@@ -106,11 +106,25 @@
                                     <action selector="didPressRegister:" destination="Xbf-4m-Njw" eventType="touchUpInside" id="tND-eJ-y14"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vpQ-i0-hXW">
+                                <rect key="frame" x="46" y="416" width="257" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vK-0k-IkM">
+                                <rect key="frame" x="46" y="387" width="145" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="t0A-8o-nvu"/>
                     </view>
                     <connections>
+                        <outlet property="addressField" destination="vpQ-i0-hXW" id="liL-1I-77h"/>
                         <outlet property="passwordField" destination="dyh-yu-aYO" id="DxP-1d-IcM"/>
                         <outlet property="usernameField" destination="Dqn-VJ-guQ" id="DE8-RZ-fH7"/>
                         <segue destination="Usw-Jn-ZU3" kind="presentation" identifier="registrationSegue" modalPresentationStyle="fullScreen" id="7ua-UL-yWn"/>
