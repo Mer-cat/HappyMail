@@ -21,6 +21,7 @@
 		D43694ED24B4EE4600902846 /* HappyMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694EC24B4EE4600902846 /* HappyMailUITests.m */; };
 		D47E36F224BCD367009B3BCE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F124BCD367009B3BCE /* Post.m */; };
 		D47E36F624BCD74F009B3BCE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F524BCD74F009B3BCE /* User.m */; };
+		D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F824BCEDCA009B3BCE /* InfoRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		D47E36F124BCD367009B3BCE /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		D47E36F424BCD74F009B3BCE /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		D47E36F524BCD74F009B3BCE /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		D47E36F724BCEDCA009B3BCE /* InfoRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoRequest.h; sourceTree = "<group>"; };
+		D47E36F824BCEDCA009B3BCE /* InfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoRequest.m; sourceTree = "<group>"; };
 		D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMail_HappyMailUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -193,6 +196,8 @@
 				D47E36F124BCD367009B3BCE /* Post.m */,
 				D47E36F424BCD74F009B3BCE /* User.h */,
 				D47E36F524BCD74F009B3BCE /* User.m */,
+				D47E36F724BCEDCA009B3BCE /* InfoRequest.h */,
+				D47E36F824BCEDCA009B3BCE /* InfoRequest.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 			files = (
 				D47E36F224BCD367009B3BCE /* Post.m in Sources */,
 				D43694CD24B4EE4200902846 /* ViewController.m in Sources */,
+				D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */,
 				D47E36F624BCD74F009B3BCE /* User.m in Sources */,
 				D43694C724B4EE4200902846 /* AppDelegate.m in Sources */,
 				D43694D824B4EE4600902846 /* main.m in Sources */,
