@@ -28,6 +28,7 @@
 		D47E370824BCF27D009B3BCE /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370724BCF27D009B3BCE /* ProfileViewController.m */; };
 		D47E370B24BCF28A009B3BCE /* FollowUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370A24BCF28A009B3BCE /* FollowUpViewController.m */; };
 		D47E370E24BCF3C1009B3BCE /* PostDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370D24BCF3C1009B3BCE /* PostDetailsViewController.m */; };
+		D47E371124BCFCF3009B3BCE /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371024BCFCF3009B3BCE /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,8 @@
 		D47E370A24BCF28A009B3BCE /* FollowUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUpViewController.m; sourceTree = "<group>"; };
 		D47E370C24BCF3C1009B3BCE /* PostDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostDetailsViewController.h; sourceTree = "<group>"; };
 		D47E370D24BCF3C1009B3BCE /* PostDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostDetailsViewController.m; sourceTree = "<group>"; };
+		D47E370F24BCFCF3009B3BCE /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		D47E371024BCFCF3009B3BCE /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMail_HappyMailUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -171,6 +174,7 @@
 		D43694C424B4EE4200902846 /* HappyMail */ = {
 			isa = PBXGroup;
 			children = (
+				D47E371224BCFCFE009B3BCE /* Helpers */,
 				D47E36ED24BCD30E009B3BCE /* Models */,
 				D47E36EF24BCD328009B3BCE /* Views */,
 				D47E36EE24BCD322009B3BCE /* View Controllers */,
@@ -244,6 +248,15 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D47E371224BCFCFE009B3BCE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D47E370F24BCFCF3009B3BCE /* Utils.h */,
+				D47E371024BCFCF3009B3BCE /* Utils.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -489,6 +502,7 @@
 				D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */,
 				D47E370524BCF258009B3BCE /* ComposeViewController.m in Sources */,
 				D47E370E24BCF3C1009B3BCE /* PostDetailsViewController.m in Sources */,
+				D47E371124BCFCF3009B3BCE /* Utils.m in Sources */,
 				D47E36F624BCD74F009B3BCE /* User.m in Sources */,
 				D43694C724B4EE4200902846 /* AppDelegate.m in Sources */,
 				D47E370B24BCF28A009B3BCE /* FollowUpViewController.m in Sources */,
