@@ -12,7 +12,6 @@
 		7853005EBA716508FE9906AB /* Pods_HappyMailTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0805DF7C572A98F56A4F6BC9 /* Pods_HappyMailTests.framework */; };
 		D43694C724B4EE4200902846 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694C624B4EE4200902846 /* AppDelegate.m */; };
 		D43694CA24B4EE4200902846 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694C924B4EE4200902846 /* SceneDelegate.m */; };
-		D43694CD24B4EE4200902846 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694CC24B4EE4200902846 /* ViewController.m */; };
 		D43694D024B4EE4200902846 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43694CE24B4EE4200902846 /* Main.storyboard */; };
 		D43694D224B4EE4600902846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D43694D124B4EE4600902846 /* Assets.xcassets */; };
 		D43694D524B4EE4600902846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43694D324B4EE4600902846 /* LaunchScreen.storyboard */; };
@@ -22,6 +21,13 @@
 		D47E36F224BCD367009B3BCE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F124BCD367009B3BCE /* Post.m */; };
 		D47E36F624BCD74F009B3BCE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F524BCD74F009B3BCE /* User.m */; };
 		D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F824BCEDCA009B3BCE /* InfoRequest.m */; };
+		D47E36FC24BCF0C4009B3BCE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36FB24BCF0C4009B3BCE /* LoginViewController.m */; };
+		D47E36FF24BCF0D8009B3BCE /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36FE24BCF0D8009B3BCE /* RegistrationViewController.m */; };
+		D47E370224BCF24A009B3BCE /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370124BCF24A009B3BCE /* FeedViewController.m */; };
+		D47E370524BCF258009B3BCE /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370424BCF258009B3BCE /* ComposeViewController.m */; };
+		D47E370824BCF27D009B3BCE /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370724BCF27D009B3BCE /* ProfileViewController.m */; };
+		D47E370B24BCF28A009B3BCE /* FollowUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370A24BCF28A009B3BCE /* FollowUpViewController.m */; };
+		D47E370E24BCF3C1009B3BCE /* PostDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370D24BCF3C1009B3BCE /* PostDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +60,6 @@
 		D43694C624B4EE4200902846 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D43694C824B4EE4200902846 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		D43694C924B4EE4200902846 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		D43694CB24B4EE4200902846 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D43694CC24B4EE4200902846 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D43694CF24B4EE4200902846 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D43694D124B4EE4600902846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D43694D424B4EE4600902846 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,6 +77,20 @@
 		D47E36F524BCD74F009B3BCE /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		D47E36F724BCEDCA009B3BCE /* InfoRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoRequest.h; sourceTree = "<group>"; };
 		D47E36F824BCEDCA009B3BCE /* InfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoRequest.m; sourceTree = "<group>"; };
+		D47E36FA24BCF0C4009B3BCE /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D47E36FB24BCF0C4009B3BCE /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D47E36FD24BCF0D8009B3BCE /* RegistrationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
+		D47E36FE24BCF0D8009B3BCE /* RegistrationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
+		D47E370024BCF24A009B3BCE /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		D47E370124BCF24A009B3BCE /* FeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		D47E370324BCF258009B3BCE /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		D47E370424BCF258009B3BCE /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		D47E370624BCF27D009B3BCE /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		D47E370724BCF27D009B3BCE /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		D47E370924BCF28A009B3BCE /* FollowUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUpViewController.h; sourceTree = "<group>"; };
+		D47E370A24BCF28A009B3BCE /* FollowUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUpViewController.m; sourceTree = "<group>"; };
+		D47E370C24BCF3C1009B3BCE /* PostDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostDetailsViewController.h; sourceTree = "<group>"; };
+		D47E370D24BCF3C1009B3BCE /* PostDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostDetailsViewController.m; sourceTree = "<group>"; };
 		D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMail_HappyMailUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -160,8 +178,6 @@
 				D43694C624B4EE4200902846 /* AppDelegate.m */,
 				D43694C824B4EE4200902846 /* SceneDelegate.h */,
 				D43694C924B4EE4200902846 /* SceneDelegate.m */,
-				D43694CB24B4EE4200902846 /* ViewController.h */,
-				D43694CC24B4EE4200902846 /* ViewController.m */,
 				D43694CE24B4EE4200902846 /* Main.storyboard */,
 				D43694D124B4EE4600902846 /* Assets.xcassets */,
 				D43694D324B4EE4600902846 /* LaunchScreen.storyboard */,
@@ -205,6 +221,20 @@
 		D47E36EE24BCD322009B3BCE /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D47E36FA24BCF0C4009B3BCE /* LoginViewController.h */,
+				D47E36FB24BCF0C4009B3BCE /* LoginViewController.m */,
+				D47E36FD24BCF0D8009B3BCE /* RegistrationViewController.h */,
+				D47E36FE24BCF0D8009B3BCE /* RegistrationViewController.m */,
+				D47E370024BCF24A009B3BCE /* FeedViewController.h */,
+				D47E370124BCF24A009B3BCE /* FeedViewController.m */,
+				D47E370324BCF258009B3BCE /* ComposeViewController.h */,
+				D47E370424BCF258009B3BCE /* ComposeViewController.m */,
+				D47E370624BCF27D009B3BCE /* ProfileViewController.h */,
+				D47E370724BCF27D009B3BCE /* ProfileViewController.m */,
+				D47E370924BCF28A009B3BCE /* FollowUpViewController.h */,
+				D47E370A24BCF28A009B3BCE /* FollowUpViewController.m */,
+				D47E370C24BCF3C1009B3BCE /* PostDetailsViewController.h */,
+				D47E370D24BCF3C1009B3BCE /* PostDetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -454,12 +484,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47E36FC24BCF0C4009B3BCE /* LoginViewController.m in Sources */,
 				D47E36F224BCD367009B3BCE /* Post.m in Sources */,
-				D43694CD24B4EE4200902846 /* ViewController.m in Sources */,
 				D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */,
+				D47E370524BCF258009B3BCE /* ComposeViewController.m in Sources */,
+				D47E370E24BCF3C1009B3BCE /* PostDetailsViewController.m in Sources */,
 				D47E36F624BCD74F009B3BCE /* User.m in Sources */,
 				D43694C724B4EE4200902846 /* AppDelegate.m in Sources */,
+				D47E370B24BCF28A009B3BCE /* FollowUpViewController.m in Sources */,
 				D43694D824B4EE4600902846 /* main.m in Sources */,
+				D47E36FF24BCF0D8009B3BCE /* RegistrationViewController.m in Sources */,
+				D47E370824BCF27D009B3BCE /* ProfileViewController.m in Sources */,
+				D47E370224BCF24A009B3BCE /* FeedViewController.m in Sources */,
 				D43694CA24B4EE4200902846 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
