@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
 #import "User.h"
+#import "Utils.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -33,7 +34,7 @@
     [User logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
-            //[self createAlertWithMessage:error.localizedDescription withTitle:@"Error logging in"];
+            [Utils showAlertWithMessage:error.localizedDescription title:@"Error logging in" controller:self];
         } else {
             NSLog(@"User logged in successfully");
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
