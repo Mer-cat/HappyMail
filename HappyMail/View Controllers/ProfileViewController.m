@@ -30,7 +30,11 @@
     sceneDelegate.window.rootViewController = loginViewController;
     
     // Clear out the current user
-    [PFUser logOutInBackground];
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"User logged out successfully");
+        }
+    }];
 }
 
 /*
