@@ -218,11 +218,10 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
    * (Update/PUT) Change user's profile image
    * (Update/PUT) Change user's About Me
    * (Update/PUT) Change user's address
-   ``objective-c
+   ```objective-c
    PFQuery *query = [PFQuery queryWithClassName:@"User"];
-   
-    //Retrieve the object by id
-    [query getObjectInBackgroundWithId:@"fAkEiD"
+   // Retrieve the object by id
+   [query getObjectInBackgroundWithId:@"fAkEiD"
                                  block:^(PFObject *user, NSError *error) {
        // Update the object's address field                          
        user[@"address"] = @"123 Main Street, Menlo Park, CA 12345";
