@@ -16,4 +16,11 @@
 @dynamic address;
 @dynamic infoRequests;
 
+/**
+ * Override PFUser init method
+ */
++(User*)user {
+    return (User*)[PFUser user];
+}
+
 @end

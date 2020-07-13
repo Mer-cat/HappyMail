@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface User : PFUser<PFSubclassing>
 
+// MARK: Properties
 @property (nonatomic, strong) NSString *aboutMeText;
 @property (nonatomic, strong) PFFileObject *profileImage;
 @property (nonatomic, strong) NSMutableArray *followUps;
@@ -22,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 /*
 @property (nonatomic, strong) NSMutableArray *thankYous;
  */
+
+// MARK: Methods
++(User*)user;
 
 @end
 
