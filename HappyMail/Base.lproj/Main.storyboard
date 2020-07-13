@@ -134,7 +134,7 @@
             </objects>
             <point key="canvasLocation" x="-490" y="469"/>
         </scene>
-        <!--Make A New Post-->
+        <!--Compose New Post-->
         <scene sceneID="hp1-M7-ZMX">
             <objects>
                 <viewController id="NWM-Am-nNd" customClass="ComposeViewController" sceneMemberID="viewController">
@@ -169,10 +169,24 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="wgE-mk-bMf"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Make A New Post" id="vem-zy-RNk">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="jsf-jr-Apf"/>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="TZi-JG-Soo"/>
+                    <navigationItem key="navigationItem" title="Compose New Post" id="vem-zy-RNk">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="jsf-jr-Apf">
+                            <connections>
+                                <action selector="didPressCancel:" destination="NWM-Am-nNd" id="rX9-dm-Ane"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="TZi-JG-Soo">
+                            <connections>
+                                <action selector="didPressPost:" destination="NWM-Am-nNd" id="6e8-93-e2H"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="bodyTextView" destination="WLi-Ej-MH6" id="efd-qP-Ap0"/>
+                        <outlet property="postButton" destination="TZi-JG-Soo" id="Uxp-Ck-GoS"/>
+                        <outlet property="postTypeControl" destination="3SM-ih-bXs" id="LDR-tZ-lTB"/>
+                        <outlet property="titleField" destination="Nem-DB-KUN" id="CzM-LM-8pu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bao-d2-mF6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
