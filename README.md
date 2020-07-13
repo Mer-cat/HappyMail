@@ -151,16 +151,17 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
    | objectId      | String   | unique id for the user post (default field) |
    | author        | Pointer to User| post author |
    | type          | String   | type of post (offer/request/thank you) |
-   | image         | File     | image that user attaches to post |
+   | title         | String   | title of post |
    | bodyText      | String   | body text of user's post |
    | createdAt     | DateTime | date when post is created (default field) |
    | updatedAt     | DateTime | date when post is last updated (default field) |
-| likesCount       | Number   | number of likes for the post (optional) |
 | respondees | array of Users | users that have responded to the post |
 | offerLimit | Number | max number of responses allowed, only applies to posts of type Offer (optional) |
 | taggedUsers | array of Users | if post is a thank-you, the users that were thanked (optional)|
 | open | Boolean | marks whether an offer/request is open or closed (optional) |
 | offerRegion | String | if an offer, the region (e.g. USA, UK, or WW) author is willing to send to (optional) |
+| likeCount       | Number   | number of likes for the post (optional) |
+| image         | File     | image that user attaches to post (optional) |
 
 
 #### User
