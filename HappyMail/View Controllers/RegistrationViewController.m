@@ -8,10 +8,12 @@
 
 #import "RegistrationViewController.h"
 #import "User.h"
+#import "Utils.h"
 
 @interface RegistrationViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField *addressField;
 
 @end
 
@@ -34,23 +36,18 @@
     // Initialize a user object
     User *newUser = [User user];
     
-//    // Check for empty username or password
-//    if ([self.usernameField.text isEqual:@""]) {
-//        [self createAlertWithMessage:@"Please enter your username" withTitle:@"Username required"];
-//    }
-//    if([self.passwordField.text isEqual:@""]) {
-//        [self createAlertWithMessage:@"Please enter your password" withTitle:@"Password required"];
-//    }
-    
     // Set user properties
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
+    newUser.address = self.addressField.text;
     
     // Call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
-            //[self createAlertWithMessage:error.localizedDescription withTitle:@"Error signing up"];
+            
+            // Display issue to user if anything is wrong with sign up
+            [Utils showAlertWithMessage:error.localizedDescription title:@"Error signing up" controller:self];
         } else {
             NSLog(@"User registered successfully");
             [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
