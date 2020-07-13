@@ -34,4 +34,21 @@
     
 }
 
+#pragma mark - Image helpers
+
++ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
+    // Check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // Get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+}
+
 @end
