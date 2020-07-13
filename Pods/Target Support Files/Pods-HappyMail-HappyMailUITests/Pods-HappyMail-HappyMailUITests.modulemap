@@ -1,0 +1,6 @@
+framework module Pods_HappyMail_HappyMailUITests {
+  umbrella header "Pods-HappyMail-HappyMailUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

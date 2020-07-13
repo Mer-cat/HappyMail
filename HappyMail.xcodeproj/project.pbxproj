@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		605AA6E8DBF6A3B15698598D /* Pods_HappyMail_HappyMailUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */; };
+		7819E1E07C0893EB1B73F4EB /* Pods_HappyMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D219E842B4845819A13D772 /* Pods_HappyMail.framework */; };
+		7853005EBA716508FE9906AB /* Pods_HappyMailTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0805DF7C572A98F56A4F6BC9 /* Pods_HappyMailTests.framework */; };
 		D43694C724B4EE4200902846 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694C624B4EE4200902846 /* AppDelegate.m */; };
 		D43694CA24B4EE4200902846 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694C924B4EE4200902846 /* SceneDelegate.m */; };
 		D43694CD24B4EE4200902846 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694CC24B4EE4200902846 /* ViewController.m */; };
@@ -36,6 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0805DF7C572A98F56A4F6BC9 /* Pods_HappyMailTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMailTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21B69FED802B0E9F3DC3F1CE /* Pods-HappyMailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMailTests.debug.xcconfig"; path = "Target Support Files/Pods-HappyMailTests/Pods-HappyMailTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4D219E842B4845819A13D772 /* Pods_HappyMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67962D09FD78B0D42A5CB34B /* Pods-HappyMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail.release.xcconfig"; path = "Target Support Files/Pods-HappyMail/Pods-HappyMail.release.xcconfig"; sourceTree = "<group>"; };
+		A9D2A1CFE27FBDBFC4017B38 /* Pods-HappyMail-HappyMailUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.debug.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB42FB979C7C007EBCD14B71 /* Pods-HappyMailTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMailTests.release.xcconfig"; path = "Target Support Files/Pods-HappyMailTests/Pods-HappyMailTests.release.xcconfig"; sourceTree = "<group>"; };
+		B54D68FD9633CEFCEB33D2F7 /* Pods-HappyMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail.debug.xcconfig"; path = "Target Support Files/Pods-HappyMail/Pods-HappyMail.debug.xcconfig"; sourceTree = "<group>"; };
 		D43694C224B4EE4200902846 /* HappyMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43694C524B4EE4200902846 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D43694C624B4EE4200902846 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,6 +64,8 @@
 		D43694E824B4EE4600902846 /* HappyMailUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyMailUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43694EC24B4EE4600902846 /* HappyMailUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappyMailUITests.m; sourceTree = "<group>"; };
 		D43694EE24B4EE4600902846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMail_HappyMailUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7819E1E07C0893EB1B73F4EB /* Pods_HappyMail.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7853005EBA716508FE9906AB /* Pods_HappyMailTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,12 +89,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605AA6E8DBF6A3B15698598D /* Pods_HappyMail_HappyMailUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EB8A85C491660A0595EEC62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D219E842B4845819A13D772 /* Pods_HappyMail.framework */,
+				FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */,
+				0805DF7C572A98F56A4F6BC9 /* Pods_HappyMailTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F7B73EF12D3FF2640D67F7D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B54D68FD9633CEFCEB33D2F7 /* Pods-HappyMail.debug.xcconfig */,
+				67962D09FD78B0D42A5CB34B /* Pods-HappyMail.release.xcconfig */,
+				A9D2A1CFE27FBDBFC4017B38 /* Pods-HappyMail-HappyMailUITests.debug.xcconfig */,
+				D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */,
+				21B69FED802B0E9F3DC3F1CE /* Pods-HappyMailTests.debug.xcconfig */,
+				AB42FB979C7C007EBCD14B71 /* Pods-HappyMailTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D43694B924B4EE4200902846 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +127,8 @@
 				D43694E024B4EE4600902846 /* HappyMailTests */,
 				D43694EB24B4EE4600902846 /* HappyMailUITests */,
 				D43694C324B4EE4200902846 /* Products */,
+				6F7B73EF12D3FF2640D67F7D /* Pods */,
+				2EB8A85C491660A0595EEC62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,9 +185,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D43694F124B4EE4600902846 /* Build configuration list for PBXNativeTarget "HappyMail" */;
 			buildPhases = (
+				177B8C2CF7CD56CD03D03ADB /* [CP] Check Pods Manifest.lock */,
 				D43694BE24B4EE4200902846 /* Sources */,
 				D43694BF24B4EE4200902846 /* Frameworks */,
 				D43694C024B4EE4200902846 /* Resources */,
+				287B3AA9D02E6938AD005A4C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +204,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D43694F424B4EE4600902846 /* Build configuration list for PBXNativeTarget "HappyMailTests" */;
 			buildPhases = (
+				6ABEACBCCEE014904070CC33 /* [CP] Check Pods Manifest.lock */,
 				D43694D924B4EE4600902846 /* Sources */,
 				D43694DA24B4EE4600902846 /* Frameworks */,
 				D43694DB24B4EE4600902846 /* Resources */,
@@ -179,9 +223,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D43694F724B4EE4600902846 /* Build configuration list for PBXNativeTarget "HappyMailUITests" */;
 			buildPhases = (
+				FB9143E448E6E197D3D22E70 /* [CP] Check Pods Manifest.lock */,
 				D43694E424B4EE4600902846 /* Sources */,
 				D43694E524B4EE4600902846 /* Frameworks */,
 				D43694E624B4EE4600902846 /* Resources */,
+				A7F08A9B44076D0328F3B8F8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -261,6 +307,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		177B8C2CF7CD56CD03D03ADB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HappyMail-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		287B3AA9D02E6938AD005A4C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyMail/Pods-HappyMail-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyMail/Pods-HappyMail-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HappyMail/Pods-HappyMail-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ABEACBCCEE014904070CC33 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HappyMailTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7F08A9B44076D0328F3B8F8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB9143E448E6E197D3D22E70 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HappyMail-HappyMailUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D43694BE24B4EE4200902846 /* Sources */ = {
@@ -437,6 +586,7 @@
 		};
 		D43694F224B4EE4600902846 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B54D68FD9633CEFCEB33D2F7 /* Pods-HappyMail.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -454,6 +604,7 @@
 		};
 		D43694F324B4EE4600902846 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67962D09FD78B0D42A5CB34B /* Pods-HappyMail.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -471,6 +622,7 @@
 		};
 		D43694F524B4EE4600902846 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21B69FED802B0E9F3DC3F1CE /* Pods-HappyMailTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -491,6 +643,7 @@
 		};
 		D43694F624B4EE4600902846 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB42FB979C7C007EBCD14B71 /* Pods-HappyMailTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -511,6 +664,7 @@
 		};
 		D43694F824B4EE4600902846 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9D2A1CFE27FBDBFC4017B38 /* Pods-HappyMail-HappyMailUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7ZHC9LK6JK;
@@ -529,6 +683,7 @@
 		};
 		D43694F924B4EE4600902846 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7ZHC9LK6JK;
