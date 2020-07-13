@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: Properties
 @property (nonatomic, strong) PFUser *author;
-@property (nonatomic, strong) NSString *type;
+@property (nonatomic) NSInteger type; // 0 = Offer, 1 = Post
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *bodyText;
 @property (nonatomic, strong) NSMutableArray *respondees;
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 // MARK: Methods
-+ (void) createNewPost: ( NSString * _Nullable )title withBody: ( NSString * _Nullable )bodyText withType: ( NSString * _Nullable )type withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(PFBooleanResultBlock  _Nullable)completion;
 
 @end
 
