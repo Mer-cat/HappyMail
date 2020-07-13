@@ -12,14 +12,14 @@ Original App Design Project
 
 ## Overview
 ### Description
-This app seeks to spread happiness through the classic medium of cards. Everyone loves receiving a card from a person rather than a corporation. Inspired by the RandomActsOfCards subreddit, this app provides a streamlined and convenient platform where people can either request some of that cheer or offer it in the form of a beautiful card or postcards. The emphasis of Happy Mail is not to send long letters in a penpal style, but rather to put a sprinkle of joy into the cards you send, whether that be through drawings, stickers, quotes, riddles, or any other cheer-bringing personal flair. 
+This app seeks to spread happiness through the classic medium of cards. Everyone loves receiving a card from a person rather than a corporation. Inspired by the RandomActsOfCards subreddit, this app provides a streamlined and convenient platform where people can either request some of that cheer or offer it in the form of a beautiful card or postcards. The emphasis of Happy Mail is not to facilitate sending long letters or connecting others with penpals, but rather to enable people to sprinkle joy in each card they send, whether that be through drawings, stickers, quotes, riddles, or any other cheer-bringing personal flair. 
 
 ### App Evaluation
 - **Category:** Social
 - **Mobile:** Having access to other users' information, such as card preferences and addresses, provides an advantage when trying to create happy mail in various places. Rather than needing to go back to one's computer to reference such information, a user can simply carry their phone with them to wherever they wish to send happy mail. Users may also take photos of the cards they receive or wish to send and incorporate them into their posts in a much more streamlined way.
 - **Story:** Lets you spread happiness and receive it anywhere via mail. 
 - **Market:** Anyone at all can send mail so long as they have an envelope, some paper, and a stamp. Everyone feels happy when they receive mail that is not a bill or advertisement.
-- **Habit:** The incorporation of positive feedback via a Thank-You post section as well as the good feelings that come from both sending and receiving mail will keep users coming back to the app.
+- **Habit:** Both sending and receiving mail is very rewarding and the ease of the platform will keep users coming back for more. In addition, the optional thank-you post feature would provide positive feedback to users.
 - **Scope:** The app will provide a forum-style platform for posting offers, requests, and thank-yous as its main feature. Users would be able to respond directly to an offer or request. The app could also automate closing offers that have reached a user-set limit of responses. Users will also be able to maintain a profile with important details such as address, card preferences, and a count of thank-yous received. Additional features might include a map personalized to each user that would mark places the user has sent and/or received mail from. (See more below)
 
 ## Product Spec
