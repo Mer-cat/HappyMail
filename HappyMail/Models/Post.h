@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Post : PFObject<PFSubclassing>
 
+// MARK: Properties
 @property (nonatomic, strong) PFUser *author;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *title;
@@ -28,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *offerRegion;
  */
 
+// MARK: Methods
 + (void) createNewPost: ( NSString * _Nullable )title withBody: ( NSString * _Nullable )bodyText withType: ( NSString * _Nullable )type withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end

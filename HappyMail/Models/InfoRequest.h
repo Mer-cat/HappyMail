@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface InfoRequest : PFObject<PFSubclassing>
 
+// MARK: Properties
 @property (nonatomic, strong) User *requestingUser;
 @property (nonatomic, strong) Post *associatedPost;
 @property (nonatomic, strong) User *requestedUser;
