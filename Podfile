@@ -7,6 +7,7 @@ target 'HappyMail' do
 
   # Pods for HappyMail
   pod 'Parse'
+  pod 'DateTools'
 
   target 'HappyMailTests' do
     inherit! :search_paths
