@@ -7,8 +7,12 @@
 //
 
 #import "FollowUpViewController.h"
+#import "FollowUpCell.h"
 
-@interface FollowUpViewController ()
+@interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *followUps;
 
 @end
 
@@ -16,7 +20,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    self.followUps = [User currentUser].followUps;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    FollowUpCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FollowUpCell"];
+    
+    // Populate cells with user's personal follow-ups
+    Post *post = self.followUps[indexPath.row];
+    [cell refreshFollowUp:post];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.followUps.count;
 }
 
 /*

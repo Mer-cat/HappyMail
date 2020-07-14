@@ -30,6 +30,7 @@
 		D47E370E24BCF3C1009B3BCE /* PostDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E370D24BCF3C1009B3BCE /* PostDetailsViewController.m */; };
 		D47E371124BCFCF3009B3BCE /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371024BCFCF3009B3BCE /* Utils.m */; };
 		D47E371524BE14FF009B3BCE /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371424BE14FF009B3BCE /* PostCell.m */; };
+		D47E371824BE3991009B3BCE /* FollowUpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371724BE3991009B3BCE /* FollowUpCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		D47E371024BCFCF3009B3BCE /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		D47E371324BE14FF009B3BCE /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		D47E371424BE14FF009B3BCE /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		D47E371624BE3991009B3BCE /* FollowUpCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUpCell.h; sourceTree = "<group>"; };
+		D47E371724BE3991009B3BCE /* FollowUpCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUpCell.m; sourceTree = "<group>"; };
 		D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMail_HappyMailUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -251,6 +254,8 @@
 			children = (
 				D47E371324BE14FF009B3BCE /* PostCell.h */,
 				D47E371424BE14FF009B3BCE /* PostCell.m */,
+				D47E371624BE3991009B3BCE /* FollowUpCell.h */,
+				D47E371724BE3991009B3BCE /* FollowUpCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47E36FC24BCF0C4009B3BCE /* LoginViewController.m in Sources */,
+				D47E371824BE3991009B3BCE /* FollowUpCell.m in Sources */,
 				D47E36F224BCD367009B3BCE /* Post.m in Sources */,
 				D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */,
 				D47E370524BCF258009B3BCE /* ComposeViewController.m in Sources */,
