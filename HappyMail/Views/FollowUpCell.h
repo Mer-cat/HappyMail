@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Post.h"
+#import "FollowUp.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FollowUpCell : UITableViewCell
 
-- (void)refreshFollowUp:(Post *)post;
+- (void)refreshFollowUp:(FollowUp *)followUp;
 
 @end
 

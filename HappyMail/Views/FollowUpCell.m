@@ -14,8 +14,8 @@
 
 @implementation FollowUpCell
 
-- (void)refreshFollowUp:(Post *)post {
-    // Fill out depending on whether Post is a request or offer
+- (void)refreshFollowUp:(FollowUp *)followUp {
+  
 }
 
 @end
