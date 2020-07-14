@@ -189,7 +189,7 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 | associatedPost | pointer to Post | post that user requested from |
 | requestedUser |pointer to User | user whose info is being requested|
 
-#### FollowUp
+#### FollowUp (Local only, not on Parse)
 | Property | Type     | Description |
 | -------- | -------- | -------- |
 | receivingUser | pointer to User| user who either responded to current user's offer or responded to their request |
