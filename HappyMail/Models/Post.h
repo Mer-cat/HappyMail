@@ -16,6 +16,9 @@ static NSArray<NSString *> *_PostTypes() {
     return @[@"Offer", @"Request"];
 }
 
+// Needed due to circular dependency causing compile-time errors
+@class User;
+
 @interface Post : PFObject<PFSubclassing>
 
 // MARK: Properties

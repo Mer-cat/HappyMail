@@ -7,6 +7,7 @@
 //
 
 #import "Post.h"
+#import "PFObject+Subclass.h"
 
 @implementation Post
     
@@ -24,12 +25,16 @@
 + (void) createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(PFBooleanResultBlock  _Nullable)completion {
     
     Post *newPost = [Post new];
-    newPost.author = [User currentUser];
+    User *user = [User currentUser];
+    newPost.author = user;
     newPost.title = title;
     newPost.bodyText = bodyText;
     newPost.type = type;
+    newPost.respondees = [[NSMutableArray alloc] init];
     
-    [newPost saveInBackgroundWithBlock: completion];
+    // Add this post to the author's follow-ups
+    [user addFollowUp:newPost];    
+    [newPost saveInBackgroundWithBlock:completion];
 }
 
 @end
