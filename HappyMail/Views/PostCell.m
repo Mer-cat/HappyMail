@@ -7,6 +7,7 @@
 //
 
 #import "PostCell.h"
+#import "DateTools.h"
 
 @interface PostCell ()
 @property (weak, nonatomic) IBOutlet UILabel *offerTypeLabel;
@@ -25,7 +26,9 @@
     self.offerTypeLabel.text = _PostTypes()[post.type];
     self.titleLabel.text = post.title;
     self.usernameLabel.text = post.author.username;
-    self.timestampLabel.text = @"Filler";
+    
+    NSDate *timeCreated = post.createdAt;
+    self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
 }
 
 @end
