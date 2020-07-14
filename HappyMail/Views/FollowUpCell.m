@@ -18,12 +18,18 @@
 
 @implementation FollowUpCell
 
-- (void)refreshFollowUp:(FollowUp *)followUp {
+- (void)refreshFollowUp:(UnpackedFollowUp *)followUp {
     NSString *postType = _PostTypes()[followUp.originalPost.type];
     self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
     self.postTitleLabel.text = followUp.originalPost.title;
-    self.usernameLabel.text = followUp.receivingUser.username;
-    self.addressLabel.text = followUp.receivingUser.address;
+    [followUp.receivingUser fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+            self.usernameLabel.text = followUp.receivingUser.username;
+            self.addressLabel.text = followUp.receivingUser.address;
+        } else {
+            NSLog(@"Error fetching receiving user: %@", error.localizedDescription);
+        }
+    }];
 }
 
 @end
