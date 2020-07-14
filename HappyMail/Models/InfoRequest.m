@@ -7,6 +7,7 @@
 //
 
 #import "InfoRequest.h"
+#import "PFObject+Subclass.h"
 
 @implementation InfoRequest
 
