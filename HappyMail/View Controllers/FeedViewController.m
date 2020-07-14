@@ -10,6 +10,7 @@
 #import "PostCell.h"
 #import <Parse/Parse.h>
 #import "Post.h"
+#import "PostDetailsViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -73,14 +74,16 @@
     return self.posts.count;
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"PostDetailsSegue"]) {
+        PostDetailsViewController *detailsViewController = [segue destinationViewController];
+        PostCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *specificPost = self.posts[indexPath.row];
+        detailsViewController.post = specificPost;
+    }
 }
-*/
 
 @end
