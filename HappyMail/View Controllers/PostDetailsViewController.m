@@ -7,8 +7,14 @@
 //
 
 #import "PostDetailsViewController.h"
+#import "DateTools.h"
 
 @interface PostDetailsViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bodyTextLabel;
 
 @end
 
@@ -16,7 +22,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self refreshPost];
+}
+
+- (void)refreshPost {
+    self.postTypeLabel.text = _PostTypes()[self.post.type];
+    self.usernameLabel.text = self.post.author.username;
+    self.titleLabel.text = self.post.title;
+    self.bodyTextLabel.text = self.post.bodyText;
+    NSDate *timeCreated = self.post.createdAt;
+    self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
 }
 
 /*
