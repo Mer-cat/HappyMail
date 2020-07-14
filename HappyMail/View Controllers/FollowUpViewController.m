@@ -8,15 +8,17 @@
 
 #import "FollowUpViewController.h"
 #import "FollowUpCell.h"
-#import "FollowUp.h"
+#import "UnpackedFollowUp.h"
 #import "Post.h"
 #import "User.h"
+#import <Parse/Parse.h>
 
 @interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *followUps;
+@property (nonatomic, strong) NSArray *followUps;
 @property (nonatomic, strong) NSMutableArray *unpackedFollowUps;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -24,22 +26,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.followUps = [User currentUser].followUps;
-    [self unpackFollowUps];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    self.unpackedFollowUps = [[NSMutableArray alloc] init];
+    [self fetchFollowUps];
+    
+    // Add refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
+    [self.refreshControl addTarget:self action:@selector(fetchFollowUps) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FollowUpCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FollowUpCell"];
     
     // Populate cells with user's personal follow-ups
-    FollowUp *followUp = self.unpackedFollowUps[indexPath.row];
+    UnpackedFollowUp *followUp = self.unpackedFollowUps[indexPath.row];
     [cell refreshFollowUp:followUp];
+    NSLog(@"Reloaded Cell");
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"%@", self.unpackedFollowUps);
     return self.unpackedFollowUps.count;
+}
+
+/**
+ * Fetch the user's follow-ups from Parse
+ */
+- (void)fetchFollowUps {
+    PFQuery *query = [User query];
+    [query whereKey:@"username" equalTo:[User currentUser].username];
+    [query includeKey:@"followUps"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"Successfully fetched user's follow-ups");
+            User *user = objects[0];
+            self.followUps = user.followUps;
+            [self unpackFollowUps];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
+        }
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 /**
@@ -48,25 +82,29 @@
 - (void)unpackFollowUps {
     for (Post *post in self.followUps) {
         // User's offers to follow up on
+        // [post fetchIfNeeded];
         if (post.type == 0) {
             // Create a follow-up for each user
             // who responded to current user's offer
+            NSLog(@"%@", post.respondees);
             for (User *user in post.respondees) {
-                FollowUp *newFollowUp = [[FollowUp alloc] init];
+                UnpackedFollowUp *newFollowUp = [[UnpackedFollowUp alloc] init];
                 newFollowUp.receivingUser = user;
                 newFollowUp.originalPost = post;
                 [self.unpackedFollowUps addObject:newFollowUp];
+                NSLog(@"Added new unpacked follow up");
             }
+            NSLog(@"Inside offer type");
         } else if (post.type == 1) {  // Other user's requests
             // Create a follow-up for each request from other
             // users that current user responded to
-            FollowUp *newFollowUp = [[FollowUp alloc] init];
+            UnpackedFollowUp *newFollowUp = [[UnpackedFollowUp alloc] init];
             newFollowUp.receivingUser = post.author;
             newFollowUp.originalPost = post;
             [self.unpackedFollowUps addObject:newFollowUp];
+            NSLog(@"Unpacked a request");
         }
     }
-    [self.tableView reloadData];
 }
 
 /*
