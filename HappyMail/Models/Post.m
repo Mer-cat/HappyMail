@@ -24,7 +24,7 @@
 + (void) createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(PFBooleanResultBlock  _Nullable)completion {
     
     Post *newPost = [Post new];
-    newPost.author = [PFUser currentUser];
+    newPost.author = [User currentUser];
     newPost.title = title;
     newPost.bodyText = bodyText;
     newPost.type = type;

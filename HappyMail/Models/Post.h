@@ -7,14 +7,20 @@
 //
 
 #import <Parse/Parse.h>
+#import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+// Constant array to represent types of posts
+static NSArray<NSString *> *_PostTypes() {
+    return @[@"Offer", @"Request"];
+}
 
 @interface Post : PFObject<PFSubclassing>
 
 // MARK: Properties
-@property (nonatomic, strong) PFUser *author;
-@property (nonatomic) NSInteger type; // 0 = Offer, 1 = Post
+@property (nonatomic, strong) User *author;
+@property (nonatomic) NSInteger type;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *bodyText;
 @property (nonatomic, strong) NSMutableArray *respondees;
