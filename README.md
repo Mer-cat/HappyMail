@@ -273,3 +273,4 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 
 ### Dependencies
 * [Parse](https://github.com/parse-community/Parse-SDK-iOS-OSX)
+* [DateTools](https://github.com/MatthewYork/DateTools)
