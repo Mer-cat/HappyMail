@@ -31,6 +31,7 @@
 		D47E371124BCFCF3009B3BCE /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371024BCFCF3009B3BCE /* Utils.m */; };
 		D47E371524BE14FF009B3BCE /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371424BE14FF009B3BCE /* PostCell.m */; };
 		D47E371824BE3991009B3BCE /* FollowUpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371724BE3991009B3BCE /* FollowUpCell.m */; };
+		D47E371B24BE4161009B3BCE /* FollowUp.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371A24BE4161009B3BCE /* FollowUp.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,8 @@
 		D47E371424BE14FF009B3BCE /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		D47E371624BE3991009B3BCE /* FollowUpCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUpCell.h; sourceTree = "<group>"; };
 		D47E371724BE3991009B3BCE /* FollowUpCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUpCell.m; sourceTree = "<group>"; };
+		D47E371924BE4161009B3BCE /* FollowUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUp.h; sourceTree = "<group>"; };
+		D47E371A24BE4161009B3BCE /* FollowUp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUp.m; sourceTree = "<group>"; };
 		D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMail_HappyMailUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -224,6 +227,8 @@
 				D47E36F524BCD74F009B3BCE /* User.m */,
 				D47E36F724BCEDCA009B3BCE /* InfoRequest.h */,
 				D47E36F824BCEDCA009B3BCE /* InfoRequest.m */,
+				D47E371924BE4161009B3BCE /* FollowUp.h */,
+				D47E371A24BE4161009B3BCE /* FollowUp.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 				D43694D824B4EE4600902846 /* main.m in Sources */,
 				D47E36FF24BCF0D8009B3BCE /* RegistrationViewController.m in Sources */,
 				D47E370824BCF27D009B3BCE /* ProfileViewController.m in Sources */,
+				D47E371B24BE4161009B3BCE /* FollowUp.m in Sources */,
 				D47E370224BCF24A009B3BCE /* FeedViewController.m in Sources */,
 				D43694CA24B4EE4200902846 /* SceneDelegate.m in Sources */,
 				D47E371524BE14FF009B3BCE /* PostCell.m in Sources */,
