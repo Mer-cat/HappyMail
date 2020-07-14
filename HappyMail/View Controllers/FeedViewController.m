@@ -44,6 +44,7 @@
     PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"respondees"];
     postQuery.limit = 20;
     
     // Fetch data asynchronously
