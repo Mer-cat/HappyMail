@@ -7,8 +7,12 @@
 //
 
 #import <Parse/Parse.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+// Needed due to circular dependency causing compile-time errors
+@class Post;
 
 @interface User : PFUser<PFSubclassing>
 
@@ -25,7 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 // MARK: Methods
-+(User*)user;
++ (User *)user;
+- (void)addFollowUp:(Post *)post;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "PFObject+Subclass.h"
 
 @implementation User
 
@@ -19,8 +20,13 @@
 /**
  * Override PFUser init method
  */
-+(User*)user {
++ (User*)user {
     return (User*)[PFUser user];
+}
+
+- (void)addFollowUp:(Post *)post {
+    [self addObject:post forKey:@"followUps"];
+    [self saveInBackground];
 }
 
 @end
