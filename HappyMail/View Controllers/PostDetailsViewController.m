@@ -20,11 +20,15 @@
 
 @implementation PostDetailsViewController
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self refreshPost];
 }
+
+#pragma mark - Init
 
 - (void)refreshPost {
     self.postTypeLabel.text = _PostTypes()[self.post.type];
@@ -33,6 +37,26 @@
     self.bodyTextLabel.text = self.post.bodyText;
     NSDate *timeCreated = self.post.createdAt;
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
+}
+
+#pragma mark - Actions
+
+- (IBAction)didPressRespond:(id)sender {
+    // Responding to an offer post
+    if (self.post.type == 0) {
+        User *currentUser = [User currentUser];
+        // TODO: Ask TAs about line below. Can't save new object to an array any other way
+        [self.post addObject:currentUser forKey:@"respondees"];
+        [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"%@ added to respondees for this post", currentUser.username);
+            } else {
+                NSLog(@"Error adding user to respondees: %@", error.localizedDescription);
+            }
+        }];
+    } else if (self.post.type == 1) {  // Responding to request
+        
+    }
 }
 
 /*
