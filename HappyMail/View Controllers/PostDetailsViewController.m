@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bodyTextLabel;
+@property (weak, nonatomic) IBOutlet UIButton *respondButton;
 
 @end
 
@@ -42,9 +43,11 @@
 #pragma mark - Actions
 
 - (IBAction)didPressRespond:(id)sender {
+    // Currently, completely disable ability or respond twice
+    self.respondButton.enabled = NO;
+    User *currentUser = [User currentUser];
     // Responding to an offer post
     if (self.post.type == 0) {
-        User *currentUser = [User currentUser];
         // TODO: Ask TAs about line below. Can't save new object to an array any other way
         [self.post addObject:currentUser forKey:@"respondees"];
         [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -55,7 +58,9 @@
             }
         }];
     } else if (self.post.type == 1) {  // Responding to request
-        
+        // TODO: Set up info request creation and flow
+        [currentUser addFollowUp:self.post];
+        NSLog(@"User successfully responded to request");
     }
 }
 
