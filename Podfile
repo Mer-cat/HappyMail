@@ -7,6 +7,7 @@ target 'HappyMail' do
 
   # Pods for HappyMail
   pod 'Parse'
+  pod 'Parse/UI'
   pod 'DateTools'
 
   target 'HappyMailTests' do
