@@ -107,9 +107,11 @@
 
 #pragma mark - Actions
 
-// TODO: Set user permissions
 - (IBAction)didPressImage:(id)sender {
-    [self initUIImagePickerController];
+    // Only user who owns account may change profile image
+    if (self.user == [User currentUser]) {
+        [self initUIImagePickerController];
+    }
 }
 
 - (IBAction)didPressLogout:(id)sender {
