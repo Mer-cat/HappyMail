@@ -13,12 +13,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *postTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (nonatomic, strong) UnpackedFollowUp *followUp;
 
 @end
 
 @implementation FollowUpCell
 
 - (void)refreshFollowUp:(UnpackedFollowUp *)followUp {
+    self.followUp = followUp;
     NSString *postType = _PostTypes()[followUp.originalPost.type];
     self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
     self.postTitleLabel.text = followUp.originalPost.title;
@@ -30,6 +32,21 @@
             NSLog(@"Error fetching receiving user: %@", error.localizedDescription);
         }
     }];
+}
+
+- (IBAction)didPressCheck:(id)sender {
+    NSLog(@"Pressed check");
+}
+
+- (IBAction)didPressX:(id)sender {
+    NSLog(@"Pressed X");
+    // Offer that user made
+    if (self.followUp.originalPost.type == 0) {
+        // TODO: Could notify user that offerer is no longer going to complete their request
+        [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
+    } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
+        [[User currentUser] removeFollowUp:self.followUp.originalPost];
+    }
 }
 
 @end
