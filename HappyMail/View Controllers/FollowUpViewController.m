@@ -24,13 +24,14 @@
 
 @implementation FollowUpViewController
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.unpackedFollowUps = [[NSMutableArray alloc] init];
     [self fetchFollowUps];
     
     // Add refresh control
@@ -40,13 +41,14 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
+#pragma mark - UITableViewDataSource
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FollowUpCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FollowUpCell"];
     
     // Populate cells with user's personal follow-ups
     UnpackedFollowUp *followUp = self.unpackedFollowUps[indexPath.row];
     [cell refreshFollowUp:followUp];
-    NSLog(@"Reloaded Cell");
     return cell;
 }
 
@@ -54,6 +56,8 @@
     NSLog(@"%@", self.unpackedFollowUps);
     return self.unpackedFollowUps.count;
 }
+
+#pragma mark - Parse network calls
 
 /**
  * Fetch the user's follow-ups from Parse
@@ -76,13 +80,17 @@
     }];
 }
 
+#pragma mark - Helper
+
 /**
  * Given the user's list of follow-up posts, unpacks them into an array of follow-up objects
  */
 - (void)unpackFollowUps {
+    // Zero out the array so that we do not create duplicates
+    self.unpackedFollowUps = [NSMutableArray new];
+    
     for (Post *post in self.followUps) {
         // User's offers to follow up on
-        // [post fetchIfNeeded];
         if (post.type == 0) {
             // Create a follow-up for each user
             // who responded to current user's offer
@@ -94,7 +102,6 @@
                 [self.unpackedFollowUps addObject:newFollowUp];
                 NSLog(@"Added new unpacked follow up");
             }
-            NSLog(@"Inside offer type");
         } else if (post.type == 1) {  // Other user's requests
             // Create a follow-up for each request from other
             // users that current user responded to
