@@ -9,8 +9,10 @@
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
 #import "SceneDelegate.h"
+#import "Utils.h"
+#import "User.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *joinDateLabel;
@@ -51,10 +53,69 @@
     self.joinDateLabel.text = [NSString stringWithFormat:@"Joined %@", joinDateString];
     self.aboutMeTextView.text = self.user.aboutMeText;
     
-    // TODO: Set profile image
+    // Temporary until PFImageView is set up
+    UIImage *placeholderImage = [UIImage imageNamed:@"image_placeholder"];
+    [self.profileImage setImage: placeholderImage];
+    [self.user.profileImage getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error getting image: %@", error.localizedDescription);
+        } else {
+            [self.profileImage setImage: [UIImage imageWithData:data]];
+        }
+    }];
+}
+
+/**
+ * Create new image picker to allow user to select profile image from their camera or photo library
+ */
+- (void)initUIImagePickerController {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        NSLog(@"Camera not available so we will use photo library instead");
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+/**
+ * Delegate method for UIImagePickerController
+ */
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    // Get the image captured by the UIImagePickerController
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    
+    // Assign image chosen to appear in the image view
+    UIImage *resizedImage = [Utils resizeImage:originalImage withSize:CGSizeMake(400, 400)];
+    self.profileImage.image = resizedImage;
+    PFFileObject *imageFile = [Utils getPFFileFromImage:resizedImage];
+    self.user.profileImage = imageFile;
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"The profile image was saved!");
+        } else {
+            NSLog(@"Problem saving profile image: %@",error.localizedDescription);
+        }
+    }];
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Actions
+
+// TODO: Set user permissions
+- (IBAction)didPressImage:(id)sender {
+    [self initUIImagePickerController];
+}
 
 - (IBAction)didPressLogout:(id)sender {
     // Go back to the login screen
@@ -70,6 +131,7 @@
         }
     }];
 }
+
 
 /*
 #pragma mark - Navigation
