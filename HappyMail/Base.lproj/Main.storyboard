@@ -230,7 +230,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lhs-ce-L51">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V9o-49-qCp">
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V9o-49-qCp" customClass="PFImageView">
                                                 <rect key="frame" x="20" y="21" width="153" height="147"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <gestureRecognizers/>
@@ -298,7 +298,7 @@
                         <outlet property="aboutMeTextView" destination="6Cc-a2-8KV" id="PAC-x3-xtA"/>
                         <outlet property="joinDateLabel" destination="FtW-7R-ER6" id="dWl-aE-H0K"/>
                         <outlet property="logoutButton" destination="E3R-w0-dDT" id="UEV-DT-ZKV"/>
-                        <outlet property="profileImage" destination="V9o-49-qCp" id="qQS-oJ-uOY"/>
+                        <outlet property="profileImageView" destination="V9o-49-qCp" id="qQS-oJ-uOY"/>
                         <outlet property="usernameLabel" destination="8Lq-g6-eXG" id="MYC-w4-uVU"/>
                     </connections>
                 </viewController>

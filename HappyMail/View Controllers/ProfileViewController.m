@@ -7,13 +7,13 @@
 //
 
 #import "ProfileViewController.h"
-#import <Parse/Parse.h>
 #import "SceneDelegate.h"
 #import "Utils.h"
 #import "User.h"
+@import Parse;
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *joinDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *aboutMeTextView;
@@ -53,16 +53,11 @@
     self.joinDateLabel.text = [NSString stringWithFormat:@"Joined %@", joinDateString];
     self.aboutMeTextView.text = self.user.aboutMeText;
     
-    // Temporary until PFImageView is set up
-    UIImage *placeholderImage = [UIImage imageNamed:@"image_placeholder"];
-    [self.profileImage setImage: placeholderImage];
-    [self.user.profileImage getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error getting image: %@", error.localizedDescription);
-        } else {
-            [self.profileImage setImage: [UIImage imageWithData:data]];
-        }
-    }];
+    UIImage *placeholderImage = [UIImage imageNamed:@"blank-profile-picture"];
+    [self.profileImageView setImage: placeholderImage];
+    
+    self.profileImageView.file = self.user.profileImage;
+    [self.profileImageView loadInBackground];
 }
 
 /**
@@ -95,7 +90,7 @@
     
     // Assign image chosen to appear in the image view
     UIImage *resizedImage = [Utils resizeImage:originalImage withSize:CGSizeMake(400, 400)];
-    self.profileImage.image = resizedImage;
+    self.profileImageView.image = resizedImage;
     PFFileObject *imageFile = [Utils getPFFileFromImage:resizedImage];
     self.user.profileImage = imageFile;
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
