@@ -22,7 +22,7 @@
     return @"Post";
 }
 
-+ (void) createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(PFBooleanResultBlock  _Nullable)completion {
++ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(PFBooleanResultBlock  _Nullable)completion {
     
     Post *newPost = [Post new];
     User *user = [User currentUser];
@@ -35,6 +35,11 @@
     // Add this post to the author's follow-ups
     [user addFollowUp:newPost];    
     [newPost saveInBackgroundWithBlock:completion];
+}
+
+- (void)removeRespondee:(User *)user {
+    [self removeObject:user forKey:@"respondees"];
+    [self saveInBackground];
 }
 
 @end
