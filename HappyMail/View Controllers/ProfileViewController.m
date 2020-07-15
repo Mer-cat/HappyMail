@@ -11,13 +11,33 @@
 #import "SceneDelegate.h"
 
 @interface ProfileViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *joinDateLabel;
+@property (weak, nonatomic) IBOutlet UITextView *aboutMeTextView;
 
 @end
 
 @implementation ProfileViewController
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.user = [User currentUser];
+    [self refreshProfile];
+}
+
+#pragma mark - Init
+
+- (void)refreshProfile {
+    self.usernameLabel.text = self.user.username;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM-dd-yyyy"];
+    NSString *joinDateString = [dateFormatter stringFromDate:self.user.createdAt];
+    
+    self.joinDateLabel.text = [NSString stringWithFormat:@"Joined %@", joinDateString];
 }
 
 #pragma mark - Actions
