@@ -29,4 +29,9 @@
     [self saveInBackground];
 }
 
+- (void)removeFollowUp:(Post *)post {
+    [self removeObject:post forKey:@"followUps"];
+    [self saveInBackground];
+}
+
 @end

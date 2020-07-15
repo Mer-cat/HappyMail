@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods
 + (User *)user;
 - (void)addFollowUp:(Post *)post;
+- (void)removeFollowUp:(Post *)post;
 
 @end
 
