@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)showAlertWithMessage:(NSString *) message title:(NSString *)title controller:(id)controller;
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
++ (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size;
 
 @end
 
