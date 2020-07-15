@@ -39,6 +39,8 @@
     [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
     [self.refreshControl addTarget:self action:@selector(fetchFollowUps) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+    // TODO: Set up live query to auto-reload table view when followUps change
 }
 
 #pragma mark - UITableViewDataSource
@@ -80,7 +82,7 @@
     }];
 }
 
-#pragma mark - Helper
+#pragma mark - Helpers
 
 /**
  * Given the user's list of follow-up posts, unpacks them into an array of follow-up objects
@@ -92,6 +94,7 @@
     for (Post *post in self.followUps) {
         // User's offers to follow up on
         if (post.type == 0) {
+            
             // Create a follow-up for each user
             // who responded to current user's offer
             NSLog(@"%@", post.respondees);
@@ -100,16 +103,15 @@
                 newFollowUp.receivingUser = user;
                 newFollowUp.originalPost = post;
                 [self.unpackedFollowUps addObject:newFollowUp];
-                NSLog(@"Added new unpacked follow up");
             }
         } else if (post.type == 1) {  // Other user's requests
+            
             // Create a follow-up for each request from other
             // users that current user responded to
             UnpackedFollowUp *newFollowUp = [[UnpackedFollowUp alloc] init];
             newFollowUp.receivingUser = post.author;
             newFollowUp.originalPost = post;
             [self.unpackedFollowUps addObject:newFollowUp];
-            NSLog(@"Unpacked a request");
         }
     }
 }
