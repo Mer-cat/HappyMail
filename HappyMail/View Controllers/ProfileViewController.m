@@ -12,11 +12,13 @@
 #import "User.h"
 @import Parse;
 
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *joinDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *aboutMeTextView;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 
 @end
@@ -28,6 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.aboutMeTextView.delegate = self;
+    
     // If no user has been passed in,
     // we are looking at user's own profile
     if (!self.user) {
@@ -35,6 +39,7 @@
     } else { // If looking at another user's profile
         self.logoutButton.enabled = NO;
         self.logoutButton.tintColor = UIColor.clearColor;
+        self.aboutMeTextView.editable = NO;
     }
     
     [self refreshProfile];
@@ -129,6 +134,25 @@
     }];
 }
 
+- (IBAction)didPressSaveAboutMe:(id)sender {
+    // TODO: Save the entered text to Parse
+}
+
+- (IBAction)didPressCancelAboutMe:(id)sender {
+    // TODO: Dismiss the keyboard and revert to previous text
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    // TODO: Animate appearance of the buttons
+    self.saveButton.hidden = NO;
+    self.cancelButton.hidden = NO;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    // TODO: Make save and cancel buttons disappear
+}
 
 /*
 #pragma mark - Navigation

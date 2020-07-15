@@ -260,6 +260,22 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJg-Gm-Xde">
+                                                <rect key="frame" x="20" y="573" width="48" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="didPressCancelAboutMe:" destination="kY2-aj-mqv" eventType="touchUpInside" id="KJQ-QY-Kyt"/>
+                                                </connections>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBw-7k-4yF">
+                                                <rect key="frame" x="350" y="571" width="46" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Save"/>
+                                                <connections>
+                                                    <action selector="didPressSaveAboutMe:" destination="kY2-aj-mqv" eventType="touchUpInside" id="cHj-Ad-8BI"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -296,9 +312,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="aboutMeTextView" destination="6Cc-a2-8KV" id="PAC-x3-xtA"/>
+                        <outlet property="cancelButton" destination="IJg-Gm-Xde" id="mV6-b3-FQ9"/>
                         <outlet property="joinDateLabel" destination="FtW-7R-ER6" id="dWl-aE-H0K"/>
                         <outlet property="logoutButton" destination="E3R-w0-dDT" id="UEV-DT-ZKV"/>
                         <outlet property="profileImageView" destination="V9o-49-qCp" id="qQS-oJ-uOY"/>
+                        <outlet property="saveButton" destination="QBw-7k-4yF" id="yew-5j-fZS"/>
                         <outlet property="usernameLabel" destination="8Lq-g6-eXG" id="MYC-w4-uVU"/>
                     </connections>
                 </viewController>
