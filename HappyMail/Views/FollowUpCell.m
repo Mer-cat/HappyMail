@@ -36,17 +36,23 @@
 
 - (IBAction)didPressCheck:(id)sender {
     NSLog(@"Pressed check");
+    if (self.followUp.originalPost.type == 0) {
+        [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
+    } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
+        [[User currentUser] removeFollowUp:self.followUp.originalPost];
+    }
+    // TODO: Could notify receiving user that a card is on the way
 }
 
 - (IBAction)didPressX:(id)sender {
     NSLog(@"Pressed X");
     // Offer that user made
     if (self.followUp.originalPost.type == 0) {
-        // TODO: Could notify user that offerer is no longer going to complete their request
         [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
     } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
         [[User currentUser] removeFollowUp:self.followUp.originalPost];
     }
+    // TODO: Could notify user that offerer/request responder is no longer going to send a card
 }
 
 @end
