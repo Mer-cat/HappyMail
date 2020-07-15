@@ -46,18 +46,10 @@
     // Currently, completely disable ability or respond twice
     self.respondButton.enabled = NO;
     User *currentUser = [User currentUser];
-    // Responding to an offer post
+    // User is responding to an offer post
     if (self.post.type == 0) {
-        // TODO: Ask TAs about line below. Can't save new object to an array any other way
-        [self.post addObject:currentUser forKey:@"respondees"];
-        [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (succeeded) {
-                NSLog(@"%@ added to respondees for this post", currentUser.username);
-            } else {
-                NSLog(@"Error adding user to respondees: %@", error.localizedDescription);
-            }
-        }];
-    } else if (self.post.type == 1) {  // Responding to request
+        [self.post addRespondee:currentUser];
+    } else if (self.post.type == 1) {  // User is responding to request
         // TODO: Set up info request creation and flow
         [currentUser addFollowUp:self.post];
         NSLog(@"User successfully responded to request");
