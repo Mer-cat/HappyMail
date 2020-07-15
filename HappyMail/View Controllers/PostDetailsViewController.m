@@ -8,10 +8,11 @@
 
 #import "PostDetailsViewController.h"
 #import "DateTools.h"
+#import "ProfileViewController.h"
 
 @interface PostDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *usernameButton;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bodyTextLabel;
@@ -33,7 +34,7 @@
 
 - (void)refreshPost {
     self.postTypeLabel.text = _PostTypes()[self.post.type];
-    self.usernameLabel.text = self.post.author.username;
+    [self.usernameButton setTitle:self.post.author.username forState:UIControlStateNormal];
     self.titleLabel.text = self.post.title;
     self.bodyTextLabel.text = self.post.bodyText;
     NSDate *timeCreated = self.post.createdAt;
@@ -56,14 +57,17 @@
     }
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        // If viewing another user's profile
+        if (![self.post.author.username isEqualToString:[User currentUser].username]) {
+            profileViewController.user = self.post.author;
+        }
+    }
 }
-*/
+
 
 @end

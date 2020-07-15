@@ -293,6 +293,7 @@
                     <connections>
                         <outlet property="aboutMeTextView" destination="6Cc-a2-8KV" id="PAC-x3-xtA"/>
                         <outlet property="joinDateLabel" destination="FtW-7R-ER6" id="dWl-aE-H0K"/>
+                        <outlet property="logoutButton" destination="E3R-w0-dDT" id="UEV-DT-ZKV"/>
                         <outlet property="profileImage" destination="V9o-49-qCp" id="qQS-oJ-uOY"/>
                         <outlet property="usernameLabel" destination="8Lq-g6-eXG" id="MYC-w4-uVU"/>
                     </connections>
@@ -403,14 +404,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I45-eK-A3E">
-                                                <rect key="frame" x="173" y="296" width="93" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbp-Qr-FTN">
                                                 <rect key="frame" x="27" y="343" width="355" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -443,6 +436,17 @@
                                                     <action selector="didPressRespond:" destination="4Mr-uy-2oY" eventType="touchUpInside" id="Aai-GA-4Mh"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrQ-bg-4qt">
+                                                <rect key="frame" x="169" y="293" width="97" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Username">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="kY2-aj-mqv" kind="show" identifier="ProfileViewSegue" id="8oJ-Fo-fes"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -471,7 +475,7 @@
                         <outlet property="respondButton" destination="eWD-Qc-2zc" id="fYK-Kw-ahV"/>
                         <outlet property="timestampLabel" destination="gb7-Ou-EFO" id="HQa-w9-REH"/>
                         <outlet property="titleLabel" destination="zbp-Qr-FTN" id="2GL-Z5-yvr"/>
-                        <outlet property="usernameLabel" destination="I45-eK-A3E" id="SOZ-Jg-WTx"/>
+                        <outlet property="usernameButton" destination="rrQ-bg-4qt" id="bjk-IA-U1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P9N-LW-Iz6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -668,5 +672,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
+        <segue reference="8oJ-Fo-fes"/>
     </inferredMetricsTieBreakers>
 </document>
