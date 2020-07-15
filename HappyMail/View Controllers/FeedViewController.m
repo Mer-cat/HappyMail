@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "Post.h"
 #import "PostDetailsViewController.h"
+#import "ProfileViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -84,6 +85,19 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *specificPost = self.posts[indexPath.row];
         detailsViewController.post = specificPost;
+    } else if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        
+        // Grab post from cell where user tapped username
+        PostCell *cell = (PostCell *)[[sender superview] superview];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        Post *post = self.posts[indexPath.row];
+        NSLog(@"Tapped %@'s username", post.author.username);
+        
+        // If viewing another user's profile
+        if (![post.author.username isEqualToString:[User currentUser].username]) {
+            profileViewController.user = post.author;
+        }
     }
 }
 
