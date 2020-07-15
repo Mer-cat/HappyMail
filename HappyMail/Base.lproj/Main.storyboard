@@ -336,13 +336,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eg4-2C-fAJ">
-                                                    <rect key="frame" x="186" y="11" width="96" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFj-ru-FoF">
                                                     <rect key="frame" x="304" y="11" width="90" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -350,13 +343,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7C-z4-h6x">
+                                                    <rect key="frame" x="162" y="6" width="71" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Username"/>
+                                                    <connections>
+                                                        <segue destination="kY2-aj-mqv" kind="show" identifier="ProfileViewSegue" id="ai7-Eq-mRd"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="offerTypeLabel" destination="4Sp-vS-WY5" id="kgZ-MN-CxX"/>
                                             <outlet property="timestampLabel" destination="UFj-ru-FoF" id="8nT-kY-bHx"/>
                                             <outlet property="titleLabel" destination="hlV-Nw-z3D" id="R2h-ZH-7Tq"/>
-                                            <outlet property="usernameLabel" destination="eg4-2C-fAJ" id="Nfa-eU-Rof"/>
+                                            <outlet property="usernameButton" destination="n7C-z4-h6x" id="5tw-uW-CeT"/>
                                             <segue destination="4Mr-uy-2oY" kind="show" identifier="PostDetailsSegue" id="5hU-vi-Oy7"/>
                                         </connections>
                                     </tableViewCell>
@@ -672,6 +673,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
-        <segue reference="8oJ-Fo-fes"/>
+        <segue reference="ai7-Eq-mRd"/>
     </inferredMetricsTieBreakers>
 </document>

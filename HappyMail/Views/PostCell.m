@@ -12,7 +12,7 @@
 @interface PostCell ()
 @property (weak, nonatomic) IBOutlet UILabel *offerTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *usernameButton;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 
 @end
@@ -25,7 +25,7 @@
     // Set labels
     self.offerTypeLabel.text = _PostTypes()[post.type];
     self.titleLabel.text = post.title;
-    self.usernameLabel.text = post.author.username;
+    [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
     
     NSDate *timeCreated = post.createdAt;
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
