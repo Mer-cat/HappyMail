@@ -41,6 +41,7 @@ static NSArray<NSString *> *_PostTypes() {
 // MARK: Methods
 + (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(PFBooleanResultBlock  _Nullable)completion;
 
+- (void)addRespondee:(User *)user;
 - (void)removeRespondee:(User *)user;
 
 @end
