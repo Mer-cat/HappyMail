@@ -92,7 +92,6 @@
         PostCell *cell = (PostCell *)[[sender superview] superview];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         Post *post = self.posts[indexPath.row];
-        NSLog(@"Tapped %@'s username", post.author.username);
         
         // If viewing another user's profile
         if (![post.author.username isEqualToString:[User currentUser].username]) {
