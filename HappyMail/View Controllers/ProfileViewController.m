@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *joinDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *aboutMeTextView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 
 @end
 
@@ -24,13 +25,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.user = [User currentUser];
+    
+    // If no user has been passed in,
+    // we are looking at user's own profile
+    if (!self.user) {
+        self.user = [User currentUser];
+    } else { // If looking at another user's profile
+        self.logoutButton.enabled = NO;
+        self.logoutButton.tintColor = UIColor.clearColor;
+    }
+    
     [self refreshProfile];
 }
 
 #pragma mark - Init
 
 - (void)refreshProfile {
+    // Set labels
     self.usernameLabel.text = self.user.username;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -38,6 +49,9 @@
     NSString *joinDateString = [dateFormatter stringFromDate:self.user.createdAt];
     
     self.joinDateLabel.text = [NSString stringWithFormat:@"Joined %@", joinDateString];
+    self.aboutMeTextView.text = self.user.aboutMeText;
+    
+    // TODO: Set profile image
 }
 
 #pragma mark - Actions
