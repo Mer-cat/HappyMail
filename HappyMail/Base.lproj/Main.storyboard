@@ -679,6 +679,9 @@
                                                     <state key="normal" title="Approve">
                                                         <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didPressApprove:" destination="7UO-Cz-2ar" eventType="touchUpInside" id="LcI-29-iPp"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQd-Fp-vPW">
                                                     <rect key="frame" x="282" y="107" width="36" height="30"/>
@@ -686,6 +689,9 @@
                                                     <state key="normal" title="Deny">
                                                         <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didPressDeny:" destination="7UO-Cz-2ar" eventType="touchUpInside" id="zPc-3P-1ZC"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
