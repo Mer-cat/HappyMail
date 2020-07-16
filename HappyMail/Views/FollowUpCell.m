@@ -53,6 +53,7 @@
     } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
         [[User currentUser] removeFollowUp:self.followUp.originalPost];
     }
+    [self.delegate didChangeFollowUp:self.followUp];
     // TODO: Could notify receiving user that a card is on the way
 }
 
@@ -64,6 +65,7 @@
     } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
         [[User currentUser] removeFollowUp:self.followUp.originalPost];
     }
+    [self.delegate didChangeFollowUp:self.followUp];
     // TODO: Could notify user that offerer/request responder is no longer going to send a card
 }
 

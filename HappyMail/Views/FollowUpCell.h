@@ -11,11 +11,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol FollowUpCellDelegate;
+
 @interface FollowUpCell : UITableViewCell
+@property (nonatomic, weak) id<FollowUpCellDelegate> delegate;
 
 - (void)refreshFollowUp:(UnpackedFollowUp *)followUp;
 - (void)showButtons;
 - (void)hideButtons;
+
+@end
+
+@protocol FollowUpCellDelegate
+- (void) didChangeFollowUp:(UnpackedFollowUp *)followUp;
 
 @end
 
