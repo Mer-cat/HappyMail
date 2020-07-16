@@ -32,8 +32,11 @@
     newPost.type = type;
     newPost.respondees = [[NSMutableArray alloc] init];
     
-    // Add this post to the author's follow-ups
-    [user addFollowUp:newPost];
+    // Add this post to the author's follow-ups if it is their own offer
+    if (type == 0) {
+        [user addFollowUp:newPost];
+    }
+
     [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             completion(newPost, nil);
