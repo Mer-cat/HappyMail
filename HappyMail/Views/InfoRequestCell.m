@@ -17,22 +17,36 @@
 
 @implementation InfoRequestCell
 
-- (void)refreshInfoRequestCell:(InfoRequest *)infoRequest {
-    [infoRequest.requestingUser fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+#pragma mark - Init
+
+- (void)refreshInfoRequestCell {
+    [self.infoRequest.requestingUser fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
-            [self.usernameButtonLabel setTitle:infoRequest.requestingUser.username forState:UIControlStateNormal];
+            [self.usernameButtonLabel setTitle:self.infoRequest.requestingUser.username forState:UIControlStateNormal];
         } else {
             NSLog(@"Error fetching requesting user for info request");
         }
     }];
     
-    [infoRequest.associatedPost fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    [self.infoRequest.associatedPost fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
-            [self.requestButtonLabel setTitle:infoRequest.associatedPost.title forState:UIControlStateNormal];
+            [self.requestButtonLabel setTitle:self.infoRequest.associatedPost.title forState:UIControlStateNormal];
         } else {
             NSLog(@"Error fetching associated post for info request");
         }
     }];
 }
+
+#pragma mark - Actions
+
+// TODO: Need to refactor FollowUp data model before implementing these
+- (IBAction)didPressApprove:(id)sender {
+    // TODO: Add follow-up for requesting user
+}
+
+- (IBAction)didPressDeny:(id)sender {
+    // TODO: Delete this inforequest
+}
+
 
 @end

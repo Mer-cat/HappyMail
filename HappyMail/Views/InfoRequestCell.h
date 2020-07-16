@@ -12,8 +12,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface InfoRequestCell : UITableViewCell
+@property (nonatomic, strong) InfoRequest *infoRequest;
 
-- (void)refreshInfoRequestCell:(InfoRequest *)infoRequest;
+- (void)refreshInfoRequestCell;
 
 @end
 

@@ -41,8 +41,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     InfoRequestCell *infoRequestCell = [self.tableView dequeueReusableCellWithIdentifier:@"InfoRequestCell"];
     InfoRequest *infoRequest = self.infoRequests[indexPath.row];
+    infoRequestCell.infoRequest = infoRequest;
     
-    [infoRequestCell refreshInfoRequestCell:infoRequest];
+    [infoRequestCell refreshInfoRequestCell];
     
     return infoRequestCell;
 }
