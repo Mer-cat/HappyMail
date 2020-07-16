@@ -135,11 +135,16 @@
 }
 
 - (IBAction)didPressSaveAboutMe:(id)sender {
-    // TODO: Save the entered text to Parse
+    // Save the entered text to Parse and dismiss keyboard
+    self.user.aboutMeText = self.aboutMeTextView.text;
+    [self.user saveInBackground];
+    [self.aboutMeTextView resignFirstResponder];
 }
 
 - (IBAction)didPressCancelAboutMe:(id)sender {
-    // TODO: Dismiss the keyboard and revert to previous text
+    // Dismiss the keyboard and revert to previous text
+    [self.aboutMeTextView resignFirstResponder];
+    self.aboutMeTextView.text = self.user.aboutMeText;
 }
 
 #pragma mark - UITextViewDelegate
@@ -151,7 +156,9 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    // TODO: Make save and cancel buttons disappear
+    // TODO: Make save and cancel buttons disappear with animation
+    self.saveButton.hidden = YES;
+    self.cancelButton.hidden = YES;
 }
 
 /*
