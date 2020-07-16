@@ -7,11 +7,13 @@
 //
 
 #import "InfoRequestCell.h"
+#import "FollowUp.h"
 
 @interface InfoRequestCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *usernameButtonLabel;
 @property (weak, nonatomic) IBOutlet UIButton *requestButtonLabel;
+@property (nonatomic, strong) InfoRequest *infoRequest;
 
 @end
 
@@ -19,7 +21,8 @@
 
 #pragma mark - Init
 
-- (void)refreshInfoRequestCell {
+- (void)refreshInfoRequestCell:(InfoRequest *)infoRequest {
+    self.infoRequest = infoRequest;
     [self.infoRequest.requestingUser fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
             [self.usernameButtonLabel setTitle:self.infoRequest.requestingUser.username forState:UIControlStateNormal];
@@ -39,13 +42,15 @@
 
 #pragma mark - Actions
 
-// TODO: Need to refactor FollowUp data model before implementing these
 - (IBAction)didPressApprove:(id)sender {
-    // TODO: Add follow-up for requesting user
+    // Add follow-up for requesting user then remove info request
+    [FollowUp createNewFollowUpForUser:self.infoRequest.requestingUser fromPost:self.infoRequest.associatedPost aboutUser:self.infoRequest.requestedUser];
+    [self.infoRequest removeInfoRequest];
 }
 
 - (IBAction)didPressDeny:(id)sender {
-    // TODO: Delete this inforequest
+    // Delete this inforequest
+    [self.infoRequest removeInfoRequest];
 }
 
 
