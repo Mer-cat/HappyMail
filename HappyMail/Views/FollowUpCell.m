@@ -58,7 +58,7 @@
     if (self.followUp.originalPost.type == 0) {
         [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
     } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
-        [FollowUp removeFollowUp:self.followUp];
+        [self.followUp removeFollowUp];
     }
     [self.delegate didChangeFollowUp:self.followUp];
     // TODO: Could notify receiving user that a card is on the way
@@ -70,7 +70,7 @@
     if (self.followUp.originalPost.type == 0) {
         [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
     } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
-        [FollowUp removeFollowUp:self.followUp];
+        [self.followUp removeFollowUp];
     }
     [self.delegate didChangeFollowUp:self.followUp];
     // TODO: Could notify user that offerer/request responder is no longer going to send a card
