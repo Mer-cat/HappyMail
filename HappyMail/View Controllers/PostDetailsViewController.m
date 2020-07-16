@@ -10,6 +10,7 @@
 #import "DateTools.h"
 #import "ProfileViewController.h"
 #import "InfoRequest.h"
+#import "FollowUp.h"
 
 @interface PostDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
@@ -48,16 +49,19 @@
     // Currently, users can go back to the page to respond again
     self.respondButton.enabled = NO;
     User *currentUser = [User currentUser];
+    
     // User is responding to an offer post
     if (self.post.type == 0) {
-        [self.post addRespondee:currentUser];
+        [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
     } else if (self.post.type == 1) {  // User is responding to request
         // TODO: Set up info request creation and flow
         [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
         
-        [currentUser addFollowUp:self.post];
+        // TODO: Below should only happen upon inforequest approval
+        [FollowUp createNewFollowUpForUser:currentUser fromPost:self.post aboutUser:self.post.author];
         NSLog(@"User successfully responded to request");
     }
+    [self.post addRespondee:currentUser];
 }
 
 #pragma mark - Navigation
