@@ -32,18 +32,18 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    [self reloadPosts];
+    [self fetchPosts];
     
     // Add refresh control
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
-    [self.refreshControl addTarget:self action:@selector(reloadPosts) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 #pragma mark - Parse queries
 
-- (void)reloadPosts {
+- (void)fetchPosts {
     PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
