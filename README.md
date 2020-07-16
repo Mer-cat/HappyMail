@@ -179,7 +179,6 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 | followUps | Array of Posts | array of Posts that user should follow up on |
 | thankYous | Array of Posts | array of thank-you posts that this user has been tagged in (optional) |
 | address | String | user's mailing address |
-| infoRequests | Array of InfoRequests | requests for information from other users |
 | country | String | user's country (could be pulled from address) (optional)|
 
 #### InfoRequest
