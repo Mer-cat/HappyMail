@@ -19,4 +19,19 @@
     return @"InfoRequest";
 }
 
++ (void)createNewInfoRequestToUser:(User *)requestedUser fromUser:(User *)requestingUser fromPost:(Post *) post {
+    InfoRequest *newInfoRequest = [InfoRequest new];
+    newInfoRequest.requestedUser = requestedUser;
+    newInfoRequest.requestingUser = requestingUser;
+    newInfoRequest.associatedPost = post;
+    
+    [newInfoRequest saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Successfully created new info request");
+        } else {
+            NSLog(@"Error adding new info request: %@", error.localizedDescription);
+        }
+    }];
+}
+
 @end
