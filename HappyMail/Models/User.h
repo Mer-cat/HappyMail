@@ -8,11 +8,13 @@
 
 #import <Parse/Parse.h>
 #import "Post.h"
+#import "InfoRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 // Needed due to circular dependency causing compile-time errors
 @class Post;
+@class InfoRequest;
 
 @interface User : PFUser<PFSubclassing>
 
