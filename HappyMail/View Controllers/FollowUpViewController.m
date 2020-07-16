@@ -39,8 +39,6 @@
     [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
     [self.refreshControl addTarget:self action:@selector(fetchFollowUps) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-    
-    // TODO: Set up live query to auto-reload table view when followUps change
 }
 
 #pragma mark - UITableViewDataSource
@@ -56,7 +54,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%@", self.unpackedFollowUps);
     return self.unpackedFollowUps.count;
 }
 
@@ -74,6 +71,9 @@
 
 #pragma mark - FollowUpCellDelegate
 
+/**
+ * Allows completed follow-ups to be immediately removed without user refreshing
+ */
 - (void)didChangeFollowUp:(UnpackedFollowUp *)followUp {
     [self.unpackedFollowUps removeObject:followUp];
     [self.tableView reloadData];
