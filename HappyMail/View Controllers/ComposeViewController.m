@@ -7,7 +7,6 @@
 //
 
 #import "ComposeViewController.h"
-#import "Post.h"
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
@@ -30,9 +29,10 @@
  */
 - (IBAction)didPressPost:(id)sender {
     self.postButton.enabled = NO;
-    [Post createNewPostWithTitle:self.titleField.text withBody:self.bodyTextView.text withType:self.postTypeControl.selectedSegmentIndex withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
+    [Post createNewPostWithTitle:self.titleField.text withBody:self.bodyTextView.text withType:self.postTypeControl.selectedSegmentIndex withCompletion:^(Post *post, NSError *error) {
+        if (post) {
             NSLog(@"Successfully made new post");
+            [self.delegate didPost:post];
             
             // Return to the home screen
             [self dismissViewControllerAnimated:true completion:nil];
