@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FollowUpCell : UITableViewCell
 
 - (void)refreshFollowUp:(UnpackedFollowUp *)followUp;
+- (void)showButtons;
+- (void)hideButtons;
 
 @end
 

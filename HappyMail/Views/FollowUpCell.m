@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (nonatomic, strong) UnpackedFollowUp *followUp;
+@property (weak, nonatomic) IBOutlet UIButton *incompleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *completeButton;
 
 @end
 
@@ -32,6 +34,16 @@
             NSLog(@"Error fetching receiving user: %@", error.localizedDescription);
         }
     }];
+}
+
+- (void)showButtons {
+    self.incompleteButton.hidden = NO;
+    self.completeButton.hidden = NO;
+}
+
+- (void)hideButtons {
+    self.incompleteButton.hidden = YES;
+    self.completeButton.hidden = YES;
 }
 
 - (IBAction)didPressCheck:(id)sender {
