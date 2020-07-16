@@ -44,7 +44,7 @@
 #pragma mark - Actions
 
 - (IBAction)didPressRespond:(id)sender {
-    // Currently, completely disable ability or respond twice
+    // Currently, users can go back to the page to respond again
     self.respondButton.enabled = NO;
     User *currentUser = [User currentUser];
     // User is responding to an offer post
