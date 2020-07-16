@@ -132,6 +132,7 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 * Follow-ups screen
     * -> Individual Offer detail view
     * -> Individual Request detail view
+    * -> InfoRequests table view
 * Other Users' Profile Screen
 
 ## Wireframes
@@ -176,10 +177,11 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 | email | String | user's associated email (default field) |
 | aboutMeText | String| user's profile description |
 | profileImage | File | user's profile image |
-| followUps | Array of Posts | array of Posts that user should follow up on |
-| thankYous | Array of Posts | array of thank-you posts that this user has been tagged in (optional) |
+| thankYous | Array of Posts | array of thank-you posts that this user has been tagged in (optional)* |
 | address | String | user's mailing address |
 | country | String | user's country (could be pulled from address) (optional)|
+
+* (reconsider putting this here, may cause issues with trying to save user who is not signed in)
 
 #### InfoRequest
 | Property | Type     | Description |
@@ -188,10 +190,11 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 | associatedPost | pointer to Post | post that user requested from |
 | requestedUser |pointer to User | user whose info is being requested|
 
-#### UnpackedFollowUp (Local only, not on Parse)
+#### FollowUp
 | Property | Type     | Description |
 | -------- | -------- | -------- |
-| receivingUser | pointer to User| user who either responded to current user's offer or responded to their request |
+| receivingUser | pointer to User| user who has requested a card (either by responding to another offer or through their own request post)|
+| sendingUser | pointer to User | user who is offering to send a card (either through their own offer post or by responding to another user's request) |
 | originalPost | pointer to Post | post that created the follow-up |
    
 
