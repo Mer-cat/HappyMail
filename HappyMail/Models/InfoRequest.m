@@ -34,4 +34,8 @@
     }];
 }
 
+- (void)removeInfoRequest {
+    [self deleteInBackground];
+}
+
 @end
