@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *postTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-@property (nonatomic, strong) UnpackedFollowUp *followUp;
+@property (nonatomic, strong) FollowUp *followUp;
 @property (weak, nonatomic) IBOutlet UIButton *incompleteButton;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
 
@@ -21,11 +21,18 @@
 
 @implementation FollowUpCell
 
-- (void)refreshFollowUp:(UnpackedFollowUp *)followUp {
+- (void)refreshFollowUp:(FollowUp *)followUp {
     self.followUp = followUp;
-    NSString *postType = _PostTypes()[followUp.originalPost.type];
-    self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
-    self.postTitleLabel.text = followUp.originalPost.title;
+    [followUp.originalPost fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+            NSString *postType = _PostTypes()[followUp.originalPost.type];
+            self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
+            self.postTitleLabel.text = followUp.originalPost.title;
+        } else {
+            NSLog(@"Error fetching associated post: %@", error.localizedDescription);
+        }
+    }];
+    
     [followUp.receivingUser fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
             self.usernameLabel.text = followUp.receivingUser.username;
@@ -51,7 +58,7 @@
     if (self.followUp.originalPost.type == 0) {
         [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
     } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
-        [[User currentUser] removeFollowUp:self.followUp.originalPost];
+        [FollowUp removeFollowUp:self.followUp];
     }
     [self.delegate didChangeFollowUp:self.followUp];
     // TODO: Could notify receiving user that a card is on the way
@@ -63,7 +70,7 @@
     if (self.followUp.originalPost.type == 0) {
         [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
     } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
-        [[User currentUser] removeFollowUp:self.followUp.originalPost];
+        [FollowUp removeFollowUp:self.followUp];
     }
     [self.delegate didChangeFollowUp:self.followUp];
     // TODO: Could notify user that offerer/request responder is no longer going to send a card

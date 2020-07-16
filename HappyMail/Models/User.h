@@ -7,23 +7,15 @@
 //
 
 #import <Parse/Parse.h>
-#import "Post.h"
-#import "InfoRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-// Needed due to circular dependency causing compile-time errors
-@class Post;
-@class InfoRequest;
 
 @interface User : PFUser<PFSubclassing>
 
 // MARK: Properties
 @property (nonatomic, strong) NSString *aboutMeText;
 @property (nonatomic, strong) PFFileObject *profileImage;
-@property (nonatomic, strong) NSMutableArray *followUps;
 @property (nonatomic, strong) NSString *address;
-@property (nonatomic, strong) NSMutableArray *infoRequests;
 
 // Properties for optional features
 /*
@@ -32,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: Methods
 + (User *)user;
-- (void)addFollowUp:(Post *)post;
-- (void)removeFollowUp:(Post *)post;
+
+// TODO: Put any methods for changing properties that should go here
 
 @end
 

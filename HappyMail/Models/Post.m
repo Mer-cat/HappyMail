@@ -17,7 +17,6 @@
 @dynamic bodyText;
 @dynamic respondees;
 
-
 + (nonnull NSString *)parseClassName {
     return @"Post";
 }
@@ -35,10 +34,6 @@
     
     [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            // Add this post to the author's follow-ups if it is their own offer
-            if (type == 0) {
-                [user addFollowUp:newPost];
-            }
             completion(newPost, nil);
         } else {
             completion(nil, error);

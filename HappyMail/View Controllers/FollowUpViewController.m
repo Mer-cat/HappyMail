@@ -8,7 +8,7 @@
 
 #import "FollowUpViewController.h"
 #import "FollowUpCell.h"
-#import "UnpackedFollowUp.h"
+#import "FollowUp.h"
 #import "Post.h"
 #import "User.h"
 #import <Parse/Parse.h>
@@ -16,8 +16,7 @@
 @interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource, FollowUpCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *followUps;
-@property (nonatomic, strong) NSMutableArray *unpackedFollowUps;
+@property (nonatomic, strong) NSMutableArray *followUps;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
@@ -48,13 +47,13 @@
     cell.delegate = self;
     
     // Populate cells with user's personal follow-ups
-    UnpackedFollowUp *followUp = self.unpackedFollowUps[indexPath.row];
+    FollowUp *followUp = self.followUps[indexPath.row];
     [cell refreshFollowUp:followUp];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.unpackedFollowUps.count;
+    return self.followUps.count;
 }
 
 #pragma mark - UITableViewDelegate
@@ -74,8 +73,8 @@
 /**
  * Allows completed follow-ups to be immediately removed without user refreshing
  */
-- (void)didChangeFollowUp:(UnpackedFollowUp *)followUp {
-    [self.unpackedFollowUps removeObject:followUp];
+- (void)didChangeFollowUp:(FollowUp *)followUp {
+    [self.followUps removeObject:followUp];
     [self.tableView reloadData];
 }
 
@@ -85,54 +84,18 @@
  * Fetch the user's follow-ups from Parse
  */
 - (void)fetchFollowUps {
-    PFQuery *query = [User query];
-    [query whereKey:@"username" equalTo:[User currentUser].username];
-    [query includeKey:@"followUps"];
+    PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
+    [query whereKey:@"sendingUser" equalTo:[User currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
             NSLog(@"Successfully fetched user's follow-ups");
-            User *user = objects[0];
-            self.followUps = user.followUps;
-            [self unpackFollowUps];
+            self.followUps = (NSMutableArray *) objects;
             [self.tableView reloadData];
         } else {
             NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
         }
         [self.refreshControl endRefreshing];
     }];
-}
-
-#pragma mark - Helpers
-
-/**
- * Given the user's list of follow-up posts, unpacks them into an array of follow-up objects
- */
-- (void)unpackFollowUps {
-    // Zero out the array so that we do not create duplicates
-    self.unpackedFollowUps = [NSMutableArray new];
-    
-    for (Post *post in self.followUps) {
-        // User's offers to follow up on
-        if (post.type == 0) {
-            
-            // Create a follow-up for each user
-            // who responded to current user's offer
-            for (User *user in post.respondees) {
-                UnpackedFollowUp *newFollowUp = [[UnpackedFollowUp alloc] init];
-                newFollowUp.receivingUser = user;
-                newFollowUp.originalPost = post;
-                [self.unpackedFollowUps addObject:newFollowUp];
-            }
-        } else if (post.type == 1) {  // Other user's requests
-            
-            // Create a follow-up for each request from other
-            // users that current user responded to
-            UnpackedFollowUp *newFollowUp = [[UnpackedFollowUp alloc] init];
-            newFollowUp.receivingUser = post.author;
-            newFollowUp.originalPost = post;
-            [self.unpackedFollowUps addObject:newFollowUp];
-        }
-    }
 }
 
 /*

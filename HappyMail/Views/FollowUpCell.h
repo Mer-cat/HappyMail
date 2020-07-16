@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UnpackedFollowUp.h"
+#import "FollowUp.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,14 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FollowUpCell : UITableViewCell
 @property (nonatomic, weak) id<FollowUpCellDelegate> delegate;
 
-- (void)refreshFollowUp:(UnpackedFollowUp *)followUp;
+- (void)refreshFollowUp:(FollowUp *)followUp;
 - (void)showButtons;
 - (void)hideButtons;
 
 @end
 
 @protocol FollowUpCellDelegate
-- (void) didChangeFollowUp:(UnpackedFollowUp *)followUp;
+- (void) didChangeFollowUp:(FollowUp *)followUp;
 
 @end
 
