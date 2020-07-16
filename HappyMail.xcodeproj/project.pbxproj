@@ -18,6 +18,8 @@
 		D43694D824B4EE4600902846 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694D724B4EE4600902846 /* main.m */; };
 		D43694E224B4EE4600902846 /* HappyMailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694E124B4EE4600902846 /* HappyMailTests.m */; };
 		D43694ED24B4EE4600902846 /* HappyMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694EC24B4EE4600902846 /* HappyMailUITests.m */; };
+		D458B98E24C0D5D400427F25 /* InfoRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D458B98D24C0D5D400427F25 /* InfoRequestsViewController.m */; };
+		D458B99124C0D6E000427F25 /* InfoRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D458B99024C0D6E000427F25 /* InfoRequestCell.m */; };
 		D47E36F224BCD367009B3BCE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F124BCD367009B3BCE /* Post.m */; };
 		D47E36F624BCD74F009B3BCE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F524BCD74F009B3BCE /* User.m */; };
 		D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F824BCEDCA009B3BCE /* InfoRequest.m */; };
@@ -75,6 +77,10 @@
 		D43694E824B4EE4600902846 /* HappyMailUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyMailUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43694EC24B4EE4600902846 /* HappyMailUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappyMailUITests.m; sourceTree = "<group>"; };
 		D43694EE24B4EE4600902846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D458B98C24C0D5D400427F25 /* InfoRequestsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoRequestsViewController.h; sourceTree = "<group>"; };
+		D458B98D24C0D5D400427F25 /* InfoRequestsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoRequestsViewController.m; sourceTree = "<group>"; };
+		D458B98F24C0D6E000427F25 /* InfoRequestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoRequestCell.h; sourceTree = "<group>"; };
+		D458B99024C0D6E000427F25 /* InfoRequestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoRequestCell.m; sourceTree = "<group>"; };
 		D47E36F024BCD367009B3BCE /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		D47E36F124BCD367009B3BCE /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		D47E36F424BCD74F009B3BCE /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -250,6 +256,8 @@
 				D47E370A24BCF28A009B3BCE /* FollowUpViewController.m */,
 				D47E370C24BCF3C1009B3BCE /* PostDetailsViewController.h */,
 				D47E370D24BCF3C1009B3BCE /* PostDetailsViewController.m */,
+				D458B98C24C0D5D400427F25 /* InfoRequestsViewController.h */,
+				D458B98D24C0D5D400427F25 /* InfoRequestsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -261,6 +269,8 @@
 				D47E371424BE14FF009B3BCE /* PostCell.m */,
 				D47E371624BE3991009B3BCE /* FollowUpCell.h */,
 				D47E371724BE3991009B3BCE /* FollowUpCell.m */,
+				D458B98F24C0D6E000427F25 /* InfoRequestCell.h */,
+				D458B99024C0D6E000427F25 /* InfoRequestCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -514,6 +524,7 @@
 			files = (
 				D47E36FC24BCF0C4009B3BCE /* LoginViewController.m in Sources */,
 				D47E371824BE3991009B3BCE /* FollowUpCell.m in Sources */,
+				D458B99124C0D6E000427F25 /* InfoRequestCell.m in Sources */,
 				D47E36F224BCD367009B3BCE /* Post.m in Sources */,
 				D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */,
 				D47E370524BCF258009B3BCE /* ComposeViewController.m in Sources */,
@@ -528,6 +539,7 @@
 				D47E370824BCF27D009B3BCE /* ProfileViewController.m in Sources */,
 				D47E370224BCF24A009B3BCE /* FeedViewController.m in Sources */,
 				D43694CA24B4EE4200902846 /* SceneDelegate.m in Sources */,
+				D458B98E24C0D5D400427F25 /* InfoRequestsViewController.m in Sources */,
 				D47E371524BE14FF009B3BCE /* PostCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
