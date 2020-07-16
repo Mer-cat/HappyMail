@@ -22,7 +22,7 @@
     return @"Post";
 }
 
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(PFBooleanResultBlock  _Nullable)completion {
++ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(void (^)(Post *, NSError *))completion {
     
     Post *newPost = [Post new];
     User *user = [User currentUser];
@@ -33,8 +33,14 @@
     newPost.respondees = [[NSMutableArray alloc] init];
     
     // Add this post to the author's follow-ups
-    [user addFollowUp:newPost];    
-    [newPost saveInBackgroundWithBlock:completion];
+    [user addFollowUp:newPost];
+    [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            completion(newPost, nil);
+        } else {
+            completion(nil, error);
+        }
+    }];
 }
 
 - (void)addRespondee:(User *)user {
