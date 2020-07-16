@@ -13,7 +13,7 @@
 #import "User.h"
 #import <Parse/Parse.h>
 
-@interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource, FollowUpCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *followUps;
@@ -47,6 +47,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FollowUpCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FollowUpCell"];
+    cell.delegate = self;
     
     // Populate cells with user's personal follow-ups
     UnpackedFollowUp *followUp = self.unpackedFollowUps[indexPath.row];
@@ -69,6 +70,13 @@
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     FollowUpCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell hideButtons];
+}
+
+#pragma mark - FollowUpCellDelegate
+
+- (void)didChangeFollowUp:(UnpackedFollowUp *)followUp {
+    [self.unpackedFollowUps removeObject:followUp];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Parse network calls
@@ -109,7 +117,6 @@
             
             // Create a follow-up for each user
             // who responded to current user's offer
-            NSLog(@"%@", post.respondees);
             for (User *user in post.respondees) {
                 UnpackedFollowUp *newFollowUp = [[UnpackedFollowUp alloc] init];
                 newFollowUp.receivingUser = user;
