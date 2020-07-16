@@ -54,12 +54,9 @@
     if (self.post.type == 0) {
         [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
     } else if (self.post.type == 1) {  // User is responding to request
-        // TODO: Set up info request creation and flow
-        [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
         
-        // TODO: Below should only happen upon inforequest approval
-        [FollowUp createNewFollowUpForUser:currentUser fromPost:self.post aboutUser:self.post.author];
-        NSLog(@"User successfully responded to request");
+        // Send an info request to the receiving user to ask for their information
+        [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
     }
     [self.post addRespondee:currentUser];
 }
