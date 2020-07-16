@@ -9,6 +9,7 @@
 #import "PostDetailsViewController.h"
 #import "DateTools.h"
 #import "ProfileViewController.h"
+#import "InfoRequest.h"
 
 @interface PostDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
@@ -52,6 +53,8 @@
         [self.post addRespondee:currentUser];
     } else if (self.post.type == 1) {  // User is responding to request
         // TODO: Set up info request creation and flow
+        [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
+        
         [currentUser addFollowUp:self.post];
         NSLog(@"User successfully responded to request");
     }
