@@ -397,7 +397,7 @@
                     <navigationItem key="navigationItem" title="Feed" id="KED-tW-y7r">
                         <barButtonItem key="rightBarButtonItem" title="Create Post" id="vRT-Up-TWx">
                             <connections>
-                                <segue destination="t9Q-Rn-AgP" kind="presentation" modalPresentationStyle="fullScreen" id="oX7-2v-Pwl"/>
+                                <segue destination="t9Q-Rn-AgP" kind="presentation" identifier="ComposeViewSegue" modalPresentationStyle="fullScreen" id="oX7-2v-Pwl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
