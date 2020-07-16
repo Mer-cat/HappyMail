@@ -253,7 +253,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="About me: I like cats blah blah blah" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Cc-a2-8KV">
-                                                <rect key="frame" x="20" y="198" width="376" height="367"/>
+                                                <rect key="frame" x="20" y="198" width="376" height="202"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -261,7 +261,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJg-Gm-Xde">
-                                                <rect key="frame" x="20" y="573" width="48" height="30"/>
+                                                <rect key="frame" x="20" y="410" width="48" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
@@ -269,7 +269,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBw-7k-4yF">
-                                                <rect key="frame" x="350" y="571" width="46" height="32"/>
+                                                <rect key="frame" x="350" y="408" width="46" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Save"/>
                                                 <connections>
@@ -577,7 +577,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7T3-WT-FCH">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7T3-WT-FCH">
                                                     <rect key="frame" x="267" y="40" width="44" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="X">
@@ -587,7 +587,7 @@
                                                         <action selector="didPressX:" destination="1jY-Iv-7dP" eventType="touchUpInside" id="eYr-9z-x5G"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDK-Ac-yRk">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDK-Ac-yRk">
                                                     <rect key="frame" x="329" y="39" width="44" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Check">
@@ -601,6 +601,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addressLabel" destination="WQB-Dz-UJL" id="H3O-mV-Ola"/>
+                                            <outlet property="completeButton" destination="PDK-Ac-yRk" id="n0P-kP-OFl"/>
+                                            <outlet property="incompleteButton" destination="7T3-WT-FCH" id="hUS-Y5-SIM"/>
                                             <outlet property="postTitleLabel" destination="rjh-Uw-xh0" id="WfI-iT-2m8"/>
                                             <outlet property="postTypeLabel" destination="FxP-el-png" id="EKu-rh-ig5"/>
                                             <outlet property="usernameLabel" destination="82P-yQ-vLj" id="CMV-V3-xNH"/>
