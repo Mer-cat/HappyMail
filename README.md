@@ -179,7 +179,6 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 | followUps | Array of Posts | array of Posts that user should follow up on |
 | thankYous | Array of Posts | array of thank-you posts that this user has been tagged in (optional) |
 | address | String | user's mailing address |
-| infoRequests | Array of InfoRequests | requests for information from other users |
 | country | String | user's country (could be pulled from address) (optional)|
 
 #### InfoRequest
@@ -189,7 +188,7 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 | associatedPost | pointer to Post | post that user requested from |
 | requestedUser |pointer to User | user whose info is being requested|
 
-#### FollowUp (Local only, not on Parse)
+#### UnpackedFollowUp (Local only, not on Parse)
 | Property | Type     | Description |
 | -------- | -------- | -------- |
 | receivingUser | pointer to User| user who either responded to current user's offer or responded to their request |
@@ -280,3 +279,4 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 ### Dependencies
 * [Parse](https://github.com/parse-community/Parse-SDK-iOS-OSX)
 * [DateTools](https://github.com/MatthewYork/DateTools)
+* [ParseUI](https://github.com/parse-community/Parse-SDK-iOS-OSX)
