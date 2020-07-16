@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) Post *originalPost;
 
 + (void)createNewFollowUpForUser:(User *)sendingUser fromPost:(Post *)originalPost aboutUser:(User *)receivingUser;
-+ (void)removeFollowUp:(FollowUp *)followUp;
+- (void)removeFollowUp;
 
 @end
 

@@ -28,8 +28,8 @@
     [newFollowUp saveInBackground];
 }
 
-+ (void)removeFollowUp:(FollowUp *)followUp {
-    [followUp deleteInBackground];
+- (void)removeFollowUp {
+    [self deleteInBackground];
 }
 
 @end
