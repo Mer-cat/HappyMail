@@ -137,25 +137,23 @@
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
+        // TODO: Un-filter when user deselects a cell, or when they choose a different cell
         
-        // Note: If I use switching, I will only be able to use one filter criteria at a time (I think)
-        // Maybe I can take out a certain predicate when a user deselects only that criteria?
-        switch(indexPath.row) {
-            case AllOffers:
-    
-                break;
-            case AllRequests:
-                
-                break;
-            case Newest:
-                
-                break;
-            case Oldest:
-                
-                break;
-            default:
-                [NSException raise:NSGenericException format:@"Unexpected FilterOption"];
-        }
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
+            switch(indexPath.row) {
+                case AllOffers:
+                    return (evaluatedObject.type == Offer);
+                    break;
+                case AllRequests:
+                    return (evaluatedObject.type == Request);
+                    break;
+                default:
+                    return evaluatedObject;
+                    // [NSException raise:NSGenericException format:@"Unexpected FilterOption"];
+            }
+        }];
+        self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
+        [self.tableView reloadData];
         
     }
 }
