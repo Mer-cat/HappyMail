@@ -68,10 +68,10 @@
 
     switch(postType) {
         case Offer:
-            result = NSLocalizedString(@"Offer",@"Tells user this is an OFFER");
+            result = @"Offer";
             break;
         case Request:
-            result = NSLocalizedString(@"Request", @"Tells user this is a REQUEST");
+            result = @"Request";
             break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
