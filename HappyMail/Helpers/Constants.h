@@ -14,4 +14,11 @@ typedef NS_ENUM(NSInteger, PostType) {
     Request
 };
 
+typedef NS_ENUM(NSInteger, FilterOption) {
+    AllOffers,
+    AllRequests,
+    Newest,
+    Oldest
+};
+
 #endif /* Constants_h */
