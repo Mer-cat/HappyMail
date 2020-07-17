@@ -370,11 +370,31 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ixb-Nf-ZHx">
+                                <rect key="frame" x="0.0" y="88" width="204" height="288"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.84383614880000002" blue="0.92643978029999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="xFj-6F-laB">
+                                        <rect key="frame" x="0.0" y="28" width="204" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xFj-6F-laB" id="cV9-nz-mNY">
+                                            <rect key="frame" x="0.0" y="0.0" width="204" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="vGd-Vm-f5O"/>
                     </view>
                     <navigationItem key="navigationItem" title="Feed" id="KED-tW-y7r">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="bqD-e2-FF2">
+                            <connections>
+                                <action selector="didPressFilter:" destination="FSg-ns-5eE" id="fof-fr-DP1"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Create Post" id="vRT-Up-TWx">
                             <connections>
                                 <segue destination="t9Q-Rn-AgP" kind="presentation" identifier="ComposeViewSegue" modalPresentationStyle="fullScreen" id="oX7-2v-Pwl"/>
@@ -382,6 +402,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dropDownTableView" destination="ixb-Nf-ZHx" id="lrX-ay-ff8"/>
                         <outlet property="searchBar" destination="cTn-HT-Sek" id="47D-LB-tja"/>
                         <outlet property="tableView" destination="WrM-2D-1fC" id="jjy-ty-6DE"/>
                     </connections>

@@ -13,6 +13,7 @@
 #import "PostDetailsViewController.h"
 #import "ProfileViewController.h"
 #import "ComposeViewController.h"
+#import "Constants.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate>
 
@@ -21,6 +22,8 @@
 @property (nonatomic, strong) NSArray *filteredPosts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *dropDownTableView;
+@property (nonatomic, strong) NSArray *filterOptions;
 
 @end
 
@@ -33,7 +36,15 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.dropDownTableView.delegate = self;
+    self.dropDownTableView.dataSource = self;
+    
     self.searchBar.delegate = self;
+    
+    self.filterOptions = @[@"Offers",@"Requests", @"Newest",@"Oldest"];
+    if ([self.tableView indexPathForSelectedRow]) {
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    }
     
     [self fetchPosts];
     
@@ -66,6 +77,12 @@
     }];
 }
 
+#pragma mark - Actions
+
+- (IBAction)didPressFilter:(id)sender {
+    self.dropDownTableView.hidden = !self.dropDownTableView.hidden;
+}
+
 #pragma mark - ComposeViewControllerDelegate
 
 - (void)didPost:(Post *) post {
@@ -77,16 +94,70 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    Post *post = self.filteredPosts[indexPath.row];
-    
-    // Load the cell with current post
-    [cell refreshPost:post];
-    return cell;
+    // Differentiate between drop down and regular table view
+    if ([tableView isEqual:self.tableView]) {
+        PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+        Post *post = self.filteredPosts[indexPath.row];
+        
+        // Load the cell with current post
+        [cell refreshPost:post];
+        return cell;
+    } else {
+        static NSString *filterCellIdentifier = @"FilterCellItem";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:filterCellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
+        }
+        
+        cell.textLabel.text = self.filterOptions[indexPath.row];
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.filteredPosts.count;
+    if ([tableView isEqual:self.tableView]) {
+        return self.filteredPosts.count;
+    } else {
+        return self.filterOptions.count;
+    }
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([tableView isEqual:self.dropDownTableView]) {
+        // TODO: Set up some filtering here and re-filter posts from the filteredPosts array
+        // TODO: Make this cell perma-selected until user un-selects it
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        // When user taps a cell, display/undisplay check mark
+        if (cell.accessoryType == UITableViewCellAccessoryNone) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+        // Note: If I use switching, I will only be able to use one filter criteria at a time (I think)
+        // Maybe I can take out a certain predicate when a user deselects only that criteria?
+        switch(indexPath.row) {
+            case AllOffers:
+    
+                break;
+            case AllRequests:
+                
+                break;
+            case Newest:
+                
+                break;
+            case Oldest:
+                
+                break;
+            default:
+                [NSException raise:NSGenericException format:@"Unexpected FilterOption"];
+        }
+        
+    }
 }
 
 #pragma mark - UISearchBarDelegate
@@ -96,7 +167,7 @@
     
     if(searchText.length != 0) {
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
-            return [evaluatedObject.title containsString:searchText];
+            return [evaluatedObject.title localizedStandardContainsString:searchText];
         }];
         self.filteredPosts = [self.posts filteredArrayUsingPredicate:predicate];
     }
@@ -132,7 +203,7 @@
         PostDetailsViewController *detailsViewController = [segue destinationViewController];
         PostCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        Post *specificPost = self.posts[indexPath.row];
+        Post *specificPost = self.filteredPosts[indexPath.row];
         detailsViewController.post = specificPost;
     } else if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
         ProfileViewController *profileViewController = [segue destinationViewController];
@@ -140,7 +211,7 @@
         // Grab post from cell where user tapped username
         PostCell *cell = (PostCell *)[[sender superview] superview];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        Post *post = self.posts[indexPath.row];
+        Post *post = self.filteredPosts[indexPath.row];
         
         // If viewing another user's profile
         if (![post.author.username isEqualToString:[User currentUser].username]) {
