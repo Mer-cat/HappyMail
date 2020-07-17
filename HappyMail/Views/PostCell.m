@@ -23,7 +23,7 @@
 
 - (void)refreshPost:(Post *)post {
     // Set labels
-    self.offerTypeLabel.text = _PostTypes()[post.type];
+    self.offerTypeLabel.text = [Post formatTypeToString:post.type];
     self.titleLabel.text = post.title;
     [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
     

@@ -8,13 +8,9 @@
 
 #import <Parse/Parse.h>
 #import "User.h"
+#import "Constants.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-// Constant array to represent types of posts
-static NSArray<NSString *> *_PostTypes() {
-    return @[@"Offer", @"Request"];
-}
 
 // Needed due to circular dependency causing compile-time errors
 @class User;
@@ -39,10 +35,11 @@ static NSArray<NSString *> *_PostTypes() {
  */
 
 // MARK: Methods
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(void (^)(Post *, NSError *))completion;
++ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withCompletion:(void (^)(Post *, NSError *))completion;
 
 - (void)addRespondee:(User *)user;
 - (void)removeRespondee:(User *)user;
++ (NSString*)formatTypeToString:(PostType)postType;
 
 @end
 

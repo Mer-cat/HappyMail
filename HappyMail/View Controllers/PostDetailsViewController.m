@@ -35,7 +35,7 @@
 #pragma mark - Init
 
 - (void)refreshPost {
-    self.postTypeLabel.text = _PostTypes()[self.post.type];
+    self.postTypeLabel.text = [Post formatTypeToString:self.post.type];
     [self.usernameButton setTitle:self.post.author.username forState:UIControlStateNormal];
     self.titleLabel.text = self.post.title;
     self.bodyTextLabel.text = self.post.bodyText;

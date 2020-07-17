@@ -107,6 +107,7 @@
 		D47E371424BE14FF009B3BCE /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		D47E371624BE3991009B3BCE /* FollowUpCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUpCell.h; sourceTree = "<group>"; };
 		D47E371724BE3991009B3BCE /* FollowUpCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUpCell.m; sourceTree = "<group>"; };
+		D4A8015124C20BED00ACF2FC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D4DA3C1124C107380069DEFE /* FollowUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUp.h; sourceTree = "<group>"; };
 		D4DA3C1224C107380069DEFE /* FollowUp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUp.m; sourceTree = "<group>"; };
 		D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -280,6 +281,7 @@
 			children = (
 				D47E370F24BCFCF3009B3BCE /* Utils.h */,
 				D47E371024BCFCF3009B3BCE /* Utils.m */,
+				D4A8015124C20BED00ACF2FC /* Constants.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

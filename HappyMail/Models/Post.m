@@ -21,7 +21,7 @@
     return @"Post";
 }
 
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(NSInteger)type withCompletion:(void (^)(Post *, NSError *))completion {
++ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withCompletion:(void (^)(Post *, NSError *))completion {
     
     Post *newPost = [Post new];
     User *user = [User currentUser];
@@ -61,6 +61,23 @@
             NSLog(@"Error removing user from respondees: %@", error.localizedDescription);
         }
     }];
+}
+
++ (NSString*)formatTypeToString:(PostType)postType {
+    NSString *result = nil;
+
+    switch(postType) {
+        case Offer:
+            result = NSLocalizedString(@"Offer",@"Tells user this is an OFFER");
+            break;
+        case Request:
+            result = NSLocalizedString(@"Request", @"Tells user this is a REQUEST");
+            break;
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected PostType"];
+    }
+
+    return result;
 }
 
 @end

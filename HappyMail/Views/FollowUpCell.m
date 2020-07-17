@@ -25,7 +25,7 @@
     self.followUp = followUp;
     [followUp.originalPost fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
-            NSString *postType = _PostTypes()[followUp.originalPost.type];
+            NSString *postType = [Post formatTypeToString:followUp.originalPost.type];
             self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
             self.postTitleLabel.text = followUp.originalPost.title;
         } else {
