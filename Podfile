@@ -9,6 +9,7 @@ target 'HappyMail' do
   pod 'Parse'
   pod 'Parse/UI'
   pod 'DateTools'
+  pod 'IQKeyboardManager'
 
   target 'HappyMailTests' do
     inherit! :search_paths
