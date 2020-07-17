@@ -283,3 +283,4 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 * [Parse](https://github.com/parse-community/Parse-SDK-iOS-OSX)
 * [DateTools](https://github.com/MatthewYork/DateTools)
 * [ParseUI](https://github.com/parse-community/Parse-SDK-iOS-OSX)
+* [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager)
