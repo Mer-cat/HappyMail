@@ -17,8 +17,9 @@ typedef NS_ENUM(NSInteger, PostType) {
 typedef NS_ENUM(NSInteger, FilterOption) {
     AllOffers,
     AllRequests,
-    Newest,
-    Oldest
+    LastWeek,
+    LastDay,
+    None
 };
 
 #endif /* Constants_h */
