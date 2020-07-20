@@ -21,6 +21,8 @@
 
 @implementation FollowUpCell
 
+#pragma mark - Init
+
 - (void)refreshFollowUp:(FollowUp *)followUp {
     self.followUp = followUp;
     [followUp.originalPost fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
@@ -43,6 +45,36 @@
     }];
 }
 
+#pragma mark - Actions
+
+- (IBAction)didPressCheck:(id)sender {
+    [self removeFollowUp];
+    // TODO: Could notify receiving user that a card is on the way
+    // Could repurpose follow-ups screen to updates and add new type
+}
+
+- (IBAction)didPressX:(id)sender {
+    [self removeFollowUp];
+    // TODO: Could notify user that offerer/request responder is no longer going to send a card
+}
+
+#pragma mark - Helper
+
+- (void)removeFollowUp {
+    switch (self.followUp.originalPost.type) {
+        case Offer:
+            [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
+            [self.followUp removeFollowUp];
+            break;
+        case Request:
+            [self.followUp removeFollowUp];
+            break;
+        default:
+            break;
+    }
+    [self.delegate didChangeFollowUp:self.followUp];
+}
+
 - (void)showButtons {
     self.incompleteButton.hidden = NO;
     self.completeButton.hidden = NO;
@@ -51,29 +83,6 @@
 - (void)hideButtons {
     self.incompleteButton.hidden = YES;
     self.completeButton.hidden = YES;
-}
-
-- (IBAction)didPressCheck:(id)sender {
-    NSLog(@"Pressed check");
-    if (self.followUp.originalPost.type == 0) {
-        [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
-    } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
-        [self.followUp removeFollowUp];
-    }
-    [self.delegate didChangeFollowUp:self.followUp];
-    // TODO: Could notify receiving user that a card is on the way
-}
-
-- (IBAction)didPressX:(id)sender {
-    NSLog(@"Pressed X");
-    // Offer that user made
-    if (self.followUp.originalPost.type == 0) {
-        [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
-    } else if (self.followUp.originalPost.type == 1) {  // Request that current user responded to
-        [self.followUp removeFollowUp];
-    }
-    [self.delegate didChangeFollowUp:self.followUp];
-    // TODO: Could notify user that offerer/request responder is no longer going to send a card
 }
 
 @end
