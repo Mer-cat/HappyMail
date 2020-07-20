@@ -63,7 +63,7 @@
     }];
 }
 
-+ (NSString*)formatTypeToString:(PostType)postType {
++ (NSString *)formatTypeToString:(PostType)postType {
     NSString *result = nil;
 
     switch(postType) {

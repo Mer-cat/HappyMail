@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: Properties
 @property (nonatomic, strong) User *author;
-@property (nonatomic) NSInteger type;
+@property (nonatomic) PostType type;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *bodyText;
 @property (nonatomic, strong) NSMutableArray *respondees;
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addRespondee:(User *)user;
 - (void)removeRespondee:(User *)user;
-+ (NSString*)formatTypeToString:(PostType)postType;
++ (NSString *)formatTypeToString:(PostType)postType;
 
 @end
 
