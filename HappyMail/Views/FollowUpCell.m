@@ -70,6 +70,7 @@
             [self.followUp removeFollowUp];
             break;
         default:
+            [NSException raise:NSGenericException format:@"Unexpected PostType"];
             break;
     }
     [self.delegate didChangeFollowUp:self.followUp];
