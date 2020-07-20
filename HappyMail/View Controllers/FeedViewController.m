@@ -14,6 +14,7 @@
 #import "ProfileViewController.h"
 #import "ComposeViewController.h"
 #import "Constants.h"
+#import "DateTools.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate>
 
@@ -24,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *dropDownTableView;
 @property (nonatomic, strong) NSArray *filterOptions;
+@property (nonatomic, strong) NSArray *previousFilteredPosts;
+@property (nonatomic) FilterOption selectedFilter;
 
 @end
 
@@ -38,10 +41,13 @@
     self.tableView.dataSource = self;
     self.dropDownTableView.delegate = self;
     self.dropDownTableView.dataSource = self;
-    
     self.searchBar.delegate = self;
     
-    self.filterOptions = @[@"Offers",@"Requests", @"Newest",@"Oldest"];
+    // Currently has to be manually updated with typedef
+    self.filterOptions = @[@"Offers",@"Requests",@"Within last week",@"Within last day"];
+    self.selectedFilter = None;
+    
+    // Deselects any previously selected rows
     if ([self.tableView indexPathForSelectedRow]) {
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     }
@@ -68,7 +74,14 @@
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> *posts, NSError *error) {
         if (posts != nil) {
             self.posts = (NSMutableArray *) posts;
-            self.filteredPosts = posts;
+            NSLog(@"Query being called");
+            if (self.selectedFilter == None) {
+                self.filteredPosts = posts;
+                self.previousFilteredPosts = posts;
+            } else {
+                [self selectNewFilter:self.selectedFilter];
+            }
+            
             [self.tableView reloadData];
         } else {
             NSLog(@"Error getting posts: %@", error.localizedDescription);
@@ -125,71 +138,113 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Dealing with drop-down table view filter options
     if ([tableView isEqual:self.dropDownTableView]) {
-        // TODO: Set up some filtering here and re-filter posts from the filteredPosts array
-        // TODO: Make this cell perma-selected until user un-selects it
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
-        // When user taps a cell, display/undisplay check mark
-        if (cell.accessoryType == UITableViewCellAccessoryNone) {
+        // If a different filter was previously selected
+        // and user is selecting a new filter
+        if (self.selectedFilter != indexPath.row) {
+            
+            // Unselect previously selected cell
+            NSIndexPath *previousCellIndexPath = [NSIndexPath indexPathForRow:self.selectedFilter inSection:0];
+            UITableViewCell *previousCell = [tableView cellForRowAtIndexPath: previousCellIndexPath];
+            previousCell.accessoryType = UITableViewCellAccessoryNone;
+            
+            // Unfilter posts before applying new filter
+            self.filteredPosts = self.posts;
+            
+            // When user taps a cell, display check mark for that cell
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        } else {
+            
+            [self selectNewFilter:indexPath.row];
+            [self.tableView reloadData];
+
+        } else {  // Unselect previously selected filter
+            
+            // Unshow check mark
             cell.accessoryType = UITableViewCellAccessoryNone;
+            self.selectedFilter = None;
+            
+            // Unfilter posts
+            self.filteredPosts = self.posts;
+            [self.tableView reloadData];
         }
-        // TODO: Un-filter when user deselects a cell, or when they choose a different cell
-        
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
-            switch(indexPath.row) {
-                case AllOffers:
-                    return (evaluatedObject.type == Offer);
-                    break;
-                case AllRequests:
-                    return (evaluatedObject.type == Request);
-                    break;
-                default:
-                    return evaluatedObject;
-                    // [NSException raise:NSGenericException format:@"Unexpected FilterOption"];
-            }
-        }];
-        self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
-        [self.tableView reloadData];
-        
     }
+}
+
+#pragma mark - Filtering helper
+
+/**
+ *  Chooses predicate based on filter selection and updates filtered posts
+ */
+- (void)selectNewFilter:(FilterOption)selectedFilter {
+    self.selectedFilter = selectedFilter;
+    NSDate *currentDate = [NSDate date];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
+        switch(self.selectedFilter) {
+            case AllOffers:
+                return (evaluatedObject.type == Offer);
+            case AllRequests:
+                return (evaluatedObject.type == Request);
+            case LastWeek:{
+                DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:evaluatedObject.createdAt endDate:currentDate];
+                double timeSincePostingInWeeks = [timePeriod durationInWeeks];
+                return (timeSincePostingInWeeks <= 1);
+            }
+            case LastDay:{
+                DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:evaluatedObject.createdAt endDate:currentDate];
+                double timeSincePostingInDays = [timePeriod durationInDays];
+                return (timeSincePostingInDays <= 1);
+            }
+            default:
+                return evaluatedObject;
+                // [NSException raise:NSGenericException format:@"Unexpected FilterOption"];
+        }
+    }];
+    
+    // Stores the posts before new filter is applied
+    // so that we can revert if needed
+    self.previousFilteredPosts = self.filteredPosts;
+    self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - UISearchBarDelegate
 
-// Filters movies shown based on search query
+/**
+ * Filter posts based on title
+ */
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
     if(searchText.length != 0) {
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
             return [evaluatedObject.title localizedStandardContainsString:searchText];
         }];
-        self.filteredPosts = [self.posts filteredArrayUsingPredicate:predicate];
-    }
-    else {
-        self.filteredPosts = self.posts;
+        self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
+    } else {
+        self.filteredPosts = self.previousFilteredPosts;
     }
     
     [self.tableView reloadData];
 }
 
--(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.previousFilteredPosts = self.filteredPosts;
     self.searchBar.showsCancelButton = YES;
 }
 
-// Hides the search bar and clears it if user cancels
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+/**
+ * Clear the search bar and re-set the posts if user cancels search
+ */
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
-    self.filteredPosts = self.posts;
+    self.filteredPosts = self.previousFilteredPosts;
     [self.tableView reloadData];
 }
 
-// Hides the search bar when search complete
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.searchBar resignFirstResponder];
 }
