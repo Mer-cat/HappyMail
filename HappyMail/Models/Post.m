@@ -63,6 +63,13 @@
     }];
 }
 
+/**
+ * Comparison method which allows for sorting of posts from newest to oldest
+ */
+- (NSComparisonResult)compare:(Post *)otherPost {
+    return [otherPost.createdAt compare:self.createdAt];
+}
+
 + (NSString *)formatTypeToString:(PostType)postType {
     NSString *result = nil;
 
