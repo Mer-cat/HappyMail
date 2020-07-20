@@ -99,7 +99,18 @@
 #pragma mark - ComposeViewControllerDelegate
 
 - (void)didPost:(Post *) post {
-    [self.posts insertObject:post atIndex:0];
+    
+    // If the new post matches the current filter, show it immediately
+    if (post.type == (NSInteger) self.selectedFilter) {
+        self.filteredPosts = [self.filteredPosts arrayByAddingObject:post];
+        
+        // Sort the array newest to oldest
+        self.filteredPosts = [self.filteredPosts sortedArrayUsingSelector:@selector(compare:)];
+    } else {
+        // New post will show when results are un-filtered
+        [self.posts insertObject:post atIndex:0];
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -153,7 +164,7 @@
             previousCell.accessoryType = UITableViewCellAccessoryNone;
             
             // Unfilter posts before applying new filter
-            self.filteredPosts = self.posts;
+            self.filteredPosts = [NSArray arrayWithArray:self.posts];
             
             // When user taps a cell, display check mark for that cell
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -168,7 +179,7 @@
             self.selectedFilter = None;
             
             // Unfilter posts
-            self.filteredPosts = self.posts;
+            self.filteredPosts = [NSArray arrayWithArray:self.posts];
             [self.tableView reloadData];
         }
     }
@@ -184,7 +195,7 @@
     NSDate *currentDate = [NSDate date];
     
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
-        switch(self.selectedFilter) {
+        switch (self.selectedFilter) {
             case AllOffers:
                 return (evaluatedObject.type == Offer);
             case AllRequests:
@@ -207,7 +218,7 @@
     
     // Stores the posts before new filter is applied
     // so that we can revert if needed
-    self.previousFilteredPosts = self.filteredPosts;
+    self.previousFilteredPosts = [NSArray arrayWithArray:self.filteredPosts];
     self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
 }
 
@@ -223,7 +234,7 @@
         }];
         self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
     } else {
-        self.filteredPosts = self.previousFilteredPosts;
+        self.filteredPosts = [NSArray arrayWithArray:self.previousFilteredPosts];
     }
     
     [self.tableView reloadData];
@@ -241,7 +252,7 @@
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
-    self.filteredPosts = self.previousFilteredPosts;
+    self.filteredPosts = [NSArray arrayWithArray:self.previousFilteredPosts];
     [self.tableView reloadData];
 }
 
