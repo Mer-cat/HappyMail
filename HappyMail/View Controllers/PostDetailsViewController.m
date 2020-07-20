@@ -50,13 +50,19 @@
     self.respondButton.enabled = NO;
     User *currentUser = [User currentUser];
     
+    // Can use switch case here wtih error handling
     // User is responding to an offer post
-    if (self.post.type == 0) {
-        [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
-    } else if (self.post.type == 1) {  // User is responding to request
-        
-        // Send an info request to the receiving user to ask for their information
-        [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
+    switch (self.post.type) {
+        case Offer:
+            [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
+            break;
+        case Request:
+            // Send an info request to the receiving user to ask for their information
+            [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
+            break;
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected PostType"];
+            break;
     }
     [self.post addRespondee:currentUser];
 }
