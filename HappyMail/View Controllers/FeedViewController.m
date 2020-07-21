@@ -47,6 +47,13 @@
     self.filterOptions = @[@"Offers",@"Requests",@"Within last week",@"Within last day"];
     self.selectedFilter = None;
     
+    CGFloat height = self.dropDownTableView.rowHeight;
+    height *= self.filterOptions.count;
+
+    CGRect tableFrame = self.dropDownTableView.frame;
+    tableFrame.size.height = height;
+    self.dropDownTableView.frame = tableFrame;
+    
     // Deselects any previously selected rows
     if ([self.tableView indexPathForSelectedRow]) {
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
