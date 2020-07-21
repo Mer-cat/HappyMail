@@ -47,6 +47,7 @@
     self.filterOptions = @[@"Offers",@"Requests",@"Within last week",@"Within last day"];
     self.selectedFilter = None;
     
+    // Set height for drop-down table view based on array data
     CGFloat height = self.dropDownTableView.rowHeight;
     height *= self.filterOptions.count;
 
@@ -68,7 +69,7 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
-#pragma mark - Parse queries
+#pragma mark - Parse query
 
 - (void)fetchPosts {
     PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
