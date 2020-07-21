@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *profileImage;
 @property (nonatomic, strong) Address *address;
 @property (nonatomic, strong) NSArray *myPosts;
+@property (nonatomic, strong) NSArray *sentToUsers;  // Users that this user has sent cards to
 
 // Properties for optional features
 /*
@@ -27,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods
 + (User *)user;
 
-// TODO: Put any methods for changing properties that should go here
+- (void)addSentToUser:(User *)user;
 
 @end
 
