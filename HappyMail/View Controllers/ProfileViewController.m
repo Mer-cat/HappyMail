@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
+@property (weak, nonatomic) IBOutlet UIButton *mapButton;
 
 @end
 
@@ -40,6 +41,7 @@
         self.logoutButton.enabled = NO;
         self.logoutButton.tintColor = UIColor.clearColor;
         self.aboutMeTextView.editable = NO;
+        self.mapButton.hidden = YES;
     }
     
     [self refreshProfile];
