@@ -34,6 +34,8 @@
 		D47E371524BE14FF009B3BCE /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371424BE14FF009B3BCE /* PostCell.m */; };
 		D47E371824BE3991009B3BCE /* FollowUpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371724BE3991009B3BCE /* FollowUpCell.m */; };
 		D4DA3C1324C107380069DEFE /* FollowUp.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DA3C1224C107380069DEFE /* FollowUp.m */; };
+		D4E90F3724C74D3900D1F6EC /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E90F3624C74D3900D1F6EC /* MapViewController.m */; };
+		D4E90F3A24C75F5900D1F6EC /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E90F3924C75F5900D1F6EC /* Address.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +112,10 @@
 		D4A8015124C20BED00ACF2FC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D4DA3C1124C107380069DEFE /* FollowUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUp.h; sourceTree = "<group>"; };
 		D4DA3C1224C107380069DEFE /* FollowUp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUp.m; sourceTree = "<group>"; };
+		D4E90F3524C74D3900D1F6EC /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		D4E90F3624C74D3900D1F6EC /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		D4E90F3824C75F5900D1F6EC /* Address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		D4E90F3924C75F5900D1F6EC /* Address.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		D8244E430033D6A013A9F893 /* Pods-HappyMail-HappyMailUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyMail-HappyMailUITests.release.xcconfig"; path = "Target Support Files/Pods-HappyMail-HappyMailUITests/Pods-HappyMail-HappyMailUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FA9130478FA8AF9A01F9C083 /* Pods_HappyMail_HappyMailUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyMail_HappyMailUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -236,6 +242,8 @@
 				D47E36F824BCEDCA009B3BCE /* InfoRequest.m */,
 				D4DA3C1124C107380069DEFE /* FollowUp.h */,
 				D4DA3C1224C107380069DEFE /* FollowUp.m */,
+				D4E90F3824C75F5900D1F6EC /* Address.h */,
+				D4E90F3924C75F5900D1F6EC /* Address.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -259,6 +267,8 @@
 				D47E370D24BCF3C1009B3BCE /* PostDetailsViewController.m */,
 				D458B98C24C0D5D400427F25 /* InfoRequestsViewController.h */,
 				D458B98D24C0D5D400427F25 /* InfoRequestsViewController.m */,
+				D4E90F3524C74D3900D1F6EC /* MapViewController.h */,
+				D4E90F3624C74D3900D1F6EC /* MapViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -531,6 +541,7 @@
 				D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */,
 				D47E370524BCF258009B3BCE /* ComposeViewController.m in Sources */,
 				D47E370E24BCF3C1009B3BCE /* PostDetailsViewController.m in Sources */,
+				D4E90F3724C74D3900D1F6EC /* MapViewController.m in Sources */,
 				D47E371124BCFCF3009B3BCE /* Utils.m in Sources */,
 				D47E36F624BCD74F009B3BCE /* User.m in Sources */,
 				D43694C724B4EE4200902846 /* AppDelegate.m in Sources */,
@@ -541,6 +552,7 @@
 				D47E370224BCF24A009B3BCE /* FeedViewController.m in Sources */,
 				D43694CA24B4EE4200902846 /* SceneDelegate.m in Sources */,
 				D4DA3C1324C107380069DEFE /* FollowUp.m in Sources */,
+				D4E90F3A24C75F5900D1F6EC /* Address.m in Sources */,
 				D458B98E24C0D5D400427F25 /* InfoRequestsViewController.m in Sources */,
 				D47E371524BE14FF009B3BCE /* PostCell.m in Sources */,
 			);

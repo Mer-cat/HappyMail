@@ -100,14 +100,14 @@
                                     <action selector="didPressRegister:" destination="Xbf-4m-Njw" eventType="touchUpInside" id="tND-eJ-y14"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vpQ-i0-hXW">
-                                <rect key="frame" x="46" y="416" width="257" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Adressee" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wa8-G7-nMD">
+                                <rect key="frame" x="48" y="403" width="257" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="street-address"/>
+                                <textInputTraits key="textInputTraits" textContentType="name"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vK-0k-IkM">
-                                <rect key="frame" x="46" y="387" width="145" height="21"/>
+                                <rect key="frame" x="48" y="372" width="145" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -119,20 +119,48 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vpQ-i0-hXW">
+                                <rect key="frame" x="48" y="456" width="257" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="street-address"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IVH-8R-EVm">
+                                <rect key="frame" x="50" y="564" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="postal-code"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qzx-sq-yg5">
+                                <rect key="frame" x="48" y="508" width="190" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="address-level2"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7p2-N2-4UH">
+                                <rect key="frame" x="258" y="508" width="121" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="address-level1"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="t0A-8o-nvu"/>
                     </view>
                     <connections>
-                        <outlet property="addressField" destination="vpQ-i0-hXW" id="liL-1I-77h"/>
+                        <outlet property="adresseeField" destination="Wa8-G7-nMD" id="Xa2-gZ-LcH"/>
+                        <outlet property="cityField" destination="Qzx-sq-yg5" id="gcP-uc-CoT"/>
                         <outlet property="passwordField" destination="dyh-yu-aYO" id="DxP-1d-IcM"/>
+                        <outlet property="stateField" destination="7p2-N2-4UH" id="6KV-g3-3q4"/>
+                        <outlet property="streetAddressField" destination="vpQ-i0-hXW" id="liL-1I-77h"/>
                         <outlet property="usernameField" destination="Dqn-VJ-guQ" id="DE8-RZ-fH7"/>
+                        <outlet property="zipcodeField" destination="IVH-8R-EVm" id="cW9-jq-dWQ"/>
                         <segue destination="Usw-Jn-ZU3" kind="presentation" identifier="registrationSegue" modalPresentationStyle="fullScreen" id="7ua-UL-yWn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifO-hN-GoY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-490" y="469"/>
+            <point key="canvasLocation" x="-491.304347826087" y="468.75"/>
         </scene>
         <!--Compose New Post-->
         <scene sceneID="hp1-M7-ZMX">
@@ -251,6 +279,14 @@
                                                     <action selector="didPressSaveAboutMe:" destination="kY2-aj-mqv" eventType="touchUpInside" id="cHj-Ad-8BI"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiZ-ZU-o0G">
+                                                <rect key="frame" x="181" y="138" width="67" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="View Map"/>
+                                                <connections>
+                                                    <segue destination="LAD-xi-m9V" kind="show" id="z3x-5b-FIZ"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -303,6 +339,31 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2011.594202898551" y="2068.5267857142858"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="QiH-ZW-ZQJ">
+            <objects>
+                <viewController id="LAD-xi-m9V" customClass="MapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WDR-8X-Akh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eaY-Q1-9HU">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="7Jf-lS-hy0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="geh-TS-80K"/>
+                    <connections>
+                        <outlet property="mapView" destination="eaY-Q1-9HU" id="XSR-Pz-Ku9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jtu-hQ-Ep0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2897.1014492753625" y="2066.5178571428569"/>
         </scene>
         <!--Feed-->
         <scene sceneID="c8z-NU-lw3">
