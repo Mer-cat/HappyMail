@@ -9,11 +9,16 @@
 #import "RegistrationViewController.h"
 #import "User.h"
 #import "Utils.h"
+#import "Address.h"
 
 @interface RegistrationViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UITextField *addressField;
+@property (weak, nonatomic) IBOutlet UITextField *streetAddressField;
+@property (weak, nonatomic) IBOutlet UITextField *adresseeField;
+@property (weak, nonatomic) IBOutlet UITextField *cityField;
+@property (weak, nonatomic) IBOutlet UITextField *stateField;
+@property (weak, nonatomic) IBOutlet UITextField *zipcodeField;
 
 @end
 
@@ -39,7 +44,15 @@
     // Set user properties
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
-    newUser.address = self.addressField.text;
+    
+    [Address createNewAddress:self.streetAddressField.text city:self.cityField.text state:self.stateField.text zipcode:self.zipcodeField.text withCompletion:^(Address *address, NSError *error) {
+        if (address) {
+            NSLog(@"Successfully added address to user");
+            newUser.address = address;
+        } else {
+            NSLog(@"Error adding address for user");
+        }
+    }];
     
     // Call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
