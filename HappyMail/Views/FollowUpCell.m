@@ -12,10 +12,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fullAddressLabel;
 @property (nonatomic, strong) FollowUp *followUp;
 @property (weak, nonatomic) IBOutlet UIButton *incompleteButton;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
+
 
 @end
 
@@ -37,8 +38,22 @@
     
     [followUp.receivingUser fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
-            self.usernameLabel.text = followUp.receivingUser.username;
-            self.addressLabel.text = followUp.receivingUser.address;
+            User *receivingUser = followUp.receivingUser;
+            self.usernameLabel.text = receivingUser.username;
+            [receivingUser.address fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                if (object) {
+                    Address *address = receivingUser.address;
+                    NSString *addressee = address.addressee;
+                    NSString *streetAddress = address.streetAddress;
+                    NSString *cityStateZipcode = [NSString stringWithFormat:@"%@, %@ %@", address.city, address.state, address.zipcode];
+                    NSString *fullAddress = [NSString stringWithFormat:@"%@\n%@\n%@", addressee, streetAddress, cityStateZipcode];
+                    
+                    self.fullAddressLabel.text = fullAddress;
+                    
+                } else {
+                    NSLog(@"Error fetching user's address: %@", error.localizedDescription);
+                }
+            }];
         } else {
             NSLog(@"Error fetching receiving user: %@", error.localizedDescription);
         }
@@ -67,6 +82,7 @@
             [self.followUp removeFollowUp];
             break;
         case Request:
+            [self.followUp.originalPost removeRespondee:self.followUp.sendingUser];
             [self.followUp removeFollowUp];
             break;
         default:
