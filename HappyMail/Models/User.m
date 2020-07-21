@@ -14,6 +14,7 @@
 @dynamic aboutMeText;
 @dynamic profileImage;
 @dynamic address;
+@dynamic myPosts;
 
 /**
  * Override PFUser init method

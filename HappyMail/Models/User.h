@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+#import "Address.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties
 @property (nonatomic, strong) NSString *aboutMeText;
 @property (nonatomic, strong) PFFileObject *profileImage;
-@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) Address *address;
+@property (nonatomic, strong) NSArray *myPosts;
 
 // Properties for optional features
 /*
