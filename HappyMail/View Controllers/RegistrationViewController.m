@@ -44,23 +44,25 @@
         if (address) {
             NSLog(@"Successfully added address to user");
             newUser.address = address;
+            
+            // Call sign up function on the object
+            [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                if (error != nil) {
+                    NSLog(@"Error: %@", error.localizedDescription);
+                    
+                    // Display issue to user if anything is wrong with sign up
+                    [Utils showAlertWithMessage:error.localizedDescription title:@"Error signing up" controller:self];
+                } else {
+                    NSLog(@"User registered successfully");
+                    [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
+                }
+            }];
         } else {
             NSLog(@"Error adding address for user");
         }
     }];
     
-    // Call sign up function on the object
-    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-            
-            // Display issue to user if anything is wrong with sign up
-            [Utils showAlertWithMessage:error.localizedDescription title:@"Error signing up" controller:self];
-        } else {
-            NSLog(@"User registered successfully");
-            [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
-        }
-    }];
+
 }
 
 @end
