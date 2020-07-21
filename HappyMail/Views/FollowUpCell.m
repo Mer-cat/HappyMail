@@ -36,18 +36,18 @@
         }
     }];
     
-    [followUp.receivingUser fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    User *receivingUser = followUp.receivingUser;
+    [receivingUser fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
-            User *receivingUser = followUp.receivingUser;
             self.usernameLabel.text = receivingUser.username;
-            [receivingUser.address fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            Address *address = receivingUser.address;
+            [address fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                 if (object) {
-                    Address *address = receivingUser.address;
                     NSString *addressee = address.addressee;
                     NSString *streetAddress = address.streetAddress;
                     NSString *cityStateZipcode = [NSString stringWithFormat:@"%@, %@ %@", address.city, address.state, address.zipcode];
                     NSString *fullAddress = [NSString stringWithFormat:@"%@\n%@\n%@", addressee, streetAddress, cityStateZipcode];
-                    
+
                     self.fullAddressLabel.text = fullAddress;
                     
                 } else {
@@ -64,6 +64,7 @@
 
 - (IBAction)didPressCheck:(id)sender {
     [self removeFollowUp];
+    [self.followUp.sendingUser addSentToUser:self.followUp.receivingUser];
     // TODO: Could notify receiving user that a card is on the way
     // Could repurpose follow-ups screen to updates and add new type
 }
