@@ -53,12 +53,18 @@
 }
 
 - (void)removeRespondee:(User *)user {
-    [self removeObject:user forKey:@"respondees"];
-    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"%@ removed from respondees for this post", user.username);
+    [user fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+            [self removeObject:user forKey:@"respondees"];
+            [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"%@ removed from respondees for this post", user.username);
+                } else {
+                    NSLog(@"Error removing user from respondees: %@", error.localizedDescription);
+                }
+            }];
         } else {
-            NSLog(@"Error removing user from respondees: %@", error.localizedDescription);
+            NSLog(@"Error fetching respondee for removal: %@", error.localizedDescription);
         }
     }];
 }
