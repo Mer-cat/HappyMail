@@ -14,18 +14,20 @@
 @dynamic city;
 @dynamic state;
 @dynamic zipcode;
+@dynamic addressee;
 
 + (nonnull NSString *)parseClassName {
     return @"Address";
 }
 
-+ (void)createNewAddress:(NSString *)streetAddress city:(NSString *)city state:(NSString *)state zipcode:(NSString *)zipcode withCompletion:(void (^)(Address *, NSError *))completion {
++ (void)createNewAddress:(NSString *)streetAddress city:(NSString *)city state:(NSString *)state zipcode:(NSString *)zipcode addressee:(NSString *)addressee withCompletion:(void (^)(Address *, NSError *))completion {
     
     Address *newAddress = [Address new];
     newAddress.streetAddress = streetAddress;
     newAddress.city = city;
     newAddress.state = state;
     newAddress.zipcode = zipcode;
+    newAddress.addressee = addressee;
     
     [newAddress saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {

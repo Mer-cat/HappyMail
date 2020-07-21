@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UITextField *streetAddressField;
-@property (weak, nonatomic) IBOutlet UITextField *adresseeField;
+@property (weak, nonatomic) IBOutlet UITextField *addresseeField;
 @property (weak, nonatomic) IBOutlet UITextField *cityField;
 @property (weak, nonatomic) IBOutlet UITextField *stateField;
 @property (weak, nonatomic) IBOutlet UITextField *zipcodeField;
@@ -23,11 +23,6 @@
 @end
 
 @implementation RegistrationViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
 
 #pragma mark - Actions
 
@@ -45,7 +40,7 @@
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
     
-    [Address createNewAddress:self.streetAddressField.text city:self.cityField.text state:self.stateField.text zipcode:self.zipcodeField.text withCompletion:^(Address *address, NSError *error) {
+    [Address createNewAddress:self.streetAddressField.text city:self.cityField.text state:self.stateField.text zipcode:self.zipcodeField.text addressee:self.addresseeField.text withCompletion:^(Address *address, NSError *error) {
         if (address) {
             NSLog(@"Successfully added address to user");
             newUser.address = address;
