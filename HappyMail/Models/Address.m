@@ -7,6 +7,7 @@
 //
 
 #import "Address.h"
+#import "Utils.h"
 
 @implementation Address
 
@@ -15,6 +16,8 @@
 @dynamic state;
 @dynamic zipcode;
 @dynamic addressee;
+@dynamic latitude;
+@dynamic longitude;
 
 + (nonnull NSString *)parseClassName {
     return @"Address";
@@ -29,11 +32,39 @@
     newAddress.zipcode = zipcode;
     newAddress.addressee = addressee;
     
-    [newAddress saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    // Grab the coordinate for the address
+    NSString *cityStateZipcode = [NSString stringWithFormat:@"%@, %@ %@", newAddress.city, newAddress.state, newAddress.zipcode];
+    NSString *fullAddress = [NSString stringWithFormat:@"%@ %@", newAddress.streetAddress, cityStateZipcode];
+    
+    [newAddress assignCoordinateFromAddress:fullAddress withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            completion(newAddress, nil);
+            [newAddress saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    completion(newAddress, nil);
+                } else {
+                    completion(nil, error);
+                }
+            }];
         } else {
-            completion(nil, error);
+            NSLog(@"Error assigning coordinate from address: %@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)assignCoordinateFromAddress:(NSString *)address withCompletion:(PFBooleanResultBlock  _Nullable)completion {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:address completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (placemarks) {
+            CLPlacemark *place = placemarks[0];
+            CLLocation *location = place.location;
+            CLLocationCoordinate2D coordinate = location.coordinate;
+            self.latitude = [NSNumber numberWithDouble:coordinate.latitude];
+            self.longitude = [NSNumber numberWithDouble:coordinate.longitude];
+            NSLog(@"Successfully grabbed coordinate from address");
+            completion(YES, nil);
+        } else {
+            NSLog(@"Error getting coordinates: %@", error.localizedDescription);
+            completion(NO, error);
         }
     }];
 }
