@@ -730,6 +730,9 @@
                                                     <rect key="frame" x="201" y="6" width="72" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Username"/>
+                                                    <connections>
+                                                        <segue destination="kY2-aj-mqv" kind="show" identifier="ProfileViewSegue" id="FDo-3C-upy"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Request:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBZ-Ef-RAK">
                                                     <rect key="frame" x="20" y="40" width="118" height="21"/>
@@ -742,6 +745,9 @@
                                                     <rect key="frame" x="20" y="69" width="242" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Hi all! Would like some cards.."/>
+                                                    <connections>
+                                                        <segue destination="4Mr-uy-2oY" kind="show" identifier="PostDetailsViewSegue" id="8Lf-nl-8TL"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGO-e4-Fht">
                                                     <rect key="frame" x="86" y="107" width="58" height="30"/>
@@ -864,6 +870,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
-        <segue reference="ai7-Eq-mRd"/>
+        <segue reference="8Lf-nl-8TL"/>
+        <segue reference="FDo-3C-upy"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,6 +9,8 @@
 #import "InfoRequestsViewController.h"
 #import "InfoRequestCell.h"
 #import "InfoRequest.h"
+#import "PostDetailsViewController.h"
+#import "ProfileViewController.h"
 
 /**
  * View controller for viewing a user's InfoRequests
@@ -59,7 +61,7 @@
 - (void)fetchInfoRequests {
     PFQuery *infoQuery = [PFQuery queryWithClassName:@"InfoRequest"];
     [infoQuery whereKey:@"requestedUser" equalTo:[User currentUser]];
-    [infoQuery orderByDescending:@"createdAt"];
+    [infoQuery orderByAscending:@"createdAt"];
     
     // Fetch data asynchronously
     [infoQuery findObjectsInBackgroundWithBlock:^(NSArray<InfoRequest *> *infoRequests, NSError *error) {
@@ -71,6 +73,30 @@
         }
         [self.refreshControl endRefreshing];
     }];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"PostDetailsViewSegue"]) {
+        PostDetailsViewController *detailsViewController = [segue destinationViewController];
+        InfoRequestCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        InfoRequest *infoRequest = self.infoRequests[indexPath.row];
+        Post *post = infoRequest.associatedPost;
+        detailsViewController.post = post;
+    } else if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        
+        // Grab post from cell where user tapped username
+        InfoRequestCell *cell = (InfoRequestCell *)[[sender superview] superview];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        InfoRequest *infoRequest = self.infoRequests[indexPath.row];
+        
+        if (![infoRequest.requestingUser.username isEqualToString:[User currentUser].username]) {
+            profileViewController.user = infoRequest.requestingUser;
+        }
+    }
 }
 
 @end
