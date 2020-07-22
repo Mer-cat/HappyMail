@@ -70,6 +70,9 @@
     [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+    // Auto-refresh
+    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchPosts) userInfo:nil repeats:true];
 }
 
 #pragma mark - Parse query
@@ -85,7 +88,6 @@
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> *posts, NSError *error) {
         if (posts != nil) {
             self.posts = (NSMutableArray *) posts;
-            NSLog(@"Query being called");
             if (self.selectedFilter == None) {
                 self.filteredPosts = [NSArray arrayWithArray:posts];
                 self.previousFilteredPosts = [NSArray arrayWithArray:posts];

@@ -42,6 +42,9 @@
     [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
     [self.refreshControl addTarget:self action:@selector(fetchFollowUps) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+    // Auto-refresh
+    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchFollowUps) userInfo:nil repeats:true];
 }
 
 #pragma mark - UITableViewDataSource
