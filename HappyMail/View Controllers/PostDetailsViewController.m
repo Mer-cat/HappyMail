@@ -39,7 +39,14 @@
 
 - (void)refreshPost {
     self.postTypeLabel.text = [Post formatTypeToString:self.post.type];
-    [self.usernameButton setTitle:self.post.author.username forState:UIControlStateNormal];
+    [self.post.author fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+             [self.usernameButton setTitle:self.post.author.username forState:UIControlStateNormal];
+        } else {
+            NSLog(@"Error fetching post author: %@", error.localizedDescription);
+        }
+    }];
+    
     self.titleLabel.text = self.post.title;
     self.bodyTextLabel.text = self.post.bodyText;
     NSDate *timeCreated = self.post.createdAt;
