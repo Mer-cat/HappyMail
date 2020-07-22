@@ -112,15 +112,14 @@
 #pragma mark - ComposeViewControllerDelegate
 
 - (void)didPost:(Post *) post {
-    
     // If the new post matches the current filter, show it immediately
-    if (post.type == (NSInteger) self.selectedFilter) {
+    if (post.type == (NSInteger) self.selectedFilter || self.selectedFilter == None) {
+        [self.posts insertObject:post atIndex:0];
         self.filteredPosts = [self.filteredPosts arrayByAddingObject:post];
         
         // Sort the array newest to oldest
         self.filteredPosts = [self.filteredPosts sortedArrayUsingSelector:@selector(compare:)];
     } else {
-        
         // New post will show when results are un-filtered
         [self.posts insertObject:post atIndex:0];
     }
