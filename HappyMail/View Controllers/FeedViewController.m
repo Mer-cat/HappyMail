@@ -213,13 +213,13 @@
                 return (evaluatedObject.type == Request);
             case LastWeek:{
                 DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:evaluatedObject.createdAt endDate:currentDate];
-                double timeSincePostingInWeeks = [timePeriod durationInWeeks];
-                return (timeSincePostingInWeeks <= 1);
+                double timeSincePostingInHours = [timePeriod durationInHours];
+                return (timeSincePostingInHours <= 168);
             }
             case LastDay:{
                 DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:evaluatedObject.createdAt endDate:currentDate];
-                double timeSincePostingInDays = [timePeriod durationInDays];
-                return (timeSincePostingInDays <= 1);
+                double timeSincePostingInHours = [timePeriod durationInHours];
+                return (timeSincePostingInHours <= 24);
             }
             default:
                 return evaluatedObject;
