@@ -535,6 +535,7 @@
                                                 <rect key="frame" x="159" y="642" width="87" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Respond"/>
+                                                <state key="disabled" title="Responded!"/>
                                                 <connections>
                                                     <action selector="didPressRespond:" destination="4Mr-uy-2oY" eventType="touchUpInside" id="Aai-GA-4Mh"/>
                                                 </connections>
@@ -872,6 +873,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
         <segue reference="8Lf-nl-8TL"/>
-        <segue reference="4ze-M6-pE5"/>
+        <segue reference="8oJ-Fo-fes"/>
     </inferredMetricsTieBreakers>
 </document>
