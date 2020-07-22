@@ -30,7 +30,7 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.user = [User currentUser];
-    
+
     [self initMap];
 }
 

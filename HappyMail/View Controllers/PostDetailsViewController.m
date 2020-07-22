@@ -60,6 +60,8 @@
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
 }
 
+#pragma mark - UIAlertController
+
 - (void)showAlertWithMessage:(NSString *)message title:(NSString *)title {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
