@@ -48,4 +48,15 @@
     }];
 }
 
+- (void)addPostToMyPosts:(Post *)post {
+    [self addObject:post forKey:@"myPosts"];
+    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Post added to myPosts");
+        } else {
+            NSLog(@"Error adding post to myPosts: %@", error.localizedDescription);
+        }
+    }];
+}
+
 @end

@@ -8,8 +8,11 @@
 
 #import <Parse/Parse.h>
 #import "Address.h"
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class Post;
 
 @interface User : PFUser<PFSubclassing>
 
@@ -29,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (User *)user;
 
 - (void)addSentToUser:(User *)user;
+- (void)addPostToMyPosts:(Post *)post;
 
 @end
 
