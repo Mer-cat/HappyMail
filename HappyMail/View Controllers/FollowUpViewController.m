@@ -12,6 +12,7 @@
 #import "Post.h"
 #import "User.h"
 #import <Parse/Parse.h>
+#import "ProfileViewController.h"
 
 /**
  * View controller for viewing a user's follow-ups
@@ -99,6 +100,22 @@
         }
         [self.refreshControl endRefreshing];
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        
+        // Grab post from cell where user tapped username
+        FollowUpCell *cell = (FollowUpCell *)[[sender superview] superview];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        FollowUp *followUp = self.followUps[indexPath.row];
+        
+        // If viewing another user's profile
+        if (![followUp.receivingUser.username isEqualToString:[User currentUser].username]) {
+            profileViewController.user = followUp.receivingUser;
+        }
+    }
 }
 
 @end

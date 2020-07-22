@@ -626,13 +626,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82P-yQ-vLj">
-                                                    <rect key="frame" x="20" y="40" width="264" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjh-Uw-xh0">
                                                     <rect key="frame" x="90" y="11" width="298" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -667,6 +660,14 @@
                                                         <action selector="didPressCheck:" destination="1jY-Iv-7dP" eventType="touchUpInside" id="faB-NF-DMt"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaT-jD-i1B">
+                                                    <rect key="frame" x="20" y="46" width="264" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Username"/>
+                                                    <connections>
+                                                        <segue destination="kY2-aj-mqv" kind="show" identifier="ProfileViewSegue" id="4ze-M6-pE5"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -675,7 +676,7 @@
                                             <outlet property="incompleteButton" destination="7T3-WT-FCH" id="hUS-Y5-SIM"/>
                                             <outlet property="postTitleLabel" destination="rjh-Uw-xh0" id="WfI-iT-2m8"/>
                                             <outlet property="postTypeLabel" destination="FxP-el-png" id="EKu-rh-ig5"/>
-                                            <outlet property="usernameLabel" destination="82P-yQ-vLj" id="CMV-V3-xNH"/>
+                                            <outlet property="usernameButton" destination="vaT-jD-i1B" id="7q4-BM-FhU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -871,6 +872,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
         <segue reference="8Lf-nl-8TL"/>
-        <segue reference="FDo-3C-upy"/>
+        <segue reference="4ze-M6-pE5"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -15,8 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fullAddressLabel;
+@property (weak, nonatomic) IBOutlet UIButton *usernameButton;
 @property (nonatomic, strong) FollowUp *followUp;
 @property (weak, nonatomic) IBOutlet UIButton *incompleteButton;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
@@ -43,7 +43,7 @@
     User *receivingUser = followUp.receivingUser;
     [receivingUser fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
-            self.usernameLabel.text = receivingUser.username;
+            [self.usernameButton setTitle:receivingUser.username forState:UIControlStateNormal];
             Address *address = receivingUser.address;
             [address fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                 if (object) {
@@ -106,5 +106,6 @@
     self.incompleteButton.hidden = YES;
     self.completeButton.hidden = YES;
 }
+
 
 @end
