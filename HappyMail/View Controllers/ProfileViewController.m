@@ -12,7 +12,11 @@
 #import "User.h"
 @import Parse;
 
+/**
+ * View controller for users' profiles
+ */
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *joinDateLabel;
@@ -37,7 +41,7 @@
     // we are looking at user's own profile
     if (!self.user) {
         self.user = [User currentUser];
-    } else { // If looking at another user's profile
+    } else {  // If looking at another user's profile
         self.logoutButton.enabled = NO;
         self.logoutButton.tintColor = UIColor.clearColor;
         self.aboutMeTextView.editable = NO;
@@ -65,6 +69,9 @@
     
     self.profileImageView.file = self.user.profileImage;
     [self.profileImageView loadInBackground];
+    
+    // Add below line to make profile pictures circular (thank you Ria)
+    // self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
 }
 
 /**
@@ -162,15 +169,5 @@
     self.saveButton.hidden = YES;
     self.cancelButton.hidden = YES;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

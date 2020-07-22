@@ -8,7 +8,11 @@
 
 #import "ComposeViewController.h"
 
+/**
+ * View controller for creating a new post
+ */
 @interface ComposeViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *postTypeControl;
 @property (weak, nonatomic) IBOutlet UITextView *bodyTextView;
@@ -17,10 +21,6 @@
 @end
 
 @implementation ComposeViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 
 #pragma mark - Actions
 
@@ -50,16 +50,5 @@
     // Return to the home screen
     [self dismissViewControllerAnimated:true completion:nil];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

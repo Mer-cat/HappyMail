@@ -14,8 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol FollowUpCellDelegate;
 
 @interface FollowUpCell : UITableViewCell
+
+// MARK: Properties
 @property (nonatomic, weak) id<FollowUpCellDelegate> delegate;
 
+// MARK: Methods
 - (void)refreshFollowUp:(FollowUp *)followUp;
 - (void)showButtons;
 - (void)hideButtons;

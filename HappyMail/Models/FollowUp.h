@@ -14,10 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FollowUp : PFObject<PFSubclassing>
 
+// MARK: Properties
 @property (nonatomic, strong) User *receivingUser;
 @property (nonatomic, strong) User *sendingUser;
 @property (nonatomic, strong) Post *originalPost;
 
+// MARK: Methods
 + (void)createNewFollowUpForUser:(User *)sendingUser fromPost:(Post *)originalPost aboutUser:(User *)receivingUser;
 - (void)removeFollowUp;
 

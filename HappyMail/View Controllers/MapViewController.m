@@ -10,8 +10,11 @@
 #import <MapKit/MapKit.h>
 #import "Address.h"
 
-
+/**
+ * View controller for viewing a map of places the user has sent a card to
+ */
 @interface MapViewController () <MKMapViewDelegate>
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSArray *sentToUsers;
@@ -47,7 +50,7 @@
             if (object) {
                 NSLog(@"%@", user.address);
                 [self.placesSentTo addObject:user.address];
-                [self dropPin:user.address];
+                [self dropPin:user.address sentTo:YES];
             } else {
                 NSLog(@"Error with fetching user address: %@", error.localizedDescription);
             }
@@ -57,7 +60,7 @@
 
 #pragma mark - Helper
 
-- (void)dropPin:(Address *)address {
+- (void)dropPin:(Address *)address sentTo:(BOOL)userSentTo {
     // Drop pin on map for each address.coordinate
     [address fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
@@ -65,7 +68,11 @@
             MKPointAnnotation *annotation = [MKPointAnnotation new];
             CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(address.latitude.floatValue, address.longitude.floatValue);
             annotation.coordinate = coordinate;
-            annotation.title = @"You sent a card here!";
+            if (userSentTo) {
+                annotation.title = @"You sent a card here!";
+            } else {
+                annotation.title = @"You received a card from here!";
+            }
             [self.mapView addAnnotation:annotation];
         } else {
             NSLog(@"Failed to drop pin: %@", error.localizedDescription);
@@ -87,16 +94,5 @@
     
     return annotationView;
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Needed due to circular dependency causing compile-time errors
+// Needed due to compile-time errors
 @class User;
 
 @interface Post : PFObject<PFSubclassing>
@@ -27,11 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Properties used for optional features
 /*
-@property (nonatomic, strong) PFFileObject *image;
-@property (nonatomic, strong) NSNumber *likeCount;
-@property (nonatomic) NSInteger offerLimit;
-@property (nonatomic) BOOL open;
-@property (nonatomic, strong) NSString *offerRegion;
+ @property (nonatomic, strong) PFFileObject *image;
+ @property (nonatomic, strong) NSNumber *likeCount;
+ @property (nonatomic) NSInteger offerLimit;
+ @property (nonatomic) BOOL open;
+ @property (nonatomic, strong) NSString *offerRegion;
  */
 
 // MARK: Methods

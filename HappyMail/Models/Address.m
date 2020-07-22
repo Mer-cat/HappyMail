@@ -9,6 +9,9 @@
 #import "Address.h"
 #import "Utils.h"
 
+/**
+ * Data model representation of an address, which each user has
+ */
 @implementation Address
 
 @dynamic streetAddress;
@@ -19,9 +22,13 @@
 @dynamic latitude;
 @dynamic longitude;
 
+#pragma mark - PFSubclassing
+
 + (nonnull NSString *)parseClassName {
     return @"Address";
 }
+
+#pragma mark - Creation
 
 + (void)createNewAddress:(NSString *)streetAddress city:(NSString *)city state:(NSString *)state zipcode:(NSString *)zipcode addressee:(NSString *)addressee withCompletion:(void (^)(Address *, NSError *))completion {
     
@@ -50,6 +57,8 @@
         }
     }];
 }
+
+#pragma mark - Geocoding
 
 - (void)assignCoordinateFromAddress:(NSString *)address withCompletion:(PFBooleanResultBlock  _Nullable)completion {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];

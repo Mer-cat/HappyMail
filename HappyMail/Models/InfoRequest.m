@@ -9,15 +9,22 @@
 #import "InfoRequest.h"
 #import "PFObject+Subclass.h"
 
+/**
+ * Data model for an info request, which represents a request for information from one user to another
+ */
 @implementation InfoRequest
 
 @dynamic requestingUser;
 @dynamic associatedPost;
 @dynamic requestedUser;
 
+#pragma mark - PFSubclassing
+
 + (nonnull NSString *)parseClassName {
     return @"InfoRequest";
 }
+
+#pragma mark - Creation and deletion
 
 + (void)createNewInfoRequestToUser:(User *)requestedUser fromUser:(User *)requestingUser fromPost:(Post *) post {
     InfoRequest *newInfoRequest = [InfoRequest new];

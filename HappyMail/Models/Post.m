@@ -9,17 +9,24 @@
 #import "Post.h"
 #import "PFObject+Subclass.h"
 
+/**
+ * Data model for a Post object which interacts with Parse
+ */
 @implementation Post
-    
+
 @dynamic author;
 @dynamic type;
 @dynamic title;
 @dynamic bodyText;
 @dynamic respondees;
 
+#pragma mark - PFSubclassing
+
 + (nonnull NSString *)parseClassName {
     return @"Post";
 }
+
+#pragma mark - Post creation
 
 + (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withCompletion:(void (^)(Post *, NSError *))completion {
     
@@ -40,6 +47,8 @@
         }
     }];
 }
+
+#pragma mark - Respondee field methods
 
 - (void)addRespondee:(User *)user {
     [self addObject:user forKey:@"respondees"];
@@ -69,6 +78,8 @@
     }];
 }
 
+#pragma mark - Comparison
+
 /**
  * Comparison method which allows for sorting of posts from newest to oldest
  */
@@ -76,9 +87,11 @@
     return [otherPost.createdAt compare:self.createdAt];
 }
 
+#pragma mark - Formatting
+
 + (NSString *)formatTypeToString:(PostType)postType {
     NSString *result = nil;
-
+    
     switch(postType) {
         case Offer:
             result = @"Offer";
@@ -89,7 +102,7 @@
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
     }
-
+    
     return result;
 }
 

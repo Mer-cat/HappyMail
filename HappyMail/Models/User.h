@@ -17,12 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *aboutMeText;
 @property (nonatomic, strong) PFFileObject *profileImage;
 @property (nonatomic, strong) Address *address;
-@property (nonatomic, strong) NSArray *myPosts;
+@property (nonatomic, strong) NSMutableArray *myPosts;
 @property (nonatomic, strong) NSArray *sentToUsers;  // Users that this user has sent cards to
 
 // Properties for optional features
 /*
-@property (nonatomic, strong) NSMutableArray *thankYous;
+ @property (nonatomic, strong) NSMutableArray *thankYous;
  */
 
 // MARK: Methods

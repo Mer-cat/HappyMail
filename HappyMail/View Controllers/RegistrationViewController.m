@@ -11,7 +11,11 @@
 #import "Utils.h"
 #import "Address.h"
 
+/**
+ * View controller for registering a new user
+ */
 @interface RegistrationViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UITextField *streetAddressField;
@@ -61,8 +65,6 @@
             NSLog(@"Error adding address for user");
         }
     }];
-    
-
 }
 
 @end

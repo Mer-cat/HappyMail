@@ -12,7 +12,11 @@
 #import "InfoRequest.h"
 #import "FollowUp.h"
 
+/**
+ * View controller for viewing a single post in more detail
+ */
 @interface PostDetailsViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *usernameButton;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
@@ -28,7 +32,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self refreshPost];
 }
 
@@ -78,6 +81,5 @@
         }
     }
 }
-
 
 @end

@@ -16,6 +16,9 @@
 #import "Constants.h"
 #import "DateTools.h"
 
+/**
+ * View controller for the main feed of posts
+ */
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -50,7 +53,7 @@
     // Set height for drop-down table view based on array data
     CGFloat height = self.dropDownTableView.rowHeight;
     height *= self.filterOptions.count;
-
+    
     CGRect tableFrame = self.dropDownTableView.frame;
     tableFrame.size.height = height;
     self.dropDownTableView.frame = tableFrame;
@@ -115,10 +118,10 @@
         // Sort the array newest to oldest
         self.filteredPosts = [self.filteredPosts sortedArrayUsingSelector:@selector(compare:)];
     } else {
+        
         // New post will show when results are un-filtered
         [self.posts insertObject:post atIndex:0];
     }
-    
     [self.tableView reloadData];
 }
 
@@ -179,7 +182,7 @@
             
             [self selectNewFilter:indexPath.row];
             [self.tableView reloadData];
-
+            
         } else {  // Unselect previously selected filter
             
             // Unshow check mark
@@ -220,7 +223,6 @@
             }
             default:
                 return evaluatedObject;
-                // [NSException raise:NSGenericException format:@"Unexpected FilterOption"];
         }
     }];
     
@@ -290,6 +292,7 @@
             profileViewController.user = post.author;
         }
     } else if ([segue.identifier isEqualToString:@"ComposeViewSegue"]) {
+        
         // Designate this VC as delegate so we can
         // Load in new posts immediately
         UINavigationController *navigationController = [segue destinationViewController];

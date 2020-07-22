@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Address : PFObject<PFSubclassing>
 
+// MARK: Properties
 @property (nonatomic, strong) NSString *addressee;
 @property (nonatomic, strong) NSString *streetAddress;
 @property (nonatomic, strong) NSString *city;
@@ -20,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *latitude;
 @property (nonatomic, strong) NSNumber *longitude;
 
+// MARK: Methods
 + (void)createNewAddress:(NSString *)streetAddress city:(NSString *)city state:(NSString *)state zipcode:(NSString *)zipcode addressee:(NSString *)addressee withCompletion:(void (^)(Address *, NSError *))completion;
 
 @end

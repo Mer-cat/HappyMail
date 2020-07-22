@@ -8,7 +8,11 @@
 
 #import "FollowUpCell.h"
 
+/**
+ * Custom UITableViewCell to show a FollowUp object
+ */
 @interface FollowUpCell ()
+
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -16,7 +20,6 @@
 @property (nonatomic, strong) FollowUp *followUp;
 @property (weak, nonatomic) IBOutlet UIButton *incompleteButton;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
-
 
 @end
 
@@ -48,7 +51,7 @@
                     NSString *streetAddress = address.streetAddress;
                     NSString *cityStateZipcode = [NSString stringWithFormat:@"%@, %@ %@", address.city, address.state, address.zipcode];
                     NSString *fullAddress = [NSString stringWithFormat:@"%@\n%@\n%@", addressee, streetAddress, cityStateZipcode];
-
+                    
                     self.fullAddressLabel.text = fullAddress;
                     
                 } else {
@@ -75,7 +78,7 @@
     // TODO: Could notify user that offerer/request responder is no longer going to send a card
 }
 
-#pragma mark - Helper
+#pragma mark - Helpers
 
 - (void)removeFollowUp {
     switch (self.followUp.originalPost.type) {

@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) Post *associatedPost;
 @property (nonatomic, strong) User *requestedUser;
 
+// MARK: Methods
 + (void)createNewInfoRequestToUser:(User *)requestedUser fromUser:(User *)requestingUser fromPost:(Post *) post;
 - (void)removeInfoRequest;
 

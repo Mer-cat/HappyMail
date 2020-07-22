@@ -10,7 +10,11 @@
 #import "InfoRequestCell.h"
 #import "InfoRequest.h"
 
+/**
+ * View controller for viewing a user's InfoRequests
+ */
 @interface InfoRequestsViewController () <UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *infoRequests;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -56,7 +60,7 @@
     PFQuery *infoQuery = [PFQuery queryWithClassName:@"InfoRequest"];
     [infoQuery whereKey:@"requestedUser" equalTo:[User currentUser]];
     [infoQuery orderByDescending:@"createdAt"];
-
+    
     // Fetch data asynchronously
     [infoQuery findObjectsInBackgroundWithBlock:^(NSArray<InfoRequest *> *infoRequests, NSError *error) {
         if (infoRequests != nil) {
@@ -68,15 +72,5 @@
         [self.refreshControl endRefreshing];
     }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
