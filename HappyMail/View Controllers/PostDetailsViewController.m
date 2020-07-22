@@ -33,6 +33,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self refreshPost];
+    
+    for (User *user in self.post.respondees) {
+        if ([user.username isEqualToString:[User currentUser].username]) {
+            self.respondButton.enabled = NO;
+            break;
+        }
+    }
 }
 
 #pragma mark - Init
@@ -56,12 +63,8 @@
 #pragma mark - Actions
 
 - (IBAction)didPressRespond:(id)sender {
-    // Currently, users can go back to the page to respond again
-    self.respondButton.enabled = NO;
     User *currentUser = [User currentUser];
-    
-    // Can use switch case here wtih error handling
-    // User is responding to an offer post
+    self.respondButton.enabled = NO; // Prevents duplicate clicks
     switch (self.post.type) {
         case Offer:
             [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
