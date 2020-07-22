@@ -10,12 +10,13 @@
 #import "SceneDelegate.h"
 #import "Utils.h"
 #import "User.h"
+#import "PostCell.h"
 @import Parse;
 
 /**
  * View controller for users' profiles
  */
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -25,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
+@property (weak, nonatomic) IBOutlet UILabel *usersPostsLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *userPosts;
 
 @end
 
@@ -36,6 +40,8 @@
     [super viewDidLoad];
     
     self.aboutMeTextView.delegate = self;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
     // If no user has been passed in,
     // we are looking at user's own profile
@@ -47,6 +53,7 @@
         self.aboutMeTextView.editable = NO;
         self.mapButton.hidden = YES;
     }
+    self.userPosts = self.user.myPosts;
     
     [self refreshProfile];
 }
@@ -56,6 +63,7 @@
 - (void)refreshProfile {
     // Set labels
     self.usernameLabel.text = self.user.username;
+    self.usersPostsLabel.text = [NSString stringWithFormat:@"Posts by %@",self.user.username];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMM-dd-yyyy"];
@@ -168,6 +176,21 @@
     // TODO: Make save and cancel buttons disappear with animation
     self.saveButton.hidden = YES;
     self.cancelButton.hidden = YES;
+}
+
+#pragma mark - UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    Post *post = self.userPosts[indexPath.row];
+    
+    // Load the cell with current post
+    [cell refreshPost:post];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.userPosts.count;
 }
 
 @end
