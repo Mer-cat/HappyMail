@@ -26,12 +26,23 @@
 
 - (void)refreshPost:(Post *)post {
     // Set labels
-    self.offerTypeLabel.text = [Post formatTypeToString:post.type];
-    self.titleLabel.text = post.title;
-    [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
-    
-    NSDate *timeCreated = post.createdAt;
-    self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
+    [post fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+            self.offerTypeLabel.text = [Post formatTypeToString:post.type];
+            self.titleLabel.text = post.title;
+            [post.author fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                if (object) {
+                    [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
+                } else {
+                    NSLog(@"Error fetching user: %@", error.localizedDescription);
+                }
+            }];
+            NSDate *timeCreated = post.createdAt;
+            self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
+        } else {
+            NSLog(@"Error fetching post: %@", error.localizedDescription);
+        }
+    }];
 }
 
 @end
