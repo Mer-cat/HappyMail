@@ -30,9 +30,10 @@
         if (object) {
             self.offerTypeLabel.text = [Post formatTypeToString:post.type];
             self.titleLabel.text = post.title;
-            [post.author fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            User *author = post.author;
+            [author fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                 if (object) {
-                    [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
+                    [self.usernameButton setTitle:author.username forState:UIControlStateNormal];
                 } else {
                     NSLog(@"Error fetching user: %@", error.localizedDescription);
                 }
