@@ -25,6 +25,7 @@
 #pragma mark - Init
 
 - (void)refreshFollowUp:(FollowUp *)followUp {
+    [self hideButtons];
     self.followUp = followUp;
     [followUp.originalPost fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
