@@ -87,8 +87,8 @@
             self.posts = (NSMutableArray *) posts;
             NSLog(@"Query being called");
             if (self.selectedFilter == None) {
-                self.filteredPosts = posts;
-                self.previousFilteredPosts = posts;
+                self.filteredPosts = [NSArray arrayWithArray:posts];
+                self.previousFilteredPosts = [NSArray arrayWithArray:posts];
             } else {
                 [self selectNewFilter:self.selectedFilter];
             }
