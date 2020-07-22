@@ -60,6 +60,45 @@
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
 }
 
+- (void)showAlertWithMessage:(NSString *)message title:(NSString *)title {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // Create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        User *currentUser = [User currentUser];
+        switch (self.post.type) {
+            case Offer:
+                [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
+                break;
+            case Request:
+                // Send an info request to the receiving user to ask for their information
+                [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
+                break;
+            default:
+                [NSException raise:NSGenericException format:@"Unexpected PostType"];
+                break;
+        }
+    }];
+    
+    // Add the OK action to the alert controller
+    [alert addAction:okAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        self.respondButton.enabled = YES;
+    }];
+    
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 #pragma mark - Actions
 
 - (IBAction)didPressRespond:(id)sender {
@@ -67,11 +106,11 @@
     self.respondButton.enabled = NO; // Prevents duplicate clicks
     switch (self.post.type) {
         case Offer:
-            [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
+            [self showAlertWithMessage:@"Are you sure you want to request a card from this user?" title:@"Confirm response"];
             break;
         case Request:
             // Send an info request to the receiving user to ask for their information
-            [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
+            [self showAlertWithMessage:@"Are you sure you want to send a card to this user?" title:@"Confirm response"];
             break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
