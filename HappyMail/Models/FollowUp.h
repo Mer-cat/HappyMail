@@ -12,6 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Data model for a follow-up object, which represents action item for user to follow up on
+ */
 @interface FollowUp : PFObject<PFSubclassing>
 
 // MARK: Properties

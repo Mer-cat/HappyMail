@@ -9,9 +9,6 @@
 #import "Post.h"
 #import "PFObject+Subclass.h"
 
-/**
- * Data model for a Post object which interacts with Parse
- */
 @implementation Post
 
 @dynamic author;

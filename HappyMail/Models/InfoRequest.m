@@ -9,9 +9,6 @@
 #import "InfoRequest.h"
 #import "PFObject+Subclass.h"
 
-/**
- * Data model for an info request, which represents a request for information from one user to another
- */
 @implementation InfoRequest
 
 @dynamic requestingUser;

@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * View controller for logging in
+ */
 @interface LoginViewController : UIViewController
 
 @end

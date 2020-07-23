@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * View controller for users' profiles
+ */
 @interface ProfileViewController : UIViewController
 
 @property (nonatomic, strong) User *user;

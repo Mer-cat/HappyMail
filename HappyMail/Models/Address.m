@@ -9,9 +9,6 @@
 #import "Address.h"
 #import "Utils.h"
 
-/**
- * Data model representation of an address, which each user has
- */
 @implementation Address
 
 @dynamic streetAddress;

@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * View controller for viewing a map of places the user has sent a card to
+ */
 @interface MapViewController : UIViewController
 
 @end

@@ -9,9 +9,6 @@
 #import "FollowUpCell.h"
 #import "Utils.h"
 
-/**
- * Custom UITableViewCell to show a FollowUp object
- */
 @interface FollowUpCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;

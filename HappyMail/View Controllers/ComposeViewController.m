@@ -8,9 +8,6 @@
 
 #import "ComposeViewController.h"
 
-/**
- * View controller for creating a new post
- */
 @interface ComposeViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;

@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol FollowUpCellDelegate;
 
+/**
+ * Custom UITableViewCell to show a FollowUp object
+ */
 @interface FollowUpCell : UITableViewCell
 
 // MARK: Properties

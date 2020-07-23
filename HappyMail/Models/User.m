@@ -9,9 +9,6 @@
 #import "User.h"
 #import "PFObject+Subclass.h"
 
-/**
- * User object representation, subclassed from Parse User obejct
- */
 @implementation User
 
 @dynamic aboutMeText;
@@ -21,9 +18,6 @@
 
 #pragma mark - PFUser
 
-/**
- * Override PFUser init method
- */
 + (User*)user {
     return (User*)[PFUser user];
 }

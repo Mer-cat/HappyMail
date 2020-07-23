@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class Post;
 
+/**
+ * User object representation, subclassed from Parse User obejct
+ */
 @interface User : PFUser<PFSubclassing>
 
 // MARK: Properties
@@ -28,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 // MARK: Methods
+
+/**
+ * Override PFUser init method
+ */
 + (User *)user;
 
 - (void)addSentToUser:(User *)user;

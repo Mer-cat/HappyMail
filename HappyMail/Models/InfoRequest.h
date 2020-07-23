@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class Post;
 @class User;
 
+/**
+ * Data model for an info request, which represents a request for information from one user to another
+ */
 @interface InfoRequest : PFObject<PFSubclassing>
 
 // MARK: Properties

@@ -11,9 +11,6 @@
 #import "Address.h"
 #import "Utils.h"
 
-/**
- * View controller for viewing a map of places the user has sent a card to
- */
 @interface MapViewController () <MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;

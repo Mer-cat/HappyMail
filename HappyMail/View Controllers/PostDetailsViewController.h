@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * View controller for viewing a single post in more detail
+ */
 @interface PostDetailsViewController : UIViewController
 @property (nonatomic, strong) Post *post;
 

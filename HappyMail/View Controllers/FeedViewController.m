@@ -16,9 +16,6 @@
 #import "Constants.h"
 #import "DateTools.h"
 
-/**
- * View controller for the main feed of posts
- */
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

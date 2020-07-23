@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * View controller for registering a new user
+ */
 @interface RegistrationViewController : UIViewController
 
 @end

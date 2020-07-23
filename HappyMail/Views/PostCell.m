@@ -9,10 +9,8 @@
 #import "PostCell.h"
 #import "DateTools.h"
 
-/**
- * Custom UITableViewCell for Posts
- */
 @interface PostCell ()
+
 @property (weak, nonatomic) IBOutlet UILabel *offerTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *usernameButton;

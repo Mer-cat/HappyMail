@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * View controller for the main feed of posts
+ */
 @interface FeedViewController : UIViewController
 
 @end

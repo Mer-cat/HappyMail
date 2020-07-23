@@ -14,9 +14,6 @@
 #import "Utils.h"
 #import "User.h"
 
-/**
- * View controller for viewing a single post in more detail
- */
 @interface PostDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;

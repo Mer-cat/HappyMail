@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+* Custom UITableViewCell to show an InfoRequest object
+*/
 @interface InfoRequestCell : UITableViewCell
 
 - (void)refreshInfoRequestCell:(InfoRequest *)infoRequest;

@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 // Needed due to compile-time errors
 @class User;
 
+/**
+ * Data model for a Post object which interacts with Parse
+ */
 @interface Post : PFObject<PFSubclassing>
 
 // MARK: Properties

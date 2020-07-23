@@ -11,9 +11,6 @@
 #import "Utils.h"
 #import "Address.h"
 
-/**
- * View controller for registering a new user
- */
 @interface RegistrationViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;

@@ -13,9 +13,6 @@
 #import "PostCell.h"
 @import Parse;
 
-/**
- * View controller for users' profiles
- */
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;

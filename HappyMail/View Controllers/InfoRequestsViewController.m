@@ -12,9 +12,6 @@
 #import "PostDetailsViewController.h"
 #import "ProfileViewController.h"
 
-/**
- * View controller for viewing a user's InfoRequests
- */
 @interface InfoRequestsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

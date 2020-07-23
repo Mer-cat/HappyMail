@@ -11,9 +11,6 @@
 #import "User.h"
 #import "Utils.h"
 
-/**
- * View controller for logging in
- */
 @interface LoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;

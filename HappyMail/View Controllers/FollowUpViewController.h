@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * View controller for viewing a user's follow-ups
+ */
 @interface FollowUpViewController : UIViewController
 
 @end

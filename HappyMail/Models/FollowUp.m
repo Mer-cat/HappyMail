@@ -8,9 +8,6 @@
 
 #import "FollowUp.h"
 
-/**
- * Data model for a follow-up object, which represents action item for user to follow up on
- */
 @implementation FollowUp
 
 @dynamic receivingUser;

@@ -14,9 +14,6 @@
 #import <Parse/Parse.h>
 #import "ProfileViewController.h"
 
-/**
- * View controller for viewing a user's follow-ups
- */
 @interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource, FollowUpCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

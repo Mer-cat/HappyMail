@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ComposeViewControllerDelegate;
 
+/**
+ * View controller for creating a new post
+ */
 @interface ComposeViewController : UIViewController
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 

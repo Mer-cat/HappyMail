@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Custom UITableViewCell for Posts
+ */
 @interface PostCell : UITableViewCell
 
 - (void)refreshPost:(Post *)post;

@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Data model representation of an address, which each user has
+ */
 @interface Address : PFObject<PFSubclassing>
 
 // MARK: Properties

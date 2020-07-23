@@ -9,9 +9,6 @@
 #import "InfoRequestCell.h"
 #import "FollowUp.h"
 
-/**
- * Custom UITableViewCell to show an InfoRequest object
- */
 @interface InfoRequestCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *usernameButtonLabel;
