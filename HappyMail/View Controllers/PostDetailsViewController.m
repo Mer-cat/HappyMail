@@ -11,6 +11,8 @@
 #import "ProfileViewController.h"
 #import "InfoRequest.h"
 #import "FollowUp.h"
+#import "Utils.h"
+#import "User.h"
 
 /**
  * View controller for viewing a single post in more detail
@@ -71,19 +73,7 @@
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
-        User *currentUser = [User currentUser];
-        switch (self.post.type) {
-            case Offer:
-                [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
-                break;
-            case Request:
-                // Send an info request to the receiving user to ask for their information
-                [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
-                break;
-            default:
-                [NSException raise:NSGenericException format:@"Unexpected PostType"];
-                break;
-        }
+        [self handleOkResponse];
     }];
     
     // Add the OK action to the alert controller
@@ -104,11 +94,10 @@
 #pragma mark - Actions
 
 - (IBAction)didPressRespond:(id)sender {
-    User *currentUser = [User currentUser];
-    self.respondButton.enabled = NO; // Prevents duplicate clicks
     switch (self.post.type) {
         case Offer:
             [self showAlertWithMessage:@"Are you sure you want to request a card from this user?" title:@"Confirm response"];
+            
             break;
         case Request:
             // Send an info request to the receiving user to ask for their information
@@ -118,8 +107,34 @@
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
             break;
     }
-    [self.post addRespondee:currentUser];
 }
+
+#pragma mark - Response handler
+
+- (void)handleOkResponse {
+    [Utils queryCurrentUserWithCompletion:^(User *user, NSError *error) {
+        if (user) {
+            User *currentUser = user;
+            switch (self.post.type) {
+                case Offer:
+                    [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
+                    break;
+                case Request:
+                    // Send an info request to the receiving user to ask for their information
+                    [InfoRequest createNewInfoRequestToUser:self.post.author fromUser:currentUser fromPost:self.post];
+                    break;
+                default:
+                    [NSException raise:NSGenericException format:@"Unexpected PostType"];
+                    break;
+            }
+            self.respondButton.enabled = NO;
+            [self.post addRespondee:currentUser];
+        } else {
+            NSLog(@"Error querying current user: %@", error.localizedDescription);
+        }
+    }];
+}
+
 
 #pragma mark - Navigation
 
