@@ -59,6 +59,7 @@
                 }
             }];
         } else {
+            [Utils showAlertWithMessage:@"Please enter a valid address" title:@"Invalid address" controller:self];
             NSLog(@"Error adding address for user");
         }
     }];

@@ -51,6 +51,7 @@
             }];
         } else {
             NSLog(@"Error assigning coordinate from address: %@", error.localizedDescription);
+            completion(nil, error);
         }
     }];
 }
