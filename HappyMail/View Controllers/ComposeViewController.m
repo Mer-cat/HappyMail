@@ -32,7 +32,6 @@
     [Post createNewPostWithTitle:self.titleField.text withBody:self.bodyTextView.text withType:self.postTypeControl.selectedSegmentIndex withCompletion:^(Post *post, NSError *error) {
         if (post) {
             NSLog(@"Successfully made new post");
-            [[User currentUser] addPostToMyPosts:post];
             [self.delegate didPost:post];
             
             // Return to the home screen
