@@ -19,6 +19,7 @@
 @dynamic title;
 @dynamic bodyText;
 @dynamic respondees;
+@dynamic authorUsername;
 
 #pragma mark - PFSubclassing
 
@@ -37,7 +38,7 @@
     newPost.bodyText = bodyText;
     newPost.type = type;
     newPost.respondees = [[NSMutableArray alloc] init];
-    
+    newPost.authorUsername = user.username;
     
     [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
@@ -62,18 +63,12 @@
 }
 
 - (void)removeRespondee:(User *)user {
-    [user fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            [self removeObject:user forKey:@"respondees"];
-            [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (succeeded) {
-                    NSLog(@"%@ removed from respondees for this post", user.username);
-                } else {
-                    NSLog(@"Error removing user from respondees: %@", error.localizedDescription);
-                }
-            }];
+    [self removeObject:user forKey:@"respondees"];
+    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"%@ removed from respondees for this post", user.username);
         } else {
-            NSLog(@"Error fetching respondee for removal: %@", error.localizedDescription);
+            NSLog(@"Error removing user from respondees: %@", error.localizedDescription);
         }
     }];
 }

@@ -17,6 +17,8 @@
 @dynamic requestingUser;
 @dynamic associatedPost;
 @dynamic requestedUser;
+@dynamic requestingUserUsername;
+@dynamic associatedPostTitle;
 
 #pragma mark - PFSubclassing
 
@@ -31,6 +33,8 @@
     newInfoRequest.requestedUser = requestedUser;
     newInfoRequest.requestingUser = requestingUser;
     newInfoRequest.associatedPost = post;
+    newInfoRequest.requestingUserUsername = requestingUser.username;
+    newInfoRequest.associatedPostTitle = post.title;
     
     [newInfoRequest saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {

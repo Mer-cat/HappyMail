@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *bodyText;
 @property (nonatomic, strong) NSMutableArray *respondees;
+@property (nonatomic, strong) NSString *authorUsername;
 
 
 // Properties used for optional features
