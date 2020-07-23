@@ -31,9 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size;
 
 /**
- * Queries parse for the current user object, populated with address key
+ * Queries parse for the user object, populated with address key
  */
-+ (void)queryCurrentUserWithCompletion:(void (^)(User *, NSError *))completion;
++ (void)queryUser:(User *)user withCompletion:(void (^)(User *, NSError *))completion;
 
 @end
 

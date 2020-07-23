@@ -49,6 +49,7 @@
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
+
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
@@ -65,10 +66,10 @@
 
 #pragma mark - Parse query helpers
 
-+ (void)queryCurrentUserWithCompletion:(void (^)(User *, NSError *))completion {
++ (void)queryUser:(PFUser *)user withCompletion:(void (^)(User *, NSError *))completion {
     PFQuery *userQuery = [PFUser query];
     [userQuery includeKey:@"address"];
-    [userQuery getObjectInBackgroundWithId:[[PFUser currentUser] objectId]
+    [userQuery getObjectInBackgroundWithId:[user objectId]
                                      block:^(PFObject *populatedUser, NSError *error) {
         if (populatedUser) {
             completion((User*) populatedUser, nil);
