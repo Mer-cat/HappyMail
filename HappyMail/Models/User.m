@@ -32,31 +32,25 @@
 #pragma mark - Array field changers
 
 - (void)addSentToUser:(User *)user {
-    [user fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            [self addObject:user forKey:@"sentToUsers"];
-            [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (succeeded) {
-                    NSLog(@"%@ added to sent users", user.username);
-                } else {
-                    NSLog(@"Error adding user to sent users: %@", error.localizedDescription);
-                }
-            }];
+    [self addObject:user forKey:@"sentToUsers"];
+    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"%@ added to sent users", user.username);
         } else {
-            NSLog(@"Error adding a new sent-to-user: %@", error.localizedDescription);
+            NSLog(@"Error adding user to sent users: %@", error.localizedDescription);
         }
     }];
 }
 
-- (void)addPostToMyPosts:(Post *)post {
-    [self addObject:post forKey:@"myPosts"];
-    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"Post added to myPosts");
-        } else {
-            NSLog(@"Error adding post to myPosts: %@", error.localizedDescription);
-        }
-    }];
-}
+//- (void)addPostToMyPosts:(Post *)post {
+//    [self addObject:post forKey:@"myPosts"];
+//    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+//        if (succeeded) {
+//            NSLog(@"Post added to myPosts");
+//        } else {
+//            NSLog(@"Error adding post to myPosts: %@", error.localizedDescription);
+//        }
+//    }];
+//}
 
 @end
