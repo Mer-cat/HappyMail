@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,9 +17,23 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface Utils : NSObject
 
+/**
+ * Create new alert on the screen with specified message and title
+ */
 + (void)showAlertWithMessage:(NSString *) message title:(NSString *)title controller:(id)controller;
+
+
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
+
+/**
+ * Resizes images since Parse only allows 10MB uploads for a photo
+ */
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size;
+
+/**
+ * Queries parse for the current user object, populated with address key
+ */
++ (void)queryCurrentUserWithCompletion:(void (^)(User *, NSError *))completion;
 
 @end
 

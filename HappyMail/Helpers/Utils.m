@@ -8,14 +8,12 @@
 
 #import "Utils.h"
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @implementation Utils
 
 #pragma mark - UIAlertController helper
 
-/**
- * Create new alert on the screen with specified message and title
- */
 + (void)showAlertWithMessage:(NSString *)message title:(NSString *)title controller:(id)controller {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
@@ -51,9 +49,6 @@
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
-/**
- * Resizes images since Parse only allows 10MB uploads for a photo
- */
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
@@ -66,6 +61,21 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+#pragma mark - Parse query helpers
+
++ (void)queryCurrentUserWithCompletion:(void (^)(User *, NSError *))completion {
+    PFQuery *userQuery = [PFUser query];
+    [userQuery includeKey:@"address"];
+    [userQuery getObjectInBackgroundWithId:[[PFUser currentUser] objectId]
+                                     block:^(PFObject *populatedUser, NSError *error) {
+        if (populatedUser) {
+            completion((User*) populatedUser, nil);
+        } else {
+            completion(nil, error);
+        }
+    }];
 }
 
 @end
