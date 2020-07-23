@@ -7,6 +7,7 @@
 //
 
 #import "FollowUpCell.h"
+#import "Utils.h"
 
 /**
  * Custom UITableViewCell to show a FollowUp object
@@ -43,7 +44,13 @@
 
 - (IBAction)didPressCheck:(id)sender {
     [self removeFollowUp];
-    [self.followUp.sendingUser addSentToUser:self.followUp.receivingUser];
+    [Utils queryUser:self.followUp.receivingUser withCompletion:^(User *user, NSError *error) {
+        if (user) {
+            [self.followUp.sendingUser addSentToUser:self.followUp.receivingUser];
+        } else {
+            NSLog(@"Error querying user: %@", error.localizedDescription);
+        }
+    }];
     // TODO: Could notify receiving user that a card is on the way
     // Could repurpose follow-ups screen to updates and add new type
 }
