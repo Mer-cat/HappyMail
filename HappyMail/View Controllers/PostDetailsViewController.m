@@ -112,7 +112,7 @@
 #pragma mark - Response handler
 
 - (void)handleOkResponse {
-    [Utils queryCurrentUserWithCompletion:^(User *user, NSError *error) {
+    [Utils queryUser:[User currentUser] withCompletion:^(User *user, NSError *error) {
         if (user) {
             User *currentUser = user;
             switch (self.post.type) {
