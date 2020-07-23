@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import <MapKit/MapKit.h>
 #import "Address.h"
+#import "Utils.h"
 
 /**
  * View controller for viewing a map of places the user has sent a card to
@@ -29,9 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mapView.delegate = self;
-    self.user = [User currentUser];
-
-    [self initMap];
+    
+    [Utils queryUser:[User currentUser] withCompletion:^(User *user, NSError *error) {
+        if (user) {
+            self.user = user;
+            [self initMap];
+        } else {
+            NSLog(@"Error fetching current user: %@",error.localizedDescription);
+        }
+    }];
 }
 
 #pragma mark - Init
@@ -40,19 +47,21 @@
     // Load in list of coordinates from user
     // Populate map with pins for each coordinate
     self.sentToUsers = self.user.sentToUsers;
+    NSLog(@"%@",self.user.sentToUsers);
     [self initPlacesSentTo];
 }
 
 - (void)initPlacesSentTo {
+    NSLog(@"%@", self.sentToUsers);
     for (User *user in self.sentToUsers) {
-        NSLog(@"Found a user");
-        [user fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            if (object) {
+        [Utils queryUser:user withCompletion:^(User *user, NSError *error) {
+            if (user) {
+                NSLog(@"Found a user");
                 NSLog(@"%@", user.address);
                 [self.placesSentTo addObject:user.address];
                 [self dropPin:user.address sentTo:YES];
             } else {
-                NSLog(@"Error with fetching user address: %@", error.localizedDescription);
+                NSLog(@"Error querying user: %@", error.localizedDescription);
             }
         }];
     }
@@ -62,22 +71,16 @@
 
 - (void)dropPin:(Address *)address sentTo:(BOOL)userSentTo {
     // Drop pin on map for each address.coordinate
-    [address fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            NSLog(@"Dropped pin");
-            MKPointAnnotation *annotation = [MKPointAnnotation new];
-            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(address.latitude.floatValue, address.longitude.floatValue);
-            annotation.coordinate = coordinate;
-            if (userSentTo) {
-                annotation.title = @"You sent a card here!";
-            } else {
-                annotation.title = @"You received a card from here!";
-            }
-            [self.mapView addAnnotation:annotation];
-        } else {
-            NSLog(@"Failed to drop pin: %@", error.localizedDescription);
-        }
-    }];
+    MKPointAnnotation *annotation = [MKPointAnnotation new];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(address.latitude.floatValue, address.longitude.floatValue);
+    annotation.coordinate = coordinate;
+    if (userSentTo) {
+        annotation.title = @"You sent a card here!";
+    } else {
+        annotation.title = @"You received a card from here!";
+    }
+    [self.mapView addAnnotation:annotation];
+    
 }
 
 #pragma mark - MKMapViewDelegate
