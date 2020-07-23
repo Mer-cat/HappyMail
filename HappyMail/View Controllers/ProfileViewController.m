@@ -53,9 +53,12 @@
         self.aboutMeTextView.editable = NO;
         self.mapButton.hidden = YES;
     }
-    self.userPosts = self.user.myPosts;
     
     [self refreshProfile];
+    [self fetchMyPosts];
+    
+    // Auto-refresh user's posts
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(fetchMyPosts) userInfo:nil repeats:true];
 }
 
 #pragma mark - Init
@@ -80,6 +83,22 @@
     
     // Add below line to make profile pictures circular (thank you Ria)
     // self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+}
+
+- (void)fetchMyPosts {
+    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery whereKey:@"author" equalTo:self.user];
+    
+    // Fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> *posts, NSError *error) {
+        if (posts != nil) {
+            self.userPosts = posts;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error getting posts: %@", error.localizedDescription);
+        }
+    }];
 }
 
 /**
@@ -186,11 +205,13 @@
     
     // Load the cell with current post
     [cell refreshPost:post];
+    
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.userPosts.count;
 }
+
 
 @end
