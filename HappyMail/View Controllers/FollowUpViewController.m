@@ -56,6 +56,7 @@
     // Populate cells with user's personal follow-ups
     FollowUp *followUp = self.followUps[indexPath.row];
     [cell refreshFollowUp:followUp];
+    
     return cell;
 }
 
@@ -92,11 +93,13 @@
  */
 - (void)fetchFollowUps {
     PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
+    [query includeKey:@"receivingUser"];
+    [query includeKey:@"sendingUser"];
+    [query includeKey:@"originalPost"];
     [query whereKey:@"sendingUser" equalTo:[User currentUser]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
         if (!error) {
-            NSLog(@"Successfully fetched user's follow-ups");
-            self.followUps = (NSMutableArray *) objects;
+            self.followUps = (NSMutableArray *) followUps;
             [self.tableView reloadData];
         } else {
             NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
