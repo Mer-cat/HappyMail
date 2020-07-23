@@ -29,39 +29,14 @@
 
 - (void)refreshFollowUp:(FollowUp *)followUp {
     [self hideButtons];
-    self.followUp = followUp;
-    [followUp.originalPost fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            NSString *postType = [Post formatTypeToString:followUp.originalPost.type];
-            self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
-            self.postTitleLabel.text = followUp.originalPost.title;
-        } else {
-            NSLog(@"Error fetching associated post: %@", error.localizedDescription);
-        }
-    }];
     
-    User *receivingUser = followUp.receivingUser;
-    [receivingUser fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            [self.usernameButton setTitle:receivingUser.username forState:UIControlStateNormal];
-            Address *address = receivingUser.address;
-            [address fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                if (object) {
-                    NSString *addressee = address.addressee;
-                    NSString *streetAddress = address.streetAddress;
-                    NSString *cityStateZipcode = [NSString stringWithFormat:@"%@, %@ %@", address.city, address.state, address.zipcode];
-                    NSString *fullAddress = [NSString stringWithFormat:@"%@\n%@\n%@", addressee, streetAddress, cityStateZipcode];
-                    
-                    self.fullAddressLabel.text = fullAddress;
-                    
-                } else {
-                    NSLog(@"Error fetching user's address: %@", error.localizedDescription);
-                }
-            }];
-        } else {
-            NSLog(@"Error fetching receiving user: %@", error.localizedDescription);
-        }
-    }];
+    self.followUp = followUp;
+    [self.usernameButton setTitle:followUp.recipientUsername forState:UIControlStateNormal];
+    NSString *postType = [Post formatTypeToString:followUp.originalPostType];
+    self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
+    self.postTitleLabel.text = followUp.originalPostTitle;
+    
+    self.fullAddressLabel.text = followUp.recipientAddressString;
 }
 
 #pragma mark - Actions

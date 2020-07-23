@@ -25,25 +25,15 @@
 #pragma mark - Init
 
 - (void)refreshPost:(Post *)post {
+    
     // Set labels
-    [post fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            self.offerTypeLabel.text = [Post formatTypeToString:post.type];
-            self.titleLabel.text = post.title;
-            User *author = post.author;
-            [author fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                if (object) {
-                    [self.usernameButton setTitle:author.username forState:UIControlStateNormal];
-                } else {
-                    NSLog(@"Error fetching user: %@", error.localizedDescription);
-                }
-            }];
-            NSDate *timeCreated = post.createdAt;
-            self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
-        } else {
-            NSLog(@"Error fetching post: %@", error.localizedDescription);
-        }
-    }];
+    self.offerTypeLabel.text = [Post formatTypeToString:post.type];
+    self.titleLabel.text = post.title;
+    [self.usernameButton setTitle:post.authorUsername forState:UIControlStateNormal];
+    
+    NSDate *timeCreated = post.createdAt;
+    self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
+    
 }
 
 @end

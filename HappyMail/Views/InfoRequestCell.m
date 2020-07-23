@@ -26,21 +26,9 @@
 
 - (void)refreshInfoRequestCell:(InfoRequest *)infoRequest {
     self.infoRequest = infoRequest;
-    [self.infoRequest.requestingUser fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            [self.usernameButtonLabel setTitle:self.infoRequest.requestingUser.username forState:UIControlStateNormal];
-        } else {
-            NSLog(@"Error fetching requesting user for info request");
-        }
-    }];
     
-    [self.infoRequest.associatedPost fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            [self.requestButtonLabel setTitle:self.infoRequest.associatedPost.title forState:UIControlStateNormal];
-        } else {
-            NSLog(@"Error fetching associated post for info request");
-        }
-    }];
+    [self.usernameButtonLabel setTitle:self.infoRequest.requestingUserUsername forState:UIControlStateNormal];
+    [self.requestButtonLabel setTitle:self.infoRequest.associatedPostTitle forState:UIControlStateNormal];
 }
 
 #pragma mark - Actions
