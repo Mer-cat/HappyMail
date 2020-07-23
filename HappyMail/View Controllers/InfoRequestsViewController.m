@@ -50,6 +50,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     InfoRequestCell *infoRequestCell = [self.tableView dequeueReusableCellWithIdentifier:@"InfoRequestCell"];
     InfoRequest *infoRequest = self.infoRequests[indexPath.row];
+    
     [infoRequestCell refreshInfoRequestCell:infoRequest];
     
     return infoRequestCell;
@@ -64,6 +65,10 @@
 - (void)fetchInfoRequests {
     PFQuery *infoQuery = [PFQuery queryWithClassName:@"InfoRequest"];
     [infoQuery whereKey:@"requestedUser" equalTo:[User currentUser]];
+    [infoQuery includeKey:@"requestedUser"];
+    [infoQuery includeKey:@"requestingUser"];
+    [infoQuery includeKey:@"associatedPost"];
+    [infoQuery includeKey:@"requestedUser.address"];
     [infoQuery orderByAscending:@"createdAt"];
     
     // Fetch data asynchronously
