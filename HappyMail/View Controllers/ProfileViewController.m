@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usersPostsLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *userPosts;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -55,7 +56,12 @@
     [self fetchMyPosts];
     
     // Auto-refresh user's posts
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(fetchMyPosts) userInfo:nil repeats:true];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(fetchMyPosts) userInfo:nil repeats:true];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
 }
 
 #pragma mark - Init
@@ -156,7 +162,7 @@
     // Go back to the login screen
     SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    UIViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
     sceneDelegate.window.rootViewController = loginViewController;
     
     // Clear out the current user

@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSArray *filterOptions;
 @property (nonatomic, strong) NSArray *previousFilteredPosts;
 @property (nonatomic) FilterOption selectedFilter;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -69,7 +70,12 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     // Auto-refresh
-    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchPosts) userInfo:nil repeats:true];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchPosts) userInfo:nil repeats:true];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
 }
 
 #pragma mark - Parse query
