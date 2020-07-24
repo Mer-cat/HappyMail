@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIStepper *stepper;
 @property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitQuestionLabel;
+@property (weak, nonatomic) IBOutlet UIView *responseLimitView;
 
 @end
 
@@ -52,13 +53,13 @@
 
 - (IBAction)postTypeChanged:(id)sender {
     if (self.postTypeControl.selectedSegmentIndex != Offer) {
-        self.stepper.hidden = NO;
-        self.limitQuestionLabel.hidden = NO;
-        self.responseLimitLabel.hidden = NO;
-    } else {
         self.stepper.hidden = YES;
         self.limitQuestionLabel.hidden = YES;
-        self.responseLimitLabel.hidden = YES;
+        self.responseLimitView.hidden = YES;
+    } else {
+        self.stepper.hidden = NO;
+        self.limitQuestionLabel.hidden = NO;
+        self.responseLimitView.hidden = NO;
     }
 }
 
