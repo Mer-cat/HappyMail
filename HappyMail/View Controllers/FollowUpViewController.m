@@ -59,6 +59,7 @@
     // Populate cells with user's personal follow-ups
     FollowUp *followUp = self.followUps[indexPath.row];
     [cell refreshFollowUp:followUp];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
