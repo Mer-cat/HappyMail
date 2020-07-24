@@ -19,13 +19,12 @@
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *filteredPosts;
+@property (nonatomic, strong) NSMutableArray *filteredPosts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *dropDownTableView;
 @property (nonatomic, strong) NSArray *filterOptions;
 @property (nonatomic) FilterOption selectedFilter;
-@property (nonatomic, strong) NSTimer *timer;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
@@ -49,7 +48,7 @@
     self.isMoreDataLoading = NO;
     
     // Initialize/clear out arrays
-    self.filteredPosts = [[NSArray alloc] init];
+    self.filteredPosts = [[NSMutableArray alloc] init];
     
     // Set height for drop-down table view based on array data
     CGFloat height = self.dropDownTableView.rowHeight;
@@ -72,13 +71,6 @@
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
-    // Auto-refresh
-    // self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchPosts) userInfo:nil repeats:true];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.timer invalidate];
 }
 
 #pragma mark - Data fetching
@@ -112,13 +104,21 @@
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
     }
-    
+    if (self.isMoreDataLoading) {
+        NSLog(@"%lu", self.filteredPosts.count);
+        postQuery.skip = self.filteredPosts.count;
+    }
     postQuery.limit = 20;
     
     // Fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> *posts, NSError *error) {
         if (posts != nil) {
-            self.filteredPosts = [NSArray arrayWithArray:posts];
+            if (self.isMoreDataLoading) {
+                self.isMoreDataLoading = NO;
+                [self.filteredPosts addObjectsFromArray:posts];
+            } else {
+                self.filteredPosts = (NSMutableArray *) posts;
+            }
             [self.tableView reloadData];
         } else {
             NSLog(@"Error getting posts: %@", error.localizedDescription);
@@ -139,13 +139,9 @@
 - (void)didPost:(Post *)post {
     // If the new post matches the current filter, show it immediately
     if (post.type == (NSInteger) self.selectedFilter || self.selectedFilter == None) {
-        self.filteredPosts = [self.filteredPosts arrayByAddingObject:post];
-        
-        // Sort the array newest to oldest
-        self.filteredPosts = [self.filteredPosts sortedArrayUsingSelector:@selector(compare:)];
-    } else {
-        // New post will show when results are un-filtered
+        [self.filteredPosts insertObject:post atIndex:0];
     }
+    // New post will show when results are un-filtered if it doesn't match current filter
     [self.tableView reloadData];
 }
 
@@ -232,7 +228,7 @@
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
             return [evaluatedObject.title localizedStandardContainsString:searchText];
         }];
-        self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
+        self.filteredPosts = (NSMutableArray *)[self.filteredPosts filteredArrayUsingPredicate:predicate];
     } else {
         [self fetchPosts];
     }
@@ -241,7 +237,6 @@
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-//    self.previousFilteredPosts = self.filteredPosts;
     self.searchBar.showsCancelButton = YES;
 }
 
@@ -261,19 +256,19 @@
 
 #pragma mark - UIScrollViewDelegate
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    if (!self.isMoreDataLoading) {
-//        // Calculate the position of one screen length before the bottom of the results
-//        int scrollViewContentHeight = self.tableView.contentSize.height;
-//        int scrollOffsetThreshhold = scrollViewContentHeight - self.tableView.bounds.size.height;
-//
-//        // When the user scrolls past the threshold, start requesting
-//        if (scrollView.contentOffset.y > scrollOffsetThreshhold && self.tableView.isDragging) {
-//            self.isMoreDataLoading = YES;
-//            [self fetchPosts];
-//        }
-//    }
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!self.isMoreDataLoading) {
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshhold = scrollViewContentHeight - self.tableView.bounds.size.height;
+
+        // When the user scrolls past the threshold, start requesting
+        if (scrollView.contentOffset.y > scrollOffsetThreshhold && self.tableView.isDragging) {
+            self.isMoreDataLoading = YES;
+            [self fetchPosts];
+        }
+    }
+}
 
 #pragma mark - Navigation
 
