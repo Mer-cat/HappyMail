@@ -14,7 +14,6 @@
 #import "ProfileViewController.h"
 #import "ComposeViewController.h"
 #import "Constants.h"
-#import "DateTools.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 
