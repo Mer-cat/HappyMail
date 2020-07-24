@@ -26,6 +26,9 @@
 @property (nonatomic, strong) NSArray *filterOptions;
 @property (nonatomic) FilterOption selectedFilter;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
+@property (assign, nonatomic) BOOL userIsSearching;
+@property (nonatomic, strong) NSString *searchText;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -80,6 +83,10 @@
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"respondees"];
+    
+    if (self.userIsSearching) {
+        [postQuery whereKey:@"title" containsString: self.searchText];
+    }
     
     switch (self.selectedFilter) {
         case AllOffers:
@@ -221,37 +228,31 @@
 #pragma mark - UISearchBarDelegate
 
 /**
- * Filter posts based on title
+ * If text is erased, un-filter posts
  */
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if(searchText.length != 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
-            return [evaluatedObject.title localizedStandardContainsString:searchText];
-        }];
-        self.filteredPosts = (NSMutableArray *)[self.filteredPosts filteredArrayUsingPredicate:predicate];
-    } else {
+    if(searchText.length == 0) {
+        self.userIsSearching = NO;
+        
+        // Hide the keyboard
+        [self.searchBar resignFirstResponder];
+        
+        // Re-fetch posts without search query
         [self fetchPosts];
     }
-    
-    [self.tableView reloadData];
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    self.searchBar.showsCancelButton = YES;
 }
 
 /**
- * Clear the search bar and re-set the posts if user cancels search
+ * Make new query with search criteria upon search button clicked
  */
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    self.searchBar.showsCancelButton = NO;
-    self.searchBar.text = @"";
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSString *searchText = searchBar.searchTextField.text;
+    if (searchText.length != 0) {
+        self.userIsSearching = YES;
+        self.searchText = searchText;
+    }
     [self.searchBar resignFirstResponder];
     [self fetchPosts];
-}
-
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self.searchBar resignFirstResponder];
 }
 
 #pragma mark - UIScrollViewDelegate
