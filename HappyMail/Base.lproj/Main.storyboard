@@ -179,6 +179,9 @@
                                     <segment title="Offer"/>
                                     <segment title="Request"/>
                                 </segments>
+                                <connections>
+                                    <action selector="postTypeChanged:" destination="NWM-Am-nNd" eventType="valueChanged" id="fjm-2N-2B9"/>
+                                </connections>
                             </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nem-DB-KUN">
                                 <rect key="frame" x="20" y="187" width="213" height="34"/>
@@ -187,13 +190,41 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WLi-Ej-MH6">
-                                <rect key="frame" x="20" y="275" width="361" height="271"/>
+                                <rect key="frame" x="20" y="259" width="361" height="278"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.84383614880000002" blue="0.92643978029999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How many people can respond to your offer (max 25)?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CD7-H9-YDV">
+                                <rect key="frame" x="20" y="545" width="361" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="25" translatesAutoresizingMaskIntoConstraints="NO" id="DCD-N9-Uv2">
+                                <rect key="frame" x="95" y="606" width="94" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="stepperValueChanged:" destination="NWM-Am-nNd" eventType="valueChanged" id="aDi-uk-Bgy"/>
+                                </connections>
+                            </stepper>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDm-jN-pKS">
+                                <rect key="frame" x="20" y="606" width="56" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcV-o0-iI3">
+                                        <rect key="frame" x="4" y="0.0" width="48" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.85989417767853193" green="0.5762658429873142" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="wgE-mk-bMf"/>
@@ -212,8 +243,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bodyTextView" destination="WLi-Ej-MH6" id="efd-qP-Ap0"/>
+                        <outlet property="limitQuestionLabel" destination="CD7-H9-YDV" id="obj-je-QZh"/>
                         <outlet property="postButton" destination="TZi-JG-Soo" id="Uxp-Ck-GoS"/>
                         <outlet property="postTypeControl" destination="3SM-ih-bXs" id="LDR-tZ-lTB"/>
+                        <outlet property="responseLimitLabel" destination="qcV-o0-iI3" id="RXS-aY-4Ak"/>
+                        <outlet property="stepper" destination="DCD-N9-Uv2" id="MmH-2t-CM4"/>
                         <outlet property="titleField" destination="Nem-DB-KUN" id="CzM-LM-8pu"/>
                     </connections>
                 </viewController>
