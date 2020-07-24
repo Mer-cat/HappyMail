@@ -17,6 +17,7 @@
 @dynamic bodyText;
 @dynamic respondees;
 @dynamic authorUsername;
+@dynamic responseLimit;
 
 #pragma mark - PFSubclassing
 
@@ -26,7 +27,7 @@
 
 #pragma mark - Post creation
 
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withCompletion:(void (^)(Post *, NSError *))completion {
++ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withCompletion:(void (^)(Post *, NSError *))completion {
     
     Post *newPost = [Post new];
     User *user = [User currentUser];
@@ -34,6 +35,7 @@
     newPost.title = title;
     newPost.bodyText = bodyText;
     newPost.type = type;
+    newPost.responseLimit = limit;
     newPost.respondees = [[NSMutableArray alloc] init];
     newPost.authorUsername = user.username;
     
@@ -59,6 +61,7 @@
     }];
 }
 
+// TODO: Remove if not needed by the end of the project
 - (void)removeRespondee:(User *)user {
     [self removeObject:user forKey:@"respondees"];
     [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -72,6 +75,7 @@
 
 #pragma mark - Comparison
 
+// TODO: Remove if not needed by end of the project
 /**
  * Comparison method which allows for sorting of posts from newest to oldest
  */

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *bodyText;
 @property (nonatomic, strong) NSMutableArray *respondees;
 @property (nonatomic, strong) NSString *authorUsername;
+@property (nonatomic) NSInteger responseLimit;
 
 
 // Properties used for optional features
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 // MARK: Methods
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withCompletion:(void (^)(Post *, NSError *))completion;
++ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withCompletion:(void (^)(Post *, NSError *))completion;
 
 - (void)addRespondee:(User *)user;
 - (void)removeRespondee:(User *)user;
