@@ -16,18 +16,17 @@
 #import "Constants.h"
 #import "DateTools.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *posts;
 @property (nonatomic, strong) NSArray *filteredPosts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *dropDownTableView;
 @property (nonatomic, strong) NSArray *filterOptions;
-@property (nonatomic, strong) NSArray *previousFilteredPosts;
 @property (nonatomic) FilterOption selectedFilter;
 @property (nonatomic, strong) NSTimer *timer;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
 
@@ -47,6 +46,10 @@
     // Currently has to be manually updated with typedef
     self.filterOptions = @[@"Offers",@"Requests",@"Within last week",@"Within last day"];
     self.selectedFilter = None;
+    self.isMoreDataLoading = NO;
+    
+    // Initialize/clear out arrays
+    self.filteredPosts = [[NSArray alloc] init];
     
     // Set height for drop-down table view based on array data
     CGFloat height = self.dropDownTableView.rowHeight;
@@ -70,7 +73,7 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     // Auto-refresh
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchPosts) userInfo:nil repeats:true];
+    // self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchPosts) userInfo:nil repeats:true];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -78,26 +81,44 @@
     [self.timer invalidate];
 }
 
-#pragma mark - Parse query
+#pragma mark - Data fetching
 
 - (void)fetchPosts {
     PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"respondees"];
+    
+    switch (self.selectedFilter) {
+        case AllOffers:
+            [postQuery whereKey:@"type" equalTo: [NSNumber numberWithInt:Offer]];
+            break;
+        case AllRequests:
+            [postQuery whereKey:@"type" equalTo: [NSNumber numberWithInt:Request]];
+            break;
+        case LastWeek:{
+            NSDate *sevenDaysAgo = [[NSDate date] dateByAddingDays:-7];
+            [postQuery whereKey:@"createdAt" greaterThanOrEqualTo:sevenDaysAgo];
+            break;
+        }
+        case LastDay:{
+            NSDate *oneDayAgo = [[NSDate date] dateByAddingDays:-1];
+            [postQuery whereKey:@"createdAt" greaterThanOrEqualTo:oneDayAgo];
+            break;
+        }
+        case None:{
+            break;
+        }
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected PostType"];
+    }
+    
     postQuery.limit = 20;
     
     // Fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> *posts, NSError *error) {
         if (posts != nil) {
-            self.posts = (NSMutableArray *) posts;
-            if (self.selectedFilter == None) {
-                self.filteredPosts = [NSArray arrayWithArray:posts];
-                self.previousFilteredPosts = [NSArray arrayWithArray:posts];
-            } else {
-                [self selectNewFilter:self.selectedFilter];
-            }
-            
+            self.filteredPosts = [NSArray arrayWithArray:posts];
             [self.tableView reloadData];
         } else {
             NSLog(@"Error getting posts: %@", error.localizedDescription);
@@ -105,6 +126,7 @@
         [self.refreshControl endRefreshing];
     }];
 }
+
 
 #pragma mark - Actions
 
@@ -114,17 +136,15 @@
 
 #pragma mark - ComposeViewControllerDelegate
 
-- (void)didPost:(Post *) post {
+- (void)didPost:(Post *)post {
     // If the new post matches the current filter, show it immediately
     if (post.type == (NSInteger) self.selectedFilter || self.selectedFilter == None) {
-        [self.posts insertObject:post atIndex:0];
         self.filteredPosts = [self.filteredPosts arrayByAddingObject:post];
         
         // Sort the array newest to oldest
         self.filteredPosts = [self.filteredPosts sortedArrayUsingSelector:@selector(compare:)];
     } else {
         // New post will show when results are un-filtered
-        [self.posts insertObject:post atIndex:0];
     }
     [self.tableView reloadData];
 }
@@ -178,24 +198,16 @@
             UITableViewCell *previousCell = [tableView cellForRowAtIndexPath: previousCellIndexPath];
             previousCell.accessoryType = UITableViewCellAccessoryNone;
             
-            // Unfilter posts before applying new filter
-            self.filteredPosts = [NSArray arrayWithArray:self.posts];
-            
             // When user taps a cell, display check mark for that cell
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             
             [self selectNewFilter:indexPath.row];
-            [self.tableView reloadData];
             
         } else {  // Unselect previously selected filter
             
             // Unshow check mark
             cell.accessoryType = UITableViewCellAccessoryNone;
-            self.selectedFilter = None;
-            
-            // Unfilter posts
-            self.filteredPosts = [NSArray arrayWithArray:self.posts];
-            [self.tableView reloadData];
+            [self selectNewFilter:None];
         }
     }
 }
@@ -203,37 +215,11 @@
 #pragma mark - Filtering helper
 
 /**
- *  Chooses predicate based on filter selection and updates filtered posts
+ *  Update posts, filtering by selected filter
  */
 - (void)selectNewFilter:(FilterOption)selectedFilter {
     self.selectedFilter = selectedFilter;
-    NSDate *currentDate = [NSDate date];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *evaluatedObject, NSDictionary *bindings) {
-        switch (self.selectedFilter) {
-            case AllOffers:
-                return (evaluatedObject.type == Offer);
-            case AllRequests:
-                return (evaluatedObject.type == Request);
-            case LastWeek:{
-                DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:evaluatedObject.createdAt endDate:currentDate];
-                double timeSincePostingInHours = [timePeriod durationInHours];
-                return (timeSincePostingInHours <= 168);
-            }
-            case LastDay:{
-                DTTimePeriod *timePeriod = [[DTTimePeriod alloc] initWithStartDate:evaluatedObject.createdAt endDate:currentDate];
-                double timeSincePostingInHours = [timePeriod durationInHours];
-                return (timeSincePostingInHours <= 24);
-            }
-            default:
-                return evaluatedObject;
-        }
-    }];
-    
-    // Stores the posts before new filter is applied
-    // so that we can revert if needed
-    self.previousFilteredPosts = [NSArray arrayWithArray:self.filteredPosts];
-    self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
+    [self fetchPosts];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -248,14 +234,14 @@
         }];
         self.filteredPosts = [self.filteredPosts filteredArrayUsingPredicate:predicate];
     } else {
-        self.filteredPosts = [NSArray arrayWithArray:self.previousFilteredPosts];
+        [self fetchPosts];
     }
     
     [self.tableView reloadData];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    self.previousFilteredPosts = self.filteredPosts;
+//    self.previousFilteredPosts = self.filteredPosts;
     self.searchBar.showsCancelButton = YES;
 }
 
@@ -266,13 +252,28 @@
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
-    self.filteredPosts = [NSArray arrayWithArray:self.previousFilteredPosts];
-    [self.tableView reloadData];
+    [self fetchPosts];
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.searchBar resignFirstResponder];
 }
+
+#pragma mark - UIScrollViewDelegate
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (!self.isMoreDataLoading) {
+//        // Calculate the position of one screen length before the bottom of the results
+//        int scrollViewContentHeight = self.tableView.contentSize.height;
+//        int scrollOffsetThreshhold = scrollViewContentHeight - self.tableView.bounds.size.height;
+//
+//        // When the user scrolls past the threshold, start requesting
+//        if (scrollView.contentOffset.y > scrollOffsetThreshhold && self.tableView.isDragging) {
+//            self.isMoreDataLoading = YES;
+//            [self fetchPosts];
+//        }
+//    }
+//}
 
 #pragma mark - Navigation
 
