@@ -40,10 +40,10 @@
 #pragma mark - Actions
 
 - (IBAction)didPressCheck:(id)sender {
-    [self removeFollowUp];
     [Utils queryUser:self.followUp.receivingUser withCompletion:^(User *user, NSError *error) {
         if (user) {
             [self.followUp.sendingUser addSentToUser:self.followUp.receivingUser];
+            [self removeFollowUp];
         } else {
             NSLog(@"Error querying user: %@", error.localizedDescription);
         }
