@@ -60,19 +60,7 @@
 #pragma mark - Helpers
 
 - (void)removeFollowUp {
-    switch (self.followUp.originalPost.type) {
-        case Offer:
-            [self.followUp.originalPost removeRespondee:self.followUp.receivingUser];
-            [self.followUp removeFollowUp];
-            break;
-        case Request:
-            [self.followUp.originalPost removeRespondee:self.followUp.sendingUser];
-            [self.followUp removeFollowUp];
-            break;
-        default:
-            [NSException raise:NSGenericException format:@"Unexpected PostType"];
-            break;
-    }
+    [self.followUp removeFollowUp];
     [self.delegate didChangeFollowUp:self.followUp];
 }
 
