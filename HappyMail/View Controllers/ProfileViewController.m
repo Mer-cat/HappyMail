@@ -92,6 +92,8 @@
     PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery whereKey:@"author" equalTo:self.user];
+    [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"respondees"];
     
     // Fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> *posts, NSError *error) {
