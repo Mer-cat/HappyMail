@@ -290,7 +290,8 @@
     FollowUpViewController *followUpViewController = [storyboard instantiateViewControllerWithIdentifier:@"FollowUpViewController"];;
     [followUpViewController fetchFollowUpsWithCompletion:^(NSArray *followUps, NSError *error) {
         if (followUps) {
-            [[self.tabBarController.tabBar.items objectAtIndex:1] setBadgeValue:[NSString stringWithFormat:@"%lu", followUps.count]];
+            // Must use the same reference in order to update badge value properly
+            [self.tabBarController.tabBar.items objectAtIndex:1].badgeValue = [NSString stringWithFormat:@"%lu", followUps.count];
             NSLog(@"%lu", followUps.count);
         } else {
             NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
