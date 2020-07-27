@@ -15,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FollowUpViewController : UIViewController
 
+/**
+ * Fetch the user's follow-ups from Parse with completion, used mainly for setting
+ *  the badge icon from outside of this view controller
+ */
+- (void)fetchFollowUpsWithCompletion:(void (^)(NSArray *, NSError *))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

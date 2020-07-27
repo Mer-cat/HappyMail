@@ -15,6 +15,7 @@
 #import "ComposeViewController.h"
 #import "Constants.h"
 #import "DateTools.h"
+#import "FollowUpViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate, PostDetailsViewControllerDelegate>
 
@@ -44,6 +45,9 @@
     self.dropDownTableView.delegate = self;
     self.dropDownTableView.dataSource = self;
     self.searchBar.delegate = self;
+    
+    // Show follow-up notifications
+    [self loadFollowUpBadgeIcon];
     
     // Currently has to be manually updated with typedef
     self.filterOptions = @[@"Offers",@"Requests",@"Within last week",@"Within last day"];
@@ -277,6 +281,21 @@
             [self fetchPosts];
         }
     }
+}
+
+#pragma mark - Tab bar badges init
+
+- (void)loadFollowUpBadgeIcon {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FollowUpViewController *followUpViewController = [storyboard instantiateViewControllerWithIdentifier:@"FollowUpViewController"];;
+    [followUpViewController fetchFollowUpsWithCompletion:^(NSArray *followUps, NSError *error) {
+        if (followUps) {
+            [[self.tabBarController.tabBar.items objectAtIndex:1] setBadgeValue:[NSString stringWithFormat:@"%lu", followUps.count]];
+            NSLog(@"%lu", followUps.count);
+        } else {
+            NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
+        }
+    }];
 }
 
 #pragma mark - Navigation

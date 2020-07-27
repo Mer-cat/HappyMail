@@ -15,11 +15,9 @@
 #import "ProfileViewController.h"
 
 @interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource, FollowUpCellDelegate>
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *followUps;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -41,13 +39,6 @@
     [self.refreshControl addTarget:self action:@selector(fetchFollowUps) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
-    // Auto-refresh
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchFollowUps) userInfo:nil repeats:true];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.timer invalidate];
 }
 
 #pragma mark - UITableViewDataSource
@@ -87,13 +78,15 @@
  */
 - (void)didChangeFollowUp:(FollowUp *)followUp {
     [self.followUps removeObject:followUp];
+    NSString *followUpCount = [NSString stringWithFormat:@"%lu", self.followUps.count];
+    self.navigationController.tabBarItem.badgeValue = followUpCount;
     [self.tableView reloadData];
 }
 
 #pragma mark - Parse network calls
 
 /**
- * Fetch the user's follow-ups from Parse
+ * Fetch the user's follow-ups from Parse, without completion
  */
 - (void)fetchFollowUps {
     PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
@@ -104,6 +97,8 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
         if (!error) {
             self.followUps = (NSMutableArray *) followUps;
+            NSString *followUpCount = [NSString stringWithFormat:@"%lu", self.followUps.count];
+            self.navigationController.tabBarItem.badgeValue = followUpCount;
             [self.tableView reloadData];
         } else {
             NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
@@ -111,6 +106,27 @@
         [self.refreshControl endRefreshing];
     }];
 }
+
+- (void)fetchFollowUpsWithCompletion:(void (^)(NSArray *, NSError *))completion {
+    PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
+    [query includeKey:@"receivingUser"];
+    [query includeKey:@"sendingUser"];
+    [query includeKey:@"originalPost"];
+    [query whereKey:@"sendingUser" equalTo:[User currentUser]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
+        if (!error) {
+            self.followUps = (NSMutableArray *) followUps;
+            [self.tableView reloadData];
+            completion(followUps, nil);
+        } else {
+            NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
+            completion(nil, error);
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
