@@ -286,8 +286,7 @@
 #pragma mark - Tab bar badges init
 
 - (void)loadFollowUpBadgeIcon {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FollowUpViewController *followUpViewController = [storyboard instantiateViewControllerWithIdentifier:@"FollowUpViewController"];;
+    FollowUpViewController *followUpViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FollowUpViewController"];;
     [followUpViewController fetchFollowUpsWithCompletion:^(NSArray *followUps, NSError *error) {
         if (followUps) {
             // Must use the same reference in order to update badge value properly
