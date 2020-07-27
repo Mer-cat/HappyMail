@@ -29,10 +29,10 @@
     [self hideButtons];
     
     self.followUp = followUp;
-    [self.usernameButton setTitle:followUp.recipientUsername forState:UIControlStateNormal];
-    NSString *postType = [Post formatTypeToString:followUp.originalPostType];
+    [self.usernameButton setTitle:followUp.receivingUser.username forState:UIControlStateNormal];
+    NSString *postType = [Post formatTypeToString:followUp.originalPost.type];
     self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
-    self.postTitleLabel.text = followUp.originalPostTitle;
+    self.postTitleLabel.text = followUp.originalPost.title;
     
     self.fullAddressLabel.text = followUp.recipientAddressString;
 }

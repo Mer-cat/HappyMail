@@ -24,8 +24,8 @@
 - (void)refreshInfoRequestCell:(InfoRequest *)infoRequest {
     self.infoRequest = infoRequest;
     
-    [self.usernameButtonLabel setTitle:self.infoRequest.requestingUserUsername forState:UIControlStateNormal];
-    [self.requestButtonLabel setTitle:self.infoRequest.associatedPostTitle forState:UIControlStateNormal];
+    [self.usernameButtonLabel setTitle:self.infoRequest.requestingUser.username forState:UIControlStateNormal];
+    [self.requestButtonLabel setTitle:self.infoRequest.associatedPost.title forState:UIControlStateNormal];
 }
 
 #pragma mark - Actions

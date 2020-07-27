@@ -22,9 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) User *sendingUser;
 @property (nonatomic, strong) Post *originalPost;
 @property (nonatomic, strong) NSString *recipientAddressString;
-@property (nonatomic, strong) NSString *recipientUsername;
-@property (nonatomic) PostType originalPostType;
-@property (nonatomic, strong) NSString *originalPostTitle;
 
 // MARK: Methods
 + (void)createNewFollowUpForUser:(User *)sendingUser fromPost:(Post *)originalPost aboutUser:(User *)receivingUser;

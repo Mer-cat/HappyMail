@@ -26,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *bodyText;
 @property (nonatomic, strong) NSMutableArray *respondees;
-@property (nonatomic, strong) NSString *authorUsername;
 @property (nonatomic) NSInteger responseLimit;
 
 
@@ -34,8 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  @property (nonatomic, strong) PFFileObject *image;
  @property (nonatomic, strong) NSNumber *likeCount;
- @property (nonatomic) NSInteger offerLimit;
- @property (nonatomic) BOOL open;
  @property (nonatomic, strong) NSString *offerRegion;
  */
 

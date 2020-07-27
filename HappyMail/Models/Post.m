@@ -16,7 +16,6 @@
 @dynamic title;
 @dynamic bodyText;
 @dynamic respondees;
-@dynamic authorUsername;
 @dynamic responseLimit;
 
 #pragma mark - PFSubclassing
@@ -37,7 +36,6 @@
     newPost.type = type;
     newPost.responseLimit = limit;
     newPost.respondees = [[NSMutableArray alloc] init];
-    newPost.authorUsername = user.username;
     
     [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {

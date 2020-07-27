@@ -14,9 +14,6 @@
 @dynamic sendingUser;
 @dynamic originalPost;
 @dynamic recipientAddressString;
-@dynamic originalPostType;
-@dynamic recipientUsername;
-@dynamic originalPostTitle;
 
 #pragma mark - PFSubclassing
 
@@ -33,11 +30,7 @@
     newFollowUp.originalPost = originalPost;
     newFollowUp.receivingUser = receivingUser;
     
-    newFollowUp.originalPostType = originalPost.type;
-    newFollowUp.originalPostTitle = originalPost.title;
-    
-    newFollowUp.recipientUsername = receivingUser.username;
-    
+    // Format the address string for the receiving user
     NSString *addressee = receivingUser.address.addressee;
     NSString *streetAddress = receivingUser.address.streetAddress;
     NSString *cityStateZipcode = [NSString stringWithFormat:@"%@, %@ %@", receivingUser.address.city, receivingUser.address.state, receivingUser.address.zipcode];

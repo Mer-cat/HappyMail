@@ -24,8 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) User *requestingUser;
 @property (nonatomic, strong) Post *associatedPost;
 @property (nonatomic, strong) User *requestedUser;
-@property (nonatomic, strong) NSString *requestingUserUsername;
-@property (nonatomic, strong) NSString *associatedPostTitle;
 
 // MARK: Methods
 + (void)createNewInfoRequestToUser:(User *)requestedUser fromUser:(User *)requestingUser fromPost:(Post *) post;

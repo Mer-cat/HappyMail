@@ -56,7 +56,7 @@
                 NSLog(@"Found a user");
                 NSLog(@"%@", user.address);
                 [self.placesSentTo addObject:user.address];
-                [self dropPin:user.address sentTo:YES];
+                [self dropPin:user.address];
             } else {
                 NSLog(@"Error querying user: %@", error.localizedDescription);
             }
@@ -66,16 +66,12 @@
 
 #pragma mark - Helper
 
-- (void)dropPin:(Address *)address sentTo:(BOOL)userSentTo {
+- (void)dropPin:(Address *)address {
     // Drop pin on map for each address.coordinate
     MKPointAnnotation *annotation = [MKPointAnnotation new];
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(address.latitude.floatValue, address.longitude.floatValue);
     annotation.coordinate = coordinate;
-    if (userSentTo) {
-        annotation.title = @"You sent a card here!";
-    } else {
-        annotation.title = @"You received a card from here!";
-    }
+    annotation.title = @"You sent a card here!";
     [self.mapView addAnnotation:annotation];
     
 }
@@ -86,12 +82,9 @@
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
     if (annotationView == nil) {
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
-        //annotationView.canShowCallout = true;
-        //annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)]
         annotationView.pinTintColor = [MKPinAnnotationView purplePinColor];
         annotationView.animatesDrop = YES;
     }
-    
     return annotationView;
 }
 

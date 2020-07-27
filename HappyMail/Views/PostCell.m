@@ -37,7 +37,7 @@
     // Set labels
     self.offerTypeLabel.text = [Post formatTypeToString:post.type];
     self.titleLabel.text = post.title;
-    [self.usernameButton setTitle:post.authorUsername forState:UIControlStateNormal];
+    [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
     
     if (post.type == Offer) {
         self.responsesLabel.text = [NSString stringWithFormat:@"%ld/%ld responses",post.respondees.count, post.responseLimit];

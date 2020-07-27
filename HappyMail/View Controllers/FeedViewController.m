@@ -29,7 +29,6 @@
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (assign, nonatomic) BOOL userIsSearching;
 @property (nonatomic, strong) NSString *searchText;
-@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
