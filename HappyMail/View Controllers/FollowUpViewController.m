@@ -41,7 +41,6 @@
     [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
     [self.refreshControl addTarget:self action:@selector(fetchFollowUps) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -131,6 +130,7 @@
  */
 - (void)fetchFollowUps {
     PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
+    [query orderByAscending:@"createdAt"];
     [query includeKey:@"receivingUser"];
     [query includeKey:@"sendingUser"];
     [query includeKey:@"originalPost"];
