@@ -13,6 +13,9 @@
 #import "User.h"
 #import <Parse/Parse.h>
 #import "ProfileViewController.h"
+#import "InfoRequestsViewController.h"
+#import "BBBadgeBarButtonItem.h"
+#import "Utils.h"
 
 @interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource, FollowUpCellDelegate>
 @property (nonatomic, strong) NSMutableArray *followUps;
@@ -39,6 +42,44 @@
     [self.refreshControl addTarget:self action:@selector(fetchFollowUps) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self infoRequestsButtonInit];
+}
+
+#pragma mark - Init
+
+- (void)infoRequestsButtonInit {
+    // Set custom button
+    UIButton *customButton = [[UIButton alloc] init];
+    CGSize navBarIconSize = CGSizeMake(30, 30);
+    UIImage *resizedImage = [Utils resizeImage:[UIImage imageNamed:@"infoRequestIcon"] withSize:navBarIconSize];
+    [customButton setImage:resizedImage forState:UIControlStateNormal];
+    [customButton addTarget:self action:@selector(infoRequestButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    // Init bar button
+    BBBadgeBarButtonItem *barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:customButton];
+    barButton.badgeOriginX = 20;
+    barButton.badgeOriginY = -10;
+    
+    InfoRequestsViewController *infoRequestsController = [self.storyboard instantiateViewControllerWithIdentifier:@"InfoRequestsController"];
+    [infoRequestsController fetchInfoRequestsWithCompletion:^(NSArray *infoRequests, NSError *error) {
+        if (infoRequests) {
+            barButton.badgeValue = [NSString stringWithFormat:@"%lu", infoRequests.count];
+        } else {
+            NSLog(@"Error fetching info requests: %@", error.localizedDescription);
+        }
+    }];
+    
+    self.navigationItem.rightBarButtonItem = barButton;
+}
+
+#pragma mark - Actions
+
+- (void)infoRequestButtonPressed:(UIButton *)sender {
+    // Show info requests view controller
+    [self performSegueWithIdentifier:@"InfoRequestsSegue" sender:self];
 }
 
 #pragma mark - UITableViewDataSource

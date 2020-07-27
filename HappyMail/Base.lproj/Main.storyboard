@@ -825,15 +825,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Xc8-CQ-cAd"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Your Follow-Ups" id="pEo-1b-Jz7">
-                        <barButtonItem key="rightBarButtonItem" title="InfoRequests" id="9cz-BX-i1T">
-                            <connections>
-                                <segue destination="7Et-ks-HlS" kind="show" id="Lmk-Xw-aHG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Your Follow-Ups" id="pEo-1b-Jz7"/>
                     <connections>
                         <outlet property="tableView" destination="JdN-Wd-3Ed" id="RGQ-ap-VbV"/>
+                        <segue destination="7Et-ks-HlS" kind="show" identifier="InfoRequestsSegue" id="noz-wH-pcN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f29-Af-sdt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -843,7 +838,7 @@
         <!--Your Info Requests-->
         <scene sceneID="smN-Uh-MAP">
             <objects>
-                <viewController id="7Et-ks-HlS" customClass="InfoRequestsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InfoRequestsController" id="7Et-ks-HlS" customClass="InfoRequestsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tNC-wB-jL4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1030,7 +1025,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
         <segue reference="8Lf-nl-8TL"/>
-        <segue reference="4ze-M6-pE5"/>
+        <segue reference="FDo-3C-upy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="blank-profile-picture" width="640" height="640"/>

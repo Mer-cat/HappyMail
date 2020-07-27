@@ -86,6 +86,29 @@
     }];
 }
 
+- (void)fetchInfoRequestsWithCompletion:(void (^)(NSArray *, NSError *))completion {
+    PFQuery *infoQuery = [PFQuery queryWithClassName:@"InfoRequest"];
+    [infoQuery whereKey:@"requestedUser" equalTo:[User currentUser]];
+    [infoQuery includeKey:@"requestedUser"];
+    [infoQuery includeKey:@"requestingUser"];
+    [infoQuery includeKey:@"associatedPost"];
+    [infoQuery includeKey:@"requestedUser.address"];
+    [infoQuery orderByAscending:@"createdAt"];
+    
+    // Fetch data asynchronously
+    [infoQuery findObjectsInBackgroundWithBlock:^(NSArray<InfoRequest *> *infoRequests, NSError *error) {
+        if (infoRequests != nil) {
+            self.infoRequests = infoRequests;
+            [self.tableView reloadData];
+            completion(infoRequests, nil);
+        } else {
+            NSLog(@"Error getting info requests: %@", error.localizedDescription);
+            completion(nil, error);
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
