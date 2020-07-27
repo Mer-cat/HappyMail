@@ -10,6 +10,7 @@ target 'HappyMail' do
   pod 'Parse/UI'
   pod 'DateTools'
   pod 'IQKeyboardManager'
+  pod 'BBBadgeBarButtonItem', '~> 1.2'
 
   target 'HappyMailTests' do
     inherit! :search_paths
