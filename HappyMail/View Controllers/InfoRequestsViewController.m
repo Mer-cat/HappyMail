@@ -40,7 +40,7 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     // Auto-refresh
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchInfoRequests) userInfo:nil repeats:true];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fetchInfoRequests) userInfo:nil repeats:true];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
