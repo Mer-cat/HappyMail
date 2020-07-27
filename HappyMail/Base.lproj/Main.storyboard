@@ -644,7 +644,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Body Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vA-9y-zBR">
-                                                <rect key="frame" x="24" y="144" width="367" height="494"/>
+                                                <rect key="frame" x="24" y="144" width="367" height="259"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -662,8 +662,15 @@
                                                     <segue destination="kY2-aj-mqv" kind="show" identifier="ProfileViewSegue" id="8oJ-Fo-fes"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0/20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuW-zz-YSc">
+                                                <rect key="frame" x="24" y="411" width="223" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWD-Qc-2zc">
-                                                <rect key="frame" x="165" y="646" width="87" height="55"/>
+                                                <rect key="frame" x="160" y="432" width="87" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Respond"/>
                                                 <state key="disabled" title="Responded!"/>
@@ -703,6 +710,7 @@
                         <outlet property="bodyTextLabel" destination="1vA-9y-zBR" id="gG5-Lj-TYR"/>
                         <outlet property="postTypeLabel" destination="YHk-Lh-D7r" id="6RX-zo-9rj"/>
                         <outlet property="respondButton" destination="eWD-Qc-2zc" id="fYK-Kw-ahV"/>
+                        <outlet property="responseLimitLabel" destination="VuW-zz-YSc" id="Pfj-TN-06O"/>
                         <outlet property="timestampLabel" destination="gb7-Ou-EFO" id="HQa-w9-REH"/>
                         <outlet property="titleLabel" destination="zbp-Qr-FTN" id="2GL-Z5-yvr"/>
                         <outlet property="usernameButton" destination="rrQ-bg-4qt" id="bjk-IA-U1H"/>
@@ -859,14 +867,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-jf-CoT">
-                                                    <rect key="frame" x="201" y="6" width="72" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Username"/>
-                                                    <connections>
-                                                        <segue destination="kY2-aj-mqv" kind="show" identifier="ProfileViewSegue" id="FDo-3C-upy"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Request:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBZ-Ef-RAK">
                                                     <rect key="frame" x="20" y="40" width="118" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -895,11 +895,19 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iR-RQ-qVs">
-                                                    <rect key="frame" x="20" y="69" width="374" height="30"/>
+                                                    <rect key="frame" x="20" y="69" width="213" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Hi all! Would like some cards.."/>
                                                     <connections>
                                                         <segue destination="4Mr-uy-2oY" kind="show" identifier="PostDetailsViewSegue" id="8Lf-nl-8TL"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-jf-CoT">
+                                                    <rect key="frame" x="171" y="6" width="72" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Username"/>
+                                                    <connections>
+                                                        <segue destination="kY2-aj-mqv" kind="show" identifier="ProfileViewSegue" id="FDo-3C-upy"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1021,8 +1029,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
-        <segue reference="5hU-vi-Oy7"/>
-        <segue reference="ai7-Eq-mRd"/>
+        <segue reference="8Lf-nl-8TL"/>
+        <segue reference="FDo-3C-upy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="blank-profile-picture" width="640" height="640"/>

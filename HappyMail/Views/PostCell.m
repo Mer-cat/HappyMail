@@ -21,6 +21,15 @@
 
 @implementation PostCell
 
+#pragma mark - Cell lifecycle
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    
+    // Prevents cells from incorrectly hiding the reponse count
+    self.responsesLabel.hidden = NO;
+}
+
 #pragma mark - Init
 
 - (void)refreshPost:(Post *)post {
@@ -29,8 +38,12 @@
     self.offerTypeLabel.text = [Post formatTypeToString:post.type];
     self.titleLabel.text = post.title;
     [self.usernameButton setTitle:post.authorUsername forState:UIControlStateNormal];
-
-    self.responsesLabel.text = [NSString stringWithFormat:@"%ld/%ld responses",post.respondees.count, post.responseLimit];
+    
+    if (post.type == Offer) {
+        self.responsesLabel.text = [NSString stringWithFormat:@"%ld/%ld responses",post.respondees.count, post.responseLimit];
+    } else {
+        self.responsesLabel.hidden = YES;
+    }
     
     NSDate *timeCreated = post.createdAt;
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];

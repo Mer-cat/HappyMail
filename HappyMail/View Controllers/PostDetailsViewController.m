@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bodyTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *respondButton;
+@property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
 
 @end
 
@@ -39,19 +40,25 @@
             break;
         }
     }
+    
+    // Hide respond button if response limit is reached
+    // and the user has not already responded
+    if (self.post.respondees.count >= self.post.responseLimit && self.respondButton.enabled != NO) {
+        self.respondButton.hidden = YES;
+    }
 }
 
 #pragma mark - Init
 
 - (void)refreshPost {
     self.postTypeLabel.text = [Post formatTypeToString:self.post.type];
-    [self.post.author fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-             [self.usernameButton setTitle:self.post.author.username forState:UIControlStateNormal];
-        } else {
-            NSLog(@"Error fetching post author: %@", error.localizedDescription);
-        }
-    }];
+    [self.usernameButton setTitle:self.post.author.username forState:UIControlStateNormal];
+    
+    if (self.post.type == Offer) {
+    self.responseLimitLabel.text = [NSString stringWithFormat:@"%lu/%lu responses", self.post.respondees.count, self.post.responseLimit];
+    } else {
+        self.responseLimitLabel.hidden = YES;
+    }
     
     self.titleLabel.text = self.post.title;
     self.bodyTextLabel.text = self.post.bodyText;
@@ -94,7 +101,6 @@
     switch (self.post.type) {
         case Offer:
             [self showAlertWithMessage:@"Are you sure you want to request a card from this user?" title:@"Confirm response"];
-            
             break;
         case Request:
             // Send an info request to the receiving user to ask for their information
@@ -114,6 +120,8 @@
             User *currentUser = user;
             switch (self.post.type) {
                 case Offer:
+                    self.responseLimitLabel.text = [NSString stringWithFormat:@"%lu/%lu responses", self.post.respondees.count+1, self.post.responseLimit];
+                    [self.delegate didRespond];
                     [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
                     break;
                 case Request:
