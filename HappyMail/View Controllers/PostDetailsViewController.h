@@ -11,11 +11,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PostDetailsViewControllerDelegate;
+
 /**
  * View controller for viewing a single post in more detail
  */
 @interface PostDetailsViewController : UIViewController
 @property (nonatomic, strong) Post *post;
+@property (nonatomic, weak) id<PostDetailsViewControllerDelegate> delegate;
+
+@end
+
+@protocol PostDetailsViewControllerDelegate
+- (void)didRespond;
 
 @end
 

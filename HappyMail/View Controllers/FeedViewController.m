@@ -16,7 +16,7 @@
 #import "Constants.h"
 #import "DateTools.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate, PostDetailsViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *filteredPosts;
@@ -105,9 +105,8 @@
             [postQuery whereKey:@"createdAt" greaterThanOrEqualTo:oneDayAgo];
             break;
         }
-        case None:{
+        case None:
             break;
-        }
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
     }
@@ -149,6 +148,15 @@
         [self.filteredPosts insertObject:post atIndex:0];
     }
     // New post will show when results are un-filtered if it doesn't match current filter
+    [self.tableView reloadData];
+}
+
+#pragma mark - PostDetailsViewControllerDelegate
+
+/**
+ * Show updated response count immediately after new response
+ */
+- (void)didRespond {
     [self.tableView reloadData];
 }
 
@@ -280,6 +288,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *specificPost = self.filteredPosts[indexPath.row];
         detailsViewController.post = specificPost;
+        detailsViewController.delegate = self;
     } else if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
         ProfileViewController *profileViewController = [segue destinationViewController];
         
