@@ -314,15 +314,15 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qhg-X5-iZm">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="144" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qhg-X5-iZm">
                                                 <rect key="frame" x="0.0" y="317" width="414" height="683"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" id="MiM-bd-onT" customClass="PostCell">
-                                                        <rect key="frame" x="0.0" y="28" width="414" height="125"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="144" id="MiM-bd-onT" customClass="PostCell">
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="144"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MiM-bd-onT" id="zNp-ti-EQs">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Offer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pl8-fI-Itt">
@@ -353,13 +353,22 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0/20 Responses" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xD3-Qv-pkT">
+                                                                    <rect key="frame" x="248" y="110" width="146" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                         </tableViewCellContentView>
                                                         <connections>
                                                             <outlet property="offerTypeLabel" destination="Pl8-fI-Itt" id="KVJ-1t-7AB"/>
+                                                            <outlet property="responsesLabel" destination="xD3-Qv-pkT" id="s5V-ox-CgE"/>
                                                             <outlet property="timestampLabel" destination="tBZ-zG-SCw" id="ufM-p5-oEM"/>
                                                             <outlet property="titleLabel" destination="o8d-ay-y4q" id="GNb-QL-Dlh"/>
                                                             <outlet property="usernameButton" destination="suF-9I-Q78" id="god-36-2AK"/>
+                                                            <segue destination="4Mr-uy-2oY" kind="show" identifier="PostDetailsViewSegue" id="udZ-yJ-0VF"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -1024,7 +1033,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
-        <segue reference="8Lf-nl-8TL"/>
+        <segue reference="udZ-yJ-0VF"/>
         <segue reference="FDo-3C-upy"/>
     </inferredMetricsTieBreakers>
     <resources>

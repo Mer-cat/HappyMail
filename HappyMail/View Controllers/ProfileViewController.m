@@ -11,9 +11,11 @@
 #import "Utils.h"
 #import "User.h"
 #import "PostCell.h"
+#import "PostDetailsViewController.h"
+#import "Post.h"
 @import Parse;
 
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, PostDetailsViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -216,6 +218,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.userPosts.count;
+}
+
+#pragma mark - PostDetailsViewControllerDelegate
+
+- (void)didRespond {
+    [self.tableView reloadData];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"PostDetailsViewSegue"]) {
+        PostDetailsViewController *detailsViewController = [segue destinationViewController];
+        PostCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *specificPost = self.userPosts[indexPath.row];
+        detailsViewController.post = specificPost;
+        detailsViewController.delegate = self;
+    }
 }
 
 
