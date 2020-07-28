@@ -48,11 +48,19 @@
     if (!self.user) {
         self.user = [User currentUser];
     } else {  // If looking at another user's profile
+        
+        // Hide self-only information
         self.logoutButton.enabled = NO;
         self.logoutButton.tintColor = UIColor.clearColor;
         self.aboutMeTextView.editable = NO;
         self.mapButton.hidden = YES;
     }
+    
+    // Round corners
+    [Utils roundCorners:self.aboutMeTextView];
+    
+    // Make profile picture circular
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     
     [self refreshProfile];
     [self fetchMyPosts];
@@ -85,9 +93,6 @@
     
     self.profileImageView.file = self.user.profileImage;
     [self.profileImageView loadInBackground];
-    
-    // Add below line to make profile pictures circular (thank you Ria)
-    // self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
 }
 
 - (void)fetchMyPosts {

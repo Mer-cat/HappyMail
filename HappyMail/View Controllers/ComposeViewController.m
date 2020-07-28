@@ -24,6 +24,16 @@
 
 @implementation ComposeViewController
 
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Round corners
+    [Utils roundCorners:self.responseLimitLabel];
+    [Utils roundCorners:self.bodyTextView];
+}
+
 #pragma mark - Actions
 
 /**
