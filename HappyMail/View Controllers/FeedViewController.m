@@ -45,15 +45,12 @@
     self.dropDownTableView.dataSource = self;
     self.searchBar.delegate = self;
     
-    // Show follow-up notifications
-    [self loadFollowUpBadgeIcon];
-    
-    // Currently has to be manually updated with typedef
+    // Below has to be manually updated with typedef if changed
     self.filterOptions = @[@"Offers",@"Requests",@"Within last week",@"Within last day"];
+    
+    // Initialize variables
     self.selectedFilter = None;
     self.isMoreDataLoading = NO;
-    
-    // Initialize/clear out arrays
     self.filteredPosts = [[NSMutableArray alloc] init];
     
     // Set height for drop-down table view based on array data
@@ -69,14 +66,25 @@
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     }
     
+    // Remove edge insets for separator
+    self.tableView.layoutMargins = UIEdgeInsetsZero;
+    self.tableView.separatorInset = UIEdgeInsetsZero;
+    
+    self.dropDownTableView.layoutMargins = UIEdgeInsetsZero;
+    self.dropDownTableView.separatorInset = UIEdgeInsetsZero;
+    
+    // Populate table view
     [self fetchPosts];
+    
+    // Show follow-up notifications
+    [self loadFollowUpBadgeIcon];
     
     // Add refresh control
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-    
+
 }
 
 #pragma mark - Data fetching
@@ -172,6 +180,9 @@
         PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
         Post *post = self.filteredPosts[indexPath.row];
         
+        // Remove separator inset from cells
+        cell.layoutMargins = UIEdgeInsetsZero;
+        
         // Load the cell with current post
         [cell refreshPost:post];
         return cell;
@@ -181,8 +192,9 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
         }
-        
+        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:239/255.0 blue:0/255.0 alpha:1.0];
         cell.textLabel.text = self.filterOptions[indexPath.row];
+        cell.textLabel.textColor = [UIColor brownColor];
         return cell;
     }
 }
