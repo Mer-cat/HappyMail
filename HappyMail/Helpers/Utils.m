@@ -32,6 +32,13 @@
     
 }
 
+#pragma mark - Style helpers
+
++ (void)roundCorners:(UIView *)view {
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = 8;
+}
+
 #pragma mark - Image helpers
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
