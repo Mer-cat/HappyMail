@@ -59,6 +59,10 @@
 
 #pragma mark - Init
 
+/**
+ * Create a custom bar button item that supports a badge
+ * To show the number of unresolved info requests a user has
+ */
 - (void)infoRequestsButtonInit {
     // Set custom button
     UIButton *customButton = [[UIButton alloc] init];
