@@ -66,6 +66,23 @@
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
 }
 
+#pragma mark - Actions
+
+- (IBAction)didPressRespond:(id)sender {
+    switch (self.post.type) {
+        case Offer:
+            [self showAlertWithMessage:@"Are you sure you want to request a card from this user?" title:@"Confirm response"];
+            break;
+        case Request:
+            // Send an info request to the receiving user to ask for their information
+            [self showAlertWithMessage:@"Are you sure you want to send a card to this user?" title:@"Confirm response"];
+            break;
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected PostType"];
+            break;
+    }
+}
+
 #pragma mark - UIAlertController
 
 - (void)showAlertWithMessage:(NSString *)message title:(NSString *)title {
@@ -93,23 +110,6 @@
     
     [self presentViewController:alert animated:YES completion:nil];
     
-}
-
-#pragma mark - Actions
-
-- (IBAction)didPressRespond:(id)sender {
-    switch (self.post.type) {
-        case Offer:
-            [self showAlertWithMessage:@"Are you sure you want to request a card from this user?" title:@"Confirm response"];
-            break;
-        case Request:
-            // Send an info request to the receiving user to ask for their information
-            [self showAlertWithMessage:@"Are you sure you want to send a card to this user?" title:@"Confirm response"];
-            break;
-        default:
-            [NSException raise:NSGenericException format:@"Unexpected PostType"];
-            break;
-    }
 }
 
 #pragma mark - Response handler
