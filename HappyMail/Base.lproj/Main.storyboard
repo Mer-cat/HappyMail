@@ -958,7 +958,7 @@
         <scene sceneID="rFG-aY-xRC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="reg-lS-zaU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" id="W7V-Tc-WyC"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="MailIcon25" id="W7V-Tc-WyC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X8B-z2-ekp">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -977,7 +977,7 @@
         <scene sceneID="gbA-N0-Zb5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bfx-ma-Qw4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Follow-Ups" id="4Ay-hd-zOX"/>
+                    <tabBarItem key="tabBarItem" title="Follow-Ups" image="OpenEnvelope25" id="4Ay-hd-zOX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WE8-az-lwp">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1015,7 +1015,7 @@
         <scene sceneID="Llv-Wq-h8r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sMa-IB-EgX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="2gf-nn-nUG"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="2gf-nn-nUG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7eG-Ml-ZyB">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1052,10 +1052,13 @@
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
         <segue reference="5hU-vi-Oy7"/>
-        <segue reference="ai7-Eq-mRd"/>
+        <segue reference="5yO-OL-VIG"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="MailIcon25" width="25" height="25"/>
+        <image name="OpenEnvelope25" width="25" height="25"/>
         <image name="blank-profile-picture" width="640" height="640"/>
         <image name="mailbox" width="512" height="512"/>
+        <image name="person" catalog="system" width="128" height="117"/>
     </resources>
 </document>
