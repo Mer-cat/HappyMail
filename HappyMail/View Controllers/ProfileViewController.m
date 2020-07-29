@@ -13,22 +13,14 @@
 #import "PostCell.h"
 #import "PostDetailsViewController.h"
 #import "Post.h"
-@import Parse;
+#import "ProfileHeaderCell.h"
+#import <Parse/Parse.h>
 
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, PostDetailsViewControllerDelegate>
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, PostDetailsViewControllerDelegate, ProfileHeaderCellDelegate>
 
-@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *joinDateLabel;
-@property (weak, nonatomic) IBOutlet UITextView *aboutMeTextView;
-@property (weak, nonatomic) IBOutlet UIButton *saveButton;
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
-@property (weak, nonatomic) IBOutlet UIButton *mapButton;
-@property (weak, nonatomic) IBOutlet UILabel *usersPostsLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *userPosts;
-@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -38,80 +30,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.aboutMeTextView.delegate = self;
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
     
     // If no user has been passed in,
     // we are looking at user's own profile
     if (!self.user) {
         self.user = [User currentUser];
     } else {  // If looking at another user's profile
-        
         // Hide self-only information
         self.logoutButton.enabled = NO;
         self.logoutButton.tintColor = UIColor.clearColor;
-        self.aboutMeTextView.editable = NO;
-        self.mapButton.hidden = YES;
     }
-    
-    // Round corners
-    [Utils roundCorners:self.aboutMeTextView];
-    
-    // Make profile picture circular
-    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-    
-    [self refreshProfile];
+
     [self fetchMyPosts];
-    
-    // Auto-refresh user's posts
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(fetchMyPosts) userInfo:nil repeats:true];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.timer invalidate];
-}
-
-#pragma mark - Init
-
-- (void)refreshProfile {
-    // Set labels
-    self.usernameLabel.text = self.user.username;
-    self.usersPostsLabel.text = [NSString stringWithFormat:@"Posts by %@",self.user.username];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMM-dd-yyyy"];
-    NSString *joinDateString = [dateFormatter stringFromDate:self.user.createdAt];
-    
-    self.joinDateLabel.text = [NSString stringWithFormat:@"Joined %@", joinDateString];
-    self.aboutMeTextView.text = self.user.aboutMeText;
-    
-    UIImage *placeholderImage = [UIImage imageNamed:@"blank-profile-picture"];
-    [self.profileImageView setImage: placeholderImage];
-    
-    self.profileImageView.file = self.user.profileImage;
-    [self.profileImageView loadInBackground];
-}
-
-- (void)fetchMyPosts {
-    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery whereKey:@"author" equalTo:self.user];
-    [postQuery includeKey:@"author"];
-    [postQuery includeKey:@"respondees"];
-    
-    // Fetch data asynchronously
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> *posts, NSError *error) {
-        if (posts != nil) {
-            self.userPosts = posts;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"Error getting posts: %@", error.localizedDescription);
-        }
-    }];
-}
+#pragma mark - ProfileHeaderCellDelegate
 
 /**
  * Create new image picker to allow user to select profile image from their camera or photo library
@@ -143,12 +80,13 @@
     
     // Assign image chosen to appear in the image view
     UIImage *resizedImage = [Utils resizeImage:originalImage withSize:CGSizeMake(400, 400)];
-    self.profileImageView.image = resizedImage;
+    
     PFFileObject *imageFile = [Utils getPFFileFromImage:resizedImage];
     self.user.profileImage = imageFile;
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"The profile image was saved!");
+            [self.tableView reloadData];  // In order to load the new image into the image view
         } else {
             NSLog(@"Problem saving profile image: %@",error.localizedDescription);
         }
@@ -158,14 +96,27 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Actions
+#pragma mark - Parse query
 
-- (IBAction)didPressImage:(id)sender {
-    // Only user who owns account may change profile image
-    if (self.user == [User currentUser]) {
-        [self initUIImagePickerController];
-    }
+- (void)fetchMyPosts {
+    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery whereKey:@"author" equalTo:self.user];
+    [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"respondees"];
+    
+    // Fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> *posts, NSError *error) {
+        if (posts != nil) {
+            self.userPosts = posts;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error getting posts: %@", error.localizedDescription);
+        }
+    }];
 }
+
+#pragma mark - Actions
 
 - (IBAction)didPressLogout:(id)sender {
     // Go back to the login screen
@@ -182,47 +133,36 @@
     }];
 }
 
-- (IBAction)didPressSaveAboutMe:(id)sender {
-    // Save the entered text to Parse and dismiss keyboard
-    self.user.aboutMeText = self.aboutMeTextView.text;
-    [self.user saveInBackground];
-    [self.aboutMeTextView resignFirstResponder];
-}
-
-- (IBAction)didPressCancelAboutMe:(id)sender {
-    // Dismiss the keyboard and revert to previous text
-    [self.aboutMeTextView resignFirstResponder];
-    self.aboutMeTextView.text = self.user.aboutMeText;
-}
-
-#pragma mark - UITextViewDelegate
-
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    // TODO: Animate appearance of the buttons
-    self.saveButton.hidden = NO;
-    self.cancelButton.hidden = NO;
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    // TODO: Make save and cancel buttons disappear with animation
-    self.saveButton.hidden = YES;
-    self.cancelButton.hidden = YES;
-}
-
 #pragma mark - UITableViewDataSource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    Post *post = self.userPosts[indexPath.row];
-    
-    // Load the cell with current post
-    [cell refreshPost:post];
-    
-    return cell;
+    if (indexPath.section == 0) {
+        ProfileHeaderCell *profileHeaderCell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
+        // Load data into cell
+        profileHeaderCell.delegate = self;
+        [profileHeaderCell loadCell:self.user];
+        return profileHeaderCell;
+    } else {
+        PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+        Post *post = self.userPosts[indexPath.row];
+        
+        // Load the cell with current post
+        [cell refreshPost:post];
+        
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.userPosts.count;
+    if (section == 0) {
+        return 1;
+    } else {
+        return self.userPosts.count;
+    }
 }
 
 #pragma mark - PostDetailsViewControllerDelegate
@@ -243,6 +183,5 @@
         detailsViewController.delegate = self;
     }
 }
-
 
 @end

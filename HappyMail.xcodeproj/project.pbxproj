@@ -33,6 +33,7 @@
 		D47E371124BCFCF3009B3BCE /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371024BCFCF3009B3BCE /* Utils.m */; };
 		D47E371524BE14FF009B3BCE /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371424BE14FF009B3BCE /* PostCell.m */; };
 		D47E371824BE3991009B3BCE /* FollowUpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E371724BE3991009B3BCE /* FollowUpCell.m */; };
+		D490FC0424D0E89600ED170C /* ProfileHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D490FC0324D0E89600ED170C /* ProfileHeaderCell.m */; };
 		D4DA3C1324C107380069DEFE /* FollowUp.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DA3C1224C107380069DEFE /* FollowUp.m */; };
 		D4E90F3724C74D3900D1F6EC /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E90F3624C74D3900D1F6EC /* MapViewController.m */; };
 		D4E90F3A24C75F5900D1F6EC /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E90F3924C75F5900D1F6EC /* Address.m */; };
@@ -109,6 +110,8 @@
 		D47E371424BE14FF009B3BCE /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		D47E371624BE3991009B3BCE /* FollowUpCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUpCell.h; sourceTree = "<group>"; };
 		D47E371724BE3991009B3BCE /* FollowUpCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUpCell.m; sourceTree = "<group>"; };
+		D490FC0224D0E89600ED170C /* ProfileHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileHeaderCell.h; sourceTree = "<group>"; };
+		D490FC0324D0E89600ED170C /* ProfileHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileHeaderCell.m; sourceTree = "<group>"; };
 		D4A8015124C20BED00ACF2FC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D4DA3C1124C107380069DEFE /* FollowUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowUp.h; sourceTree = "<group>"; };
 		D4DA3C1224C107380069DEFE /* FollowUp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowUp.m; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 				D47E371724BE3991009B3BCE /* FollowUpCell.m */,
 				D458B98F24C0D6E000427F25 /* InfoRequestCell.h */,
 				D458B99024C0D6E000427F25 /* InfoRequestCell.m */,
+				D490FC0224D0E89600ED170C /* ProfileHeaderCell.h */,
+				D490FC0324D0E89600ED170C /* ProfileHeaderCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -546,6 +551,7 @@
 				D47E36F624BCD74F009B3BCE /* User.m in Sources */,
 				D43694C724B4EE4200902846 /* AppDelegate.m in Sources */,
 				D47E370B24BCF28A009B3BCE /* FollowUpViewController.m in Sources */,
+				D490FC0424D0E89600ED170C /* ProfileHeaderCell.m in Sources */,
 				D43694D824B4EE4600902846 /* main.m in Sources */,
 				D47E36FF24BCF0D8009B3BCE /* RegistrationViewController.m in Sources */,
 				D47E370824BCF27D009B3BCE /* ProfileViewController.m in Sources */,
