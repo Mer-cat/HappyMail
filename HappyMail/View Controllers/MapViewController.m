@@ -44,16 +44,14 @@
     // Load in list of coordinates from user
     // Populate map with pins for each coordinate
     self.sentToUsers = self.user.sentToUsers;
-    NSLog(@"%@",self.user.sentToUsers);
     [self initPlacesSentTo];
 }
 
 - (void)initPlacesSentTo {
-    NSLog(@"%@", self.sentToUsers);
     for (User *user in self.sentToUsers) {
         [Utils queryUser:user withCompletion:^(User *user, NSError *error) {
             if (user) {
-                NSLog(@"Found a user");
+
                 NSLog(@"%@", user.address);
                 [self.placesSentTo addObject:user.address];
                 [self dropPin:user.address];
