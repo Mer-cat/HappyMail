@@ -34,11 +34,13 @@
     // Add follow-up for requesting user then remove info request
     [FollowUp createNewFollowUpForUser:self.infoRequest.requestingUser fromPost:self.infoRequest.associatedPost aboutUser:self.infoRequest.requestedUser];
     [self.infoRequest removeInfoRequest];
+    [self.delegate didChangeInfoRequest:self.infoRequest];
 }
 
 - (IBAction)didPressDeny:(id)sender {
     // Delete this inforequest
     [self.infoRequest removeInfoRequest];
+    [self.delegate didChangeInfoRequest:self.infoRequest];
 }
 
 

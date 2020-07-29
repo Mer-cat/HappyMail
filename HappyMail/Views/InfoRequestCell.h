@@ -11,12 +11,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol InfoRequestCellDelegate;
+
 /**
-* Custom UITableViewCell to show an InfoRequest object
-*/
+ * Custom UITableViewCell to show an InfoRequest object
+ */
 @interface InfoRequestCell : UITableViewCell
 
+// MARK: Properties
+@property (nonatomic, weak) id<InfoRequestCellDelegate> delegate;
+
+// MARK: Methods
 - (void)refreshInfoRequestCell:(InfoRequest *)infoRequest;
+
+@end
+
+@protocol InfoRequestCellDelegate
+
+- (void)didChangeInfoRequest:(InfoRequest *)infoRequest;
 
 @end
 

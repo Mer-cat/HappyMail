@@ -12,10 +12,10 @@
 #import "PostDetailsViewController.h"
 #import "ProfileViewController.h"
 
-@interface InfoRequestsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface InfoRequestsViewController () <UITableViewDelegate, UITableViewDataSource, InfoRequestCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *infoRequests;
+@property (nonatomic, strong) NSMutableArray *infoRequests;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSTimer *timer;
 
@@ -48,17 +48,6 @@
     [self.timer invalidate];
 }
 
-#pragma mark - UITableViewDataSource
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    InfoRequestCell *infoRequestCell = [self.tableView dequeueReusableCellWithIdentifier:@"InfoRequestCell"];
-    InfoRequest *infoRequest = self.infoRequests[indexPath.row];
-    
-    [infoRequestCell refreshInfoRequestCell:infoRequest];
-    
-    return infoRequestCell;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.infoRequests.count;
 }
@@ -77,7 +66,7 @@
     // Fetch data asynchronously
     [infoQuery findObjectsInBackgroundWithBlock:^(NSArray<InfoRequest *> *infoRequests, NSError *error) {
         if (infoRequests != nil) {
-            self.infoRequests = infoRequests;
+            self.infoRequests = (NSMutableArray *) infoRequests;
             [self.tableView reloadData];
         } else {
             NSLog(@"Error getting info requests: %@", error.localizedDescription);
@@ -98,7 +87,7 @@
     // Fetch data asynchronously
     [infoQuery findObjectsInBackgroundWithBlock:^(NSArray<InfoRequest *> *infoRequests, NSError *error) {
         if (infoRequests != nil) {
-            self.infoRequests = infoRequests;
+            self.infoRequests = (NSMutableArray *) infoRequests;
             [self.tableView reloadData];
             completion(infoRequests, nil);
         } else {
@@ -107,6 +96,24 @@
         }
         [self.refreshControl endRefreshing];
     }];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    InfoRequestCell *infoRequestCell = [self.tableView dequeueReusableCellWithIdentifier:@"InfoRequestCell"];
+    InfoRequest *infoRequest = self.infoRequests[indexPath.row];
+    infoRequestCell.delegate = self;
+    [infoRequestCell refreshInfoRequestCell:infoRequest];
+    
+    return infoRequestCell;
+}
+
+#pragma mark - InfoRequestCellDelegate
+
+- (void)didChangeInfoRequest:(InfoRequest *)infoRequest {
+    [self.infoRequests removeObject:infoRequest];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Navigation
