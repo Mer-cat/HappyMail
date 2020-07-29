@@ -35,7 +35,7 @@
     
     // Add refresh control
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl setTintColor:[UIColor systemIndigoColor]];
+    [self.refreshControl setTintColor:[UIColor brownColor]];
     [self.refreshControl addTarget:self action:@selector(fetchInfoRequests) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
