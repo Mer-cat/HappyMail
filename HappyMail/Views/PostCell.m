@@ -8,6 +8,7 @@
 
 #import "PostCell.h"
 #import "DateTools.h"
+@import Parse;
 
 @interface PostCell ()
 
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *usernameButton;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *responsesLabel;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 
 @end
 
@@ -38,6 +40,12 @@
     self.offerTypeLabel.text = [Post formatTypeToString:post.type];
     self.titleLabel.text = post.title;
     [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
+    
+    UIImage *placeholderImage = [UIImage imageNamed:@"blank-profile-picture"];
+    [self.profileImage setImage: placeholderImage];
+    
+    self.profileImage.file = post.author.profileImage;
+    [self.profileImage loadInBackground];
     
     if (post.type == Offer) {
         self.responsesLabel.text = [NSString stringWithFormat:@"%ld/%ld responses",post.respondees.count, post.responseLimit];
