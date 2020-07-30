@@ -15,6 +15,7 @@
 #import "ComposeViewController.h"
 #import "Constants.h"
 #import "DateTools.h"
+#import "Utils.h"
 #import "FollowUpViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate, PostDetailsViewControllerDelegate>
@@ -37,25 +38,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.dropDownTableView.delegate = self;
-    self.dropDownTableView.dataSource = self;
+
     self.searchBar.delegate = self;
+    [self initTableViewUI];
+    [self initDropDownTableViewUI];
     
     // Initialize variables
     self.selectedFilter = None;
     self.isMoreDataLoading = NO;
     self.filteredPosts = [[NSMutableArray alloc] init];
     
-    // Set height for drop-down table view based on array data
-    CGFloat height = self.dropDownTableView.rowHeight;
-    height *= FILTER_ARRAY.count;
+    // Populate table view
+    [self fetchPosts];
     
-    CGRect tableFrame = self.dropDownTableView.frame;
-    tableFrame.size.height = height;
-    self.dropDownTableView.frame = tableFrame;
+    // Show follow-up notifications
+    [self loadFollowUpBadgeIcon];
+    
+    // Add refresh control
+    self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchPosts) withColor:[UIColor whiteColor] fromController:self];
+}
+
+#pragma mark - Init
+
+- (void)initTableViewUI {
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
     // Deselects any previously selected rows
     if ([self.tableView indexPathForSelectedRow]) {
@@ -68,19 +75,19 @@
     
     self.dropDownTableView.layoutMargins = UIEdgeInsetsZero;
     self.dropDownTableView.separatorInset = UIEdgeInsetsZero;
-    
-    // Populate table view
-    [self fetchPosts];
-    
-    // Show follow-up notifications
-    [self loadFollowUpBadgeIcon];
-    
-    // Add refresh control
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl setTintColor:[UIColor whiteColor]];
-    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:self.refreshControl atIndex:0];
+}
 
+- (void)initDropDownTableViewUI {
+    self.dropDownTableView.delegate = self;
+    self.dropDownTableView.dataSource = self;
+    
+    // Set height for drop-down table view based on array data
+    CGFloat height = self.dropDownTableView.rowHeight;
+    height *= FILTER_ARRAY.count;
+    
+    CGRect tableFrame = self.dropDownTableView.frame;
+    tableFrame.size.height = height;
+    self.dropDownTableView.frame = tableFrame;
 }
 
 #pragma mark - Data fetching
