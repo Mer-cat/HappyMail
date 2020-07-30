@@ -76,6 +76,7 @@
 - (IBAction)stepperValueChanged:(id)sender {
     self.responseLimitLabel.text = [NSString stringWithFormat:@"%d", (int) self.responseLimitStepper.value];
 }
+
 /**
  * Cancel creation of post, return to feed
  */
@@ -83,6 +84,5 @@
     // Return to the home screen
     [self dismissViewControllerAnimated:true completion:nil];
 }
-
 
 @end

@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol FollowUpCellDelegate
-- (void) didChangeFollowUp:(FollowUp *)followUp;
+- (void)didChangeFollowUp:(FollowUp *)followUp;
 
 @end
 

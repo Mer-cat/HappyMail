@@ -34,7 +34,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    
     // If no user has been passed in,
     // we are looking at user's own profile
     if (!self.user) {
