@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface Utils : NSObject
 
+
++ (UIRefreshControl *)createRefreshControlInView:(UIView *)view withSelector:(SEL)selector withColor:(UIColor *)color fromController:(UIViewController *)controller;
 /**
  * Create new UIAlert on the screen with specified message and title
  *
@@ -28,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Rounds the corners of the given label
- * @param label  Label whose corners are to be rounded
+ * @param view  View whose corners are to be rounded
  */
 + (void)roundCorners:(UIView *)view;
 

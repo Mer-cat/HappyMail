@@ -12,6 +12,16 @@
 
 @implementation Utils
 
+#pragma mark - Refresh control helper
+
++ (UIRefreshControl *)createRefreshControlInView:(UIView *)view withSelector:(SEL)selector withColor:(UIColor *)color fromController:(UIViewController *)controller {
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl setTintColor:color];
+    [refreshControl addTarget:controller action:selector forControlEvents:UIControlEventValueChanged];
+    [view insertSubview:refreshControl atIndex:0];
+    return refreshControl;
+}
+
 #pragma mark - UIAlertController helper
 
 + (void)showAlertWithMessage:(NSString *)message title:(NSString *)title controller:(id)controller {
