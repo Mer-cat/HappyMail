@@ -38,10 +38,7 @@
     [self fetchFollowUps];
     
     // Add refresh control
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl setTintColor:[UIColor brownColor]];
-    [self.refreshControl addTarget:self action:@selector(fetchFollowUps) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchFollowUps) withColor:[UIColor brownColor] fromController:self];
     
     // Auto-refresh
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchFollowUps) userInfo:nil repeats:true];

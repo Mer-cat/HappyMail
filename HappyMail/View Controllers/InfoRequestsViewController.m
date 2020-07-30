@@ -11,6 +11,7 @@
 #import "InfoRequest.h"
 #import "PostDetailsViewController.h"
 #import "ProfileViewController.h"
+#import "Utils.h"
 
 @interface InfoRequestsViewController () <UITableViewDelegate, UITableViewDataSource, InfoRequestCellDelegate>
 
@@ -34,10 +35,7 @@
     [self fetchInfoRequests];
     
     // Add refresh control
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl setTintColor:[UIColor brownColor]];
-    [self.refreshControl addTarget:self action:@selector(fetchInfoRequests) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchInfoRequests) withColor:[UIColor brownColor] fromController:self];
     
     // Auto-refresh
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fetchInfoRequests) userInfo:nil repeats:true];
