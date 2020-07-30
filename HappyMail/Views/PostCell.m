@@ -44,6 +44,9 @@
     UIImage *placeholderImage = [UIImage imageNamed:@"blank-profile-picture"];
     [self.profileImage setImage: placeholderImage];
     
+    // Make profile picture circular
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    
     self.profileImage.file = post.author.profileImage;
     [self.profileImage loadInBackground];
     
