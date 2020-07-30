@@ -82,12 +82,36 @@
     self.dropDownTableView.dataSource = self;
     
     // Set height for drop-down table view based on array data
-    CGFloat height = self.dropDownTableView.rowHeight;
-    height *= FILTER_ARRAY.count;
+    CGFloat height = self.dropDownTableView.rowHeight * FILTER_ARRAY.count;
     
+    // If condensing to one line, self.dropDownTableView.frame.size.height becomes read only property
     CGRect tableFrame = self.dropDownTableView.frame;
     tableFrame.size.height = height;
     self.dropDownTableView.frame = tableFrame;
+}
+
+- (PostCell *)setPostCellWithIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    Post *post = self.filteredPosts[indexPath.row];
+    
+    // Remove separator inset from cells
+    cell.layoutMargins = UIEdgeInsetsZero;
+    
+    // Load the cell with current post
+    [cell refreshPost:post];
+    return cell;
+}
+
+- (UITableViewCell *)setDropDownCellWithIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
+    static NSString *filterCellIdentifier = @"FilterCellItem";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:filterCellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
+    }
+    cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:239/255.0 blue:0/255.0 alpha:1.0];
+    cell.textLabel.text = FILTER_ARRAY[indexPath.row];
+    cell.textLabel.textColor = [UIColor brownColor];
+    return cell;
 }
 
 #pragma mark - Data fetching
@@ -176,27 +200,12 @@
 #pragma mark - UITableViewDataSource
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    
     // Differentiate between drop down and regular table view
     if ([tableView isEqual:self.tableView]) {
-        PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-        Post *post = self.filteredPosts[indexPath.row];
-        
-        // Remove separator inset from cells
-        cell.layoutMargins = UIEdgeInsetsZero;
-        
-        // Load the cell with current post
-        [cell refreshPost:post];
+        PostCell *cell = [self setPostCellWithIndexPath:indexPath forTableView:tableView];
         return cell;
     } else {
-        static NSString *filterCellIdentifier = @"FilterCellItem";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:filterCellIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
-        }
-        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:239/255.0 blue:0/255.0 alpha:1.0];
-        cell.textLabel.text = FILTER_ARRAY[indexPath.row];
-        cell.textLabel.textColor = [UIColor brownColor];
+        UITableViewCell *cell = [self setDropDownCellWithIndexPath:indexPath forTableView:tableView];
         return cell;
     }
 }
@@ -310,35 +319,44 @@
     }];
 }
 
+#pragma mark - Navigation segue helpers
+
+- (void)prepareForPostDetailsSegue:(PostDetailsViewController *)detailsViewController sender:(id)sender {
+    PostCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Post *specificPost = self.filteredPosts[indexPath.row];
+    detailsViewController.post = specificPost;
+    detailsViewController.delegate = self;
+}
+
+- (void)prepareForProfileViewSegue:(ProfileViewController *)profileViewController sender:(id)sender {
+    // Grab post from cell where user tapped username
+    PostCell *cell = (PostCell *)[[sender superview] superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    Post *post = self.filteredPosts[indexPath.row];
+    
+    // If viewing another user's profile
+    if (![post.author.username isEqualToString:[User currentUser].username]) {
+        profileViewController.user = post.author;
+    }
+}
+
+- (void)prepareForComposeViewSegue:(UINavigationController *)navigationController {
+    // Designate this VC as delegate so we can
+    // Load in new posts immediately
+    ComposeViewController *composeViewController = (ComposeViewController *)navigationController.topViewController;
+    composeViewController.delegate = self;
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"PostDetailsSegue"]) {
-        PostDetailsViewController *detailsViewController = [segue destinationViewController];
-        PostCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        Post *specificPost = self.filteredPosts[indexPath.row];
-        detailsViewController.post = specificPost;
-        detailsViewController.delegate = self;
+        [self prepareForPostDetailsSegue:[segue destinationViewController] sender:sender];
     } else if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
-        ProfileViewController *profileViewController = [segue destinationViewController];
-        
-        // Grab post from cell where user tapped username
-        PostCell *cell = (PostCell *)[[sender superview] superview];
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        Post *post = self.filteredPosts[indexPath.row];
-        
-        // If viewing another user's profile
-        if (![post.author.username isEqualToString:[User currentUser].username]) {
-            profileViewController.user = post.author;
-        }
+        [self prepareForProfileViewSegue:[segue destinationViewController] sender:sender];
     } else if ([segue.identifier isEqualToString:@"ComposeViewSegue"]) {
-        
-        // Designate this VC as delegate so we can
-        // Load in new posts immediately
-        UINavigationController *navigationController = [segue destinationViewController];
-        ComposeViewController *composeViewController = (ComposeViewController *)navigationController.topViewController;
-        composeViewController.delegate = self;
+        [self prepareForComposeViewSegue:[segue destinationViewController]];
     }
 }
 
