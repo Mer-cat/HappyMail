@@ -24,7 +24,12 @@
 
 #pragma mark - UIAlertController helper
 
-+ (void)showAlertWithMessage:(NSString *)message title:(NSString *)title controller:(id)controller {
++ (void)showAlertWithMessage:(NSString *)message
+                       title:(NSString *)title
+                  controller:(id)controller
+                    okAction:(SEL _Nullable)okSelector
+       shouldAddCancelButton:(BOOL)shouldAddCancel
+              cancelSelector:(SEL _Nullable)cancelSelector {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
                                                             preferredStyle:(UIAlertControllerStyleAlert)];
@@ -33,10 +38,30 @@
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
-        // Dismiss the view.
+        if (okSelector) {
+            // IMP is a pointer to the start of the function that
+            // implements the method
+            // Need to specify return type to prevent memory leaks
+            IMP imp = [controller methodForSelector:okSelector];
+            void (*func)(id, SEL) = (void *)imp;
+            func(controller, okSelector);
+        }
     }];
+    
     // Add the OK action to the alert controller
     [alert addAction:okAction];
+    
+    if (shouldAddCancel) {
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+            IMP imp = [controller methodForSelector:cancelSelector];
+            void (*func)(id, SEL) = (void *)imp;
+            func(controller,cancelSelector);
+        }];
+        
+        [alert addAction:cancelAction];
+    }
     
     [controller presentViewController:alert animated:YES completion:nil];
     
