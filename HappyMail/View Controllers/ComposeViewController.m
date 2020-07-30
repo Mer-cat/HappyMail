@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *postTypeControl;
 @property (weak, nonatomic) IBOutlet UITextView *bodyTextView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *postButton;
-@property (weak, nonatomic) IBOutlet UIStepper *stepper;
+@property (weak, nonatomic) IBOutlet UIStepper *responseLimitStepper;
 @property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitQuestionLabel;
 @property (weak, nonatomic) IBOutlet UIView *responseLimitView;
@@ -45,7 +45,7 @@
     NSString *title = self.titleField.text;
     NSString *bodyText = self.bodyTextView.text;
     NSInteger postType = self.postTypeControl.selectedSegmentIndex;
-    NSInteger responseLimit = (int) self.stepper.value;
+    NSInteger responseLimit = (int) self.responseLimitStepper.value;
     
     [Post createNewPostWithTitle:title withBody:bodyText withType:postType withLimit:responseLimit withCompletion:^(Post *post, NSError *error) {
         if (post) {
@@ -63,18 +63,18 @@
 
 - (IBAction)postTypeChanged:(id)sender {
     if (self.postTypeControl.selectedSegmentIndex != Offer) {
-        self.stepper.hidden = YES;
+        self.responseLimitStepper.hidden = YES;
         self.limitQuestionLabel.hidden = YES;
         self.responseLimitView.hidden = YES;
     } else {
-        self.stepper.hidden = NO;
+        self.responseLimitStepper.hidden = NO;
         self.limitQuestionLabel.hidden = NO;
         self.responseLimitView.hidden = NO;
     }
 }
 
 - (IBAction)stepperValueChanged:(id)sender {
-    self.responseLimitLabel.text = [NSString stringWithFormat:@"%d", (int) self.stepper.value];
+    self.responseLimitLabel.text = [NSString stringWithFormat:@"%d", (int) self.responseLimitStepper.value];
 }
 /**
  * Cancel creation of post, return to feed
