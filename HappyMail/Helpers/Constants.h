@@ -9,6 +9,9 @@
 #ifndef Constants_h
 #define Constants_h
 
+// Must update this array if FilterOption is updated
+#define FILTER_ARRAY (@[@"Offers", @"Requests", @"Within last week", @"Within last day"])
+
 typedef NS_ENUM(NSInteger, PostType) {
     Offer,
     Request

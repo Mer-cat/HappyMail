@@ -24,7 +24,6 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *dropDownTableView;
-@property (nonatomic, strong) NSArray *filterOptions;
 @property (nonatomic) FilterOption selectedFilter;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (assign, nonatomic) BOOL userIsSearching;
@@ -45,9 +44,6 @@
     self.dropDownTableView.dataSource = self;
     self.searchBar.delegate = self;
     
-    // Below has to be manually updated with typedef if changed
-    self.filterOptions = @[@"Offers",@"Requests",@"Within last week",@"Within last day"];
-    
     // Initialize variables
     self.selectedFilter = None;
     self.isMoreDataLoading = NO;
@@ -55,7 +51,7 @@
     
     // Set height for drop-down table view based on array data
     CGFloat height = self.dropDownTableView.rowHeight;
-    height *= self.filterOptions.count;
+    height *= FILTER_ARRAY.count;
     
     CGRect tableFrame = self.dropDownTableView.frame;
     tableFrame.size.height = height;
@@ -144,7 +140,6 @@
     }];
 }
 
-
 #pragma mark - Actions
 
 - (IBAction)didPressFilter:(id)sender {
@@ -193,7 +188,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
         }
         cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:239/255.0 blue:0/255.0 alpha:1.0];
-        cell.textLabel.text = self.filterOptions[indexPath.row];
+        cell.textLabel.text = FILTER_ARRAY[indexPath.row];
         cell.textLabel.textColor = [UIColor brownColor];
         return cell;
     }
@@ -203,7 +198,7 @@
     if ([tableView isEqual:self.tableView]) {
         return self.filteredPosts.count;
     } else {
-        return self.filterOptions.count;
+        return FILTER_ARRAY.count;
     }
 }
 
