@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <ChameleonFramework/Chameleon.h>
 
 @interface AppDelegate ()
 
@@ -22,8 +23,9 @@
         configuration.applicationId = @"mercyHappyMail";
         configuration.server = @"https://happy-mail.herokuapp.com/parse";
     }];
-    
     [Parse initializeWithConfiguration:config];
+    
+    [Chameleon setGlobalThemeUsingPrimaryColor:FlatYellow withContentStyle:UIContentStyleContrast];
     return YES;
 }
 
