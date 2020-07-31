@@ -16,17 +16,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mailbox" translatesAutoresizingMaskIntoConstraints="NO" id="Rcl-Ko-c5C">
-                                <rect key="frame" x="106" y="279" width="193" height="233"/>
+                                <rect key="frame" x="100.5" y="331.5" width="193" height="233"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="233" id="w5e-Rw-jJv"/>
-                                    <constraint firstAttribute="width" constant="193" id="xOi-5V-VVf"/>
+                                    <constraint firstAttribute="height" constant="233" id="EEt-LF-XGN"/>
+                                    <constraint firstAttribute="width" constant="193" id="Q0c-Y9-7cp"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HappyMail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2U-Ls-hMp">
-                                <rect key="frame" x="115" y="521" width="194" height="49"/>
+                                <rect key="frame" x="114" y="574.5" width="186" height="46"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="194" id="70i-qq-r3X"/>
-                                    <constraint firstAttribute="height" constant="49" id="WVM-bg-H6z"/>
+                                    <constraint firstAttribute="height" constant="46" id="vSN-WV-dPG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="34"/>
                                 <color key="textColor" red="0.61390435700000001" green="0.33316028120000002" blue="0.23725277189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -35,13 +34,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="K2U-Ls-hMp" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="115" id="DQS-rT-OBY"/>
-                            <constraint firstItem="Rcl-Ko-c5C" firstAttribute="top" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="235" id="HBd-Bx-RJ1"/>
-                            <constraint firstItem="K2U-Ls-hMp" firstAttribute="top" secondItem="Rcl-Ko-c5C" secondAttribute="bottom" constant="9" id="JNn-yK-uZW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Rcl-Ko-c5C" secondAttribute="trailing" constant="115" id="Kzp-NZ-XFs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="K2U-Ls-hMp" secondAttribute="bottom" constant="292" id="MkL-Km-ZuS"/>
-                            <constraint firstItem="Rcl-Ko-c5C" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="106" id="gT5-3R-WmD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="K2U-Ls-hMp" secondAttribute="trailing" constant="105" id="xpJ-A8-aia"/>
+                            <constraint firstItem="Rcl-Ko-c5C" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-10" id="Pew-gc-6Me"/>
+                            <constraint firstItem="K2U-Ls-hMp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PnN-nW-zf6"/>
+                            <constraint firstItem="K2U-Ls-hMp" firstAttribute="top" secondItem="Rcl-Ko-c5C" secondAttribute="bottom" constant="10" id="PxO-8h-zAc"/>
+                            <constraint firstItem="Rcl-Ko-c5C" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="aYg-i2-5wq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
