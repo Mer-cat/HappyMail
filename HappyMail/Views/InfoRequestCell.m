@@ -8,11 +8,14 @@
 
 #import "InfoRequestCell.h"
 #import "FollowUp.h"
+#import "Utils.h"
 
 @interface InfoRequestCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *usernameButtonLabel;
 @property (weak, nonatomic) IBOutlet UIButton *requestButtonLabel;
+@property (weak, nonatomic) IBOutlet UIButton *approveButton;
+@property (weak, nonatomic) IBOutlet UIButton *denyButton;
 @property (nonatomic, strong) InfoRequest *infoRequest;
 
 @end
@@ -23,6 +26,10 @@
 
 - (void)refreshInfoRequestCell:(InfoRequest *)infoRequest {
     self.infoRequest = infoRequest;
+    
+    [Utils roundCorners:self.usernameButtonLabel];
+    [Utils roundCorners:self.approveButton];
+    [Utils roundCorners:self.denyButton];
     
     [self.usernameButtonLabel setTitle:self.infoRequest.requestingUser.username forState:UIControlStateNormal];
     [self.requestButtonLabel setTitle:self.infoRequest.associatedPost.title forState:UIControlStateNormal];
