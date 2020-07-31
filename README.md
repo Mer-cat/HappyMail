@@ -277,7 +277,7 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 
 ## SDKs and Dependencies
 ### SDKs
-* Google Maps SDK or another maps SDK is likely
+* [AppleMaps Mapkit](https://developer.apple.com/maps/)
 
 ### Dependencies
 * [Parse](https://github.com/parse-community/Parse-SDK-iOS-OSX)
