@@ -84,7 +84,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="B5r-nN-Ldw"/>
                     <connections>
+                        <outlet property="loginButton" destination="FHg-oe-Kn6" id="Sse-cx-pF2"/>
                         <outlet property="passwordField" destination="7JM-ax-EQG" id="aJH-Wa-J5a"/>
+                        <outlet property="signUpButton" destination="gAZ-rS-O0O" id="ssK-ak-qQN"/>
                         <outlet property="usernameField" destination="Y7d-bL-n1o" id="icE-ey-YHC"/>
                         <segue destination="Usw-Jn-ZU3" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="o2H-JK-0ON"/>
                     </connections>
@@ -240,6 +242,7 @@
                         <outlet property="addresseeField" destination="Wa8-G7-nMD" id="Plt-oA-cKp"/>
                         <outlet property="cityField" destination="Qzx-sq-yg5" id="gcP-uc-CoT"/>
                         <outlet property="passwordField" destination="dyh-yu-aYO" id="DxP-1d-IcM"/>
+                        <outlet property="registerButton" destination="qau-jw-vNF" id="xzU-R0-5FI"/>
                         <outlet property="stateField" destination="7p2-N2-4UH" id="6KV-g3-3q4"/>
                         <outlet property="streetAddressField" destination="vpQ-i0-hXW" id="liL-1I-77h"/>
                         <outlet property="usernameField" destination="Dqn-VJ-guQ" id="DE8-RZ-fH7"/>
@@ -710,15 +713,15 @@
                                 </prototypes>
                             </tableView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ixb-Nf-ZHx">
-                                <rect key="frame" x="0.0" y="88" width="204" height="20"/>
+                                <rect key="frame" x="0.0" y="88" width="162" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" rowHeight="44" id="xFj-6F-laB">
-                                        <rect key="frame" x="0.0" y="28" width="204" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="162" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xFj-6F-laB" id="cV9-nz-mNY">
-                                            <rect key="frame" x="0.0" y="0.0" width="204" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="162" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1215,7 +1218,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
         <segue reference="udZ-yJ-0VF"/>
-        <segue reference="FDo-3C-upy"/>
+        <segue reference="4ze-M6-pE5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ComposeIcon44" width="44" height="44"/>
