@@ -32,6 +32,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    // Do not display insets when table view is empty
+    self.tableView.tableFooterView = [UIView new];
+    
     [self fetchInfoRequests];
     
     // Add refresh control

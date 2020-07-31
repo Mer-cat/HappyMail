@@ -34,6 +34,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    // Do not display insets when table view is empty
+    self.tableView.tableFooterView = [UIView new];
+    
     // If no user has been passed in,
     // we are looking at user's own profile
     if (!self.user) {

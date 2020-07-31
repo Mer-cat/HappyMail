@@ -72,6 +72,9 @@
     // Remove edge insets for separator
     self.tableView.layoutMargins = UIEdgeInsetsZero;
     self.tableView.separatorInset = UIEdgeInsetsZero;
+    
+    // Do not display insets when table view is empty
+    self.tableView.tableFooterView = [UIView new];
 }
 
 - (void)initDropDownTableViewUI {
