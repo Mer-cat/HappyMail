@@ -1,6 +1,9 @@
 PODS:
   - BBBadgeBarButtonItem (1.2)
   - Bolts/Tasks (1.9.1)
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
   - DateTools (2.0.0)
   - IQKeyboardManager (6.5.5)
   - Parse (1.18.0):
@@ -12,6 +15,7 @@ PODS:
 
 DEPENDENCIES:
   - BBBadgeBarButtonItem (~> 1.2)
+  - ChameleonFramework
   - DateTools
   - IQKeyboardManager
   - Parse
@@ -21,6 +25,7 @@ SPEC REPOS:
   trunk:
     - BBBadgeBarButtonItem
     - Bolts
+    - ChameleonFramework
     - DateTools
     - IQKeyboardManager
     - Parse
@@ -28,10 +33,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   BBBadgeBarButtonItem: c2fbca0bff18e21b70defc9438a8a5048008e7ca
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: 4ee6491043973951e716360317df6bfabfc9650b
+PODFILE CHECKSUM: 7d9d9f976439ecd8c0551e7f5e817a8b2bd26d8c
 
 COCOAPODS: 1.9.3
