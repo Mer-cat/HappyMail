@@ -34,6 +34,7 @@
     [super viewDidLoad];
     [self refreshPost];
     
+    // Disable responding for anyone who has already responded
     for (User *user in self.post.respondees) {
         if ([user.username isEqualToString:[User currentUser].username]) {
             self.respondButton.enabled = NO;
