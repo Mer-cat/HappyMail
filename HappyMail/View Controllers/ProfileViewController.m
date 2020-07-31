@@ -134,29 +134,45 @@
 
 #pragma mark - UITableViewDataSource
 
-/**
- * Set up the header for the cell, which is the profile of the user
- */
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    ProfileHeaderCell *profileHeaderCell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
-    // Load data into cell
-    profileHeaderCell.delegate = self;
-    [profileHeaderCell loadCell:self.user];
-    return profileHeaderCell;
+///**
+// * Set up the header for the cell, which is the profile of the user
+// */
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    ProfileHeaderCell *profileHeaderCell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
+//    // Load data into cell
+//    profileHeaderCell.delegate = self;
+//    [profileHeaderCell loadCell:self.user];
+//    return profileHeaderCell;
+//}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    Post *post = self.userPosts[indexPath.row];
-    
-    // Load the cell with current post
-    [cell refreshPost:post];
-    
-    return cell;
+    if (indexPath.section == 0) {
+        ProfileHeaderCell *profileHeaderCell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
+        // Load data into cell
+        profileHeaderCell.delegate = self;
+        [profileHeaderCell loadCell:self.user];
+        return profileHeaderCell;
+    } else {
+        PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+        Post *post = self.userPosts[indexPath.row];
+        
+        // Load the cell with current post
+        [cell refreshPost:post];
+        
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.userPosts.count;
+    if (section == 0) {
+        return 1;
+    } else {
+        return self.userPosts.count;
+    }
 }
 
 #pragma mark - PostDetailsViewControllerDelegate
