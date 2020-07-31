@@ -35,7 +35,7 @@
     [User logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
-            [Utils showAlertWithMessage:error.localizedDescription title:@"Error logging in" controller:self];
+            [Utils showAlertWithMessage:error.localizedDescription title:@"Error logging in" controller:self okAction:nil shouldAddCancelButton:NO cancelSelector:nil];
         } else {
             NSLog(@"User logged in successfully");
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
