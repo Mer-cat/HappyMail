@@ -58,10 +58,10 @@
 - (void)fetchInfoRequests {
     PFQuery *infoQuery = [PFQuery queryWithClassName:@"InfoRequest"];
     [infoQuery whereKey:@"requestedUser" equalTo:[User currentUser]];
-    [infoQuery includeKey:@"requestedUser"];
-    [infoQuery includeKey:@"requestingUser"];
-    [infoQuery includeKey:@"associatedPost"];
     [infoQuery includeKey:@"requestedUser.address"];
+    [infoQuery includeKey:@"requestingUser"];
+    [infoQuery includeKey:@"associatedPost.author"];
+    [infoQuery includeKey:@"associatedPost.respondees"];
     [infoQuery orderByAscending:@"createdAt"];
     
     // Fetch data asynchronously
@@ -77,12 +77,11 @@
 }
 
 - (void)fetchInfoRequestsWithCompletion:(void (^)(NSArray *, NSError *))completion {
-    PFQuery *infoQuery = [PFQuery queryWithClassName:@"InfoRequest"];
+    PFQuery *infoQuery = [InfoRequest query];
     [infoQuery whereKey:@"requestedUser" equalTo:[User currentUser]];
     [infoQuery includeKey:@"requestedUser"];
     [infoQuery includeKey:@"requestingUser"];
-    [infoQuery includeKey:@"associatedPost"];
-    [infoQuery includeKey:@"requestedUser.address"];
+    [infoQuery includeKey:@"associatedPost.author"];
     [infoQuery orderByAscending:@"createdAt"];
     
     // Fetch data asynchronously
@@ -116,17 +115,30 @@
     [self.infoRequests removeObject:infoRequest];
     [self.tableView reloadData];
 }
+- (void)queryAssociatedPost:(Post *)post {
+    PFQuery *postQuery = [Post query];
+    [postQuery includeKey:@"author"];
+    [postQuery getObjectInBackgroundWithId:post.objectId block:^(PFObject * _Nullable post, NSError * _Nullable error) {
+        if (post) {
+            
+        }
+    }];
+}
+
+#pragma mark - Navigation segue helpers
+
+- (void)prepareForPostDetailsSegue:(PostDetailsViewController *)detailsViewController sender:(id)sender {
+    InfoRequestCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    InfoRequest *infoRequest = self.infoRequests[indexPath.row];
+    detailsViewController.post = infoRequest.associatedPost;
+}
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"PostDetailsViewSegue"]) {
-        PostDetailsViewController *detailsViewController = [segue destinationViewController];
-        InfoRequestCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        InfoRequest *infoRequest = self.infoRequests[indexPath.row];
-        Post *post = infoRequest.associatedPost;
-        detailsViewController.post = post;
+        [self prepareForPostDetailsSegue:[segue destinationViewController] sender:sender];
     } else if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
         ProfileViewController *profileViewController = [segue destinationViewController];
         
