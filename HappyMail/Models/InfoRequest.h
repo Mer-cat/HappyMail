@@ -26,7 +26,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) User *requestedUser;
 
 // MARK: Methods
-+ (void)createNewInfoRequestToUser:(User *)requestedUser fromUser:(User *)requestingUser fromPost:(Post *) post;
+
+/**
+ * Creates a new request for information from one user to another as an InfoRequest object
+ *
+ * @param requestedUser The user whose information is being requested
+ * @param requestingUser The user who is requesting the other user's information
+ * @param post The post from which the info-request was created
+ */
++ (void)createNewInfoRequestToUser:(User *)requestedUser fromUser:(User *)requestingUser fromPost:(Post *)post;
+
+/**
+ * Deletes this info request
+ */
 - (void)removeInfoRequest;
 
 @end

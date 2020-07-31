@@ -24,7 +24,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *recipientAddressString;
 
 // MARK: Methods
+
+/**
+ * Creates a new FollowUp object for a user to view in their FollowUps
+ * @param sendingUser The user who "owns" the follow-up, i.e. needs to follow up by sending a card
+ * @param originalPost The post which led to the creation of the FollowUp
+ * @param receivingUser The user whose information will be displayed with the FollowUp
+ */
 + (void)createNewFollowUpForUser:(User *)sendingUser fromPost:(Post *)originalPost aboutUser:(User *)receivingUser;
+
+/**
+ * Deletes this FollowUp
+ */
 - (void)removeFollowUp;
 
 @end

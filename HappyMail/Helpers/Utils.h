@@ -17,7 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface Utils : NSObject
 
-
+/**
+ * Create a refresh control for the given view controller, which upon pulling will call the given selector
+ *
+ * @param view The view in which to insert the refresh control
+ * @param selector The selector for the refresh control
+ * @param color The color of the refresh control
+ * @param controller The view controller where the refresh control is implemented
+ *
+ * @return The UIRefreshControl object created
+ */
 + (UIRefreshControl *)createRefreshControlInView:(UIView *)view withSelector:(SEL)selector withColor:(UIColor *)color fromController:(UIViewController *)controller;
 /**
  * Create new UIAlert on the screen with specified message and title
@@ -43,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Resizes images since Parse only allows 10MB uploads for a photo
  *  @param image The image to be resized
  *  @param size The desired size of the image
+ *
+ *  @return The resized image
  */
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size;
 

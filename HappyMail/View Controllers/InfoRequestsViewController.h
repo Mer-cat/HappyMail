@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Fetch the info request with completion
  * Mainly to enable showing badge for number of info requests
+ *
+ * @param completion The block which returns either an NSArray of InfoRequests or an error
  */
 - (void)fetchInfoRequestsWithCompletion:(void (^)(NSArray *, NSError *))completion;
 

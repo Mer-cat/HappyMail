@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface PostCell : UITableViewCell
 
+/**
+ * Sets all the labels and information inside a PostCell
+ *
+ * @param post The post from which the cell should populate information
+ */
 - (void)refreshPost:(Post *)post;
 
 @end

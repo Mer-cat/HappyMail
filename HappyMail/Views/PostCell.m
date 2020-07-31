@@ -8,6 +8,7 @@
 
 #import "PostCell.h"
 #import "DateTools.h"
+#import "Utils.h"
 @import Parse;
 
 @interface PostCell ()
@@ -35,7 +36,7 @@
 #pragma mark - Init
 
 - (void)refreshPost:(Post *)post {
-    
+    [Utils roundCorners:self];
     // Set labels
     self.offerTypeLabel.text = [Post formatTypeToString:post.type];
     self.titleLabel.text = post.title;

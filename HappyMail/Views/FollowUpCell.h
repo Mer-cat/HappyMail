@@ -22,13 +22,33 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<FollowUpCellDelegate> delegate;
 
 // MARK: Methods
+
+/**
+ * Populates the FollowUpCell with information
+ *
+ * @param followUp The FollowUp object whose information will be used to populate the cell
+ */
 - (void)refreshFollowUp:(FollowUp *)followUp;
+
+/**
+ * Shows the buttons for marking a FollowUp as complete/incomplete
+ */
 - (void)showButtons;
+
+/**
+ * Hides the buttons for marking a FollowUp as complete/incomplete
+ */
 - (void)hideButtons;
 
 @end
 
 @protocol FollowUpCellDelegate
+
+/**
+ * The method for the delegate to implement, activated upon a FollowUp being marked as complete/incomplete
+ *
+ * @param followUp The FollowUp that was changed
+ */
 - (void)didChangeFollowUp:(FollowUp *)followUp;
 
 @end

@@ -22,6 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol ComposeViewControllerDelegate
+
+/**
+ * Delegate method activated upon a new post being made
+ *
+ * @param post The newly created post
+ */
 - (void)didPost:(Post *) post;
 
 @end

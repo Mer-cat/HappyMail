@@ -28,19 +28,36 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *respondees;
 @property (nonatomic) NSInteger responseLimit;
 
-
-// Properties used for optional features
-/*
- @property (nonatomic, strong) PFFileObject *image;
- @property (nonatomic, strong) NSNumber *likeCount;
- @property (nonatomic, strong) NSString *offerRegion;
- */
-
 // MARK: Methods
+
+/**
+ * Create a new post and save it to Parse
+ * @param title The title of the post
+ * @param bodyText The main body text of the post
+ * @param type The post type (e.g. Offer)
+ * @param limit The maximum number of respondees allowed, relevant only to offers
+ * @param completion The block which returns either the new post or an error
+ */
 + (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withCompletion:(void (^)(Post *, NSError *))completion;
 
+/**
+ * Adds a respondee for the given post
+ * @param user The respondee to add
+ */
 - (void)addRespondee:(User *)user;
+
+/**
+ * Removes a respondee for a given post
+ * @param user The respondee to remove
+ */
 - (void)removeRespondee:(User *)user;
+
+/**
+ * Given a post type, returns the string representation for the post type
+ * @param postType The post type (e..g Offer or Request)
+ *
+ * @return The string representation of the post type
+ */
 + (NSString *)formatTypeToString:(PostType)postType;
 
 @end

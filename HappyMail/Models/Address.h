@@ -25,6 +25,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *longitude;
 
 // MARK: Methods
+
+/**
+ * Creates a new address object
+ * @param streetAddress The street address
+ * @param city The city
+ * @param state The state
+ * @param zipcode The zipcode/postal code
+ * @param addressee The name associated with the address
+ * @param completion The block which returns the new address object or an error
+ */
 + (void)createNewAddress:(NSString *)streetAddress city:(NSString *)city state:(NSString *)state zipcode:(NSString *)zipcode addressee:(NSString *)addressee withCompletion:(void (^)(Address *, NSError *))completion;
 
 @end
