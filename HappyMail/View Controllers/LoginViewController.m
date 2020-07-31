@@ -15,10 +15,20 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 
 @end
 
 @implementation LoginViewController
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [Utils roundCorners:self.loginButton];
+    [Utils roundCorners:self.signUpButton];
+}
 
 #pragma mark - Actions
 

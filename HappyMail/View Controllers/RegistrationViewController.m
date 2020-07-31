@@ -20,10 +20,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *cityField;
 @property (weak, nonatomic) IBOutlet UITextField *stateField;
 @property (weak, nonatomic) IBOutlet UITextField *zipcodeField;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
 @end
 
 @implementation RegistrationViewController
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [Utils roundCorners:self.registerButton];
+}
 
 #pragma mark - Actions
 

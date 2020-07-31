@@ -48,6 +48,9 @@
     }
     // Round corners
     [Utils roundCorners:self.aboutMeTextView];
+    [Utils roundCorners:self.mapButton];
+    [Utils roundCorners:self.saveButton];
+    [Utils roundCorners:self.cancelButton];
     
     // Make profile picture circular
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;

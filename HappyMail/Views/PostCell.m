@@ -37,6 +37,8 @@
 
 - (void)refreshPost:(Post *)post {
     [Utils roundCorners:self];
+    [Utils roundCorners:self.usernameButton];
+    
     // Set labels
     self.offerTypeLabel.text = [Post formatTypeToString:post.type];
     self.titleLabel.text = post.title;

@@ -28,6 +28,7 @@
     self.infoRequest = infoRequest;
     
     [Utils roundCorners:self.usernameButtonLabel];
+    [Utils roundCorners:self.requestButtonLabel];
     [Utils roundCorners:self.approveButton];
     [Utils roundCorners:self.denyButton];
     

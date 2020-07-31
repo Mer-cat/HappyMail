@@ -28,6 +28,12 @@
 - (void)refreshFollowUp:(FollowUp *)followUp {
     [self hideButtons];
     
+    // Round corners of buttons
+    [Utils roundCorners:self.usernameButton];
+    [Utils roundCorners:self.postTitleLabel];
+    [Utils roundCorners:self.incompleteButton];
+    [Utils roundCorners:self.completeButton];
+    
     self.followUp = followUp;
     [self.usernameButton setTitle:followUp.receivingUser.username forState:UIControlStateNormal];
     NSString *postType = [Post formatTypeToString:followUp.originalPost.type];
