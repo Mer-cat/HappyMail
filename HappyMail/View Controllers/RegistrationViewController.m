@@ -43,7 +43,7 @@
     
     [Address createNewAddress:self.streetAddressField.text city:self.cityField.text state:self.stateField.text zipcode:self.zipcodeField.text addressee:self.addresseeField.text withCompletion:^(Address *address, NSError *error) {
         if (address) {
-            NSLog(@"Successfully added address to user");
+            NSLog(@"Successfully created new address");
             newUser.address = address;
             
             // Call sign up function on the object
@@ -52,14 +52,14 @@
                     NSLog(@"Error: %@", error.localizedDescription);
                     
                     // Display issue to user if anything is wrong with sign up
-                    [Utils showAlertWithMessage:error.localizedDescription title:@"Error signing up" controller:self];
+                    [Utils showAlertWithMessage:error.localizedDescription title:@"Error signing up" controller:self okAction:nil shouldAddCancelButton:NO cancelSelector:nil];
                 } else {
                     NSLog(@"User registered successfully");
                     [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
                 }
             }];
         } else {
-            [Utils showAlertWithMessage:@"Please enter a valid address" title:@"Invalid address" controller:self];
+            [Utils showAlertWithMessage:@"Please enter a valid address" title:@"Invalid address" controller:self okAction:nil shouldAddCancelButton:NO cancelSelector:nil];
             NSLog(@"Error adding address for user");
         }
     }];
