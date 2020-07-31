@@ -64,6 +64,8 @@
     self.bodyTextLabel.text = self.post.bodyText;
     NSDate *timeCreated = self.post.createdAt;
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
+    [Utils roundCorners:self.respondButton];
+    [Utils roundCorners:self.usernameButton];
 }
 
 #pragma mark - Actions
@@ -71,11 +73,10 @@
 - (IBAction)didPressRespond:(id)sender {
     switch (self.post.type) {
         case Offer:
-            [self showAlertWithMessage:@"Are you sure you want to request a card from this user?" title:@"Confirm response"];
+            [Utils showAlertWithMessage:@"Are you sure you want to request a card from this user?" title:@"Confirm response" controller:self okAction:@selector(handleOkResponse) shouldAddCancelButton:YES cancelSelector:@selector(handleCancelResponse)];
             break;
         case Request:
-            // Send an info request to the receiving user to ask for their information
-            [self showAlertWithMessage:@"Are you sure you want to send a card to this user?" title:@"Confirm response"];
+            [Utils showAlertWithMessage:@"Are you sure you want to send a card to this user?" title:@"Confirm response" controller:self okAction:@selector(handleOkResponse) shouldAddCancelButton:YES cancelSelector:@selector(handleCancelResponse)];
             break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
@@ -83,38 +84,10 @@
     }
 }
 
-#pragma mark - UIAlertController
-
-- (void)showAlertWithMessage:(NSString *)message title:(NSString *)title {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
-                                                                   message:message
-                                                            preferredStyle:(UIAlertControllerStyleAlert)];
-    
-    // Create an OK action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-        [self handleOkResponse];
-    }];
-    
-    // Add the OK action to the alert controller
-    [alert addAction:okAction];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-        self.respondButton.enabled = YES;
-    }];
-    
-    [alert addAction:cancelAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-    
-}
-
 #pragma mark - Response handler
 
 - (void)handleOkResponse {
+    // Must query in order to include address key with user
     [Utils queryUser:[User currentUser] withCompletion:^(User *user, NSError *error) {
         if (user) {
             User *currentUser = user;
@@ -140,6 +113,9 @@
     }];
 }
 
+- (void)handleCancelResponse {
+    self.respondButton.enabled = YES;
+}
 
 #pragma mark - Navigation
 
