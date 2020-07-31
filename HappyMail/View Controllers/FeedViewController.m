@@ -72,9 +72,6 @@
     // Remove edge insets for separator
     self.tableView.layoutMargins = UIEdgeInsetsZero;
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    
-    self.dropDownTableView.layoutMargins = UIEdgeInsetsZero;
-    self.dropDownTableView.separatorInset = UIEdgeInsetsZero;
 }
 
 - (void)initDropDownTableViewUI {
@@ -88,6 +85,9 @@
     CGRect tableFrame = self.dropDownTableView.frame;
     tableFrame.size.height = height;
     self.dropDownTableView.frame = tableFrame;
+    
+    self.dropDownTableView.layoutMargins = UIEdgeInsetsZero;
+    self.dropDownTableView.separatorInset = UIEdgeInsetsZero;
 }
 
 - (PostCell *)setPostCellWithIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
@@ -108,9 +108,8 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
     }
-    cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:239/255.0 blue:0/255.0 alpha:1.0];
+    cell.backgroundColor = [UIColor whiteColor];
     cell.textLabel.text = FILTER_ARRAY[indexPath.row];
-    cell.textLabel.textColor = [UIColor brownColor];
     return cell;
 }
 
