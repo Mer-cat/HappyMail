@@ -50,6 +50,8 @@
             [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                 if (error != nil) {
                     NSLog(@"Error: %@", error.localizedDescription);
+                    // Delete address that was just created if sign up is invalid
+                    [address deleteInBackground];
                     
                     // Display issue to user if anything is wrong with sign up
                     [Utils showAlertWithMessage:error.localizedDescription title:@"Error signing up" controller:self okAction:nil shouldAddCancelButton:NO cancelSelector:nil];
