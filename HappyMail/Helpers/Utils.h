@@ -25,9 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param message Main message of UIAlert
  * @param title Title of UIAlert
  * @param controller The view controller in which the alert should be displayed
- * @param okSelector the selector to perform upon the ok button press
+ * @param okSelector the selector to perform upon the ok button press *MUST HAVE VOID RETURN TYPE AND NO PARAMS*
  * @param shouldAddCancel Bool to indicate whether the alert should add a cancel button
- * @param cancelSelector the selector to perform upon the cancel button press (if included)
+ * @param cancelSelector the selector to perform upon the cancel button press (if included) *MUST HAVE VOID RETURN TYPE AND NO PARAMS*
  */
 + (void)showAlertWithMessage:(NSString *)message title:(NSString *)title controller:(id)controller okAction:(SEL _Nullable)okSelector shouldAddCancelButton:(BOOL)shouldAddCancel cancelSelector:(SEL _Nullable)cancelSelector;
 
