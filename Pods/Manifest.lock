@@ -5,7 +5,9 @@ PODS:
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
   - DateTools (2.0.0)
+  - DZNEmptyDataSet (1.8.1)
   - IQKeyboardManager (6.5.5)
+  - MBProgressHUD (1.2.0)
   - Parse (1.18.0):
     - Parse/Core (= 1.18.0)
   - Parse/Core (1.18.0):
@@ -17,7 +19,9 @@ DEPENDENCIES:
   - BBBadgeBarButtonItem (~> 1.2)
   - ChameleonFramework
   - DateTools
+  - DZNEmptyDataSet
   - IQKeyboardManager
+  - MBProgressHUD
   - Parse
   - Parse/UI
 
@@ -27,7 +31,9 @@ SPEC REPOS:
     - Bolts
     - ChameleonFramework
     - DateTools
+    - DZNEmptyDataSet
     - IQKeyboardManager
+    - MBProgressHUD
     - Parse
 
 SPEC CHECKSUMS:
@@ -35,9 +41,11 @@ SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: 7d9d9f976439ecd8c0551e7f5e817a8b2bd26d8c
+PODFILE CHECKSUM: 4e6b8026dc691d9e1d0538052685467baebf7ace
 
 COCOAPODS: 1.9.3

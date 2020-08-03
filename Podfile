@@ -12,6 +12,8 @@ target 'HappyMail' do
   pod 'IQKeyboardManager'
   pod 'BBBadgeBarButtonItem', '~> 1.2'
   pod 'ChameleonFramework'
+  pod 'DZNEmptyDataSet'
+  pod 'MBProgressHUD'
 
   target 'HappyMailTests' do
     inherit! :search_paths
