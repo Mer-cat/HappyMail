@@ -134,7 +134,7 @@
     }];
     completeAction.backgroundColor = FlatGreen;
     
-    UIContextualAction *incompleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Mark as incomplete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+    UIContextualAction *incompleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Mark as unable to complete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         [self userMarkedAsIncomplete:cell];
     }];
     
