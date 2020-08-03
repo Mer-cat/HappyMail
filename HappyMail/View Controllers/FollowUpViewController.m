@@ -15,6 +15,7 @@
 #import "ProfileViewController.h"
 #import "InfoRequestsViewController.h"
 #import "BBBadgeBarButtonItem.h"
+#import "ChameleonFramework/Chameleon.h"
 #import "Utils.h"
 
 @interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource, FollowUpCellDelegate>
@@ -44,7 +45,7 @@
     self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchFollowUps) withColor:[UIColor brownColor] fromController:self];
     
     // Auto-refresh
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchFollowUps) userInfo:nil repeats:true];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(fetchFollowUps) userInfo:nil repeats:true];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -122,6 +123,37 @@
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     FollowUpCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell hideButtons];
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    FollowUpCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    UIContextualAction *completeAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"Mark as complete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        [self userMarkedAsComplete:cell];
+    }];
+    completeAction.backgroundColor = FlatGreen;
+    
+    UIContextualAction *incompleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Mark as incomplete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        [self userMarkedAsIncomplete:cell];
+    }];
+    
+    NSArray *actions = @[incompleteAction, completeAction];
+    UISwipeActionsConfiguration *newSwipeAction = [UISwipeActionsConfiguration configurationWithActions:actions];
+    
+    return newSwipeAction;
+}
+
+#pragma mark - Completion helpers
+
+- (void)userMarkedAsComplete:(FollowUpCell *)cell {
+    // Put alert here if necessary
+    [cell markAsComplete];
+}
+
+- (void)userMarkedAsIncomplete:(FollowUpCell *)cell {
+    // Put alert here if necessary
+    [cell markAsIncomplete];
 }
 
 #pragma mark - FollowUpCellDelegate

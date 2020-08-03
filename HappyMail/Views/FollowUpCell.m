@@ -43,9 +43,9 @@
     self.fullAddressLabel.text = followUp.recipientAddressString;
 }
 
-#pragma mark - Actions
+#pragma mark - Marking actions
 
-- (IBAction)didPressCheck:(id)sender {
+- (void)markAsComplete {
     [Utils queryUser:self.followUp.receivingUser withCompletion:^(User *user, NSError *error) {
         if (user) {
             [self.followUp.sendingUser addSentToUser:self.followUp.receivingUser];
@@ -58,7 +58,7 @@
     // Could repurpose follow-ups screen to updates and add new type
 }
 
-- (IBAction)didPressX:(id)sender {
+- (void)markAsIncomplete {
     [self removeFollowUp];
     // TODO: Could notify user that offerer/request responder is no longer going to send a card
 }

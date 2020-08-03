@@ -31,6 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)refreshFollowUp:(FollowUp *)followUp;
 
 /**
+ * Removes the follow-up and updates the user's map
+ */
+- (void)markAsComplete;
+
+/**
+ * Removes the follow-up
+ */
+- (void)markAsIncomplete;
+
+/**
  * Shows the buttons for marking a FollowUp as complete/incomplete
  */
 - (void)showButtons;
