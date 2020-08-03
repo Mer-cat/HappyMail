@@ -70,6 +70,11 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
+- (void)relayout {
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 /**
@@ -136,17 +141,6 @@
 }
 
 #pragma mark - UITableViewDataSource
-
-///**
-// * Set up the header for the cell, which is the profile of the user
-// */
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    ProfileHeaderCell *profileHeaderCell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
-//    // Load data into cell
-//    profileHeaderCell.delegate = self;
-//    [profileHeaderCell loadCell:self.user];
-//    return profileHeaderCell;
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;

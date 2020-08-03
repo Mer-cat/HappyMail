@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void) initUIImagePickerController;
 
+- (void)relayout;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -93,6 +93,7 @@
     // Dismiss the keyboard and revert to previous text
     [self.aboutMeTextView resignFirstResponder];
     self.aboutMeTextView.text = self.user.aboutMeText;
+    [self.delegate relayout];
 }
 
 #pragma mark - UITextViewDelegate
@@ -105,6 +106,10 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {
     self.saveButton.hidden = YES;
     self.cancelButton.hidden = YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    [self.delegate relayout];
 }
 
 @end
