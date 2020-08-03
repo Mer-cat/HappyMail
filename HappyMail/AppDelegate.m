@@ -25,9 +25,7 @@
     }];
     [Parse initializeWithConfiguration:config];
     
-    NSArray *colorScheme = [NSArray arrayOfColorsFromImage:[UIImage imageNamed:@"mailbox"] withFlatScheme:YES];
-    
-    [Chameleon setGlobalThemeUsingPrimaryColor:colorScheme[3] withContentStyle:UIContentStyleContrast];
+    [Chameleon setGlobalThemeUsingPrimaryColor:FlatYellow withContentStyle:UIContentStyleContrast];
     return YES;
 }
 
