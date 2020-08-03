@@ -72,6 +72,12 @@
 + (void)roundCorners:(UIView *)view {
     view.layer.masksToBounds = YES;
     view.layer.cornerRadius = 8;
+    
+    // Add padding around button
+    if ([view isKindOfClass:[UIButton class]]){
+        UIButton *button = (UIButton *)view;
+        button.contentEdgeInsets = UIEdgeInsetsMake(2, 6, 2, 6);
+    }
 }
 
 #pragma mark - Image helpers
