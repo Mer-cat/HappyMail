@@ -16,9 +16,10 @@
 #import "InfoRequestsViewController.h"
 #import "BBBadgeBarButtonItem.h"
 #import "ChameleonFramework/Chameleon.h"
+#import "UIScrollView+EmptyDataSet.h"
 #import "Utils.h"
 
-@interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource, FollowUpCellDelegate>
+@interface FollowUpViewController () <UITableViewDelegate, UITableViewDataSource, FollowUpCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @property (nonatomic, strong) NSMutableArray *followUps;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -35,6 +36,8 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
     
     // Do not display insets when table view is empty
     self.tableView.tableFooterView = [UIView new];
@@ -56,6 +59,50 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self infoRequestsButtonInit];
+}
+
+#pragma mark - Parse network calls
+
+/**
+ * Fetch the user's follow-ups from Parse, without completion
+ */
+- (void)fetchFollowUps {
+    PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
+    [query orderByAscending:@"createdAt"];
+    [query includeKey:@"receivingUser"];
+    [query includeKey:@"sendingUser"];
+    [query includeKey:@"originalPost"];
+    [query whereKey:@"sendingUser" equalTo:[User currentUser]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
+        if (!error) {
+            self.followUps = (NSMutableArray *) followUps;
+            NSString *followUpCount = [NSString stringWithFormat:@"%lu", self.followUps.count];
+            self.navigationController.tabBarItem.badgeValue = followUpCount;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+- (void)fetchFollowUpsWithCompletion:(void (^)(NSArray *, NSError *))completion {
+    PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
+    [query includeKey:@"receivingUser"];
+    [query includeKey:@"sendingUser"];
+    [query includeKey:@"originalPost"];
+    [query whereKey:@"sendingUser" equalTo:[User currentUser]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
+        if (!error) {
+            self.followUps = (NSMutableArray *) followUps;
+            [self.tableView reloadData];
+            completion(followUps, nil);
+        } else {
+            NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
+            completion(nil, error);
+        }
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 #pragma mark - Init
@@ -168,48 +215,32 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - Parse network calls
+#pragma mark - DZNEmptyDataSetSource
 
-/**
- * Fetch the user's follow-ups from Parse, without completion
- */
-- (void)fetchFollowUps {
-    PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
-    [query orderByAscending:@"createdAt"];
-    [query includeKey:@"receivingUser"];
-    [query includeKey:@"sendingUser"];
-    [query includeKey:@"originalPost"];
-    [query whereKey:@"sendingUser" equalTo:[User currentUser]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
-        if (!error) {
-            self.followUps = (NSMutableArray *) followUps;
-            NSString *followUpCount = [NSString stringWithFormat:@"%lu", self.followUps.count];
-            self.navigationController.tabBarItem.badgeValue = followUpCount;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
-        }
-        [self.refreshControl endRefreshing];
-    }];
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIImage imageNamed:@"mailboxplaceholder"];
 }
 
-- (void)fetchFollowUpsWithCompletion:(void (^)(NSArray *, NSError *))completion {
-    PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
-    [query includeKey:@"receivingUser"];
-    [query includeKey:@"sendingUser"];
-    [query includeKey:@"originalPost"];
-    [query whereKey:@"sendingUser" equalTo:[User currentUser]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
-        if (!error) {
-            self.followUps = (NSMutableArray *) followUps;
-            [self.tableView reloadData];
-            completion(followUps, nil);
-        } else {
-            NSLog(@"Error fetching follow-ups: %@", error.localizedDescription);
-            completion(nil, error);
-        }
-        [self.refreshControl endRefreshing];
-    }];
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"No follow-ups found";
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"These are created when someone responds to one of your offers or you respond to a request. Create an offer or respond to a request in order to make some!";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+                                 
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 #pragma mark - Navigation

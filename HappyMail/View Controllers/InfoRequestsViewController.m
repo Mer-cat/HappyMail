@@ -11,9 +11,10 @@
 #import "InfoRequest.h"
 #import "PostDetailsViewController.h"
 #import "ProfileViewController.h"
+#import "UIScrollView+EmptyDataSet.h"
 #import "Utils.h"
 
-@interface InfoRequestsViewController () <UITableViewDelegate, UITableViewDataSource, InfoRequestCellDelegate>
+@interface InfoRequestsViewController () <UITableViewDelegate, UITableViewDataSource, InfoRequestCellDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *infoRequests;
@@ -31,6 +32,8 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
     
     // Do not display insets when table view is empty
     self.tableView.tableFooterView = [UIView new];
@@ -118,6 +121,34 @@
 
 - (void)showRequestDetailView {
     [self performSegueWithIdentifier:@"RequestDetailsSegue" sender:self];
+}
+
+#pragma mark - DZNEmptyDataSetSource
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIImage imageNamed:@"questionmark"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"No info-requests found";
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"These are created when a user would like your information to send you a card. Make a request to get some!";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+                                 
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 
