@@ -385,7 +385,7 @@
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="About me: I like cats blah blah blah" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Cc-a2-8KV">
                                                     <rect key="frame" x="19" y="190" width="374" height="39"/>
-                                                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.98624199628829956" green="0.7796865701675415" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1205,7 +1205,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
-        <segue reference="8Lf-nl-8TL"/>
+        <segue reference="udZ-yJ-0VF"/>
         <segue reference="4ze-M6-pE5"/>
     </inferredMetricsTieBreakers>
     <resources>
