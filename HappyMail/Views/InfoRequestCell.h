@@ -40,6 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)didChangeInfoRequest:(InfoRequest *)infoRequest;
 
+/**
+ * Delegate method which activates upon title label being long-pressed
+ */
+- (void)showRequestDetailView;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -115,19 +115,15 @@
     [self.infoRequests removeObject:infoRequest];
     [self.tableView reloadData];
 }
-- (void)queryAssociatedPost:(Post *)post {
-    PFQuery *postQuery = [Post query];
-    [postQuery includeKey:@"author"];
-    [postQuery getObjectInBackgroundWithId:post.objectId block:^(PFObject * _Nullable post, NSError * _Nullable error) {
-        if (post) {
-            
-        }
-    }];
+
+- (void)showRequestDetailView {
+    [self performSegueWithIdentifier:@"RequestDetailsSegue" sender:self];
 }
+
 
 #pragma mark - Navigation segue helpers
 
-- (void)prepareForPostDetailsSegue:(PostDetailsViewController *)detailsViewController sender:(id)sender {
+- (void)prepareForRequestDetailsSegue:(PostDetailsViewController *)detailsViewController sender:(id)sender {
     InfoRequestCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
     InfoRequest *infoRequest = self.infoRequests[indexPath.row];
@@ -137,8 +133,8 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"PostDetailsViewSegue"]) {
-        [self prepareForPostDetailsSegue:[segue destinationViewController] sender:sender];
+    if ([segue.identifier isEqualToString:@"RequestDetailsSegue"]) {
+        [self prepareForRequestDetailsSegue:[segue destinationViewController] sender:sender];
     } else if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
         ProfileViewController *profileViewController = [segue destinationViewController];
         

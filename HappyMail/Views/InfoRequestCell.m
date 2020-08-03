@@ -13,14 +13,22 @@
 @interface InfoRequestCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *usernameButtonLabel;
-@property (weak, nonatomic) IBOutlet UIButton *requestButtonLabel;
 @property (weak, nonatomic) IBOutlet UIButton *approveButton;
 @property (weak, nonatomic) IBOutlet UIButton *denyButton;
 @property (nonatomic, strong) InfoRequest *infoRequest;
+@property (weak, nonatomic) IBOutlet UILabel *requestTitleLabel;
 
 @end
 
 @implementation InfoRequestCell
+
+#pragma mark - Cell lifecycle
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    UITapGestureRecognizer *titleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToOriginalPost)];
+    [self.requestTitleLabel addGestureRecognizer:titleTapGesture];
+}
 
 #pragma mark - Init
 
@@ -28,12 +36,12 @@
     self.infoRequest = infoRequest;
     
     [Utils roundCorners:self.usernameButtonLabel];
-    [Utils roundCorners:self.requestButtonLabel];
+    [Utils roundCorners:self.requestTitleLabel];
     [Utils roundCorners:self.approveButton];
     [Utils roundCorners:self.denyButton];
     
     [self.usernameButtonLabel setTitle:self.infoRequest.requestingUser.username forState:UIControlStateNormal];
-    [self.requestButtonLabel setTitle:self.infoRequest.associatedPost.title forState:UIControlStateNormal];
+    self.requestTitleLabel.text = self.infoRequest.associatedPost.title;
 }
 
 #pragma mark - Actions
@@ -51,5 +59,11 @@
     [self.delegate didChangeInfoRequest:self.infoRequest];
 }
 
+#pragma mark - Gesture recognizer actions
+
+- (void)goToOriginalPost {
+    NSLog(@"Activating long press gesture");
+    [self.delegate showRequestDetailView];
+}
 
 @end
