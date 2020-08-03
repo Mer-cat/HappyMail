@@ -45,6 +45,8 @@
         self.aboutMeTextView.editable = NO;
         self.mapButton.hidden = YES;
         self.mailLocationImage.hidden = YES;
+        self.saveButton.hidden = YES;
+        self.cancelButton.hidden = YES;
     }
     // Round corners
     [Utils roundCorners:self.aboutMeTextView];
@@ -99,13 +101,18 @@
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    self.saveButton.hidden = NO;
-    self.cancelButton.hidden = NO;
+    [UIButton animateWithDuration:0.5 animations:^{
+        self.saveButton.alpha = 1;
+        self.cancelButton.alpha = 1;
+    }];
+
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    self.saveButton.hidden = YES;
-    self.cancelButton.hidden = YES;
+    [UIButton animateWithDuration:0.5 animations:^{
+        self.saveButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+    }];
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
