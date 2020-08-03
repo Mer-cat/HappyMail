@@ -293,7 +293,7 @@
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="25" translatesAutoresizingMaskIntoConstraints="NO" id="DCD-N9-Uv2">
                                 <rect key="frame" x="64" y="365.5" width="94" height="32"/>
                                 <connections>
-                                    <action selector="stepperValueChanged:" destination="NWM-Am-nNd" eventType="valueChanged" id="aDi-uk-Bgy"/>
+                                    <action selector="stepperValueChanged:" destination="NWM-Am-nNd" eventType="valueChanged" id="Ibc-zT-ZVp"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcV-o0-iI3">
@@ -323,7 +323,7 @@
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" secondItem="Nem-DB-KUN" secondAttribute="trailing" constant="20" id="dem-8a-Bt5"/>
                             <constraint firstItem="CD7-H9-YDV" firstAttribute="leading" secondItem="WLi-Ej-MH6" secondAttribute="leading" id="dju-FF-DYK"/>
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" secondItem="3SM-ih-bXs" secondAttribute="trailing" constant="219" id="kaU-n1-t4V"/>
-                            <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" secondItem="DCD-N9-Uv2" secondAttribute="trailing" constant="256" id="mQx-l0-1Q2"/>
+                            <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DCD-N9-Uv2" secondAttribute="trailing" constant="20" id="mQx-l0-1Q2"/>
                             <constraint firstItem="Nem-DB-KUN" firstAttribute="leading" secondItem="3SM-ih-bXs" secondAttribute="leading" id="pUh-rx-hRJ"/>
                             <constraint firstItem="3SM-ih-bXs" firstAttribute="top" secondItem="wgE-mk-bMf" secondAttribute="top" constant="46" id="tIs-Kr-uUs"/>
                             <constraint firstItem="DCD-N9-Uv2" firstAttribute="leading" secondItem="qcV-o0-iI3" secondAttribute="trailing" constant="12" id="tbB-cA-fgi"/>
@@ -349,7 +349,7 @@
                         <outlet property="postButton" destination="TZi-JG-Soo" id="Uxp-Ck-GoS"/>
                         <outlet property="postTypeControl" destination="3SM-ih-bXs" id="LDR-tZ-lTB"/>
                         <outlet property="responseLimitLabel" destination="qcV-o0-iI3" id="RXS-aY-4Ak"/>
-                        <outlet property="responseLimitStepper" destination="DCD-N9-Uv2" id="MmH-2t-CM4"/>
+                        <outlet property="responseLimitStepper" destination="DCD-N9-Uv2" id="1AB-oX-xcB"/>
                         <outlet property="titleField" destination="Nem-DB-KUN" id="CzM-LM-8pu"/>
                     </connections>
                 </viewController>
@@ -500,9 +500,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suF-9I-Q78">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suF-9I-Q78">
                                                     <rect key="frame" x="144" y="12.5" width="79" height="32"/>
-                                                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <state key="normal" title="Username">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1216,7 +1215,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
-        <segue reference="s6d-Mp-YOb"/>
+        <segue reference="udZ-yJ-0VF"/>
         <segue reference="FDo-3C-upy"/>
     </inferredMetricsTieBreakers>
     <resources>
