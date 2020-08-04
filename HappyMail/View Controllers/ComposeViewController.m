@@ -45,8 +45,9 @@
     NSString *bodyText = self.bodyTextView.text;
     NSInteger postType = self.postTypeControl.selectedSegmentIndex;
     NSInteger responseLimit = (int) self.responseLimitStepper.value;
+    NSArray *taggedUsers = [[NSArray alloc] init];
     
-    [Post createNewPostWithTitle:title withBody:bodyText withType:postType withLimit:responseLimit withCompletion:^(Post *post, NSError *error) {
+    [Post createNewPostWithTitle:title withBody:bodyText withType:postType withLimit:responseLimit withTaggedUsers:taggedUsers withCompletion:^(Post *post, NSError *error) {
         if (post) {
             NSLog(@"Successfully made new post");
             [self.delegate didPost:post];
@@ -69,6 +70,9 @@
         self.responseLimitStepper.hidden = NO;
         self.limitQuestionLabel.hidden = NO;
         self.responseLimitLabel.hidden = NO;
+    }
+    if (self.postTypeControl.selectedSegmentIndex == ThankYou) {
+        // Enable user tagging
     }
 }
 

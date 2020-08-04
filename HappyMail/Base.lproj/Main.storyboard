@@ -260,10 +260,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3SM-ih-bXs">
-                                <rect key="frame" x="20" y="134" width="175" height="32"/>
+                                <rect key="frame" x="20" y="134" width="251" height="32"/>
                                 <segments>
                                     <segment title="Offer"/>
                                     <segment title="Request"/>
+                                    <segment title="Thank You"/>
                                 </segments>
                                 <connections>
                                     <action selector="postTypeChanged:" destination="NWM-Am-nNd" eventType="valueChanged" id="fjm-2N-2B9"/>
@@ -319,7 +320,7 @@
                             <constraint firstItem="CD7-H9-YDV" firstAttribute="trailing" secondItem="WLi-Ej-MH6" secondAttribute="trailing" id="auA-Gv-BYB"/>
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" secondItem="Nem-DB-KUN" secondAttribute="trailing" constant="20" id="dem-8a-Bt5"/>
                             <constraint firstItem="CD7-H9-YDV" firstAttribute="leading" secondItem="WLi-Ej-MH6" secondAttribute="leading" id="dju-FF-DYK"/>
-                            <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" secondItem="3SM-ih-bXs" secondAttribute="trailing" constant="219" id="kaU-n1-t4V"/>
+                            <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3SM-ih-bXs" secondAttribute="trailing" constant="20" id="kaU-n1-t4V"/>
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DCD-N9-Uv2" secondAttribute="trailing" constant="20" id="mQx-l0-1Q2"/>
                             <constraint firstItem="Nem-DB-KUN" firstAttribute="leading" secondItem="3SM-ih-bXs" secondAttribute="leading" id="pUh-rx-hRJ"/>
                             <constraint firstItem="3SM-ih-bXs" firstAttribute="top" secondItem="wgE-mk-bMf" secondAttribute="top" constant="46" id="tIs-Kr-uUs"/>
@@ -536,7 +537,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <connections>
-                                            <outlet property="offerTypeLabel" destination="Pl8-fI-Itt" id="KVJ-1t-7AB"/>
+                                            <outlet property="postTypeLabel" destination="Pl8-fI-Itt" id="KVJ-1t-7AB"/>
                                             <outlet property="responsesLabel" destination="xD3-Qv-pkT" id="myR-Yd-HTq"/>
                                             <outlet property="timestampLabel" destination="tBZ-zG-SCw" id="ufM-p5-oEM"/>
                                             <outlet property="titleLabel" destination="o8d-ay-y4q" id="GNb-QL-Dlh"/>
@@ -690,7 +691,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="offerTypeLabel" destination="4Sp-vS-WY5" id="kgZ-MN-CxX"/>
+                                            <outlet property="postTypeLabel" destination="4Sp-vS-WY5" id="kgZ-MN-CxX"/>
                                             <outlet property="profileImage" destination="pzm-6d-8Kc" id="KlA-dP-eXJ"/>
                                             <outlet property="responsesLabel" destination="RYb-lg-VFQ" id="8D9-uM-3eP"/>
                                             <outlet property="timestampLabel" destination="UFj-ru-FoF" id="8nT-kY-bHx"/>

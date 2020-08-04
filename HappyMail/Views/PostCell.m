@@ -13,7 +13,7 @@
 
 @interface PostCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *offerTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *usernameButton;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
@@ -40,7 +40,7 @@
     [Utils roundCorners:self.usernameButton];
     
     // Set labels
-    self.offerTypeLabel.text = [Post formatTypeToString:post.type];
+    self.postTypeLabel.text = [Post formatTypeToString:post.type];
     self.titleLabel.text = post.title;
     [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
     
@@ -53,6 +53,7 @@
     self.profileImage.file = post.author.profileImage;
     [self.profileImage loadInBackground];
     
+    // Show responses label only for offers
     if (post.type == Offer) {
         self.responsesLabel.text = [NSString stringWithFormat:@"%ld/%ld responses",post.respondees.count, post.responseLimit];
     } else {

@@ -17,6 +17,7 @@
 @dynamic bodyText;
 @dynamic respondees;
 @dynamic responseLimit;
+@dynamic taggedUsers;
 
 #pragma mark - PFSubclassing
 
@@ -26,7 +27,7 @@
 
 #pragma mark - Post creation
 
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withCompletion:(void (^)(Post *, NSError *))completion {
++ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withTaggedUsers:(NSArray * _Nullable)taggedUsers withCompletion:(void (^)(Post *, NSError *))completion {
     
     Post *newPost = [Post new];
     User *user = [User currentUser];
@@ -36,6 +37,7 @@
     newPost.type = type;
     newPost.responseLimit = limit;
     newPost.respondees = [[NSMutableArray alloc] init];
+    newPost.taggedUsers = taggedUsers;
     
     [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
@@ -93,6 +95,8 @@
         case Request:
             result = @"Request";
             break;
+        case ThankYou:
+            result = @"Thank You";
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
     }

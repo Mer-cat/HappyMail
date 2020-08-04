@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *bodyText;
 @property (nonatomic, strong) NSMutableArray *respondees;
 @property (nonatomic) NSInteger responseLimit;
+@property (nonatomic, strong) NSArray *taggedUsers;
 
 // MARK: Methods
 
@@ -36,10 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @param bodyText The main body text of the post
  * @param type The post type (e.g. Offer)
  * @param limit The maximum number of respondees allowed, relevant only to offers
+ * @param taggedUsers The users that were tagged if the post is a thank-you
  * @param completion The block which returns either the new post or an error
  */
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withCompletion:(void (^)(Post *, NSError *))completion;
-
++ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withTaggedUsers:(NSArray * _Nullable)taggedUsers withCompletion:(void (^)(Post *, NSError *))completion;
 /**
  * Adds a respondee for the given post
  * @param user The respondee to add

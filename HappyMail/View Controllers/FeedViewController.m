@@ -39,7 +39,6 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
-    NSLog(@"Test feature");
     [super viewDidLoad];
     
     // Show progress indicator
@@ -142,6 +141,8 @@
         case AllRequests:
             [postQuery whereKey:@"type" equalTo: [NSNumber numberWithInt:Request]];
             break;
+        case AllThankYous:
+            [postQuery whereKey:@"type" equalTo: [NSNumber numberWithInt:ThankYou]];
         case LastWeek:{
             NSDate *sevenDaysAgo = [[NSDate date] dateByAddingDays:-7];
             [postQuery whereKey:@"createdAt" greaterThanOrEqualTo:sevenDaysAgo];
