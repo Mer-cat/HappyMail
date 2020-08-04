@@ -184,6 +184,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *specificPost = self.userPosts[indexPath.row];
         detailsViewController.post = specificPost;
+        detailsViewController.posts = self.userPosts;
         detailsViewController.delegate = self;
     }
 }
