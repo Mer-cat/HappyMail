@@ -115,8 +115,13 @@
 #pragma mark - InfoRequestCellDelegate
 
 - (void)didChangeInfoRequest:(InfoRequest *)infoRequest {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.infoRequests indexOfObject:infoRequest] inSection:0];
     [self.infoRequests removeObject:infoRequest];
-    [self.tableView reloadData];
+
+    // Fade out row
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
 }
 
 - (void)showRequestDetailView {

@@ -209,10 +209,15 @@
  * Allows completed follow-ups to be immediately removed without user refreshing
  */
 - (void)didChangeFollowUp:(FollowUp *)followUp {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.followUps indexOfObject:followUp] inSection:0];
     [self.followUps removeObject:followUp];
     NSString *followUpCount = [NSString stringWithFormat:@"%lu", self.followUps.count];
     self.navigationController.tabBarItem.badgeValue = followUpCount;
-    [self.tableView reloadData];
+    
+    // Fade out row
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
 }
 
 #pragma mark - DZNEmptyDataSetSource
