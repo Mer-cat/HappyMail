@@ -39,6 +39,7 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
+    NSLog(@"Test feature");
     [super viewDidLoad];
     
     // Show progress indicator
