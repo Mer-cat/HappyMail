@@ -30,6 +30,7 @@
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (assign, nonatomic) BOOL userIsSearching;
 @property (nonatomic, strong) NSString *searchText;
+@property (nonatomic, strong) MBProgressHUD *activityIndicator;
 
 @end
 
@@ -39,6 +40,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Show progress indicator
+    self.activityIndicator = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    self.activityIndicator.label.text = @"Loading...";
 
     self.searchBar.delegate = self;
     [self initTableViewUI];
@@ -120,10 +125,6 @@
 #pragma mark - Data fetching
 
 - (void)fetchPosts {
-    // Show progress indicator
-    MBProgressHUD *activityIndicator = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    activityIndicator.label.text = @"Loading...";
-    
     PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
@@ -174,7 +175,7 @@
         } else {
             NSLog(@"Error getting posts: %@", error.localizedDescription);
         }
-        [activityIndicator hideAnimated:YES];
+        [self.activityIndicator hideAnimated:YES];
         [self.refreshControl endRefreshing];
     }];
 }
@@ -227,6 +228,13 @@
 }
 
 #pragma mark - UITableViewDelegate
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (self.selectedFilter < 4) {
+        return [NSString stringWithFormat:@"Filter: %@",FILTER_ARRAY[self.selectedFilter]];
+    }
+    return @"";
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Dealing with drop-down table view filter options
