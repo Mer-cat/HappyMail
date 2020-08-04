@@ -6,6 +6,12 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - DateTools (2.0.0)
   - DZNEmptyDataSet (1.8.1)
+  - Hakawai (7.2.8):
+    - Hakawai/Core (= 7.2.8)
+    - Hakawai/Mentions (= 7.2.8)
+  - Hakawai/Core (7.2.8)
+  - Hakawai/Mentions (7.2.8):
+    - Hakawai/Core
   - IQKeyboardManager (6.5.5)
   - MBProgressHUD (1.2.0)
   - Parse (1.18.0):
@@ -20,6 +26,7 @@ DEPENDENCIES:
   - ChameleonFramework
   - DateTools
   - DZNEmptyDataSet
+  - Hakawai
   - IQKeyboardManager
   - MBProgressHUD
   - Parse
@@ -32,6 +39,7 @@ SPEC REPOS:
     - ChameleonFramework
     - DateTools
     - DZNEmptyDataSet
+    - Hakawai
     - IQKeyboardManager
     - MBProgressHUD
     - Parse
@@ -42,10 +50,11 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  Hakawai: 641e2077867c9998205b8dddbaf04eee6d1e0ba7
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: 4e6b8026dc691d9e1d0538052685467baebf7ace
+PODFILE CHECKSUM: 8eedc5ca06159ac7a1c4ae0ed04198062095809c
 
 COCOAPODS: 1.9.3
