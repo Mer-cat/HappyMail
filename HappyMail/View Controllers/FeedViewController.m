@@ -131,7 +131,7 @@
     [postQuery includeKey:@"respondees"];
     
     if (self.userIsSearching) {
-        [postQuery whereKey:@"title" containsString: self.searchText];
+        [postQuery whereKey:@"title" matchesRegex:self.searchText modifiers:@"i"];
     }
     
     switch (self.selectedFilter) {
