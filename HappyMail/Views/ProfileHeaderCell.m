@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usersPostsLabel;
 @property (nonatomic, strong) User *user;
 @property (weak, nonatomic) IBOutlet UIImageView *mailLocationImage;
+@property (nonatomic, strong) UILongPressGestureRecognizer *imageTapGesture;
 
 @end
 
@@ -31,8 +32,8 @@
     [super awakeFromNib];
     
     // Add tap gesture recognizer to profile image
-    UITapGestureRecognizer *imageTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressImage)];
-    [self.profileImageView addGestureRecognizer:imageTapGesture];
+    self.imageTapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didPressImage)];
+    [self.profileImageView addGestureRecognizer:self.imageTapGesture];
 }
 
 #pragma mark - Init
@@ -78,9 +79,11 @@
 #pragma mark - Actions
 
 - (void)didPressImage {
-    // Only user who owns account may change profile image
-    if (self.user == [User currentUser]) {
-        [self.delegate initUIImagePickerController];
+    if (self.imageTapGesture.state == UIGestureRecognizerStateBegan) {
+        // Only user who owns account may change profile image
+        if (self.user == [User currentUser]) {
+            [self.delegate initUIImagePickerController];
+        }
     }
 }
 
