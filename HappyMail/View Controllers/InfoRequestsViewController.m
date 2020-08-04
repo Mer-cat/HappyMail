@@ -30,15 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
-    
-    // Do not display insets when table view is empty
-    self.tableView.tableFooterView = [UIView new];
-    
     [self fetchInfoRequests];
+    [self initTableView];
     
     // Add refresh control
     self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchInfoRequests) withColor:[UIColor brownColor] fromController:self];
@@ -54,6 +47,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.infoRequests.count;
+}
+
+#pragma mark - Init
+
+- (void)initTableView {
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    
+    // Do not display insets when table view is empty
+    self.tableView.tableFooterView = [UIView new];
 }
 
 #pragma mark - Parse query
@@ -166,22 +171,24 @@
     detailsViewController.post = infoRequest.associatedPost;
 }
 
+- (void)prepareForProfileViewSegue:(ProfileViewController *)profileViewController sender:(id)sender {
+    // Grab post from cell where user tapped username
+     InfoRequestCell *cell = (InfoRequestCell *)[[sender superview] superview];
+     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+     InfoRequest *infoRequest = self.infoRequests[indexPath.row];
+     
+     if (![infoRequest.requestingUser.username isEqualToString:[User currentUser].username]) {
+         profileViewController.user = infoRequest.requestingUser;
+     }
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"RequestDetailsSegue"]) {
         [self prepareForRequestDetailsSegue:[segue destinationViewController] sender:sender];
     } else if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
-        ProfileViewController *profileViewController = [segue destinationViewController];
-        
-        // Grab post from cell where user tapped username
-        InfoRequestCell *cell = (InfoRequestCell *)[[sender superview] superview];
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        InfoRequest *infoRequest = self.infoRequests[indexPath.row];
-        
-        if (![infoRequest.requestingUser.username isEqualToString:[User currentUser].username]) {
-            profileViewController.user = infoRequest.requestingUser;
-        }
+        [self prepareForProfileViewSegue:[segue destinationViewController] sender:sender];
     }
 }
 

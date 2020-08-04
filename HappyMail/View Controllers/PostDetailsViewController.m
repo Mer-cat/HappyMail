@@ -35,20 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self refreshPost];
-    
-    // Disable responding for anyone who has already responded
-    for (User *user in self.post.respondees) {
-        if ([user.username isEqualToString:[User currentUser].username]) {
-            self.respondButton.enabled = NO;
-            break;
-        }
-    }
-    
-    // Hide respond button if response limit is reached
-    // and the user has not already responded
-    if (self.post.respondees.count >= self.post.responseLimit && self.respondButton.enabled != NO) {
-        self.respondButton.hidden = YES;
-    }
+    [self setRespondPermissions];
 }
 
 #pragma mark - Init
@@ -71,6 +58,24 @@
     [Utils roundCorners:self.usernameButton];
 }
 
+#pragma mark - User permissions
+
+- (void)setRespondPermissions {
+    // Disable responding for anyone who has already responded
+    for (User *user in self.post.respondees) {
+        if ([user.username isEqualToString:[User currentUser].username]) {
+            self.respondButton.enabled = NO;
+            break;
+        }
+    }
+    
+    // Hide respond button if response limit is reached
+    // and the user has not already responded
+    if (self.post.respondees.count >= self.post.responseLimit && self.respondButton.enabled != NO) {
+        self.respondButton.hidden = YES;
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)didPressRespond:(id)sender {
@@ -87,19 +92,13 @@
     }
 }
 
+/**
+ * Allows user to swipe to see the next post in the feed
+ */
 - (IBAction)didSwipeFromRightEdge:(id)sender {
     if (self.swipeGestureRecognizer.state == UIGestureRecognizerStateBegan) {
         NSLog(@"Swiping!");
-        
-        NSInteger currentIndex = [self.posts indexOfObject:self.post];
-        // Only swipe if there are more posts to show
-        if (currentIndex < self.posts.count - 1) {
-            // Pass in the next post
-            PostDetailsViewController *postDetailsView = [self.storyboard instantiateViewControllerWithIdentifier:@"PostDetailsViewController"];
-            postDetailsView.post = self.posts[currentIndex+1];
-            postDetailsView.posts = self.posts;
-            [self.navigationController pushViewController:postDetailsView animated:YES];
-        }
+        [self segueToNextPost];
     }
 }
 
@@ -134,6 +133,26 @@
 
 - (void)handleCancelResponse {
     self.respondButton.enabled = YES;
+}
+
+#pragma mark - Navigation helpers
+
+/**
+ * Pulls up the details view of the next post in the feed
+ * Stops once user has reached last post
+ */
+- (void)segueToNextPost {
+    NSInteger currentIndex = [self.posts indexOfObject:self.post];
+    
+    // Only transition if there are more posts to show
+    if (currentIndex < self.posts.count - 1) {
+        
+        // Pass in the next post
+        PostDetailsViewController *postDetailsView = [self.storyboard instantiateViewControllerWithIdentifier:@"PostDetailsViewController"];
+        postDetailsView.post = self.posts[currentIndex+1];
+        postDetailsView.posts = self.posts;
+        [self.navigationController pushViewController:postDetailsView animated:YES];
+    }
 }
 
 #pragma mark - Navigation

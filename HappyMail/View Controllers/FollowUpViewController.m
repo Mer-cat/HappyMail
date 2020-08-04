@@ -34,14 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
-    
-    // Do not display insets when table view is empty
-    self.tableView.tableFooterView = [UIView new];
-    
+    [self initTableView];
     [self fetchFollowUps];
     
     // Add refresh control
@@ -106,6 +99,16 @@
 }
 
 #pragma mark - Init
+
+- (void)initTableView {
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    
+    // Do not display insets when table view is empty
+    self.tableView.tableFooterView = [UIView new];
+}
 
 /**
  * Create a custom bar button item that supports a badge
