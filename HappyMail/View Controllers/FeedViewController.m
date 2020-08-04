@@ -17,6 +17,7 @@
 #import "DateTools.h"
 #import "Utils.h"
 #import "FollowUpViewController.h"
+#import "MBProgressHUD.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate, PostDetailsViewControllerDelegate>
 
@@ -119,6 +120,10 @@
 #pragma mark - Data fetching
 
 - (void)fetchPosts {
+    // Show progress indicator
+    MBProgressHUD *activityIndicator = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    activityIndicator.label.text = @"Loading...";
+    
     PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
@@ -169,6 +174,7 @@
         } else {
             NSLog(@"Error getting posts: %@", error.localizedDescription);
         }
+        [activityIndicator hideAnimated:YES];
         [self.refreshControl endRefreshing];
     }];
 }
