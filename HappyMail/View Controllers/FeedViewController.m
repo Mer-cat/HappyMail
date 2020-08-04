@@ -342,6 +342,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
     Post *specificPost = self.filteredPosts[indexPath.row];
     detailsViewController.post = specificPost;
+    detailsViewController.posts = self.filteredPosts;
     detailsViewController.delegate = self;
 }
 

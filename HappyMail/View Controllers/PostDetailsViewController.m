@@ -13,6 +13,7 @@
 #import "FollowUp.h"
 #import "Utils.h"
 #import "User.h"
+#import "FeedViewController.h"
 
 @interface PostDetailsViewController ()
 
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bodyTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *respondButton;
 @property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
+@property (strong, nonatomic) IBOutlet UIScreenEdgePanGestureRecognizer *swipeGestureRecognizer;
 
 @end
 
@@ -82,6 +84,22 @@
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
             break;
+    }
+}
+
+- (IBAction)didSwipeFromRightEdge:(id)sender {
+    if (self.swipeGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"Swiping!");
+        
+        NSInteger currentIndex = [self.posts indexOfObject:self.post];
+        // Only swipe if there are more posts to show
+        if (currentIndex < self.posts.count - 1) {
+            // Pass in the next post
+            PostDetailsViewController *postDetailsView = [self.storyboard instantiateViewControllerWithIdentifier:@"PostDetailsViewController"];
+            postDetailsView.post = self.posts[currentIndex+1];
+            postDetailsView.posts = self.posts;
+            [self.navigationController pushViewController:postDetailsView animated:YES];
+        }
     }
 }
 

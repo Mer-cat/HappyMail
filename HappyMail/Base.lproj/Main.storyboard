@@ -751,7 +751,7 @@
         <!--Post Details View Controller-->
         <scene sceneID="snN-Vd-JEN">
             <objects>
-                <viewController id="4Mr-uy-2oY" customClass="PostDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostDetailsViewController" id="4Mr-uy-2oY" customClass="PostDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j6X-mV-e2w">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -840,6 +840,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="R0d-RD-BB5" firstAttribute="top" secondItem="ewQ-BJ-bvZ" secondAttribute="top" id="GAF-51-loU"/>
                                     <constraint firstItem="R0d-RD-BB5" firstAttribute="trailing" secondItem="ewQ-BJ-bvZ" secondAttribute="trailing" id="J0V-qY-QkZ"/>
@@ -849,6 +850,9 @@
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="ewQ-BJ-bvZ"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="fT6-KN-eBf"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="FNe-1u-uR0" appends="YES" id="SSP-Or-37g"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -866,12 +870,19 @@
                         <outlet property="postTypeLabel" destination="YHk-Lh-D7r" id="6RX-zo-9rj"/>
                         <outlet property="respondButton" destination="eWD-Qc-2zc" id="fYK-Kw-ahV"/>
                         <outlet property="responseLimitLabel" destination="VuW-zz-YSc" id="Pfj-TN-06O"/>
+                        <outlet property="swipeGestureRecognizer" destination="FNe-1u-uR0" id="Z7A-5H-hFd"/>
                         <outlet property="timestampLabel" destination="gb7-Ou-EFO" id="HQa-w9-REH"/>
                         <outlet property="titleLabel" destination="zbp-Qr-FTN" id="2GL-Z5-yvr"/>
                         <outlet property="usernameButton" destination="rrQ-bg-4qt" id="bjk-IA-U1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P9N-LW-Iz6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="FNe-1u-uR0">
+                    <rectEdge key="edges" right="YES"/>
+                    <connections>
+                        <action selector="didSwipeFromRightEdge:" destination="4Mr-uy-2oY" id="fGy-1r-zgQ"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2950.7246376811595" y="468.75"/>
         </scene>
@@ -1206,8 +1217,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7ua-UL-yWn"/>
-        <segue reference="s6d-Mp-YOb"/>
-        <segue reference="4ze-M6-pE5"/>
+        <segue reference="5hU-vi-Oy7"/>
+        <segue reference="8oJ-Fo-fes"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ComposeIcon44" width="44" height="44"/>

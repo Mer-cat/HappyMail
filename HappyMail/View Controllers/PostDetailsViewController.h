@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: Properties
 @property (nonatomic, strong) Post *post;
+@property (nonatomic, strong) NSArray *posts;
 @property (nonatomic, weak) id<PostDetailsViewControllerDelegate> delegate;
 
 @end
