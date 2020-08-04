@@ -14,10 +14,9 @@
 #import "PostDetailsViewController.h"
 #import "Post.h"
 #import "ProfileHeaderCell.h"
-#import "UIScrollView+EmptyDataSet.h"
 #import <Parse/Parse.h>
 
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, PostDetailsViewControllerDelegate, ProfileHeaderCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, PostDetailsViewControllerDelegate, ProfileHeaderCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -34,11 +33,6 @@
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
-    
-    // Do not display insets when table view is empty
-    self.tableView.tableFooterView = [UIView new];
     
     // If no user has been passed in,
     // we are looking at user's own profile
@@ -173,20 +167,6 @@
     } else {
         return self.userPosts.count;
     }
-}
-
-#pragma mark - DZNEmptyDataSetSource
-
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
-    return [UIImage imageNamed:@"lines"];
-}
-
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = [NSString stringWithFormat:@"%@ hasn't made any posts yet", self.user];
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
-                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 #pragma mark - PostDetailsViewControllerDelegate
