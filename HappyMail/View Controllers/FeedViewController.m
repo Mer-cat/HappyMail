@@ -99,29 +99,6 @@
     self.dropDownTableView.separatorInset = UIEdgeInsetsZero;
 }
 
-- (PostCell *)setPostCellWithIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    Post *post = self.filteredPosts[indexPath.row];
-    
-    // Remove separator inset from cells
-    cell.layoutMargins = UIEdgeInsetsZero;
-    
-    // Load the cell with current post
-    [cell refreshPost:post];
-    return cell;
-}
-
-- (UITableViewCell *)setDropDownCellWithIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
-    static NSString *filterCellIdentifier = @"FilterCellItem";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:filterCellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
-    }
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.textLabel.text = FILTER_ARRAY[indexPath.row];
-    return cell;
-}
-
 #pragma mark - Data fetching
 
 - (void)fetchPosts {
@@ -208,16 +185,39 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - Table view cell setters
+
+- (PostCell *)setPostCellWithIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    Post *post = self.filteredPosts[indexPath.row];
+    
+    // Remove separator inset from cells
+    cell.layoutMargins = UIEdgeInsetsZero;
+    
+    // Load the cell with current post
+    [cell refreshPost:post];
+    return cell;
+}
+
+- (UITableViewCell *)setDropDownCellWithIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
+    static NSString *filterCellIdentifier = @"FilterCellItem";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:filterCellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
+    }
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.textLabel.text = FILTER_ARRAY[indexPath.row];
+    return cell;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     // Differentiate between drop down and regular table view
     if ([tableView isEqual:self.tableView]) {
-        PostCell *cell = [self setPostCellWithIndexPath:indexPath forTableView:tableView];
-        return cell;
+        return [self setPostCellWithIndexPath:indexPath forTableView:tableView];
     } else {
-        UITableViewCell *cell = [self setDropDownCellWithIndexPath:indexPath forTableView:tableView];
-        return cell;
+        return [self setDropDownCellWithIndexPath:indexPath forTableView:tableView];
     }
 }
 
@@ -232,7 +232,8 @@
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (self.selectedFilter < 4) {
+    // Do not display if selected filter is "None"
+    if (self.selectedFilter < FILTER_ARRAY.count) {
         return [NSString stringWithFormat:@"Filter: %@",FILTER_ARRAY[self.selectedFilter]];
     }
     return @"";

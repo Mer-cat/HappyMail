@@ -144,35 +144,45 @@
     return 2;
 }
 
+#pragma mark - Table view cell setters
+
+- (ProfileHeaderCell *)setProfileHeaderCellForIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
+    ProfileHeaderCell *profileHeaderCell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
+    // Load data into cell
+    profileHeaderCell.delegate = self;
+    
+    // First load cell without external data
+    [profileHeaderCell loadCell:self.user externalData:nil];
+    
+    // Load thank-you data into cell
+    PFQuery *externalDataQuery = [PFQuery queryWithClassName:@"UserExternalData"];
+    [externalDataQuery whereKey:@"user" equalTo:self.user];
+    [externalDataQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable externalData, NSError * _Nullable error) {
+        if (externalData) {
+            [profileHeaderCell loadCell:self.user externalData:(UserExternalData *)externalData];
+        } else {
+            NSLog(@"Could not load user's external data: %@", error.localizedDescription);
+        }
+    }];
+    
+    return profileHeaderCell;
+}
+
+- (PostCell *)setPostCellForIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    Post *post = self.userPosts[indexPath.row];
+    
+    // Load the cell with current post
+    [cell refreshPost:post];
+    
+    return cell;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        ProfileHeaderCell *profileHeaderCell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
-        // Load data into cell
-        profileHeaderCell.delegate = self;
-        
-        // First load cell without external data
-        [profileHeaderCell loadCell:self.user externalData:nil];
-        
-        // Load thank-you data into cell
-        PFQuery *externalDataQuery = [PFQuery queryWithClassName:@"UserExternalData"];
-        [externalDataQuery whereKey:@"user" equalTo:self.user];
-        [externalDataQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable externalData, NSError * _Nullable error) {
-            if (externalData) {
-                [profileHeaderCell loadCell:self.user externalData:(UserExternalData *)externalData];
-            } else {
-                NSLog(@"Could not load user's external data: %@", error.localizedDescription);
-            }
-        }];
-        
-        return profileHeaderCell;
+        return [self setProfileHeaderCellForIndexPath:indexPath tableView:tableView];
     } else {
-        PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-        Post *post = self.userPosts[indexPath.row];
-        
-        // Load the cell with current post
-        [cell refreshPost:post];
-        
-        return cell;
+        return [self setPostCellForIndexPath:indexPath tableView:tableView];
     }
 }
 
