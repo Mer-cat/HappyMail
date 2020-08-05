@@ -285,3 +285,5 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 * [ParseUI](https://github.com/parse-community/Parse-SDK-iOS-OSX)
 * [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager)
 * [BBBadgeBarButtonItem](https://github.com/TanguyAladenise/BBBadgeBarButtonItem)
+* [Chameleon](https://github.com/viccsmind/Chameleon)
+* [Hakawai](https://github.com/linkedin/Hakawai)
