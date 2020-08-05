@@ -85,6 +85,7 @@
     
     // Assign image chosen to appear in the image view
     UIImage *resizedImage = [Utils resizeImage:originalImage withSize:CGSizeMake(400, 400)];
+    [self.delegate didChangeProfileImage:resizedImage];
     
     PFFileObject *imageFile = [Utils getPFFileFromImage:resizedImage];
     self.user.profileImage = imageFile;
@@ -152,14 +153,14 @@
     profileHeaderCell.delegate = self;
     
     // First load cell without external data
-    [profileHeaderCell loadCell:self.user externalData:nil];
+    [profileHeaderCell loadCell:self.user externalData:nil controller:self];
     
     // Load thank-you data into cell
     PFQuery *externalDataQuery = [PFQuery queryWithClassName:@"UserExternalData"];
     [externalDataQuery whereKey:@"user" equalTo:self.user];
     [externalDataQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable externalData, NSError * _Nullable error) {
         if (externalData) {
-            [profileHeaderCell loadCell:self.user externalData:(UserExternalData *)externalData];
+            [profileHeaderCell loadCell:self.user externalData:(UserExternalData *)externalData controller:self];
         } else {
             NSLog(@"Could not load user's external data: %@", error.localizedDescription);
         }

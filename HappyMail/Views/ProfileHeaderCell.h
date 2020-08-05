@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "User.h"
 #import "UserExternalData.h"
+#import "ProfileViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,8 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
  * Populates the ProfileHeaderCell with information
  *
  * @param user The user whose profile is being viewed
+ * @param externalData Data associated with the user that may be updated by other user actions
+ * @param controller The profile view controller that hosts the cell
  */
-- (void)loadCell:(User *)user externalData:(UserExternalData * _Nullable)externalData;
+- (void)loadCell:(User *)user externalData:(UserExternalData * _Nullable)externalData controller:(ProfileViewController *)controller;
 
 @end
 
@@ -34,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Implementation should pull up an image picker, activated upon user tapping their own image
  */
-- (void) initUIImagePickerController;
+- (void)initUIImagePickerController;
 
 - (void)relayout;
 

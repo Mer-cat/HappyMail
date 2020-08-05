@@ -11,12 +11,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ProfileViewControllerDelegate;
+
 /**
  * View controller for users' profiles
  */
 @interface ProfileViewController : UIViewController
 
+@property (nonatomic, weak) id<ProfileViewControllerDelegate> delegate;
 @property (nonatomic, strong) User *user;
+
+@end
+
+@protocol ProfileViewControllerDelegate
+
+/**
+ * Delegate method activated upon a profile image being changed
+ *
+ * @param image The new profile image
+ */
+- (void)didChangeProfileImage:(UIImage *)image;
 
 @end
 

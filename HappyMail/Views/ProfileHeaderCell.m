@@ -8,10 +8,10 @@
 
 #import "ProfileHeaderCell.h"
 #import "Utils.h"
-#import "ProfileViewController.h"
 @import Parse;
 
-@interface ProfileHeaderCell() <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileHeaderCell() <UITextViewDelegate, ProfileViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *joinDateLabel;
@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usersPostsLabel;
 @property (nonatomic, strong) User *user;
 @property (weak, nonatomic) IBOutlet UIImageView *mailLocationImage;
-@property (nonatomic, strong) UILongPressGestureRecognizer *imageTapGesture;
+@property (nonatomic, strong) UITapGestureRecognizer *imageTapGesture;
 @property (weak, nonatomic) IBOutlet UILabel *thankYouCountLabel;
 
 @end
@@ -33,14 +33,15 @@
     [super awakeFromNib];
     
     // Add tap gesture recognizer to profile image
-    self.imageTapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didPressImage)];
+    self.imageTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressImage)];
     [self.profileImageView addGestureRecognizer:self.imageTapGesture];
 }
 
 #pragma mark - Init
 
-- (void)loadCell:(User *)user externalData:(UserExternalData *)externalData {
+- (void)loadCell:(User *)user externalData:(UserExternalData *)externalData controller:(ProfileViewController *)controller {
     self.aboutMeTextView.delegate = self;
+    controller.delegate = self;
     
     self.user = user;
     if(user != [User currentUser]) {
@@ -79,6 +80,12 @@
     if (externalData) {
         self.thankYouCountLabel.text = [NSString stringWithFormat:@"Thank Yous: %lu", externalData.thankYous.count];
     }
+}
+
+#pragma mark - ProfileViewControllerDelegate
+
+- (void)didChangeProfileImage:(UIImage *)image {
+    self.profileImageView.image = image;
 }
 
 #pragma mark - Actions
