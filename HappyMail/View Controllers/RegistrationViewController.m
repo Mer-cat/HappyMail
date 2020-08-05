@@ -10,6 +10,7 @@
 #import "User.h"
 #import "Utils.h"
 #import "Address.h"
+#import "UserExternalData.h"
 
 @interface RegistrationViewController ()
 
@@ -64,6 +65,7 @@
                     // Display issue to user if anything is wrong with sign up
                     [Utils showAlertWithMessage:error.localizedDescription title:@"Error signing up" controller:self okAction:nil shouldAddCancelButton:NO cancelSelector:nil];
                 } else {
+                    [UserExternalData createUserExternalData:newUser];
                     NSLog(@"User registered successfully");
                     [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
                 }

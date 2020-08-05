@@ -40,6 +40,7 @@
 		D47B971324DB172A006D74AA /* HKWMentionsAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B96FB24DB172A006D74AA /* HKWMentionsAttribute.m */; };
 		D47B971424DB172A006D74AA /* HKWMentionDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B96FC24DB172A006D74AA /* HKWMentionDataProvider.m */; };
 		D47B971524DB172A006D74AA /* HKWMentionsCreationStateMachineV2.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B96FE24DB172A006D74AA /* HKWMentionsCreationStateMachineV2.m */; };
+		D47B971B24DB6859006D74AA /* UserExternalData.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B971A24DB6859006D74AA /* UserExternalData.m */; };
 		D47E36F224BCD367009B3BCE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F124BCD367009B3BCE /* Post.m */; };
 		D47E36F624BCD74F009B3BCE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F524BCD74F009B3BCE /* User.m */; };
 		D47E36F924BCEDCA009B3BCE /* InfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E36F824BCEDCA009B3BCE /* InfoRequest.m */; };
@@ -156,6 +157,8 @@
 		D47B970024DB172A006D74AA /* Hakawai-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hakawai-Prefix.pch"; sourceTree = "<group>"; };
 		D47B970124DB172A006D74AA /* HKWMentionsPluginV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKWMentionsPluginV1.h; sourceTree = "<group>"; };
 		D47B970224DB172A006D74AA /* HKWMentionsPluginV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKWMentionsPluginV2.h; sourceTree = "<group>"; };
+		D47B971924DB6859006D74AA /* UserExternalData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserExternalData.h; sourceTree = "<group>"; };
+		D47B971A24DB6859006D74AA /* UserExternalData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserExternalData.m; sourceTree = "<group>"; };
 		D47E36F024BCD367009B3BCE /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		D47E36F124BCD367009B3BCE /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		D47E36F424BCD74F009B3BCE /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -417,6 +420,8 @@
 				D4DA3C1224C107380069DEFE /* FollowUp.m */,
 				D4E90F3824C75F5900D1F6EC /* Address.h */,
 				D4E90F3924C75F5900D1F6EC /* Address.m */,
+				D47B971924DB6859006D74AA /* UserExternalData.h */,
+				D47B971A24DB6859006D74AA /* UserExternalData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -753,6 +758,7 @@
 				D4E90F3A24C75F5900D1F6EC /* Address.m in Sources */,
 				D458B98E24C0D5D400427F25 /* InfoRequestsViewController.m in Sources */,
 				D47E371524BE14FF009B3BCE /* PostCell.m in Sources */,
+				D47B971B24DB6859006D74AA /* UserExternalData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
