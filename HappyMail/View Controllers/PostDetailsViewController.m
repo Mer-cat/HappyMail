@@ -71,8 +71,10 @@
     
     // Hide respond button if response limit is reached
     // and the user has not already responded
-    if (self.post.respondees.count >= self.post.responseLimit && self.respondButton.enabled != NO) {
-        self.respondButton.hidden = YES;
+    if (self.post.type == Offer) {
+        if (self.post.respondees.count >= self.post.responseLimit && self.respondButton.enabled != NO) {
+            self.respondButton.hidden = YES;
+        }
     }
 }
 

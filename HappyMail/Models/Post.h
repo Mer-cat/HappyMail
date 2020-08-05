@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param bodyText The main body text of the post
  * @param type The post type (e.g. Offer)
  * @param limit The maximum number of respondees allowed, relevant only to offers
- * @param taggedUsers The users that were tagged if the post is a thank-you
+ * @param taggedUsers The usernames of users that were tagged if the post is a thank-you
  * @param completion The block which returns either the new post or an error
  */
 + (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withTaggedUsers:(NSArray * _Nullable)taggedUsers withCompletion:(void (^)(Post *, NSError *))completion;
