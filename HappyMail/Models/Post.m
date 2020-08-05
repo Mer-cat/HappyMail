@@ -97,6 +97,7 @@
             break;
         case ThankYou:
             result = @"Thank You";
+            break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected PostType"];
     }
