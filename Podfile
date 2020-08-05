@@ -14,7 +14,6 @@ target 'HappyMail' do
   pod 'ChameleonFramework'
   pod 'DZNEmptyDataSet'
   pod 'MBProgressHUD'
-  pod 'Hakawai'
 
   target 'HappyMailTests' do
     inherit! :search_paths
