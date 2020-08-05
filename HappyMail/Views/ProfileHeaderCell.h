@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "UserExternalData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param user The user whose profile is being viewed
  */
-- (void)loadCell:(User *)user;
+- (void)loadCell:(User *)user externalData:(UserExternalData * _Nullable)externalData;
 
 @end
 

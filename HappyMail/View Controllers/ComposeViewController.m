@@ -14,7 +14,7 @@
 #import "MentionsManager.h"
 #import "HKWMentionsAttribute.h"
 #import "IQKeyboardManager.h"
-
+#import "UserExternalData.h"
 
 @interface ComposeViewController () <HKWTextViewDelegate>
 
@@ -77,7 +77,8 @@
     NSInteger postType = self.postTypeControl.selectedSegmentIndex;
     NSInteger responseLimit = (int) self.responseLimitStepper.value;
     NSMutableArray *taggedUsers = [[NSMutableArray alloc] init];
-    // Should only apply for Thank You posts
+    
+    // Grab tagged users only for Thank You post
     if (postType == ThankYou) {
         NSArray *taggedUsersAttributes = self.plugin.mentions;
         for (HKWMentionsAttribute *mention in taggedUsersAttributes) {
@@ -90,6 +91,21 @@
         if (post) {
             NSLog(@"Successfully made new post");
             [self.delegate didPost:post];
+            
+            // Add thank you post to each user's array of thank-yous via their external data object
+            if (postType == ThankYou) {
+                PFQuery *taggedUserQuery = [PFQuery queryWithClassName:@"UserExternalData"];
+                [taggedUserQuery whereKey:@"username" containedIn:taggedUsers];
+                [taggedUserQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable externalDataArray, NSError * _Nullable error) {
+                    if (externalDataArray) {
+                        for (UserExternalData *externalData in externalDataArray) {
+                            [externalData addThankYou:post];
+                        }
+                    } else {
+                        NSLog(@"Error finding external data for users: %@", error.localizedDescription);
+                    }
+                }];
+            }
             
             // Return to the home screen
             [self dismissViewControllerAnimated:true completion:nil];

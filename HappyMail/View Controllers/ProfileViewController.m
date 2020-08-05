@@ -14,6 +14,7 @@
 #import "PostDetailsViewController.h"
 #import "Post.h"
 #import "ProfileHeaderCell.h"
+#import "UserExternalData.h"
 #import <Parse/Parse.h>
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, PostDetailsViewControllerDelegate, ProfileHeaderCellDelegate>
@@ -148,7 +149,21 @@
         ProfileHeaderCell *profileHeaderCell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
         // Load data into cell
         profileHeaderCell.delegate = self;
-        [profileHeaderCell loadCell:self.user];
+        
+        // First load cell without external data
+        [profileHeaderCell loadCell:self.user externalData:nil];
+        
+        // Load thank-you data into cell
+        PFQuery *externalDataQuery = [PFQuery queryWithClassName:@"UserExternalData"];
+        [externalDataQuery whereKey:@"user" equalTo:self.user];
+        [externalDataQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable externalData, NSError * _Nullable error) {
+            if (externalData) {
+                [profileHeaderCell loadCell:self.user externalData:(UserExternalData *)externalData];
+            } else {
+                NSLog(@"Could not load user's external data: %@", error.localizedDescription);
+            }
+        }];
+        
         return profileHeaderCell;
     } else {
         PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];

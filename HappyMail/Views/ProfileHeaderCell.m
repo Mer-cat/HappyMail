@@ -23,6 +23,7 @@
 @property (nonatomic, strong) User *user;
 @property (weak, nonatomic) IBOutlet UIImageView *mailLocationImage;
 @property (nonatomic, strong) UILongPressGestureRecognizer *imageTapGesture;
+@property (weak, nonatomic) IBOutlet UILabel *thankYouCountLabel;
 
 @end
 
@@ -38,7 +39,7 @@
 
 #pragma mark - Init
 
-- (void)loadCell:(User *)user {
+- (void)loadCell:(User *)user externalData:(UserExternalData *)externalData {
     self.aboutMeTextView.delegate = self;
     
     self.user = user;
@@ -74,6 +75,10 @@
     
     self.profileImageView.file = user.profileImage;
     [self.profileImageView loadInBackground];
+    
+    if (externalData) {
+        self.thankYouCountLabel.text = [NSString stringWithFormat:@"Thank Yous: %lu", externalData.thankYous.count];
+    }
 }
 
 #pragma mark - Actions

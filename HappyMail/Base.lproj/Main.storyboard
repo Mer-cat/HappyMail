@@ -470,6 +470,13 @@
                                                         <constraint firstAttribute="height" constant="25" id="K33-dO-F6P"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thank Yous: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K30-CT-sOD">
+                                                    <rect key="frame" x="161" y="87" width="108" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="IJg-Gm-Xde" firstAttribute="trailing" secondItem="6Cc-a2-8KV" secondAttribute="trailing" id="09t-qS-0gD"/>
@@ -507,6 +514,7 @@
                                             <outlet property="mapButton" destination="HiZ-ZU-o0G" id="PMB-Gs-QMD"/>
                                             <outlet property="profileImageView" destination="V9o-49-qCp" id="zJL-aI-nDA"/>
                                             <outlet property="saveButton" destination="QBw-7k-4yF" id="rGF-Qe-jfF"/>
+                                            <outlet property="thankYouCountLabel" destination="K30-CT-sOD" id="JWK-Jc-kYj"/>
                                             <outlet property="usernameLabel" destination="8Lq-g6-eXG" id="dyU-KZ-jsa"/>
                                             <outlet property="usersPostsLabel" destination="XCg-eJ-1aw" id="MXU-mo-oXN"/>
                                         </connections>
