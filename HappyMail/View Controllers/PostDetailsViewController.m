@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *respondButton;
 @property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
 @property (strong, nonatomic) IBOutlet UIScreenEdgePanGestureRecognizer *swipeGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UILabel *taggedUsersLabel;
 
 @end
 
@@ -45,9 +46,15 @@
     [self.usernameButton setTitle:self.post.author.username forState:UIControlStateNormal];
     
     if (self.post.type == Offer) {
-    self.responseLimitLabel.text = [NSString stringWithFormat:@"%lu/%lu responses", self.post.respondees.count, self.post.responseLimit];
+        self.responseLimitLabel.text = [NSString stringWithFormat:@"%lu/%lu responses", self.post.respondees.count, self.post.responseLimit];
     } else {
         self.responseLimitLabel.hidden = YES;
+    }
+    
+    if (self.post.type == ThankYou) {
+        NSString *userList = [self.post.taggedUsers componentsJoinedByString:@", "];
+        self.taggedUsersLabel.text = [NSString stringWithFormat:@"Tagged users: %@",userList];
+        self.taggedUsersLabel.hidden = NO;
     }
     
     self.titleLabel.text = self.post.title;
