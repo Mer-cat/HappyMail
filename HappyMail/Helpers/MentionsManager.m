@@ -36,16 +36,20 @@
  * Fetch users from parse whose usernames contain the search text
  */
 - (void)asyncRetrieveEntitiesForKeyString:(nonnull NSString *)keyString searchType:(HKWMentionsSearchType)type controlCharacter:(unichar)character completion:(void (^ _Null_unspecified)(NSArray * _Null_unspecified, BOOL, BOOL))completionBlock {
+    // Do not show table view initially until user types
+    if (!completionBlock || type == HKWMentionsSearchTypeInitial) {
+           return;
+    }
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" matchesRegex:keyString modifiers:@"i"];
     [query orderByAscending:@"createdAt"];
     [query setLimit:10];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable users, NSError * _Nullable error) {
         if (!error) {
-            completionBlock(users, NO, NO);
+            completionBlock(users, NO, YES);
         } else {
             NSLog(@"Error fetching users: %@", error.localizedDescription);
-            completionBlock(nil, NO, NO);
+            completionBlock(nil, NO, YES);
         }
     }];
 }
