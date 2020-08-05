@@ -8,8 +8,13 @@
 
 #import "ComposeViewController.h"
 #import "Utils.h"
+#import "HKWTextView.h"
+#import "HKWMentionsPlugin.h"
+#import "HKWMentionsPluginV1.h"
+#import "MentionsManager.h"
 
-@interface ComposeViewController () <UITextFieldDelegate>
+
+@interface ComposeViewController () <HKWTextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *postTypeControl;
@@ -18,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIStepper *responseLimitStepper;
 @property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitQuestionLabel;
+@property (weak, nonatomic) IBOutlet HKWTextView *userTagTextView;
+@property (nonatomic, strong) id<HKWMentionsPlugin> plugin;
 
 @end
 
@@ -27,10 +34,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initMentionsPlugin];
     
     // Round corners
     [Utils roundCorners:self.responseLimitLabel];
     [Utils roundCorners:self.bodyTextView];
+}
+
+#pragma mark - Init
+
+- (void)initMentionsPlugin {
+    self.userTagTextView.externalDelegate = self;
+    
+    NSCharacterSet *controlCharacters = [NSCharacterSet characterSetWithCharactersInString:@"@+"];
+    id<HKWMentionsPlugin> mentionsPlugin = [HKWMentionsPluginV1 mentionsPluginWithChooserMode:HKWMentionsChooserPositionModeEnclosedTop controlCharacters:controlCharacters searchLength:0];
+    self.plugin = mentionsPlugin;
+    
+    mentionsPlugin.defaultChooserViewDelegate = [MentionsManager sharedInstance];
+    mentionsPlugin.stateChangeDelegate = [MentionsManager sharedInstance];
+    mentionsPlugin.resumeMentionsCreationEnabled = YES;
+    
+    self.userTagTextView.controlFlowPlugin = mentionsPlugin;
 }
 
 #pragma mark - Actions
@@ -45,6 +69,8 @@
     NSString *bodyText = self.bodyTextView.text;
     NSInteger postType = self.postTypeControl.selectedSegmentIndex;
     NSInteger responseLimit = (int) self.responseLimitStepper.value;
+    
+    // Should only apply for Thank You posts
     NSArray *taggedUsers = [[NSArray alloc] init];
     
     [Post createNewPostWithTitle:title withBody:bodyText withType:postType withLimit:responseLimit withTaggedUsers:taggedUsers withCompletion:^(Post *post, NSError *error) {
