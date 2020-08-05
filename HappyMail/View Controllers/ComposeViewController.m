@@ -13,6 +13,7 @@
 #import "HKWMentionsPluginV1.h"
 #import "MentionsManager.h"
 #import "HKWMentionsAttribute.h"
+#import "IQKeyboardManager.h"
 
 
 @interface ComposeViewController () <HKWTextViewDelegate>
@@ -43,6 +44,9 @@
     [Utils roundCorners:self.responseLimitLabel];
     [Utils roundCorners:self.bodyTextView];
     [Utils roundCorners: self.userTagTextView];
+    
+    // Add custom action for keyboard when on user tag text view
+    [self.userTagTextView.keyboardToolbar.doneBarButton setTarget:self action:@selector(doneAction:)];
 }
 
 #pragma mark - Init
@@ -125,6 +129,13 @@
 - (IBAction)didPressCancel:(id)sender {
     // Return to the home screen
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+/**
+ * Fixes slight compability issue between Hakawai and IQKeyboardManager
+ */
+-(void)doneAction:(UIBarButtonItem*)barButton {
+    [self.userTagTextView endEditing:YES];
 }
 
 #pragma mark - Helpers
