@@ -153,14 +153,15 @@
     profileHeaderCell.delegate = self;
     
     // First load cell without external data
-    [profileHeaderCell loadCell:self.user externalData:nil controller:self];
+    [profileHeaderCell loadCell:self.user externalData:nil];
+    [profileHeaderCell makeDelegateOfViewController:self];
     
     // Load thank-you data into cell
     PFQuery *externalDataQuery = [PFQuery queryWithClassName:@"UserExternalData"];
     [externalDataQuery whereKey:@"user" equalTo:self.user];
     [externalDataQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable externalData, NSError * _Nullable error) {
         if (externalData) {
-            [profileHeaderCell loadCell:self.user externalData:(UserExternalData *)externalData controller:self];
+            [profileHeaderCell loadCell:self.user externalData:(UserExternalData *)externalData];
         } else {
             NSLog(@"Could not load user's external data: %@", error.localizedDescription);
         }

@@ -21,14 +21,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<ProfileHeaderCellDelegate> delegate;
 
 // MARK: Methods
+
 /**
  * Populates the ProfileHeaderCell with information
  *
  * @param user The user whose profile is being viewed
  * @param externalData Data associated with the user that may be updated by other user actions
+ */
+- (void)loadCell:(User *)user externalData:(UserExternalData * _Nullable)externalData;
+
+/**
+ * Make this cell the delegate of the Profile View Controller
  * @param controller The profile view controller that hosts the cell
  */
-- (void)loadCell:(User *)user externalData:(UserExternalData * _Nullable)externalData controller:(ProfileViewController *)controller;
+- (void)makeDelegateOfViewController:(ProfileViewController *)controller;
+
 
 @end
 

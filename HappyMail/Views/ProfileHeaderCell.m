@@ -39,9 +39,8 @@
 
 #pragma mark - Init
 
-- (void)loadCell:(User *)user externalData:(UserExternalData *)externalData controller:(ProfileViewController *)controller {
+- (void)loadCell:(User *)user externalData:(UserExternalData *)externalData {
     self.aboutMeTextView.delegate = self;
-    controller.delegate = self;
     
     self.user = user;
     if(user != [User currentUser]) {
@@ -80,6 +79,10 @@
     if (externalData) {
         self.thankYouCountLabel.text = [NSString stringWithFormat:@"Thank Yous: %lu", externalData.thankYous.count];
     }
+}
+
+- (void)makeDelegateOfViewController:(ProfileViewController *)controller {
+    controller.delegate = self;
 }
 
 #pragma mark - ProfileViewControllerDelegate
