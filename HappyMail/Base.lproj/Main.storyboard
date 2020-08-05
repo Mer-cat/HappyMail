@@ -305,54 +305,57 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag users to thank below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOq-G5-nG0">
-                                <rect key="frame" x="20" y="410" width="195" height="20"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tag users here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YOD-eZ-l2y" customClass="HKWTextView">
-                                <rect key="frame" x="20" y="438" width="374" height="227"/>
-                                <color key="backgroundColor" red="0.98624199629999998" green="0.77968657019999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter post text below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9E-Fm-NNG">
                                 <rect key="frame" x="20" y="236" width="167" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag users to thank below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOq-G5-nG0">
+                                <rect key="frame" x="20" y="317" width="195" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Tag users here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YOD-eZ-l2y" customClass="HKWTextView">
+                                <rect key="frame" x="20" y="345" width="374" height="200"/>
+                                <color key="backgroundColor" red="0.98624199629999998" green="0.77968657019999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="zh6-Ow-DHL"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DCD-N9-Uv2" firstAttribute="centerY" secondItem="qcV-o0-iI3" secondAttribute="centerY" id="42a-GB-yx9"/>
+                            <constraint firstItem="wgE-mk-bMf" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YOD-eZ-l2y" secondAttribute="bottom" constant="20" id="BRw-sD-Mxh"/>
                             <constraint firstItem="Nem-DB-KUN" firstAttribute="top" secondItem="3SM-ih-bXs" secondAttribute="bottom" constant="22" id="El1-q5-dVo"/>
                             <constraint firstItem="WLi-Ej-MH6" firstAttribute="trailing" secondItem="Nem-DB-KUN" secondAttribute="trailing" id="Ema-3c-Ovu"/>
                             <constraint firstItem="qcV-o0-iI3" firstAttribute="top" secondItem="CD7-H9-YDV" secondAttribute="bottom" constant="8" id="GMd-Xd-EcA"/>
-                            <constraint firstItem="YOD-eZ-l2y" firstAttribute="leading" secondItem="bOq-G5-nG0" secondAttribute="leading" id="IdC-9V-gsv"/>
-                            <constraint firstItem="bOq-G5-nG0" firstAttribute="top" secondItem="DCD-N9-Uv2" secondAttribute="bottom" constant="12.5" id="JKl-HM-xIH"/>
-                            <constraint firstItem="YOD-eZ-l2y" firstAttribute="top" secondItem="bOq-G5-nG0" secondAttribute="bottom" constant="8" id="KSH-Md-vh0"/>
                             <constraint firstItem="WLi-Ej-MH6" firstAttribute="leading" secondItem="Nem-DB-KUN" secondAttribute="leading" id="KWq-IB-axR"/>
                             <constraint firstItem="CD7-H9-YDV" firstAttribute="top" secondItem="WLi-Ej-MH6" secondAttribute="bottom" constant="21" id="QP3-Go-bA9"/>
+                            <constraint firstItem="bOq-G5-nG0" firstAttribute="leading" secondItem="t9E-Fm-NNG" secondAttribute="leading" id="Qyx-sQ-H37"/>
                             <constraint firstItem="qcV-o0-iI3" firstAttribute="leading" secondItem="WLi-Ej-MH6" secondAttribute="leading" id="VrD-SG-6SO"/>
+                            <constraint firstItem="YOD-eZ-l2y" firstAttribute="leading" secondItem="bOq-G5-nG0" secondAttribute="leading" id="XoM-zE-tMZ"/>
+                            <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bOq-G5-nG0" secondAttribute="trailing" constant="20" id="Yyq-vV-B42"/>
                             <constraint firstItem="CD7-H9-YDV" firstAttribute="trailing" secondItem="WLi-Ej-MH6" secondAttribute="trailing" id="auA-Gv-BYB"/>
-                            <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bOq-G5-nG0" secondAttribute="trailing" constant="20" id="cfy-Ar-ze9"/>
+                            <constraint firstItem="YOD-eZ-l2y" firstAttribute="top" secondItem="bOq-G5-nG0" secondAttribute="bottom" constant="8" id="bIn-90-fQ0"/>
+                            <constraint firstItem="YOD-eZ-l2y" firstAttribute="trailing" secondItem="WLi-Ej-MH6" secondAttribute="trailing" id="c5m-3x-Oc7"/>
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" secondItem="Nem-DB-KUN" secondAttribute="trailing" constant="20" id="dem-8a-Bt5"/>
                             <constraint firstItem="CD7-H9-YDV" firstAttribute="leading" secondItem="WLi-Ej-MH6" secondAttribute="leading" id="dju-FF-DYK"/>
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3SM-ih-bXs" secondAttribute="trailing" constant="20" id="kaU-n1-t4V"/>
+                            <constraint firstItem="bOq-G5-nG0" firstAttribute="top" secondItem="WLi-Ej-MH6" secondAttribute="bottom" constant="20.5" id="lk4-fA-8BS"/>
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DCD-N9-Uv2" secondAttribute="trailing" constant="20" id="mQx-l0-1Q2"/>
                             <constraint firstItem="Nem-DB-KUN" firstAttribute="leading" secondItem="3SM-ih-bXs" secondAttribute="leading" id="pUh-rx-hRJ"/>
                             <constraint firstItem="WLi-Ej-MH6" firstAttribute="leading" secondItem="t9E-Fm-NNG" secondAttribute="leading" id="qc1-e6-EPZ"/>
-                            <constraint firstItem="YOD-eZ-l2y" firstAttribute="trailing" secondItem="WLi-Ej-MH6" secondAttribute="trailing" id="rRB-GH-jyh"/>
                             <constraint firstItem="WLi-Ej-MH6" firstAttribute="top" secondItem="t9E-Fm-NNG" secondAttribute="bottom" constant="3" id="ssN-ue-Paa"/>
                             <constraint firstItem="3SM-ih-bXs" firstAttribute="top" secondItem="wgE-mk-bMf" secondAttribute="top" constant="46" id="tIs-Kr-uUs"/>
                             <constraint firstItem="DCD-N9-Uv2" firstAttribute="leading" secondItem="qcV-o0-iI3" secondAttribute="trailing" constant="12" id="tbB-cA-fgi"/>
-                            <constraint firstItem="bOq-G5-nG0" firstAttribute="leading" secondItem="WLi-Ej-MH6" secondAttribute="leading" id="uEB-x4-LqB"/>
                             <constraint firstItem="3SM-ih-bXs" firstAttribute="leading" secondItem="wgE-mk-bMf" secondAttribute="leading" constant="20" id="ucz-It-Xn1"/>
                             <constraint firstItem="t9E-Fm-NNG" firstAttribute="top" secondItem="Nem-DB-KUN" secondAttribute="bottom" constant="15" id="wmy-fI-Sz8"/>
-                            <constraint firstItem="wgE-mk-bMf" firstAttribute="bottom" secondItem="YOD-eZ-l2y" secondAttribute="bottom" constant="197" id="xYT-do-JfR"/>
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="t9E-Fm-NNG" secondAttribute="trailing" constant="20" id="yzS-IR-HxK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wgE-mk-bMf"/>
