@@ -72,14 +72,14 @@
     NSString *bodyText = self.bodyTextView.text;
     NSInteger postType = self.postTypeControl.selectedSegmentIndex;
     NSInteger responseLimit = (int) self.responseLimitStepper.value;
-    
-    // Should only apply for Thank You posts
-    
-    NSArray *taggedUsersAttributes = self.plugin.mentions;
     NSMutableArray *taggedUsers = [[NSMutableArray alloc] init];
-    for (HKWMentionsAttribute *mention in taggedUsersAttributes) {
-        NSString *username = mention.mentionText;
-        [taggedUsers addObject:username];
+    // Should only apply for Thank You posts
+    if (postType == ThankYou) {
+        NSArray *taggedUsersAttributes = self.plugin.mentions;
+        for (HKWMentionsAttribute *mention in taggedUsersAttributes) {
+            NSString *username = mention.mentionText;
+            [taggedUsers addObject:username];
+        }
     }
     
     [Post createNewPostWithTitle:title withBody:bodyText withType:postType withLimit:responseLimit withTaggedUsers:taggedUsers withCompletion:^(Post *post, NSError *error) {
