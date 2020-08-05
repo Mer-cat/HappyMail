@@ -305,23 +305,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag users to thank below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOq-G5-nG0">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag users to thank below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOq-G5-nG0">
                                 <rect key="frame" x="20" y="410" width="195" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tag users here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YOD-eZ-l2y" customClass="HKWTextView">
-                                <rect key="frame" x="20" y="438" width="374" height="203"/>
-                                <color key="backgroundColor" red="0.23018704349999999" green="0.77713233230000001" blue="0.31589496140000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tag users here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YOD-eZ-l2y" customClass="HKWTextView">
+                                <rect key="frame" x="20" y="438" width="374" height="227"/>
+                                <color key="backgroundColor" red="0.98624199629999998" green="0.77968657019999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter post text below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9E-Fm-NNG">
+                                <rect key="frame" x="20" y="236" width="167" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WLi-Ej-MH6" firstAttribute="top" secondItem="Nem-DB-KUN" secondAttribute="bottom" constant="38" id="18K-EE-b1U"/>
                             <constraint firstItem="DCD-N9-Uv2" firstAttribute="centerY" secondItem="qcV-o0-iI3" secondAttribute="centerY" id="42a-GB-yx9"/>
                             <constraint firstItem="Nem-DB-KUN" firstAttribute="top" secondItem="3SM-ih-bXs" secondAttribute="bottom" constant="22" id="El1-q5-dVo"/>
                             <constraint firstItem="WLi-Ej-MH6" firstAttribute="trailing" secondItem="Nem-DB-KUN" secondAttribute="trailing" id="Ema-3c-Ovu"/>
@@ -339,12 +344,16 @@
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3SM-ih-bXs" secondAttribute="trailing" constant="20" id="kaU-n1-t4V"/>
                             <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DCD-N9-Uv2" secondAttribute="trailing" constant="20" id="mQx-l0-1Q2"/>
                             <constraint firstItem="Nem-DB-KUN" firstAttribute="leading" secondItem="3SM-ih-bXs" secondAttribute="leading" id="pUh-rx-hRJ"/>
+                            <constraint firstItem="WLi-Ej-MH6" firstAttribute="leading" secondItem="t9E-Fm-NNG" secondAttribute="leading" id="qc1-e6-EPZ"/>
                             <constraint firstItem="YOD-eZ-l2y" firstAttribute="trailing" secondItem="WLi-Ej-MH6" secondAttribute="trailing" id="rRB-GH-jyh"/>
+                            <constraint firstItem="WLi-Ej-MH6" firstAttribute="top" secondItem="t9E-Fm-NNG" secondAttribute="bottom" constant="3" id="ssN-ue-Paa"/>
                             <constraint firstItem="3SM-ih-bXs" firstAttribute="top" secondItem="wgE-mk-bMf" secondAttribute="top" constant="46" id="tIs-Kr-uUs"/>
                             <constraint firstItem="DCD-N9-Uv2" firstAttribute="leading" secondItem="qcV-o0-iI3" secondAttribute="trailing" constant="12" id="tbB-cA-fgi"/>
                             <constraint firstItem="bOq-G5-nG0" firstAttribute="leading" secondItem="WLi-Ej-MH6" secondAttribute="leading" id="uEB-x4-LqB"/>
                             <constraint firstItem="3SM-ih-bXs" firstAttribute="leading" secondItem="wgE-mk-bMf" secondAttribute="leading" constant="20" id="ucz-It-Xn1"/>
-                            <constraint firstItem="wgE-mk-bMf" firstAttribute="bottom" secondItem="YOD-eZ-l2y" secondAttribute="bottom" constant="221" id="xYT-do-JfR"/>
+                            <constraint firstItem="t9E-Fm-NNG" firstAttribute="top" secondItem="Nem-DB-KUN" secondAttribute="bottom" constant="15" id="wmy-fI-Sz8"/>
+                            <constraint firstItem="wgE-mk-bMf" firstAttribute="bottom" secondItem="YOD-eZ-l2y" secondAttribute="bottom" constant="197" id="xYT-do-JfR"/>
+                            <constraint firstItem="wgE-mk-bMf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="t9E-Fm-NNG" secondAttribute="trailing" constant="20" id="yzS-IR-HxK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wgE-mk-bMf"/>
                     </view>
@@ -367,6 +376,7 @@
                         <outlet property="postTypeControl" destination="3SM-ih-bXs" id="LDR-tZ-lTB"/>
                         <outlet property="responseLimitLabel" destination="qcV-o0-iI3" id="RXS-aY-4Ak"/>
                         <outlet property="responseLimitStepper" destination="DCD-N9-Uv2" id="1AB-oX-xcB"/>
+                        <outlet property="tagInstructionsLabel" destination="bOq-G5-nG0" id="PRE-y4-TGq"/>
                         <outlet property="titleField" destination="Nem-DB-KUN" id="CzM-LM-8pu"/>
                         <outlet property="userTagTextView" destination="YOD-eZ-l2y" id="EGa-Ic-i8o"/>
                     </connections>
