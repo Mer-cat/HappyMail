@@ -15,11 +15,18 @@
 @dynamic profileImage;
 @dynamic address;
 @dynamic sentToUsers;
+@dynamic entityName;
+@dynamic entityId;
+@dynamic entityMetadata;
 
 #pragma mark - PFUser
 
 + (User*)user {
     return (User*)[PFUser user];
+}
+
+- (NSString *)entityName {
+    return self.username;
 }
 
 #pragma mark - Array field changers
