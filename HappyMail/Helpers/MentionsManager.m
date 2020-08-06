@@ -28,7 +28,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"mentionsCell"];
     }
     cell.textLabel.text = [entity entityName];
-    cell.backgroundColor = FlatYellow;
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
