@@ -41,10 +41,17 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)showAlertWithMessage:(NSString *)message title:(NSString *)title controller:(id)controller okAction:(SEL _Nullable)okSelector shouldAddCancelButton:(BOOL)shouldAddCancel cancelSelector:(SEL _Nullable)cancelSelector;
 
 /**
- * Rounds the corners of the given label
+ * Rounds the corners of the given view
  * @param view  View whose corners are to be rounded
  */
 + (void)roundCorners:(UIView *)view;
+
+/**
+ * Create a border around the given label
+ * @param label The label on which a border is to be drawn
+ * @param color The color of the border
+ */
++ (void)createBorder:(UILabel *)label color:(UIColor *)color;
 
 + (PFFileObject *)getPFFileFromImage:(UIImage * _Nullable)image;
 

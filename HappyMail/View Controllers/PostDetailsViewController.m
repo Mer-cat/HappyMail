@@ -63,6 +63,7 @@
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
     [Utils roundCorners:self.respondButton];
     [Utils roundCorners:self.usernameButton];
+    [Utils roundCorners:self.bodyTextLabel];
 }
 
 #pragma mark - User permissions

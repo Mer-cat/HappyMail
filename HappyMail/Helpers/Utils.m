@@ -80,6 +80,12 @@
     }
 }
 
++ (void)createBorder:(UILabel *)label color:(UIColor *)color {
+    label.layer.borderColor = color.CGColor;
+    label.layer.borderWidth = 1.0;
+    // TODO: Subclass UILabel in order to adjust the insets
+}
+
 #pragma mark - Image helpers
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
