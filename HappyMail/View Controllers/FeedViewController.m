@@ -18,6 +18,7 @@
 #import "Utils.h"
 #import "FollowUpViewController.h"
 #import "MBProgressHUD.h"
+#import <ChameleonFramework/Chameleon.h>
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate, PostDetailsViewControllerDelegate>
 
@@ -31,6 +32,7 @@
 @property (assign, nonatomic) BOOL userIsSearching;
 @property (nonatomic, strong) NSString *searchText;
 @property (nonatomic, strong) MBProgressHUD *activityIndicator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dropDownTableViewHeightConstraint;
 
 @end
 
@@ -87,13 +89,8 @@
     self.dropDownTableView.delegate = self;
     self.dropDownTableView.dataSource = self;
     
-    // Set height for drop-down table view based on array data
-    CGFloat height = self.dropDownTableView.rowHeight * FILTER_ARRAY.count;
-    
-    // If condensing to one line, self.dropDownTableView.frame.size.height becomes read only property
-    CGRect tableFrame = self.dropDownTableView.frame;
-    tableFrame.size.height = height;
-    self.dropDownTableView.frame = tableFrame;
+    // Set height of table view based on number of rows.
+    self.dropDownTableViewHeightConstraint.constant = self.dropDownTableView.rowHeight * FILTER_ARRAY.count;
     
     self.dropDownTableView.layoutMargins = UIEdgeInsetsZero;
     self.dropDownTableView.separatorInset = UIEdgeInsetsZero;
@@ -205,7 +202,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:filterCellIdentifier];
     }
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = FlatWhite;
     cell.textLabel.text = FILTER_ARRAY[indexPath.row];
     return cell;
 }
