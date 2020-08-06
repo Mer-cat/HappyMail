@@ -74,7 +74,7 @@
     view.layer.cornerRadius = 8;
     
     // Add padding around button
-    if ([view isKindOfClass:[UIButton class]]){
+    if ([view isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)view;
         button.contentEdgeInsets = UIEdgeInsetsMake(2, 6, 2, 6);
     }
@@ -83,7 +83,6 @@
 + (void)createBorder:(UIView*)view color:(UIColor *)color {
     view.layer.borderColor = color.CGColor;
     view.layer.borderWidth = 1.2;
-    // TODO: Subclass UILabel in order to adjust the insets for labels
 }
 
 #pragma mark - Image helpers
