@@ -9,6 +9,7 @@
 #import "PostCell.h"
 #import "DateTools.h"
 #import "Utils.h"
+#import <ChameleonFramework/Chameleon.h>
 @import Parse;
 
 @interface PostCell ()
@@ -52,6 +53,7 @@
     
     self.profileImage.file = post.author.profileImage;
     [self.profileImage loadInBackground];
+    [Utils createBorder:self.profileImage color:FlatBlack];
     
     // Show responses label only for offers
     if (post.type == Offer) {

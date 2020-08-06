@@ -8,6 +8,7 @@
 
 #import "ProfileHeaderCell.h"
 #import "Utils.h"
+#import <ChameleonFramework/Chameleon.h>
 @import Parse;
 
 @interface ProfileHeaderCell() <UITextViewDelegate, ProfileViewControllerDelegate>
@@ -58,7 +59,7 @@
     
     // Make profile picture circular
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-    [Utils createBorder:self.profileImageView color:[UIColor blackColor]];
+    [Utils createBorder:self.profileImageView color:FlatBlack];
     
     // Set labels
     self.usernameLabel.text = user.username;
