@@ -47,11 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)roundCorners:(UIView *)view;
 
 /**
- * Create a border around the given label
- * @param label The label on which a border is to be drawn
+ * Create a border around the given view
+ * @param view The view on which a border is to be drawn
  * @param color The color of the border
  */
-+ (void)createBorder:(UILabel *)label color:(UIColor *)color;
++ (void)createBorder:(UIView*)view color:(UIColor *)color;
 
 + (PFFileObject *)getPFFileFromImage:(UIImage * _Nullable)image;
 

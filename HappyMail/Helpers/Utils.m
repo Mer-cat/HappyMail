@@ -80,10 +80,10 @@
     }
 }
 
-+ (void)createBorder:(UILabel *)label color:(UIColor *)color {
-    label.layer.borderColor = color.CGColor;
-    label.layer.borderWidth = 1.0;
-    // TODO: Subclass UILabel in order to adjust the insets
++ (void)createBorder:(UIView*)view color:(UIColor *)color {
+    view.layer.borderColor = color.CGColor;
+    view.layer.borderWidth = 1.2;
+    // TODO: Subclass UILabel in order to adjust the insets for labels
 }
 
 #pragma mark - Image helpers
