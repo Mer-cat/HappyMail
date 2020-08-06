@@ -62,7 +62,6 @@
 #pragma mark - Gesture recognizer actions
 
 - (void)goToOriginalPost {
-    NSLog(@"Activating long press gesture");
     [self.delegate showRequestDetailView];
 }
 
