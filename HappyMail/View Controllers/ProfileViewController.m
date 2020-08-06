@@ -16,12 +16,14 @@
 #import "ProfileHeaderCell.h"
 #import "UserExternalData.h"
 #import <Parse/Parse.h>
+#import <ChameleonFramework/Chameleon.h>
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, PostDetailsViewControllerDelegate, ProfileHeaderCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *userPosts;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -46,6 +48,7 @@
     }
 
     [self fetchMyPosts];
+    self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchMyPosts) withColor:FlatYellow fromController:self];
 }
 
 #pragma mark - ProfileHeaderCellDelegate
@@ -119,6 +122,7 @@
         } else {
             NSLog(@"Error getting posts: %@", error.localizedDescription);
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
