@@ -90,6 +90,7 @@
     [infoQuery includeKey:@"requestedUser"];
     [infoQuery includeKey:@"requestingUser"];
     [infoQuery includeKey:@"associatedPost.author"];
+    [infoQuery includeKey:@"associatedPost.respondees"];
     [infoQuery orderByAscending:@"createdAt"];
     
     // Fetch data asynchronously
@@ -129,8 +130,8 @@
     [self.tableView endUpdates];
 }
 
-- (void)showRequestDetailView {
-    [self performSegueWithIdentifier:@"RequestDetailsSegue" sender:self];
+- (void)showRequestDetailView:(id)sender {
+    [self performSegueWithIdentifier:@"RequestDetailsSegue" sender:sender];
 }
 
 #pragma mark - DZNEmptyDataSetSource

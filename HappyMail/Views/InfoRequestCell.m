@@ -62,7 +62,7 @@
 #pragma mark - Gesture recognizer actions
 
 - (void)goToOriginalPost {
-    [self.delegate showRequestDetailView];
+    [self.delegate showRequestDetailView:self];
 }
 
 @end

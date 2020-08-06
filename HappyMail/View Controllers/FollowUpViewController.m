@@ -226,8 +226,8 @@
     [self.tableView endUpdates];
 }
 
-- (void)showPostDetailView {
-    [self performSegueWithIdentifier:@"PostDetailsSegue" sender:self];
+- (void)showPostDetailView:(id)sender {
+    [self performSegueWithIdentifier:@"PostDetailsSegue" sender:sender];
 }
 
 #pragma mark - DZNEmptyDataSetSource
@@ -273,7 +273,7 @@
 }
 
 - (void)prepareForPostDetailsSegue:(PostDetailsViewController *)detailsViewController sender:(id)sender {
-    FollowUpCell *tappedCell = sender;
+    FollowUpCell *tappedCell = (FollowUpCell *) sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
     FollowUp *followUp = self.followUps[indexPath.row];
     detailsViewController.post = followUp.originalPost;

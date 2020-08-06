@@ -42,8 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Delegate method which activates upon title label being long-pressed
+ *
+ * @param sender The cell in which the label is tapped
  */
-- (void)showRequestDetailView;
+- (void)showRequestDetailView:(id)sender;
 
 @end
 

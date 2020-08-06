@@ -74,7 +74,7 @@
 #pragma mark - Gesture recognizer actions
 
 - (void)goToOriginalPost {
-    [self.delegate showPostDetailView];
+    [self.delegate showPostDetailView:self];
 }
 
 #pragma mark - Helpers
