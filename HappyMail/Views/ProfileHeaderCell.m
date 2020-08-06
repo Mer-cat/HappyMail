@@ -58,6 +58,7 @@
     
     // Make profile picture circular
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+    [Utils createBorder:self.profileImageView color:[UIColor blackColor]];
     
     // Set labels
     self.usernameLabel.text = user.username;
