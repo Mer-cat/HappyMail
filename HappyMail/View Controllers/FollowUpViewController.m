@@ -41,7 +41,7 @@
     self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchFollowUps) withColor:[UIColor brownColor] fromController:self];
     
     // Auto-refresh
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(fetchFollowUps) userInfo:nil repeats:true];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchFollowUps) userInfo:nil repeats:true];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
