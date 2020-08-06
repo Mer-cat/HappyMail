@@ -992,8 +992,9 @@
                                                         <segue destination="kY2-aj-mqv" kind="show" identifier="ProfileViewSegue" id="4ze-M6-pE5"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjh-Uw-xh0">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjh-Uw-xh0" customClass="PaddedLabel">
                                                     <rect key="frame" x="20" y="39" width="30.5" height="20.5"/>
+                                                    <color key="backgroundColor" red="0.98624199629999998" green="0.77968657019999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1045,6 +1046,7 @@
                     <connections>
                         <outlet property="tableView" destination="JdN-Wd-3Ed" id="RGQ-ap-VbV"/>
                         <segue destination="7Et-ks-HlS" kind="show" identifier="InfoRequestsSegue" id="noz-wH-pcN"/>
+                        <segue destination="4Mr-uy-2oY" kind="show" identifier="PostDetailsSegue" id="Gk7-rv-Mky"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f29-Af-sdt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1271,8 +1273,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="o2H-JK-0ON"/>
-        <segue reference="udZ-yJ-0VF"/>
-        <segue reference="FDo-3C-upy"/>
+        <segue reference="Gk7-rv-Mky"/>
+        <segue reference="4ze-M6-pE5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ComposeIcon44" width="44" height="44"/>

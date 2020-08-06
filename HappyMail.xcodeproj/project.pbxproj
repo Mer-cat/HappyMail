@@ -20,6 +20,7 @@
 		D43694ED24B4EE4600902846 /* HappyMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D43694EC24B4EE4600902846 /* HappyMailUITests.m */; };
 		D458B98E24C0D5D400427F25 /* InfoRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D458B98D24C0D5D400427F25 /* InfoRequestsViewController.m */; };
 		D458B99124C0D6E000427F25 /* InfoRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D458B99024C0D6E000427F25 /* InfoRequestCell.m */; };
+		D46FFD8124DCBA3B00B92E8E /* PaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D46FFD8024DCBA3B00B92E8E /* PaddedLabel.m */; };
 		D47B96C724DA205F006D74AA /* MentionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B96C624DA205F006D74AA /* MentionsManager.m */; };
 		D47B970324DB172A006D74AA /* HKWTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B96CD24DB172A006D74AA /* HKWTextView.m */; };
 		D47B970424DB172A006D74AA /* HKWTextView+Plugins.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B96CF24DB172A006D74AA /* HKWTextView+Plugins.m */; };
@@ -105,6 +106,8 @@
 		D458B98D24C0D5D400427F25 /* InfoRequestsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoRequestsViewController.m; sourceTree = "<group>"; };
 		D458B98F24C0D6E000427F25 /* InfoRequestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoRequestCell.h; sourceTree = "<group>"; };
 		D458B99024C0D6E000427F25 /* InfoRequestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoRequestCell.m; sourceTree = "<group>"; };
+		D46FFD7F24DCBA3B00B92E8E /* PaddedLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaddedLabel.h; sourceTree = "<group>"; };
+		D46FFD8024DCBA3B00B92E8E /* PaddedLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaddedLabel.m; sourceTree = "<group>"; };
 		D47B96C524DA205F006D74AA /* MentionsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MentionsManager.h; sourceTree = "<group>"; };
 		D47B96C624DA205F006D74AA /* MentionsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MentionsManager.m; sourceTree = "<group>"; };
 		D47B96CD24DB172A006D74AA /* HKWTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKWTextView.m; sourceTree = "<group>"; };
@@ -422,6 +425,8 @@
 				D4E90F3924C75F5900D1F6EC /* Address.m */,
 				D47B971924DB6859006D74AA /* UserExternalData.h */,
 				D47B971A24DB6859006D74AA /* UserExternalData.m */,
+				D46FFD7F24DCBA3B00B92E8E /* PaddedLabel.h */,
+				D46FFD8024DCBA3B00B92E8E /* PaddedLabel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -730,6 +735,7 @@
 				D47E370E24BCF3C1009B3BCE /* PostDetailsViewController.m in Sources */,
 				D47B971424DB172A006D74AA /* HKWMentionDataProvider.m in Sources */,
 				D47B970A24DB172A006D74AA /* HKWTextView+Extras.m in Sources */,
+				D46FFD8124DCBA3B00B92E8E /* PaddedLabel.m in Sources */,
 				D47B970C24DB172A006D74AA /* HKWRoundedRectBackgroundAttributeValue.m in Sources */,
 				D4E90F3724C74D3900D1F6EC /* MapViewController.m in Sources */,
 				D47E371124BCFCF3009B3BCE /* Utils.m in Sources */,
