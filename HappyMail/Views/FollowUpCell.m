@@ -23,6 +23,14 @@
 
 @implementation FollowUpCell
 
+#pragma mark - Cell lifecycle
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    UITapGestureRecognizer *titleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToOriginalPost)];
+    [self.postTitleLabel addGestureRecognizer:titleTapGesture];
+}
+
 #pragma mark - Init
 
 - (void)refreshFollowUp:(FollowUp *)followUp {
@@ -61,6 +69,12 @@
 - (void)markAsIncomplete {
     [self removeFollowUp];
     // TODO: Could notify user that offerer/request responder is no longer going to send a card
+}
+
+#pragma mark - Gesture recognizer actions
+
+- (void)goToOriginalPost {
+    [self.delegate showPostDetailView];
 }
 
 #pragma mark - Helpers

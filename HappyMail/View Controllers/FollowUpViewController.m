@@ -14,6 +14,7 @@
 #import <Parse/Parse.h>
 #import "ProfileViewController.h"
 #import "InfoRequestsViewController.h"
+#import "PostDetailsViewController.h"
 #import "BBBadgeBarButtonItem.h"
 #import "ChameleonFramework/Chameleon.h"
 #import "UIScrollView+EmptyDataSet.h"
@@ -64,7 +65,8 @@
     [query orderByAscending:@"createdAt"];
     [query includeKey:@"receivingUser"];
     [query includeKey:@"sendingUser"];
-    [query includeKey:@"originalPost"];
+    [query includeKey:@"originalPost.author"];
+    [query includeKey:@"originalPost.respondees"];
     [query whereKey:@"sendingUser" equalTo:[User currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
         if (!error) {
@@ -83,7 +85,8 @@
     PFQuery *query = [PFQuery queryWithClassName:@"FollowUp"];
     [query includeKey:@"receivingUser"];
     [query includeKey:@"sendingUser"];
-    [query includeKey:@"originalPost"];
+    [query includeKey:@"originalPost.author"];
+    [query includeKey:@"originalPost.respondees"];
     [query whereKey:@"sendingUser" equalTo:[User currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followUps, NSError * _Nullable error) {
         if (!error) {
@@ -223,6 +226,10 @@
     [self.tableView endUpdates];
 }
 
+- (void)showPostDetailView {
+    [self performSegueWithIdentifier:@"PostDetailsSegue" sender:self];
+}
+
 #pragma mark - DZNEmptyDataSetSource
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
@@ -251,21 +258,34 @@
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
+#pragma mark - Navigation segue helpers
+
+- (void)prepareForProfileViewSegue:(ProfileViewController *)profileViewController sender:(id)sender {
+    // Grab post from cell where user tapped username
+    FollowUpCell *cell = (FollowUpCell *)[[sender superview] superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    FollowUp *followUp = self.followUps[indexPath.row];
+    
+    // If viewing another user's profile
+    if (![followUp.receivingUser.username isEqualToString:[User currentUser].username]) {
+        profileViewController.user = followUp.receivingUser;
+    }
+}
+
+- (void)prepareForPostDetailsSegue:(PostDetailsViewController *)detailsViewController sender:(id)sender {
+    FollowUpCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    FollowUp *followUp = self.followUps[indexPath.row];
+    detailsViewController.post = followUp.originalPost;
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ProfileViewSegue"]) {
-        ProfileViewController *profileViewController = [segue destinationViewController];
-        
-        // Grab post from cell where user tapped username
-        FollowUpCell *cell = (FollowUpCell *)[[sender superview] superview];
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        FollowUp *followUp = self.followUps[indexPath.row];
-        
-        // If viewing another user's profile
-        if (![followUp.receivingUser.username isEqualToString:[User currentUser].username]) {
-            profileViewController.user = followUp.receivingUser;
-        }
+        [self prepareForProfileViewSegue:[segue destinationViewController] sender:sender];
+    } else if ([segue.identifier isEqualToString:@"PostDetailsSegue"]) {
+        [self prepareForPostDetailsSegue:[segue destinationViewController] sender:sender];
     }
 }
 

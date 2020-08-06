@@ -61,6 +61,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)didChangeFollowUp:(FollowUp *)followUp;
 
+/**
+ * Delegate method which activates upon post title label being long-pressed
+ */
+- (void)showPostDetailView;
+
 @end
 
 NS_ASSUME_NONNULL_END
