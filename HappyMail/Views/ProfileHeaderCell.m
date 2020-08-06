@@ -94,11 +94,9 @@
 #pragma mark - Actions
 
 - (void)didPressImage {
-    if (self.imageTapGesture.state == UIGestureRecognizerStateBegan) {
-        // Only user who owns account may change profile image
-        if (self.user == [User currentUser]) {
-            [self.delegate initUIImagePickerController];
-        }
+    // Only user who owns account may change profile image
+    if (self.user == [User currentUser]) {
+        [self.delegate initUIImagePickerController];
     }
 }
 
