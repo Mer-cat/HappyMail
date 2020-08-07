@@ -204,6 +204,7 @@
     }
     cell.backgroundColor = FlatWhite;
     cell.textLabel.text = FILTER_ARRAY[indexPath.row];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
     return cell;
 }
 
