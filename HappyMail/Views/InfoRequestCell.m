@@ -9,6 +9,7 @@
 #import "InfoRequestCell.h"
 #import "FollowUp.h"
 #import "Utils.h"
+#import "PaddedLabel.h"
 
 @interface InfoRequestCell ()
 
@@ -16,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *approveButton;
 @property (weak, nonatomic) IBOutlet UIButton *denyButton;
 @property (nonatomic, strong) InfoRequest *infoRequest;
-@property (weak, nonatomic) IBOutlet UILabel *requestTitleLabel;
+@property (weak, nonatomic) IBOutlet PaddedLabel *requestTitleLabel;
 
 @end
 
@@ -42,6 +43,8 @@
     
     [self.usernameButtonLabel setTitle:self.infoRequest.requestingUser.username forState:UIControlStateNormal];
     self.requestTitleLabel.text = self.infoRequest.associatedPost.title;
+    
+    [self.requestTitleLabel setTextInsets];
 }
 
 #pragma mark - Actions

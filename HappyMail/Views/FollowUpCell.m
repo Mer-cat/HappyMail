@@ -8,11 +8,12 @@
 
 #import "FollowUpCell.h"
 #import "Utils.h"
+#import "PaddedLabel.h"
 
 @interface FollowUpCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *postTitleLabel;
+@property (weak, nonatomic) IBOutlet PaddedLabel *postTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fullAddressLabel;
 @property (weak, nonatomic) IBOutlet UIButton *usernameButton;
 @property (nonatomic, strong) FollowUp *followUp;
@@ -42,13 +43,15 @@
     [Utils roundCorners:self.incompleteButton];
     [Utils roundCorners:self.completeButton];
     
+    
     self.followUp = followUp;
     [self.usernameButton setTitle:followUp.receivingUser.username forState:UIControlStateNormal];
     NSString *postType = [Post formatTypeToString:followUp.originalPost.type];
     self.postTypeLabel.text = [NSString stringWithFormat:@"%@:", postType];
     self.postTitleLabel.text = followUp.originalPost.title;
-    
     self.fullAddressLabel.text = followUp.recipientAddressString;
+    
+    [self.postTitleLabel setTextInsets];
 }
 
 #pragma mark - Marking actions
