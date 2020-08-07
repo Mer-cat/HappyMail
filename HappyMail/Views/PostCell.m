@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *responsesLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 
 @end
 
@@ -44,6 +45,7 @@
     self.postTypeLabel.text = [Post formatTypeToString:post.type];
     self.titleLabel.text = post.title;
     [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
+    self.usernameLabel.text = post.author.username;
     
     UIImage *placeholderImage = [UIImage imageNamed:@"blank-profile-picture"];
     [self.profileImage setImage: placeholderImage];
