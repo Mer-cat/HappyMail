@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface PaddedLabel : UILabel
 
+/**
+ * Set the text properly within the bounds of the label with proper insets
+ */
+- (void)setTextInsets;
+
 @end
 
 NS_ASSUME_NONNULL_END
