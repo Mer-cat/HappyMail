@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *responsesLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @end
 
@@ -38,8 +39,9 @@
 #pragma mark - Init
 
 - (void)refreshPost:(Post *)post {
-    [Utils roundCorners:self];
     [Utils roundCorners:self.usernameButton];
+    [Utils roundCorners:self.containerView];
+    [Utils createBorder:self.containerView color:FlatWhiteDark];
     
     // Set labels
     self.postTypeLabel.text = [Post formatTypeToString:post.type];
@@ -66,7 +68,6 @@
     
     NSDate *timeCreated = post.createdAt;
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
-    
 }
 
 @end
