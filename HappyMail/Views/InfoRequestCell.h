@@ -29,6 +29,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)refreshInfoRequestCell:(InfoRequest *)infoRequest;
 
+/**
+ * Handles the user marking an info-request as approved
+ */
+- (void)markAsApproved;
+
+/**
+ * Handles the user marking an info-request as denied
+ */
+- (void)markAsDenied;
+
 @end
 
 @protocol InfoRequestCellDelegate

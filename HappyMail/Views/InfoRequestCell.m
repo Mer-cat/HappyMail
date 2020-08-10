@@ -14,8 +14,6 @@
 @interface InfoRequestCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *usernameButtonLabel;
-@property (weak, nonatomic) IBOutlet UIButton *approveButton;
-@property (weak, nonatomic) IBOutlet UIButton *denyButton;
 @property (nonatomic, strong) InfoRequest *infoRequest;
 @property (weak, nonatomic) IBOutlet PaddedLabel *requestTitleLabel;
 
@@ -38,8 +36,6 @@
     
     [Utils roundCorners:self.usernameButtonLabel];
     [Utils roundCorners:self.requestTitleLabel];
-    [Utils roundCorners:self.approveButton];
-    [Utils roundCorners:self.denyButton];
     
     [self.usernameButtonLabel setTitle:self.infoRequest.requestingUser.username forState:UIControlStateNormal];
     self.requestTitleLabel.text = self.infoRequest.associatedPost.title;
@@ -47,16 +43,16 @@
     [self.requestTitleLabel setTextInsets];
 }
 
-#pragma mark - Actions
+#pragma mark - Approve/deny Actions
 
-- (IBAction)didPressApprove:(id)sender {
+- (void)markAsApproved {
     // Add follow-up for requesting user then remove info request
     [FollowUp createNewFollowUpForUser:self.infoRequest.requestingUser fromPost:self.infoRequest.associatedPost aboutUser:self.infoRequest.requestedUser];
     [self.infoRequest removeInfoRequest];
     [self.delegate didChangeInfoRequest:self.infoRequest];
 }
 
-- (IBAction)didPressDeny:(id)sender {
+- (void)markAsDenied {
     // Delete this inforequest
     [self.infoRequest removeInfoRequest];
     [self.delegate didChangeInfoRequest:self.infoRequest];
