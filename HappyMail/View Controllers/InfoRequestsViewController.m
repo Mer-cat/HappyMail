@@ -12,6 +12,7 @@
 #import "PostDetailsViewController.h"
 #import "ProfileViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "ChameleonFramework/Chameleon.h"
 #import "Utils.h"
 
 @interface InfoRequestsViewController () <UITableViewDelegate, UITableViewDataSource, InfoRequestCellDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
@@ -34,10 +35,10 @@
     [self initTableView];
     
     // Add refresh control
-    self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchInfoRequests) withColor:[UIColor brownColor] fromController:self];
+    self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchInfoRequests) withColor:FlatBlack fromController:self];
     
     // Auto-refresh
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fetchInfoRequests) userInfo:nil repeats:true];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchInfoRequests) userInfo:nil repeats:true];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

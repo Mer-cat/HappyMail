@@ -39,7 +39,7 @@
     [self fetchFollowUps];
     
     // Add refresh control
-    self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchFollowUps) withColor:[UIColor brownColor] fromController:self];
+    self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchFollowUps) withColor:FlatBlack fromController:self];
     
     // Auto-refresh
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fetchFollowUps) userInfo:nil repeats:true];
@@ -256,6 +256,10 @@
                                  NSParagraphStyleAttributeName: paragraph};
                                  
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
 }
 
 #pragma mark - Navigation segue helpers
