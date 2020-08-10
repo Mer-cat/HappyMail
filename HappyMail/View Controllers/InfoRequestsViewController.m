@@ -119,6 +119,39 @@
     return infoRequestCell;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    InfoRequestCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    UIContextualAction *approveAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"Approve" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        [self userApproved:cell];
+    }];
+    approveAction.backgroundColor = FlatGreen;
+    
+    UIContextualAction *denyAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Deny" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        [self userDenied:cell];
+    }];
+    
+    NSArray *actions = @[denyAction, approveAction];
+    UISwipeActionsConfiguration *newSwipeAction = [UISwipeActionsConfiguration configurationWithActions:actions];
+    
+    return newSwipeAction;
+}
+
+#pragma mark - Completion helpers
+
+- (void)userApproved:(InfoRequestCell *)cell {
+    // Put alert here if necessary
+    [cell markAsApproved];
+}
+
+- (void)userDenied:(InfoRequestCell *)cell {
+    // Put alert here if necessary
+    [cell markAsDenied];
+}
+
 #pragma mark - InfoRequestCellDelegate
 
 - (void)didChangeInfoRequest:(InfoRequest *)infoRequest {
@@ -163,6 +196,9 @@
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
+}
 
 #pragma mark - Navigation segue helpers
 
