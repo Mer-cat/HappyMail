@@ -14,6 +14,8 @@
 #import "Utils.h"
 #import "User.h"
 #import "FeedViewController.h"
+#import <ChameleonFramework/Chameleon.h>
+@import Parse;
 
 @interface PostDetailsViewController ()
 
@@ -22,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bodyTextLabel;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *respondButton;
 @property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
 @property (strong, nonatomic) IBOutlet UIScreenEdgePanGestureRecognizer *swipeGestureRecognizer;
@@ -61,6 +64,14 @@
     self.bodyTextLabel.text = self.post.bodyText;
     NSDate *timeCreated = self.post.createdAt;
     self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
+    
+    self.profileImageView.file = self.post.author.profileImage;
+    [self.profileImageView loadInBackground];
+    
+    // Make profile picture circular
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+    [Utils createBorder:self.profileImageView color:FlatBlack];
+    
     [Utils roundCorners:self.respondButton];
     [Utils roundCorners:self.usernameButton];
     [Utils roundCorners:self.bodyTextLabel];
@@ -75,6 +86,10 @@
             self.respondButton.enabled = NO;
             break;
         }
+    }
+    
+    if (self.post.type == ThankYou) {
+        self.respondButton.hidden = YES;
     }
     
     // Hide respond button if response limit is reached
