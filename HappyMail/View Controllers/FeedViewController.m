@@ -349,7 +349,7 @@
 
 - (void)prepareForProfileViewSegue:(ProfileViewController *)profileViewController sender:(id)sender {
     // Grab post from cell where user tapped username
-    PostCell *cell = (PostCell *)[[sender superview] superview];
+    PostCell *cell = (PostCell *)[[[sender superview] superview] superview];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     Post *post = self.filteredPosts[indexPath.row];
     
