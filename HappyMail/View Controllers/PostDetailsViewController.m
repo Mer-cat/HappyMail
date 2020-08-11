@@ -15,6 +15,7 @@
 #import "User.h"
 #import "FeedViewController.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "PaddedLabel.h"
 @import Parse;
 
 @interface PostDetailsViewController ()
@@ -26,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bodyTextLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *respondButton;
-@property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
+@property (weak, nonatomic) IBOutlet PaddedLabel *responseLimitLabel;
 @property (strong, nonatomic) IBOutlet UIScreenEdgePanGestureRecognizer *swipeGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UILabel *taggedUsersLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowView;
@@ -73,7 +74,15 @@
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     [Utils createBorder:self.profileImageView color:FlatBlack];
     
+    [Utils createBorder:self.responseLimitLabel color:FlatBlack];
+    [Utils roundCorners:self.responseLimitLabel];
+    [self.responseLimitLabel setTextInsets];
+    if (self.post.respondees.count == self.post.responseLimit) {
+        self.responseLimitLabel.backgroundColor = [UIColor systemGray5Color];
+    }
+    
     [Utils roundCorners:self.respondButton];
+    
     [Utils roundCorners:self.usernameButton];
     
     // Hide arrow if there are no more posts to swipe to
@@ -94,7 +103,8 @@
         }
     }
     
-    if (self.post.type == ThankYou) {
+    // Disable responding to thank yous and one's own post
+    if (self.post.type == ThankYou || [self.post.author.username isEqualToString:[User currentUser].username]) {
         self.respondButton.hidden = YES;
     }
     
@@ -142,7 +152,12 @@
             User *currentUser = user;
             switch (self.post.type) {
                 case Offer:
+                    // Update response limit label on details screen
                     self.responseLimitLabel.text = [NSString stringWithFormat:@"%lu/%lu responses", self.post.respondees.count+1, self.post.responseLimit];
+                    if (self.post.respondees.count+1 >= self.post.responseLimit) {
+                        self.responseLimitLabel.backgroundColor = [UIColor systemGray5Color];
+                    }
+                    
                     [self.delegate didRespond];
                     [FollowUp createNewFollowUpForUser:self.post.author fromPost:self.post aboutUser:currentUser];
                     break;
