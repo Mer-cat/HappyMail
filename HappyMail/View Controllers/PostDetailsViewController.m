@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *responseLimitLabel;
 @property (strong, nonatomic) IBOutlet UIScreenEdgePanGestureRecognizer *swipeGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UILabel *taggedUsersLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowView;
 
 @end
 
@@ -74,7 +75,12 @@
     
     [Utils roundCorners:self.respondButton];
     [Utils roundCorners:self.usernameButton];
-    [Utils roundCorners:self.bodyTextLabel];
+    
+    // Hide arrow if there are no more posts to swipe to
+    NSInteger currentIndex = [self.posts indexOfObject:self.post];
+    if (currentIndex >= self.posts.count - 1) {
+        self.arrowView.hidden = YES;
+    }
 }
 
 #pragma mark - User permissions
@@ -170,6 +176,8 @@
     NSInteger currentIndex = [self.posts indexOfObject:self.post];
     
     // Only transition if there are more posts to show
+    NSLog(@"%lu", currentIndex);
+    NSLog(@"%lu", self.posts.count);
     if (currentIndex < self.posts.count - 1) {
         
         // Pass in the next post

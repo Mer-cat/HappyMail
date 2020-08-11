@@ -906,11 +906,21 @@
                                             <constraint firstItem="gb7-Ou-EFO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YHk-Lh-D7r" secondAttribute="trailing" constant="20" id="zkl-uI-CYP"/>
                                         </constraints>
                                     </view>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightarrow" translatesAutoresizingMaskIntoConstraints="NO" id="A3Y-RS-jT3">
+                                        <rect key="frame" x="377" y="322" width="37" height="81"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="37" id="lKO-QX-05N"/>
+                                            <constraint firstAttribute="height" constant="81" id="rC0-LP-Tnx"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="R0d-RD-BB5" firstAttribute="top" secondItem="ewQ-BJ-bvZ" secondAttribute="top" id="GAF-51-loU"/>
                                     <constraint firstItem="R0d-RD-BB5" firstAttribute="trailing" secondItem="ewQ-BJ-bvZ" secondAttribute="trailing" id="J0V-qY-QkZ"/>
+                                    <constraint firstItem="A3Y-RS-jT3" firstAttribute="trailing" secondItem="fT6-KN-eBf" secondAttribute="trailing" id="YVs-3v-4UT"/>
+                                    <constraint firstItem="A3Y-RS-jT3" firstAttribute="centerY" secondItem="N4J-dK-FLP" secondAttribute="centerY" id="dbP-dQ-7Hk"/>
                                     <constraint firstItem="R0d-RD-BB5" firstAttribute="width" secondItem="fT6-KN-eBf" secondAttribute="width" id="dxu-Jf-2ZT"/>
                                     <constraint firstItem="R0d-RD-BB5" firstAttribute="leading" secondItem="ewQ-BJ-bvZ" secondAttribute="leading" id="g16-QT-91c"/>
                                     <constraint firstItem="R0d-RD-BB5" firstAttribute="bottom" secondItem="ewQ-BJ-bvZ" secondAttribute="bottom" id="oSW-Sk-0Hr"/>
@@ -933,6 +943,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="lf8-v9-t8V"/>
                     <connections>
+                        <outlet property="arrowView" destination="A3Y-RS-jT3" id="A8L-bI-mSc"/>
+                        <outlet property="arrowXConstraint" destination="YVs-3v-4UT" id="lOd-JH-AzV"/>
                         <outlet property="bodyTextLabel" destination="1vA-9y-zBR" id="gG5-Lj-TYR"/>
                         <outlet property="postTypeLabel" destination="YHk-Lh-D7r" id="6RX-zo-9rj"/>
                         <outlet property="profileImageView" destination="pcq-O4-1Hx" id="R1m-9e-kqr"/>
@@ -1262,7 +1274,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="o2H-JK-0ON"/>
         <segue reference="s6d-Mp-YOb"/>
-        <segue reference="FDo-3C-upy"/>
+        <segue reference="8oJ-Fo-fes"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ComposeIcon44" width="44" height="44"/>
@@ -1273,5 +1285,6 @@
         <image name="blank-profile-picture" width="640" height="640"/>
         <image name="mailbox" width="512" height="512"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="rightarrow" width="512" height="512"/>
     </resources>
 </document>
