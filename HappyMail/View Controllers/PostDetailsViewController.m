@@ -31,6 +31,7 @@
 @property (strong, nonatomic) IBOutlet UIScreenEdgePanGestureRecognizer *swipeGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UILabel *taggedUsersLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowView;
+@property (nonatomic, strong) NSArray *taggedUserObjects;
 
 @end
 
@@ -40,6 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self queryTaggedUsers];
     [self refreshPost];
     [self setRespondPermissions];
 }
@@ -57,9 +59,23 @@
     }
     
     if (self.post.type == ThankYou) {
-        NSString *userList = [self.post.taggedUsers componentsJoinedByString:@", "];
-        self.taggedUsersLabel.text = [NSString stringWithFormat:@"Tagged users: %@",userList];
-        self.taggedUsersLabel.hidden = NO;
+    
+        if (self.taggedUserObjects) {
+            NSMutableAttributedString *taggedUserStringList = [[NSMutableAttributedString alloc] init];
+            for (User *user in self.taggedUserObjects) {
+                // Create a label whose text is the user's username
+                // Add tap gesture recognizer to the label
+                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:user.username attributes:@{@"taggedUser" : @(YES) }];
+                [taggedUserStringList appendAttributedString:attributedString];
+            }
+            self.taggedUsersLabel.attributedText = taggedUserStringList;
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapUser:)];
+            [self.taggedUsersLabel addGestureRecognizer:tapGesture];
+        } else {
+            NSString *userList = [self.post.taggedUsers componentsJoinedByString:@", "];
+            self.taggedUsersLabel.text = [NSString stringWithFormat:@"Tagged users: %@",userList];
+            self.taggedUsersLabel.hidden = NO;
+        }
     }
     
     self.titleLabel.text = self.post.title;
@@ -90,6 +106,50 @@
     if (currentIndex >= self.posts.count - 1) {
         self.arrowView.hidden = YES;
     }
+}
+
+- (void)didTapUser:(UITapGestureRecognizer *)recognizer {
+    UILabel *label = (UILabel *)recognizer.view;
+    CGPoint tapLocation = [recognizer locationInView:label];
+    
+    // Init text storage
+    NSTextStorage *textStorage = [[NSTextStorage alloc] initWithAttributedString:label.attributedText];
+    NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
+    [textStorage addLayoutManager:layoutManager];
+
+    // Init text container
+    NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize:CGSizeMake(label.frame.size.width, label.frame.size.height+100) ];
+    textContainer.lineFragmentPadding  = 0;
+    textContainer.maximumNumberOfLines = label.numberOfLines;
+    textContainer.lineBreakMode        = label.lineBreakMode;
+
+    [layoutManager addTextContainer:textContainer];
+
+    NSUInteger characterIndex = [layoutManager characterIndexForPoint:tapLocation
+                                    inTextContainer:textContainer
+                                    fractionOfDistanceBetweenInsertionPoints:NULL];
+    
+    if (characterIndex < textStorage.length) {
+        NSRange range;
+        id value = [label.attributedText attribute:@"taggedUser" atIndex:characterIndex effectiveRange:&range];
+        NSLog(@"%@", value);
+        // Handle as required
+    }
+    
+}
+
+- (void)queryTaggedUsers {
+    PFQuery *userQuery = [User query];
+    [userQuery whereKey:@"username" containedIn:self.post.taggedUsers];
+    [userQuery includeKey:@"address"];
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable userObjects, NSError * _Nullable error) {
+        if (userObjects) {
+            self.taggedUserObjects = userObjects;
+            // Reload tagged user list
+        } else {
+            NSLog(@"Error grabbing tagged user objects: %@", error.localizedDescription);
+        }
+    }];
 }
 
 #pragma mark - User permissions
