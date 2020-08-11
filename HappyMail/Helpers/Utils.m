@@ -14,7 +14,10 @@
 
 #pragma mark - Refresh control helper
 
-+ (UIRefreshControl *)createRefreshControlInView:(UIView *)view withSelector:(SEL)selector withColor:(UIColor *)color fromController:(UIViewController *)controller {
++ (UIRefreshControl *)createRefreshControlInView:(UIView *)view
+                                    withSelector:(SEL)selector
+                                       withColor:(UIColor *)color
+                                  fromController:(UIViewController *)controller {
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl setTintColor:color];
     [refreshControl addTarget:controller action:selector forControlEvents:UIControlEventValueChanged];
@@ -30,6 +33,7 @@
                     okAction:(SEL _Nullable)okSelector
        shouldAddCancelButton:(BOOL)shouldAddCancel
               cancelSelector:(SEL _Nullable)cancelSelector {
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
                                                             preferredStyle:(UIAlertControllerStyleAlert)];

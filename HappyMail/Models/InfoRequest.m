@@ -23,7 +23,9 @@
 
 #pragma mark - Creation and deletion
 
-+ (void)createNewInfoRequestToUser:(User *)requestedUser fromUser:(User *)requestingUser fromPost:(Post *) post {
++ (void)createNewInfoRequestToUser:(User *)requestedUser
+                          fromUser:(User *)requestingUser
+                          fromPost:(Post *) post {
     InfoRequest *newInfoRequest = [InfoRequest new];
     newInfoRequest.requestedUser = requestedUser;
     newInfoRequest.requestingUser = requestingUser;

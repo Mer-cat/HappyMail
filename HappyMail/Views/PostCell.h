@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface PostCell : UITableViewCell
 
+// MARK: Methods
+
 /**
  * Sets all the labels and information inside a PostCell
  *

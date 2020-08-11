@@ -35,7 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
  * @param addressee The name associated with the address
  * @param completion The block which returns the new address object or an error
  */
-+ (void)createNewAddress:(NSString *)streetAddress city:(NSString *)city state:(NSString *)state zipcode:(NSString *)zipcode addressee:(NSString *)addressee withCompletion:(void (^)(Address *, NSError *))completion;
++ (void)createNewAddress:(NSString *)streetAddress
+                    city:(NSString *)city
+                   state:(NSString *)state
+                 zipcode:(NSString *)zipcode
+               addressee:(NSString *)addressee
+          withCompletion:(void (^)(Address *, NSError *))completion;
 
 @end
 

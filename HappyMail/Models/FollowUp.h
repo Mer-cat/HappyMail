@@ -31,7 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param originalPost The post which led to the creation of the FollowUp
  * @param receivingUser The user whose information will be displayed with the FollowUp
  */
-+ (void)createNewFollowUpForUser:(User *)sendingUser fromPost:(Post *)originalPost aboutUser:(User *)receivingUser;
++ (void)createNewFollowUpForUser:(User *)sendingUser
+                        fromPost:(Post *)originalPost
+                       aboutUser:(User *)receivingUser;
 
 /**
  * Deletes this FollowUp

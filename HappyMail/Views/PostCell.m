@@ -32,13 +32,14 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     
-    // Prevents cells from incorrectly hiding the reponse count
+    // Prevents cells from incorrectly hiding the response count
     self.responsesLabel.hidden = NO;
 }
 
 #pragma mark - Init
 
 - (void)refreshPost:(Post *)post {
+    // Stylize certain elements
     [Utils roundCorners:self.usernameButton];
     [Utils roundCorners:self.containerView];
     [Utils createBorder:self.containerView color:FlatWhiteDark];
@@ -49,12 +50,13 @@
     [self.usernameButton setTitle:post.author.username forState:UIControlStateNormal];
     self.usernameLabel.text = post.author.username;
     
+    NSDate *timeCreated = post.createdAt;
+    self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
+    
+    // Set and stylize profile image
     UIImage *placeholderImage = [UIImage imageNamed:@"blank-profile-picture"];
     [self.profileImage setImage: placeholderImage];
-    
-    // Make profile picture circular
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
-    
     self.profileImage.file = post.author.profileImage;
     [self.profileImage loadInBackground];
     [Utils createBorder:self.profileImage color:FlatBlack];
@@ -65,9 +67,6 @@
     } else {
         self.responsesLabel.hidden = YES;
     }
-    
-    NSDate *timeCreated = post.createdAt;
-    self.timestampLabel.text = [NSString stringWithFormat:@"%@ ago", timeCreated.shortTimeAgoSinceNow];
 }
 
 @end

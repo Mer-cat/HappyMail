@@ -11,8 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Manager for mentions plugin which implements delegate protocols as specified by Hakawai requirements
+ */
 @interface MentionsManager : NSObject <HKWMentionsStateChangeDelegate, HKWMentionsDefaultChooserViewDelegate>
 
+/**
+ * @return A shared instance of this class
+ */
 + (instancetype)sharedInstance;
 
 @end

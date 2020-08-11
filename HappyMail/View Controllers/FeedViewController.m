@@ -46,8 +46,10 @@
     // Show progress indicator
     self.activityIndicator = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     self.activityIndicator.label.text = @"Loading...";
-
+    
     self.searchBar.delegate = self;
+    
+    // Initialize tableviews
     [self initTableViewUI];
     [self initDropDownTableViewUI];
     
@@ -158,6 +160,9 @@
 
 #pragma mark - Actions
 
+/**
+ * Hide and unhide the drop down table view with filter options
+ */
 - (IBAction)didPressFilter:(id)sender {
     self.dropDownTableView.hidden = !self.dropDownTableView.hidden;
 }
@@ -180,6 +185,25 @@
  */
 - (void)didRespond {
     [self.tableView reloadData];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    // Differentiate between drop down and regular table view
+    if ([tableView isEqual:self.tableView]) {
+        return [self setPostCellWithIndexPath:indexPath forTableView:tableView];
+    } else {
+        return [self setDropDownCellWithIndexPath:indexPath forTableView:tableView];
+    }
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ([tableView isEqual:self.tableView]) {
+        return self.filteredPosts.count;
+    } else {
+        return FILTER_ARRAY.count;
+    }
 }
 
 #pragma mark - Table view cell setters
@@ -206,25 +230,6 @@
     cell.textLabel.text = FILTER_ARRAY[indexPath.row];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
     return cell;
-}
-
-#pragma mark - UITableViewDataSource
-
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    // Differentiate between drop down and regular table view
-    if ([tableView isEqual:self.tableView]) {
-        return [self setPostCellWithIndexPath:indexPath forTableView:tableView];
-    } else {
-        return [self setDropDownCellWithIndexPath:indexPath forTableView:tableView];
-    }
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([tableView isEqual:self.tableView]) {
-        return self.filteredPosts.count;
-    } else {
-        return FILTER_ARRAY.count;
-    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -308,12 +313,15 @@
 
 #pragma mark - UIScrollViewDelegate
 
+/**
+ * Load in more posts when user scrolls to bottom of current set of posts
+ */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (!self.isMoreDataLoading) {
         // Calculate the position of one screen length before the bottom of the results
         int scrollViewContentHeight = self.tableView.contentSize.height;
         int scrollOffsetThreshhold = scrollViewContentHeight - self.tableView.bounds.size.height;
-
+        
         // When the user scrolls past the threshold, start requesting
         if (scrollView.contentOffset.y > scrollOffsetThreshhold && self.tableView.isDragging) {
             self.isMoreDataLoading = YES;

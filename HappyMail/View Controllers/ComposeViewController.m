@@ -45,12 +45,15 @@
     [Utils roundCorners:self.bodyTextView];
     [Utils roundCorners: self.userTagTextView];
     
-    // Add custom action for keyboard when on user tag text view
+    // Add custom action for keyboard when on user tagging text view
     [self.userTagTextView.keyboardToolbar.doneBarButton setTarget:self action:@selector(doneAction:)];
 }
 
 #pragma mark - Init
 
+/**
+ * Set up the mentions plugin which will allow users to add mentions to post
+ */
 - (void)initMentionsPlugin {
     self.userTagTextView.externalDelegate = self;
     
@@ -116,6 +119,9 @@
     }];
 }
 
+/**
+ * Selectively hide and show fields depending on the type of post the user is making
+ */
 - (IBAction)postTypeChanged:(id)sender {
     switch (self.postTypeControl.selectedSegmentIndex) {
         case Offer:
@@ -140,7 +146,7 @@
 }
 
 /**
- * Cancel creation of post, return to feed
+ * Cancel creation of post and return to feed
  */
 - (IBAction)didPressCancel:(id)sender {
     // Return to the home screen
@@ -150,7 +156,7 @@
 /**
  * Fixes slight compability issue between Hakawai and IQKeyboardManager
  */
--(void)doneAction:(UIBarButtonItem*)barButton {
+- (void)doneAction:(UIBarButtonItem*)barButton {
     [self.userTagTextView endEditing:YES];
 }
 

@@ -12,7 +12,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Needed due to compile-time errors
 @class User;
 
 /**
@@ -40,18 +39,17 @@ NS_ASSUME_NONNULL_BEGIN
  * @param taggedUsers The usernames of users that were tagged if the post is a thank-you
  * @param completion The block which returns either the new post or an error
  */
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withTaggedUsers:(NSArray * _Nullable)taggedUsers withCompletion:(void (^)(Post *, NSError *))completion;
++ (void)createNewPostWithTitle:(NSString * _Nullable)title
+                      withBody:(NSString * _Nullable)bodyText
+                      withType:(PostType)type
+                     withLimit:(NSInteger)limit
+               withTaggedUsers:(NSArray * _Nullable)taggedUsers
+                withCompletion:(void (^)(Post *, NSError *))completion;
 /**
  * Adds a respondee for the given post
  * @param user The respondee to add
  */
 - (void)addRespondee:(User *)user;
-
-/**
- * Removes a respondee for a given post
- * @param user The respondee to remove
- */
-- (void)removeRespondee:(User *)user;
 
 /**
  * Given a post type, returns the string representation for the post type

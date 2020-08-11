@@ -27,7 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return The UIRefreshControl object created
  */
-+ (UIRefreshControl *)createRefreshControlInView:(UIView *)view withSelector:(SEL)selector withColor:(UIColor *)color fromController:(UIViewController *)controller;
++ (UIRefreshControl *)createRefreshControlInView:(UIView *)view
+                                    withSelector:(SEL)selector
+                                       withColor:(UIColor *)color
+                                  fromController:(UIViewController *)controller;
+
 /**
  * Create new UIAlert on the screen with specified message and title
  *
@@ -38,7 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
  * @param shouldAddCancel Bool to indicate whether the alert should add a cancel button
  * @param cancelSelector the selector to perform upon the cancel button press (if included) *MUST HAVE VOID RETURN TYPE AND NO PARAMS*
  */
-+ (void)showAlertWithMessage:(NSString *)message title:(NSString *)title controller:(id)controller okAction:(SEL _Nullable)okSelector shouldAddCancelButton:(BOOL)shouldAddCancel cancelSelector:(SEL _Nullable)cancelSelector;
++ (void)showAlertWithMessage:(NSString *)message
+                       title:(NSString *)title
+                  controller:(id)controller
+                    okAction:(SEL _Nullable)okSelector
+       shouldAddCancelButton:(BOOL)shouldAddCancel
+              cancelSelector:(SEL _Nullable)cancelSelector;
 
 /**
  * Rounds the corners of the given view
@@ -53,6 +62,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)createBorder:(UIView*)view color:(UIColor *)color;
 
+/**
+ * Converts an image to a PFFileObject
+ * @param image The image to be converted to a PFFileObjet
+ *
+ * @return The PFFileObject containing the image
+ */
 + (PFFileObject *)getPFFileFromImage:(UIImage * _Nullable)image;
 
 /**

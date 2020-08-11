@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Populates the ProfileHeaderCell with information
- *
  * @param user The user whose profile is being viewed
  * @param externalData Data associated with the user that may be updated by other user actions
  */
@@ -36,7 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)makeDelegateOfViewController:(ProfileViewController *)controller;
 
-
 @end
 
 @protocol ProfileHeaderCellDelegate
@@ -46,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)initUIImagePickerController;
 
+/**
+ * Delegate implementation should re-layout the tableview containing this cell
+ */
 - (void)relayout;
 
 @end

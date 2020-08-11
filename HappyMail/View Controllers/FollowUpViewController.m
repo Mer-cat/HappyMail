@@ -168,16 +168,6 @@
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    FollowUpCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell showButtons];
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    FollowUpCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell hideButtons];
-}
-
 - (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     FollowUpCell *cell = [tableView cellForRowAtIndexPath:indexPath];

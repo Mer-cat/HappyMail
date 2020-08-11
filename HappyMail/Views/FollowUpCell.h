@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Populates the FollowUpCell with information
- *
  * @param followUp The FollowUp object whose information will be used to populate the cell
  */
 - (void)refreshFollowUp:(FollowUp *)followUp;
@@ -40,30 +39,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)markAsIncomplete;
 
-/**
- * Shows the buttons for marking a FollowUp as complete/incomplete
- */
-- (void)showButtons;
-
-/**
- * Hides the buttons for marking a FollowUp as complete/incomplete
- */
-- (void)hideButtons;
-
 @end
 
 @protocol FollowUpCellDelegate
 
 /**
  * The method for the delegate to implement, activated upon a FollowUp being marked as complete/incomplete
- *
  * @param followUp The FollowUp that was changed
  */
 - (void)didChangeFollowUp:(FollowUp *)followUp;
 
 /**
  * Delegate method which activates upon post title label being long-pressed
- *
  * @param sender The cell in which the label is pressed
  */
 - (void)showPostDetailView:(id)sender;

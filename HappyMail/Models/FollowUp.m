@@ -23,7 +23,9 @@
 
 #pragma mark - Creation and deletion
 
-+ (void)createNewFollowUpForUser:(User *)sendingUser fromPost:(Post *)originalPost aboutUser:(User *)receivingUser {
++ (void)createNewFollowUpForUser:(User *)sendingUser
+                        fromPost:(Post *)originalPost
+                       aboutUser:(User *)receivingUser {
     FollowUp *newFollowUp = [FollowUp new];
     
     newFollowUp.sendingUser = sendingUser;

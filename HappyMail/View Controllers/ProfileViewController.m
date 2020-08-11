@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -46,7 +46,7 @@
         self.logoutButton.enabled = NO;
         self.logoutButton.tintColor = UIColor.clearColor;
     }
-
+    
     [self fetchMyPosts];
     self.refreshControl = [Utils createRefreshControlInView:self.tableView withSelector:@selector(fetchMyPosts) withColor:FlatYellow fromController:self];
 }
@@ -149,6 +149,22 @@
     return 2;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return [self setProfileHeaderCellForIndexPath:indexPath tableView:tableView];
+    } else {
+        return [self setPostCellForIndexPath:indexPath tableView:tableView];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 1;
+    } else {
+        return self.userPosts.count;
+    }
+}
+
 #pragma mark - Table view cell setters
 
 - (ProfileHeaderCell *)setProfileHeaderCellForIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
@@ -182,22 +198,6 @@
     [cell refreshPost:post];
     
     return cell;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return [self setProfileHeaderCellForIndexPath:indexPath tableView:tableView];
-    } else {
-        return [self setPostCellForIndexPath:indexPath tableView:tableView];
-    }
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1;
-    } else {
-        return self.userPosts.count;
-    }
 }
 
 #pragma mark - PostDetailsViewControllerDelegate

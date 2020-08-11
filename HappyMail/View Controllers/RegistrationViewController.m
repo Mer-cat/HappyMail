@@ -42,6 +42,9 @@
 
 #pragma mark - Parse network calls
 
+/**
+ * Create a new user object, given they have entered a valid username, password, and address
+ */
 - (void)registerUser {
     // Initialize a user object
     User *newUser = [User user];

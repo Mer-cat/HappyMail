@@ -9,7 +9,7 @@
 #import "PaddedLabel.h"
 
 @interface PaddedLabel ()
- 
+
 @property (nonatomic) UIEdgeInsets textInsets;
 
 @end

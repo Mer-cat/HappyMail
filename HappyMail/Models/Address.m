@@ -27,7 +27,12 @@
 
 #pragma mark - Creation
 
-+ (void)createNewAddress:(NSString *)streetAddress city:(NSString *)city state:(NSString *)state zipcode:(NSString *)zipcode addressee:(NSString *)addressee withCompletion:(void (^)(Address *, NSError *))completion {
++ (void)createNewAddress:(NSString *)streetAddress
+                    city:(NSString *)city
+                   state:(NSString *)state
+                 zipcode:(NSString *)zipcode
+               addressee:(NSString *)addressee
+          withCompletion:(void (^)(Address *, NSError *))completion {
     
     Address *newAddress = [Address new];
     newAddress.streetAddress = streetAddress;
@@ -58,6 +63,11 @@
 
 #pragma mark - Geocoding
 
+/**
+ * Given an address, geocodes the address into a set of coordinates
+ * @param address The address to be geocoded
+ * @param completion Completion block which indicates success of geocoding
+ */
 - (void)assignCoordinateFromAddress:(NSString *)address withCompletion:(PFBooleanResultBlock  _Nullable)completion {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:address completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {

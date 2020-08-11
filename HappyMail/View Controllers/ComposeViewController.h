@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * View controller for creating a new post
  */
 @interface ComposeViewController : UIViewController
+
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 
 @end
@@ -25,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Delegate method activated upon a new post being made
- *
  * @param post The newly created post
  */
 - (void)didPost:(Post *) post;

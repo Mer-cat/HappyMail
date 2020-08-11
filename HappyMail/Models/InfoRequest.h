@@ -34,7 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param requestingUser The user who is requesting the other user's information
  * @param post The post from which the info-request was created
  */
-+ (void)createNewInfoRequestToUser:(User *)requestedUser fromUser:(User *)requestingUser fromPost:(Post *)post;
++ (void)createNewInfoRequestToUser:(User *)requestedUser
+                          fromUser:(User *)requestingUser
+                          fromPost:(Post *)post;
 
 /**
  * Deletes this info request

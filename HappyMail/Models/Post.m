@@ -27,7 +27,12 @@
 
 #pragma mark - Post creation
 
-+ (void)createNewPostWithTitle:(NSString * _Nullable)title withBody:(NSString * _Nullable)bodyText withType:(PostType)type withLimit:(NSInteger)limit withTaggedUsers:(NSArray * _Nullable)taggedUsers withCompletion:(void (^)(Post *, NSError *))completion {
++ (void)createNewPostWithTitle:(NSString * _Nullable)title
+                      withBody:(NSString * _Nullable)bodyText
+                      withType:(PostType)type
+                     withLimit:(NSInteger)limit
+               withTaggedUsers:(NSArray * _Nullable)taggedUsers
+                withCompletion:(void (^)(Post *, NSError *))completion {
     
     Post *newPost = [Post new];
     User *user = [User currentUser];
@@ -59,28 +64,6 @@
             NSLog(@"Error adding user to respondees: %@", error.localizedDescription);
         }
     }];
-}
-
-// TODO: Remove if not needed by the end of the project
-- (void)removeRespondee:(User *)user {
-    [self removeObject:user forKey:@"respondees"];
-    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"%@ removed from respondees for this post", user.username);
-        } else {
-            NSLog(@"Error removing user from respondees: %@", error.localizedDescription);
-        }
-    }];
-}
-
-#pragma mark - Comparison
-
-// TODO: Remove if not needed by end of the project
-/**
- * Comparison method which allows for sorting of posts from newest to oldest
- */
-- (NSComparisonResult)compare:(Post *)otherPost {
-    return [otherPost.createdAt compare:self.createdAt];
 }
 
 #pragma mark - Formatting

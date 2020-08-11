@@ -44,14 +44,9 @@
     self.aboutMeTextView.delegate = self;
     
     self.user = user;
-    if(user != [User currentUser]) {
-        self.aboutMeTextView.editable = NO;
-        self.mapButton.hidden = YES;
-        self.mailLocationImage.hidden = YES;
-        self.saveButton.hidden = YES;
-        self.cancelButton.hidden = YES;
-    }
-    // Round corners
+    [self setAccessPermissions];
+
+    // Round corners of various fields
     [Utils roundCorners:self.aboutMeTextView];
     [Utils roundCorners:self.mapButton];
     [Utils roundCorners:self.saveButton];
@@ -93,6 +88,18 @@
     self.profileImageView.image = image;
 }
 
+#pragma mark - Helpers
+
+- (void)setAccessPermissions {
+    if(self.user != [User currentUser]) {
+        self.aboutMeTextView.editable = NO;
+        self.mapButton.hidden = YES;
+        self.mailLocationImage.hidden = YES;
+        self.saveButton.hidden = YES;
+        self.cancelButton.hidden = YES;
+    }
+}
+
 #pragma mark - Actions
 
 - (void)didPressImage {
@@ -118,14 +125,19 @@
 
 #pragma mark - UITextViewDelegate
 
+/**
+ * Fade in save and cancel buttons
+ */
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     [UIButton animateWithDuration:0.5 animations:^{
         self.saveButton.alpha = 1;
         self.cancelButton.alpha = 1;
     }];
-
 }
 
+/**
+ * Fade out save and cancel buttons
+ */
 - (void)textViewDidEndEditing:(UITextView *)textView {
     [UIButton animateWithDuration:0.5 animations:^{
         self.saveButton.alpha = 0;

@@ -17,8 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *fullAddressLabel;
 @property (weak, nonatomic) IBOutlet UIButton *usernameButton;
 @property (nonatomic, strong) FollowUp *followUp;
-@property (weak, nonatomic) IBOutlet UIButton *incompleteButton;
-@property (weak, nonatomic) IBOutlet UIButton *completeButton;
 
 @end
 
@@ -28,6 +26,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    // Add tap gesture recognizer to title
     UITapGestureRecognizer *titleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToOriginalPost)];
     [self.postTitleLabel addGestureRecognizer:titleTapGesture];
 }
@@ -35,14 +35,10 @@
 #pragma mark - Init
 
 - (void)refreshFollowUp:(FollowUp *)followUp {
-    [self hideButtons];
     
-    // Round corners of buttons
+    // Round corners of buttons and labels that have backgrounds
     [Utils roundCorners:self.usernameButton];
     [Utils roundCorners:self.postTitleLabel];
-    [Utils roundCorners:self.incompleteButton];
-    [Utils roundCorners:self.completeButton];
-    
     
     self.followUp = followUp;
     [self.usernameButton setTitle:followUp.receivingUser.username forState:UIControlStateNormal];
@@ -86,16 +82,5 @@
     [self.followUp removeFollowUp];
     [self.delegate didChangeFollowUp:self.followUp];
 }
-
-- (void)showButtons {
-    self.incompleteButton.hidden = NO;
-    self.completeButton.hidden = NO;
-}
-
-- (void)hideButtons {
-    self.incompleteButton.hidden = YES;
-    self.completeButton.hidden = YES;
-}
-
 
 @end

@@ -25,6 +25,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    // Create tap gesture recognizer for title label
     UITapGestureRecognizer *titleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToOriginalPost)];
     [self.requestTitleLabel addGestureRecognizer:titleTapGesture];
 }

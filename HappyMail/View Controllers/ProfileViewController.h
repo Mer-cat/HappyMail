@@ -27,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Delegate method activated upon a profile image being changed
- *
  * @param image The new profile image
  */
 - (void)didChangeProfileImage:(UIImage *)image;
