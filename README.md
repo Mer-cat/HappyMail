@@ -139,10 +139,6 @@ This app seeks to spread happiness through the classic medium of cards. Everyone
 [Add picture of your hand sketched wireframes in this section]
 <img src="https://i.imgur.com/gg0pNU8.png" width=600>
 
-### [BONUS] Digital Wireframes & Mockups
-
-### [BONUS] Interactive Prototype
-
 ## Schema 
 ### Models
 #### Post
